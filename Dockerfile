@@ -1,38 +1,5 @@
-# Use Node.js LTS
-FROM node:20-alpine AS build
-
-# Set working directory
-WORKDIR /app
-
-# Copy package files
-COPY package*.json ./
-
-# Use npm ci for deterministic builds (need devDependencies for build)
-RUN npm ci
-
-# Copy source code
-COPY . .
-
-# Accept build arguments for Vite environment variables
-ARG VITE_SUPABASE_URL
-ARG VITE_SUPABASE_PUBLISHABLE_KEY
-ARG VITE_AGORA_APP_ID
-ARG VITE_ALGOLIA_APP_ID
-ARG VITE_ALGOLIA_SEARCH_API_KEY
-ARG VITE_GOOGLE_MAPS_API_KEY
-
-# Set as environment variables for the build
-ENV VITE_SUPABASE_URL=$VITE_SUPABASE_URL
-ENV VITE_SUPABASE_PUBLISHABLE_KEY=$VITE_SUPABASE_PUBLISHABLE_KEY
-ENV VITE_AGORA_APP_ID=$VITE_AGORA_APP_ID
-ENV VITE_ALGOLIA_APP_ID=$VITE_ALGOLIA_APP_ID
-ENV VITE_ALGOLIA_SEARCH_API_KEY=$VITE_ALGOLIA_SEARCH_API_KEY
-ENV VITE_GOOGLE_MAPS_API_KEY=$VITE_GOOGLE_MAPS_API_KEY
-
-# Build the application
-RUN npm run build
-
-# Production stage
+# Production stage - uses pre-built dist folder from CI/CD
+# No build step, no secrets passed as build args
 FROM node:20-alpine
 
 # Create non-root user for security
@@ -44,8 +11,9 @@ WORKDIR /app
 # Install serve as non-root user
 RUN npm install -g serve
 
-# Copy built assets from build stage
-COPY --from=build --chown=nodejs:nodejs /app/dist ./dist
+# Copy pre-built dist folder (built in CI/CD with environment variables)
+# The dist folder is downloaded from build artifacts in the workflow
+COPY --chown=nodejs:nodejs dist ./dist
 
 # Switch to non-root user
 USER nodejs
