@@ -1,6 +1,6 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 // Users Service
 // Centralized data access for user profiles, seller profiles, and buyer profiles
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { supabase } from '@/integrations/supabase/client';
 import { withErrorHandling, withMutation } from '@/services/api/apiClient';
