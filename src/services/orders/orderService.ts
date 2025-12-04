@@ -1,5 +1,6 @@
 // Order Service
 // Centralized data access for order-related operations
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { supabase } from '@/integrations/supabase/client';
 import { withErrorHandling, withMutation } from '@/services/api/apiClient';

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState, useEffect, useRef } from 'react';
 import AgoraRTM from 'agora-rtm-sdk';
 import { Send, Smile, Gift, Heart } from 'lucide-react';

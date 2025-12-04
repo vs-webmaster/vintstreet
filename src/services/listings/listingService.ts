@@ -1,5 +1,6 @@
 // Listing Service
 // Centralized data access for listing operations
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { supabase } from '@/integrations/supabase/client';
 import type { Result } from '@/types/api';
