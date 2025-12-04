@@ -1,0 +1,64 @@
+project_id = "quibvppxriibzfvhrhwv"
+
+[functions.moderate-content]
+verify_jwt = false
+
+[functions.get-agora-config]
+verify_jwt = false
+
+[functions.get-agora-rtm-token]
+verify_jwt = false
+
+[functions.analyze-product-image]
+verify_jwt = false
+
+[functions.create-connect-account]
+verify_jwt = true
+
+[functions.create-payment-with-split]
+verify_jwt = true
+
+[functions.stripe-webhook]
+verify_jwt = false
+
+[functions.release-cleared-funds]
+verify_jwt = true
+
+[functions.create-checkout-split]
+verify_jwt = true
+
+[functions.get-seller-balance]
+verify_jwt = true
+
+[functions.create-payout]
+verify_jwt = true
+
+[functions.generate-product-meta]
+verify_jwt = false
+
+[functions.delete-all-products]
+verify_jwt = true
+
+[functions.generate-category-synonyms]
+verify_jwt = false
+
+[functions.sync-products-to-algolia]
+verify_jwt = false
+
+[functions.sync-categories-to-algolia]
+verify_jwt = false
+
+[functions.sync-brands-to-algolia]
+verify_jwt = false
+
+[functions.generate-shipping-label]
+verify_jwt = true
+
+[functions.shipping-webhook]
+verify_jwt = false
+
+[functions.generate-thumbnail]
+verify_jwt = false
+
+[functions.sitemap]
+verify_jwt = false
