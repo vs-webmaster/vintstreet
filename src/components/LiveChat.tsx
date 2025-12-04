@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState, useEffect, useRef } from 'react';
 import AgoraRTM from 'agora-rtm-sdk';
 import { Send, Smile, Gift, Heart } from 'lucide-react';
@@ -24,6 +23,7 @@ interface RtmClient {
   login: (params: { uid: string; token: string | null }) => Promise<void>;
   createChannel: (channelId: string) => RtmChannel;
   setLocalUserAttributes: (attributes: { name: string; color: string }) => Promise<void>;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   getUserAttributes: (uid: string) => Promise<any>;
 }
 
@@ -61,6 +61,7 @@ const LiveChat = ({ streamId }: LiveChatProps) => {
   const [isLoading, setIsLoading] = useState(true);
 
   // RTM related refs and state
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [agoraRTMConfig, setAgoraRTMConfig] = useState<any>(null);
   const clientRef = useRef<RtmClient | null>(null);
   const channelRef = useRef<RtmChannel | null>(null);

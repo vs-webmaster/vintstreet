@@ -342,7 +342,7 @@ export const CategoryTemplateGenerator = ({
       if (subSubcategoryId && subSubcategories && subSubcategories.length === 1) {
         fileName += `_${subSubcategories[0].name}`;
       }
-      fileName = `${fileName}_template.csv`.replace(/[^a-z0-9_\-\.]/gi, '_');
+      fileName = `${fileName}_template.csv`.replace(/[^a-z0-9_\-.]/gi, '_');
 
       downloadCsv(csvContent, fileName);
 

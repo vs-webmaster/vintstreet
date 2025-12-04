@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 // Order Service
 // Centralized data access for order-related operations
 
@@ -169,7 +168,7 @@ export async function fetchUserOrders(
   pageSize = 1000,
 ): Promise<Result<{ data: Order[]; totalCount: number }>> {
   return withErrorHandling(async () => {
-    let query = supabase
+    const query = supabase
       .from('orders')
       .select(ORDER_SELECT, { count: 'exact' })
       .or(`buyer_id.eq.${userId},seller_id.eq.${userId}`);
