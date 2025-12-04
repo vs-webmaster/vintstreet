@@ -41,7 +41,7 @@ interface ShowTemplate {
   id: string;
   title: string;
   description: string;
-  icon: any;
+  icon: unknown;
   category: string;
   popularity: number;
 }

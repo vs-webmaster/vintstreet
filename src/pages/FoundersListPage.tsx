@@ -55,7 +55,7 @@ const FoundersListPage = () => {
       // Move to step 2
       setStep(2);
       toast.success('Spot saved! Just a few more questions...');
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error('Error saving founder info:', error);
       toast.error('Failed to save your spot. Please try again.');
     } finally {
@@ -115,7 +115,7 @@ const FoundersListPage = () => {
       setTimeout(() => {
         navigate('/about');
       }, 2000);
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error('Error updating preferences:', error);
       toast.error('Failed to save preferences. Please try again.');
     } finally {

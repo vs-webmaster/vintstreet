@@ -145,7 +145,7 @@ export const AuctionDisplay = ({ productId }: AuctionDisplayProps) => {
       } else {
         throw new Error(data.error || 'Failed to place bid');
       }
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error('Error placing bid:', error);
       toast.error(error.message || 'Failed to place bid');
     } finally {

@@ -116,7 +116,7 @@ export async function createStreams(inputs: CreateStreamInput[]): Promise<Result
 // Update stream status
 export async function updateStreamStatus(streamId: string, status: string, endTime?: string): Promise<Result<Stream>> {
   return withMutation(async () => {
-    const updateData: any = { status };
+    const updateData: unknown = { status };
     if (endTime) updateData.end_time = endTime;
 
     const { data, error } = await supabase.from('streams').update(updateData).eq('id', streamId).select().single();

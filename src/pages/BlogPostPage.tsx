@@ -1,3 +1,4 @@
+/* eslint-disable no-case-declarations */
 import { useParams, Link } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { ArrowLeft, Edit } from 'lucide-react';
@@ -34,7 +35,7 @@ const ProductRowSection = ({ products }: { products: string[] }) => {
     <div className="mb-8">
       <h3 className="mb-4 text-xl font-bold">Featured Products</h3>
       <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-5">
-        {productsData.map((product: any) => (
+        {productsData.map((product: unknown) => (
           <Link key={product.id} to={`/product/${product.id}`} className="group">
             <div className="mb-2 aspect-square overflow-hidden rounded-lg">
               <img
@@ -66,13 +67,14 @@ export default function BlogPostPage() {
     enabled: !!slug,
   });
 
-  const renderSection = (section: any) => {
+  const renderSection = (section: unknown) => {
     const { section_type, content } = section;
 
     switch (section_type) {
-      case 'heading':
+      case 'heading': {
         const HeadingTag = content.level as keyof JSX.IntrinsicElements;
         return <HeadingTag className="mb-4 font-bold">{content.text}</HeadingTag>;
+      }
 
       case 'paragraph':
         return <p className="mb-4 leading-relaxed">{content.text}</p>;
@@ -95,7 +97,7 @@ export default function BlogPostPage() {
           </blockquote>
         );
 
-      case 'list':
+      case 'list': {
         const ListTag = content.type === 'numbered' ? 'ol' : 'ul';
         return (
           <ListTag className="mb-6 ml-6 space-y-2">
@@ -104,6 +106,7 @@ export default function BlogPostPage() {
             ))}
           </ListTag>
         );
+      }
 
       case 'divider':
         return <hr className="my-8 border-t" />;
@@ -118,7 +121,7 @@ export default function BlogPostPage() {
           </div>
         );
 
-      case 'video':
+      case 'video': {
         // Extract video ID from YouTube URL
         const getYouTubeId = (url: string) => {
           const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
@@ -151,6 +154,7 @@ export default function BlogPostPage() {
             )}
           </figure>
         );
+      }
 
       case 'author_note':
         return (
@@ -318,8 +322,8 @@ export default function BlogPostPage() {
 
           <div className="prose prose-lg max-w-none">
             {post.blog_post_sections
-              ?.sort((a: any, b: any) => a.display_order - b.display_order)
-              .map((section: any) => (
+              ?.sort((a: unknown, b: unknown) => a.display_order - b.display_order)
+              .map((section: unknown) => (
                 <div key={section.id}>{renderSection(section)}</div>
               ))}
           </div>

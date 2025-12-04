@@ -41,7 +41,7 @@ export function subscribeToPostgresChanges<T = any>(
         table: filter.table,
         filter: filter.filter,
       },
-      (payload: any) => {
+      (payload: unknown) => {
         callback({
           new: payload.new as T | undefined,
           old: payload.old as T | undefined,
@@ -80,7 +80,7 @@ export function subscribeToMultiplePostgresChanges(
         table: filter.table,
         filter: filter.filter,
       },
-      (payload: any) => {
+      (payload: unknown) => {
         callback({
           new: payload.new,
           old: payload.old,

@@ -14,7 +14,7 @@ import { searchProductsByName, fetchProductsByIds } from '@/services/products';
 import { isFailure } from '@/types/api';
 import { BlogImageUpload } from './BlogImageUpload';
 
-const ProductRowEditor = ({ content, updateSection }: { content: any; updateSection: (content: any) => void }) => {
+const ProductRowEditor = ({ content, updateSection }: { content: unknown; updateSection: (content: unknown) => void }) => {
   const [searchQuery, setSearchQuery] = useState('');
   const debouncedSearch = useDebounce(searchQuery, 300);
 
@@ -102,7 +102,7 @@ const ProductRowEditor = ({ content, updateSection }: { content: any; updateSect
             <div className="space-y-2">
               {searchResults
                 .filter((product) => !content.products || !content.products.includes(product.id))
-                .map((product: any) => (
+                .map((product: unknown) => (
                   <div
                     key={product.id}
                     className="flex cursor-pointer items-center gap-3 rounded p-2 hover:bg-accent"
@@ -130,7 +130,7 @@ const ProductRowEditor = ({ content, updateSection }: { content: any; updateSect
         <div className="space-y-2">
           <Label>Selected Products ({selectedProductsData.length}/5)</Label>
           <div className="grid gap-2">
-            {selectedProductsData.map((product: any) => (
+            {selectedProductsData.map((product: unknown) => (
               <div key={product.id} className="flex items-center gap-3 rounded-lg border p-2">
                 {product.thumbnail && (
                   <img src={product.thumbnail} alt={product.product_name} className="h-10 w-10 rounded object-cover" />
@@ -152,8 +152,8 @@ const ProductRowEditor = ({ content, updateSection }: { content: any; updateSect
 };
 
 interface BlogSectionEditorProps {
-  sections: any[];
-  onSectionsChange: (sections: any[]) => void;
+  sections: unknown[];
+  onSectionsChange: (sections: unknown[]) => void;
   onUploadStateChange?: (isUploading: boolean) => void;
   sectionRefs?: React.MutableRefObject<(HTMLDivElement | null)[]>;
 }
@@ -222,7 +222,7 @@ export const BlogSectionEditor = ({
     }
   };
 
-  const updateSection = (index: number, content: any) => {
+  const updateSection = (index: number, content: unknown) => {
     const updated = [...sections];
     updated[index] = { ...updated[index], content };
     onSectionsChange(updated);
@@ -241,7 +241,7 @@ export const BlogSectionEditor = ({
     onSectionsChange(updated);
   };
 
-  const renderSectionEditor = (section: any, index: number) => {
+  const renderSectionEditor = (section: unknown, index: number) => {
     const { section_type, content } = section;
 
     switch (section_type) {

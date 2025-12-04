@@ -5,8 +5,8 @@ import { isFailure } from '@/types/api';
 const AGORA_APP_ID = import.meta.env.VITE_AGORA_APP_ID || '';
 
 // Cached configs to avoid multiple API calls
-let cachedConfig: any = null;
-let cachedRTMConfig: any = null;
+let cachedConfig: unknown = null;
+let cachedRTMConfig: unknown = null;
 
 export const getAgoraConfig = async (params?: { channelName?: string; uid?: number; role?: 'host' | 'audience' }) => {
   if (cachedConfig && !params) {

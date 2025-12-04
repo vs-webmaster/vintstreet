@@ -114,7 +114,7 @@ const ListingManager = ({ streamId }: ListingManagerProps) => {
         title: 'Listing created!',
         description: 'You can now activate it to start the auction',
       });
-    } catch (error: any) {
+    } catch (error: unknown) {
       toast({
         title: 'Error creating listing',
         description: error?.message || 'Please try again',
@@ -152,7 +152,7 @@ const ListingManager = ({ streamId }: ListingManagerProps) => {
         title: 'Auction started!',
         description: `Bidding is now live for ${durationMinutes} minutes`,
       });
-    } catch (error: any) {
+    } catch (error: unknown) {
       toast({
         title: 'Error starting auction',
         description: error?.message || 'Please try again',
@@ -185,7 +185,7 @@ const ListingManager = ({ streamId }: ListingManagerProps) => {
         title: 'Auction ended',
         description: 'Bidding has been stopped',
       });
-    } catch (error: any) {
+    } catch (error: unknown) {
       toast({
         title: 'Error ending auction',
         description: error?.message || 'Please try again',

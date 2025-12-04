@@ -103,14 +103,14 @@ export default function AdminDataRecoveryPage() {
       toast.success('Images restored successfully');
       queryClient.invalidateQueries({ queryKey: ['product-audit-history'] });
     },
-    onError: (error: any) => {
+    onError: (error: unknown) => {
       toast.error(`Failed to restore images: ${error.message}`);
     },
   });
 
   // Restore attributes mutation
   const restoreAttributesMutation = useMutation({
-    mutationFn: async ({ productId, attributeId, values }: { productId: string; attributeId: string; values: any }) => {
+    mutationFn: async ({ productId, attributeId, values }: { productId: string; attributeId: string; values: unknown }) => {
       const result = await restoreAttribute(productId, attributeId, values);
       if (isFailure(result)) throw result.error;
     },
@@ -118,7 +118,7 @@ export default function AdminDataRecoveryPage() {
       toast.success('Attribute restored successfully');
       queryClient.invalidateQueries({ queryKey: ['product-audit-history'] });
     },
-    onError: (error: any) => {
+    onError: (error: unknown) => {
       toast.error(`Failed to restore attribute: ${error.message}`);
     },
   });
@@ -133,7 +133,7 @@ export default function AdminDataRecoveryPage() {
       toast.success('Tag restored successfully');
       queryClient.invalidateQueries({ queryKey: ['product-audit-history'] });
     },
-    onError: (error: any) => {
+    onError: (error: unknown) => {
       toast.error(`Failed to restore tag: ${error.message}`);
     },
   });
@@ -147,7 +147,7 @@ export default function AdminDataRecoveryPage() {
     onSuccess: () => {
       toast.success('Old audit logs cleaned up successfully');
     },
-    onError: (error: any) => {
+    onError: (error: unknown) => {
       toast.error(`Failed to cleanup logs: ${error.message}`);
     },
   });
@@ -158,7 +158,7 @@ export default function AdminDataRecoveryPage() {
     }
   };
 
-  const renderAuditValue = (value: any) => {
+  const renderAuditValue = (value: unknown) => {
     if (value === null || value === undefined) return <span className="text-muted-foreground">null</span>;
     if (Array.isArray(value)) {
       if (value.length === 0) return <span className="text-muted-foreground">empty array</span>;
@@ -276,7 +276,7 @@ export default function AdminDataRecoveryPage() {
                         </TableRow>
                       </TableHeader>
                       <TableBody>
-                        {productHistory.map((record: any) => (
+                        {productHistory.map((record: unknown) => (
                           <TableRow key={record.id}>
                             <TableCell className="whitespace-nowrap">
                               {format(new Date(record.changed_at), 'PPp')}
@@ -396,7 +396,7 @@ export default function AdminDataRecoveryPage() {
                             </TableRow>
                           </TableHeader>
                           <TableBody>
-                            {dataLossProducts.imageLoss.slice(0, 10).map((record: any, idx: number) => (
+                            {dataLossProducts.imageLoss.slice(0, 10).map((record: unknown, idx: number) => (
                               <TableRow key={idx}>
                                 <TableCell className="font-mono text-xs">{record.listing_id}</TableCell>
                                 <TableCell>{record.old_images?.length || 0} images</TableCell>
@@ -443,7 +443,7 @@ export default function AdminDataRecoveryPage() {
                             </TableRow>
                           </TableHeader>
                           <TableBody>
-                            {dataLossProducts.attributeLoss.slice(0, 10).map((record: any, idx: number) => (
+                            {dataLossProducts.attributeLoss.slice(0, 10).map((record: unknown, idx: number) => (
                               <TableRow key={idx}>
                                 <TableCell className="font-mono text-xs">{record.product_id}</TableCell>
                                 <TableCell>{record.deletion_count} attributes deleted</TableCell>
@@ -487,7 +487,7 @@ export default function AdminDataRecoveryPage() {
                             </TableRow>
                           </TableHeader>
                           <TableBody>
-                            {dataLossProducts.tagLoss.slice(0, 10).map((record: any, idx: number) => (
+                            {dataLossProducts.tagLoss.slice(0, 10).map((record: unknown, idx: number) => (
                               <TableRow key={idx}>
                                 <TableCell className="font-mono text-xs">{record.product_id}</TableCell>
                                 <TableCell>{record.deletion_count} tags deleted</TableCell>

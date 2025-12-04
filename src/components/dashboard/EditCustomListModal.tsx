@@ -67,7 +67,7 @@ export const EditCustomListModal = ({ listId, open, onOpenChange }: EditCustomLi
 
       // Fetch category names for items with category_id
       const itemsWithCategories = await Promise.all(
-        (result.data || []).map(async (item: any) => {
+        (result.data || []).map(async (item: unknown) => {
           if (item.category_id && item.category_level) {
             const catResult = await fetchCategoryByIdAndLevel(item.category_id, item.category_level);
             if (isFailure(catResult)) {
@@ -141,7 +141,7 @@ export const EditCustomListModal = ({ listId, open, onOpenChange }: EditCustomLi
       toast.success('List name updated');
       setIsEditingName(false);
     },
-    onError: (error: any) => {
+    onError: (error: unknown) => {
       toast.error(`Failed to update list: ${error.message}`);
     },
   });
@@ -180,7 +180,7 @@ export const EditCustomListModal = ({ listId, open, onOpenChange }: EditCustomLi
       setSelectedLevel3('');
       setSelectedLevel4('');
     },
-    onError: (error: any) => {
+    onError: (error: unknown) => {
       toast.error(`Failed to add item: ${error.message}`);
     },
   });
@@ -213,7 +213,7 @@ export const EditCustomListModal = ({ listId, open, onOpenChange }: EditCustomLi
       toast.success('Item updated');
       setEditingItem(null);
     },
-    onError: (error: any) => {
+    onError: (error: unknown) => {
       toast.error(`Failed to update item: ${error.message}`);
     },
   });
@@ -228,7 +228,7 @@ export const EditCustomListModal = ({ listId, open, onOpenChange }: EditCustomLi
       queryClient.invalidateQueries({ queryKey: ['mega-menu-categories'] });
       toast.success('Item deleted');
     },
-    onError: (error: any) => {
+    onError: (error: unknown) => {
       toast.error(`Failed to delete item: ${error.message}`);
     },
   });
@@ -319,7 +319,7 @@ export const EditCustomListModal = ({ listId, open, onOpenChange }: EditCustomLi
             </Label>
 
             {listType === 'standard' && (
-              <RadioGroup value={itemType} onValueChange={(value: any) => setItemType(value)} className="flex gap-4">
+              <RadioGroup value={itemType} onValueChange={(value: unknown) => setItemType(value)} className="flex gap-4">
                 <div className="flex items-center space-x-2">
                   <RadioGroupItem value="url" id="type-url" />
                   <Label htmlFor="type-url" className="cursor-pointer">
@@ -361,7 +361,7 @@ export const EditCustomListModal = ({ listId, open, onOpenChange }: EditCustomLi
                       <SelectValue placeholder="1. Select Level 1 Category" />
                     </SelectTrigger>
                     <SelectContent className="z-50 bg-background">
-                      {level1Categories.map((cat: any) => (
+                      {level1Categories.map((cat: unknown) => (
                         <SelectItem key={cat.id} value={cat.id}>
                           {cat.name}
                         </SelectItem>
@@ -386,7 +386,7 @@ export const EditCustomListModal = ({ listId, open, onOpenChange }: EditCustomLi
                           <SelectValue placeholder="2. Select Level 2 Category" />
                         </SelectTrigger>
                         <SelectContent className="z-50 bg-background">
-                          {level2Categories.map((cat: any) => (
+                          {level2Categories.map((cat: unknown) => (
                             <SelectItem key={cat.id} value={cat.id}>
                               {cat.name}
                             </SelectItem>
@@ -414,7 +414,7 @@ export const EditCustomListModal = ({ listId, open, onOpenChange }: EditCustomLi
                           <SelectValue placeholder="3. Select Level 3 Category" />
                         </SelectTrigger>
                         <SelectContent className="z-50 bg-background">
-                          {level3Categories.map((cat: any) => (
+                          {level3Categories.map((cat: unknown) => (
                             <SelectItem key={cat.id} value={cat.id}>
                               {cat.name}
                             </SelectItem>
@@ -435,7 +435,7 @@ export const EditCustomListModal = ({ listId, open, onOpenChange }: EditCustomLi
                         <SelectValue placeholder="4. Select Level 4 Category (optional)" />
                       </SelectTrigger>
                       <SelectContent className="z-50 bg-background">
-                        {level4Categories.map((cat: any) => (
+                        {level4Categories.map((cat: unknown) => (
                           <SelectItem key={cat.id} value={cat.id}>
                             {cat.name}
                           </SelectItem>
@@ -459,7 +459,7 @@ export const EditCustomListModal = ({ listId, open, onOpenChange }: EditCustomLi
                     // For header-links, only use level 2 categories
                     if (selectedLevel2) {
                       // Find the category name to use as the item name
-                      const level2Cat = level2Categories.find((cat: any) => cat.id === selectedLevel2);
+                      const level2Cat = level2Categories.find((cat: unknown) => cat.id === selectedLevel2);
                       if (level2Cat) {
                         addItemMutation.mutate({
                           name: level2Cat.name,
@@ -507,7 +507,7 @@ export const EditCustomListModal = ({ listId, open, onOpenChange }: EditCustomLi
           {items.length > 0 ? (
             <div className="space-y-2">
               <Label className="text-sm font-semibold">List Items ({items.length})</Label>
-              {items.map((item: any) => {
+              {items.map((item: unknown) => {
                 const isEditing = editingItem?.id === item.id;
                 const isUrlItem = item.url != null;
 

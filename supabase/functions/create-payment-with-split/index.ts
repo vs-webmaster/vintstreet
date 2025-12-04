@@ -53,7 +53,7 @@ serve(async (req) => {
 
     // Check if buyer has a Stripe customer
     const customers = await stripe.customers.list({ email: user.email, limit: 1 });
-    let customerId = customers.data.length > 0 ? customers.data[0].id : undefined;
+    const customerId = customers.data.length > 0 ? customers.data[0].id : undefined;
 
     // Create PaymentIntent with application fee
     const paymentIntent = await stripe.paymentIntents.create({

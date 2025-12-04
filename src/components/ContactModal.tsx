@@ -74,7 +74,7 @@ export const ContactModal = ({
       onClose();
       setSubject('');
       setMessage('');
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error('Error sending message:', error);
       const errorMessage = error?.message || 'Failed to send message. Please try again.';
       toast.error(errorMessage);

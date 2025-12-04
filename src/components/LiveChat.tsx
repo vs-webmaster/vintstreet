@@ -29,7 +29,7 @@ interface RtmClient {
 interface RtmChannel {
   join: () => Promise<void>;
   sendMessage: (message: { text: string }) => Promise<void>;
-  on: (event: string, callback: (data: any, uid: string) => void) => void;
+  on: (event: string, callback: (data: unknown, uid: string) => void) => void;
 }
 
 interface RtmMessage {

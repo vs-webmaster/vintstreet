@@ -48,7 +48,7 @@ interface UseProductSubmissionProps {
   };
   existingImages?: string[]; // Add existing images for safe comparison
   originalUpdatedAt?: string | null; // For optimistic locking
-  onConflict?: (conflictData: any) => void; // Callback for conflict handling
+  onConflict?: (conflictData: unknown) => void; // Callback for conflict handling
 }
 
 type SubmissionMode = 'publish' | 'draft' | 'private';
@@ -186,7 +186,7 @@ export const useProductSubmission = ({
         }
 
         // SAFE: Only update product_images if we have valid images or this is a new product
-        const updateData: any = {
+        const updateData: unknown = {
           product_name: formData.name || 'Untitled Draft',
           product_description: formData.description || null,
           starting_price: formData.price ? parseFloat(formData.price) : null,

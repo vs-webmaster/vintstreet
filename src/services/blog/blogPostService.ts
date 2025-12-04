@@ -182,7 +182,7 @@ export interface BlogPostForEditor extends BlogPost {
     id: string;
     post_id: string;
     section_type: string;
-    content: any;
+    content: unknown;
     display_order: number;
   }>;
   blog_post_tags?: Array<{
@@ -223,7 +223,7 @@ export interface BlogPostBySlug extends BlogPostWithRelations {
     id: string;
     post_id: string;
     section_type: string;
-    content: any;
+    content: unknown;
     display_order: number;
   }>;
 }
@@ -294,7 +294,7 @@ export async function updateBlogPost(
 export interface BlogPostSection {
   post_id: string;
   section_type: string;
-  content: any;
+  content: unknown;
   display_order: number;
 }
 

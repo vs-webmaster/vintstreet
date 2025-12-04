@@ -84,7 +84,7 @@ export const BlogRelatedPostsSelector = ({
             <div className="grid max-h-48 gap-2 overflow-y-auto">
               {availablePosts
                 .filter((post) => !selectedPosts.includes(post.id))
-                .map((post: any) => (
+                .map((post: unknown) => (
                   <div
                     key={post.id}
                     className="flex cursor-pointer items-center justify-between rounded-lg border p-3 hover:bg-accent"
@@ -104,7 +104,7 @@ export const BlogRelatedPostsSelector = ({
           <div className="space-y-2">
             <p className="text-sm font-medium">Selected Posts:</p>
             <div className="grid gap-2">
-              {selected.map((post: any) => (
+              {selected.map((post: unknown) => (
                 <div key={post.id} className="flex items-center justify-between rounded-lg border p-3">
                   <div className="flex-1">
                     <p className="text-sm font-medium">{post.title}</p>

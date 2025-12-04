@@ -10,7 +10,7 @@ import { filterByCategoryId, filterBySubcategoryId, filterBySubSubcategoryId } f
 
 interface BaseCategory {
   id: string;
-  [key: string]: any;
+  [key: string]: unknown;
 }
 
 interface Level2Category extends BaseCategory {
@@ -53,7 +53,7 @@ export function buildCategoryHierarchy<T extends Level2Category>(
   level3Items: Level3Category[] | null | undefined,
   level4Items: Level4Category[] | null | undefined,
   options: HierarchyOptions = {}
-): any[] {
+): unknown[] {
   const {
     level3Key = 'product_sub_subcategories',
     level4Key = 'product_sub_sub_subcategories',
@@ -81,7 +81,7 @@ export function buildAdminCategoryHierarchy<T extends Level2Category>(
   level2Items: T[] | null | undefined,
   level3Items: Level3Category[] | null | undefined,
   level4Items: Level4Category[] | null | undefined
-): any[] {
+): unknown[] {
   return buildCategoryHierarchy(parentCategoryId, level2Items, level3Items, level4Items, {
     level3Key: 'sub_subcategories',
     level4Key: 'sub_sub_subcategories',
@@ -109,10 +109,10 @@ export interface CategoryLevelMaps {
  * @returns Object containing Maps for each level
  */
 export function buildCategoryLevelMaps(
-  l1Data: any[] | null | undefined,
-  l2Data: any[] | null | undefined,
-  l3Data: any[] | null | undefined,
-  l4Data: any[] | null | undefined
+  l1Data: unknown[] | null | undefined,
+  l2Data: unknown[] | null | undefined,
+  l3Data: unknown[] | null | undefined,
+  l4Data: unknown[] | null | undefined
 ): CategoryLevelMaps {
   return {
     l1Map: new Map((l1Data || []).map((item) => [item.id, item])),

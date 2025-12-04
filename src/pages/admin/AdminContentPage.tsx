@@ -94,7 +94,7 @@ export default function AdminContentPage() {
       setNewPage({ title: '', slug: '', meta_description: '', page_type: 'content' });
       navigate(`/admin/content/${data.id}/edit`);
     },
-    onError: (error: any) => {
+    onError: (error: unknown) => {
       toast({
         title: 'Error',
         description: error.message,
@@ -116,7 +116,7 @@ export default function AdminContentPage() {
       });
       setDeleteId(null);
     },
-    onError: (error: any) => {
+    onError: (error: unknown) => {
       toast({
         title: 'Error',
         description: error.message,

@@ -79,7 +79,7 @@ export default function AdminSidebar() {
 
   type MenuItem = {
     label: string;
-    icon: any;
+    icon: unknown;
     href: string;
     count?: number;
   };

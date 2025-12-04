@@ -7,7 +7,7 @@ import { StatCard } from './StatCard';
 
 interface OverviewTabProps {
   streams: Stream[];
-  orders: any[];
+  orders: unknown[];
   streamsLoading: boolean;
   nextStream?: Stream;
 }

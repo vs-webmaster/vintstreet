@@ -65,7 +65,7 @@ export default function BlogPage() {
                         All Posts
                       </Badge>
                     </Link>
-                    {categories.map((category: any) => (
+                    {categories.map((category: unknown) => (
                       <Link key={category.id} to={`/blog?category=${category.slug}`}>
                         <Badge
                           variant={categorySlug === category.slug ? 'default' : 'outline'}
@@ -91,7 +91,7 @@ export default function BlogPage() {
             </Card>
           ) : (
             <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-              {posts.map((post: any) => (
+              {posts.map((post: unknown) => (
                 <Link key={post.id} to={`/blog/${post.slug}`}>
                   <Card className="flex h-full flex-col transition-shadow hover:shadow-lg">
                     {post.featured_image && (

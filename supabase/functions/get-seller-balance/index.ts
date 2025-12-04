@@ -34,8 +34,8 @@ serve(async (req) => {
     });
 
     // Calculate available balance (convert from smallest unit)
-    const availableBalance = balance.available.reduce((sum: number, b: any) => sum + b.amount, 0) / 100;
-    const pendingBalance = balance.pending.reduce((sum: number, b: any) => sum + b.amount, 0) / 100;
+    const availableBalance = balance.available.reduce((sum: number, b: unknown) => sum + b.amount, 0) / 100;
+    const pendingBalance = balance.pending.reduce((sum: number, b: unknown) => sum + b.amount, 0) / 100;
 
     // Get total earnings from transactions
     const { data: transactions } = await supabaseClient

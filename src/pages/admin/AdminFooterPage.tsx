@@ -308,7 +308,7 @@ export default function AdminFooterPage() {
                       <SelectValue placeholder="Choose a page..." />
                     </SelectTrigger>
                     <SelectContent>
-                      {contentPages.map((page: any) => (
+                      {contentPages.map((page: unknown) => (
                         <SelectItem key={page.id} value={page.id}>
                           {page.title}
                         </SelectItem>

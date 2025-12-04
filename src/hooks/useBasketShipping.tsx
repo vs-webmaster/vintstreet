@@ -13,7 +13,7 @@ import { isFailure } from '@/types/api';
 export interface SellerGroup {
   sellerId: string;
   sellerName: string;
-  items: any[];
+  items: unknown[];
   selectedShipping: string | null;
 }
 

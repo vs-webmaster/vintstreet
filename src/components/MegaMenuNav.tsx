@@ -1,3 +1,4 @@
+/* eslint-disable no-case-declarations */
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import {
@@ -30,7 +31,7 @@ export const MegaMenuNav = () => {
     setValue('');
   };
 
-  const renderColumnContent = (category: any, type: string, label: string) => {
+  const renderColumnContent = (category: unknown, type: string, label: string) => {
     switch (type) {
       case 'popular_brands':
         if (!category.brands || category.brands.length === 0) return null;
@@ -39,8 +40,8 @@ export const MegaMenuNav = () => {
             <h4 className="text-sm font-semibold leading-none transition-colors hover:text-primary">{label}</h4>
             <ul className="space-y-1">
               {[...category.brands]
-                .sort((a: any, b: any) => a.brands.name.localeCompare(b.brands.name))
-                .map((categoryBrand: any) => (
+                .sort((a: unknown, b: unknown) => a.brands.name.localeCompare(b.brands.name))
+                .map((categoryBrand: unknown) => (
                   <li key={categoryBrand.brand_id}>
                     <Link
                       to={`/shop/${category.slug}?brand=${categoryBrand.brands.name}`}
@@ -55,15 +56,15 @@ export const MegaMenuNav = () => {
           </>
         );
 
-      case 'categories':
+      case 'categories': {
         if (!category.product_subcategories || category.product_subcategories.length === 0) return null;
         const visibleSubcategories = category.product_subcategories.filter(
-          (sub: any) => sub.show_in_mega_menu !== false,
+          (sub: unknown) => sub.show_in_mega_menu !== false,
         );
         if (visibleSubcategories.length === 0) return null;
         return (
           <>
-            {visibleSubcategories.map((subcategory: any) => (
+            {visibleSubcategories.map((subcategory: unknown) => (
               <div key={subcategory.id} className="space-y-2">
                 <Link
                   to={`/shop/${category.slug}/${subcategory.slug}`}
@@ -75,8 +76,8 @@ export const MegaMenuNav = () => {
                 {subcategory.product_sub_subcategories && subcategory.product_sub_subcategories.length > 0 && (
                   <ul className="space-y-1">
                     {subcategory.product_sub_subcategories
-                      .filter((subSub: any) => subSub.show_in_mega_menu !== false)
-                      .map((subSubcategory: any) => (
+                      .filter((subSub: unknown) => subSub.show_in_mega_menu !== false)
+                      .map((subSubcategory: unknown) => (
                         <li key={subSubcategory.id}>
                           <Link
                             to={`/shop/${category.slug}/${subcategory.slug}/${subSubcategory.slug}`}
@@ -93,6 +94,7 @@ export const MegaMenuNav = () => {
             ))}
           </>
         );
+      }
 
       case 'trending':
         if (!category.trending || category.trending.length === 0) return null;
@@ -101,8 +103,8 @@ export const MegaMenuNav = () => {
             <h4 className="text-sm font-semibold leading-none transition-colors hover:text-primary">{label}</h4>
             <ul className="space-y-1">
               {[...category.trending]
-                .sort((a: any, b: any) => (a.name || '').localeCompare(b.name || ''))
-                .map((item: any) =>
+                .sort((a: unknown, b: unknown) => (a.name || '').localeCompare(b.name || ''))
+                .map((item: unknown) =>
                   item.path ? (
                     <li key={item.id}>
                       <Link
@@ -126,8 +128,8 @@ export const MegaMenuNav = () => {
             <h4 className="text-sm font-semibold leading-none transition-colors hover:text-primary">{label}</h4>
             <ul className="space-y-1">
               {[...category.bestSellers]
-                .sort((a: any, b: any) => (a.name || '').localeCompare(b.name || ''))
-                .map((item: any) =>
+                .sort((a: unknown, b: unknown) => (a.name || '').localeCompare(b.name || ''))
+                .map((item: unknown) =>
                   item.path ? (
                     <li key={item.id}>
                       <Link
@@ -151,8 +153,8 @@ export const MegaMenuNav = () => {
             <h4 className="text-sm font-semibold leading-none transition-colors hover:text-primary">{label}</h4>
             <ul className="space-y-1">
               {[...category.luxuryBrands]
-                .sort((a: any, b: any) => a.brands.name.localeCompare(b.brands.name))
-                .map((luxuryBrand: any) => (
+                .sort((a: unknown, b: unknown) => a.brands.name.localeCompare(b.brands.name))
+                .map((luxuryBrand: unknown) => (
                   <li key={luxuryBrand.brand_id}>
                     <Link
                       to={`/shop/${category.slug}?brand=${luxuryBrand.brands.name}`}
@@ -167,13 +169,13 @@ export const MegaMenuNav = () => {
           </>
         );
 
-      case 'custom':
+      case 'custom': {
         // Resolve custom list globally by its system_name (unique identifier)
-        const list = (megaMenuCustomLists as any)?.find((l: any) => l.system_name === label);
+        const list = (megaMenuCustomLists as unknown)?.find((l: unknown) => l.system_name === label);
         if (!list) {
           return null;
         }
-        const items = (megaMenuCustomListItems as any)?.filter((i: any) => i.list_id === list.id) || [];
+        const items = (megaMenuCustomListItems as unknown)?.filter((i: unknown) => i.list_id === list.id) || [];
         if (items.length === 0) {
           return null;
         }
@@ -186,7 +188,7 @@ export const MegaMenuNav = () => {
               <h4 className="text-sm font-semibold leading-none transition-colors hover:text-primary">{list.name}</h4>
             )}
             <ul className={isHeaderLinks ? 'space-y-2.5' : 'space-y-1'}>
-              {items.map((item: any) => {
+              {items.map((item: unknown) => {
                 // The URL is already generated in the allCustomItems query
                 const itemUrl = item.url || '/shop';
                 const isExternal = itemUrl.startsWith('http://') || itemUrl.startsWith('https://');
@@ -226,13 +228,14 @@ export const MegaMenuNav = () => {
             </ul>
           </>
         );
+      }
 
       default:
         return null;
     }
   };
 
-  const renderMegaMenuContent = (category: any) => {
+  const renderMegaMenuContent = (category: unknown) => {
     const layout = category.layout;
 
     // If no layout configured, use default all-text layout with all sections
@@ -260,7 +263,7 @@ export const MegaMenuNav = () => {
     let columns = layout.columns || [];
     // Normalize old format to new format
     if (columns.length > 0 && !columns[0].items) {
-      columns = columns.map((col: any) => ({
+      columns = columns.map((col: unknown) => ({
         items: [{ type: col.type, label: col.label }],
       }));
     }
@@ -268,9 +271,9 @@ export const MegaMenuNav = () => {
 
     return (
       <>
-        {columns.map((col: any, index: number) => (
+        {columns.map((col: unknown, index: number) => (
           <div key={index} className="flex-1 space-y-6">
-            {col.items?.map((item: any, itemIndex: number) => (
+            {col.items?.map((item: unknown, itemIndex: number) => (
               <div key={itemIndex} className="space-y-3">
                 {renderColumnContent(category, item.type, item.label)}
               </div>
@@ -287,7 +290,7 @@ export const MegaMenuNav = () => {
               maxWidth: `${(layout.image_column_span || 2) * 200}px`,
             }}
           >
-            {images.map((image: any) => (
+            {images.map((image: unknown) => (
               <div key={image.id} className="overflow-hidden rounded-lg bg-white" style={{ maxHeight: '150px' }}>
                 {image.image_link ? (
                   <Link to={image.image_link} onClick={handleLinkClick} className="block w-full">

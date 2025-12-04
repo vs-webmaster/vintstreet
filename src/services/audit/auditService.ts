@@ -20,8 +20,8 @@ export interface AuditAttributeRecord {
   product_id: string;
   attribute_id: string;
   operation: string;
-  old_values: any;
-  new_values: any;
+  old_values: Record<string, unknown>;
+  new_values: Record<string, unknown>;
   changed_at: string;
 }
 
@@ -108,9 +108,9 @@ export async function fetchTagAuditHistory(productId: string, limit: number = 50
 // Scan for data loss
 export async function scanForDataLoss(days: number): Promise<
   Result<{
-    imageLoss: any[];
-    attributeLoss: any[];
-    tagLoss: any[];
+    imageLoss: unknown[];
+    attributeLoss: unknown[];
+    tagLoss: unknown[];
   }>
 > {
   try {
@@ -130,7 +130,7 @@ export async function scanForDataLoss(days: number): Promise<
     }
 
     // Filter to only those where images were lost
-    const lostImages = (imageLoss || []).filter((record: any) => {
+    const lostImages = (imageLoss || []).filter((record: { old_images?: unknown[]; new_images?: unknown[] }) => {
       const oldCount = Array.isArray(record.old_images) ? record.old_images.length : 0;
       const newCount = Array.isArray(record.new_images) ? record.new_images.length : 0;
       return oldCount > 0 && newCount === 0;
@@ -150,7 +150,7 @@ export async function scanForDataLoss(days: number): Promise<
 
     // Group deletions by product
     const attrDeletionCounts: Record<string, number> = {};
-    (attrLoss || []).forEach((record: any) => {
+    (attrLoss || []).forEach((record: { product_id: string }) => {
       attrDeletionCounts[record.product_id] = (attrDeletionCounts[record.product_id] || 0) + 1;
     });
 
@@ -172,7 +172,7 @@ export async function scanForDataLoss(days: number): Promise<
     }
 
     const tagDeletionCounts: Record<string, number> = {};
-    (tagLoss || []).forEach((record: any) => {
+    (tagLoss || []).forEach((record: { product_id: string }) => {
       tagDeletionCounts[record.product_id] = (tagDeletionCounts[record.product_id] || 0) + 1;
     });
 
@@ -215,7 +215,7 @@ export async function restoreImages(listingId: string, images: string[]): Promis
 }
 
 // Restore attribute
-export async function restoreAttribute(productId: string, attributeId: string, values: any): Promise<Result<boolean>> {
+export async function restoreAttribute(productId: string, attributeId: string, values: Record<string, unknown>): Promise<Result<boolean>> {
   try {
     const { error } = await supabase.from('product_attribute_values').upsert({
       product_id: productId,

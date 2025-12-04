@@ -35,7 +35,7 @@ export const extractSellerIds = <T extends { seller_id: string }>(products: T[])
 /**
  * Get the display name for a seller based on their preferences
  */
-export const getSellerDisplayName = (sellerProfile: any): string => {
+export const getSellerDisplayName = (sellerProfile: unknown): string => {
   const displayFormat = sellerProfile?.display_name_format || 'shop_name';
 
   if (displayFormat === 'personal_name') {

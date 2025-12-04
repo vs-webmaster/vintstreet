@@ -137,7 +137,7 @@ serve(async (req) => {
     // Check if listing stream_id is "master-catalog" OR seller is VintStreet System
     const isWarehouse = sellerProfile?.shop_type === 'master';
 
-    let result: any;
+    let result: unknown;
     let trackingNumber: string | null = null;
 
     try {
@@ -188,6 +188,7 @@ serve(async (req) => {
           error: deleteError,
         });
       } else {
+        // Success - no action needed
       }
 
       // Re-throw the error to be caught by outer catch block
@@ -428,7 +429,7 @@ async function generateVoilaLabel(
   listing: ListingData,
   shippingAddress: ShippingAddress | null,
   sellerProfile: SellerProfile | null,
-  shippingOption: any,
+  shippingOption: unknown,
 ): Promise<any> {
   const VOILA_API_USER = Deno.env.get('VOILA_API_USER') || '';
   const VOILA_API_TOKEN = Deno.env.get('VOILA_API_TOKEN') || '';

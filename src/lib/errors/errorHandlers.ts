@@ -101,15 +101,39 @@ export const getUserMessage = (error: unknown): string => {
   }
 };
 
-// Log error for debugging (in development)
+// Log error for debugging (in development) and tracking (in production)
 export const logError = (error: unknown, context?: string): void => {
+  const normalized = normalizeError(error);
+  
+  // Log to console in development
   if (process.env.NODE_ENV === 'development') {
-    const normalized = normalizeError(error);
     console.error(`[${context || 'Error'}]:`, {
       code: normalized.code,
       message: normalized.message,
       details: normalized.details,
       stack: normalized.stack,
+    });
+  }
+  
+  // Send to Sentry in production (if configured)
+  if (process.env.NODE_ENV === 'production') {
+    // Lazy import Sentry to avoid bundling in development
+    import('@sentry/react').then((Sentry) => {
+      Sentry.captureException(error, {
+        tags: {
+          context: context || 'Unknown',
+          errorCode: normalized.code,
+        },
+        extra: {
+          message: normalized.message,
+          details: normalized.details,
+          statusCode: normalized.statusCode,
+        },
+      });
+    }).catch(() => {
+      // Silently fail if Sentry is not available
+      // Fallback to console.error in production
+      console.error(`[${context || 'Error'}]:`, normalized.message);
     });
   }
 };

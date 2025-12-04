@@ -21,7 +21,7 @@ interface ShippingLabelResponse {
   order_id: string;
   tracking_number: string | null;
   label_type: 'ninja' | 'voila';
-  data?: any;
+  data?: unknown;
   error?: string;
   details?: string;
 }

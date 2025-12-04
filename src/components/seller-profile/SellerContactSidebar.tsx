@@ -2,7 +2,7 @@ import { User, Mail, Phone, MapPin } from 'lucide-react';
 import { Card } from '@/components/ui/card';
 
 interface SellerContactSidebarProps {
-  sellerProfile: any;
+  sellerProfile: unknown;
 }
 
 export const SellerContactSidebar = ({ sellerProfile }: SellerContactSidebarProps) => {

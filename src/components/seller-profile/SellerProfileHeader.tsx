@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button';
 import { getSellerDisplayName } from '@/lib/sellerNameUtils';
 
 interface SellerProfileHeaderProps {
-  sellerProfile: any;
+  sellerProfile: unknown;
   averageRating: number;
   reviewCount: number;
   isFollowing: boolean;

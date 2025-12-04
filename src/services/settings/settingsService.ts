@@ -113,7 +113,7 @@ export async function fetchCurrencyRates(): Promise<Result<Record<string, number
     if (error) throw error;
 
     const rates: Record<string, number> = { GBP: 1 };
-    (data || []).forEach((curr: any) => {
+    (data || []).forEach((curr: unknown) => {
       const code = String(curr.target_currency).toUpperCase();
       const rateNum = Number(curr.rate);
       if (Number.isFinite(rateNum)) {
@@ -257,7 +257,7 @@ export interface SiteContent {
   instagram_post_1?: string | null;
   instagram_post_2?: string | null;
   instagram_post_3?: string | null;
-  [key: string]: any;
+  [key: string]: unknown;
 }
 
 // Fetch site content

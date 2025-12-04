@@ -811,7 +811,7 @@ export async function fetchSystemSellerAdmins(): Promise<Result<SystemSellerAdmi
     const adminMap = new Map<string, SystemSellerAdmin>();
 
     // Add all super_admins
-    superAdminRoles?.forEach((admin: any) => {
+    superAdminRoles?.forEach((admin: unknown) => {
       const profile = admin.profiles;
       if (profile) {
         adminMap.set(admin.user_id, {
@@ -829,7 +829,7 @@ export async function fetchSystemSellerAdmins(): Promise<Result<SystemSellerAdmi
     });
 
     // Override/add system_seller_admins
-    sellerAdmins?.forEach((admin: any) => {
+    sellerAdmins?.forEach((admin: unknown) => {
       const existing = adminMap.get(admin.user_id || admin.email);
       const profile = admin.profiles;
 

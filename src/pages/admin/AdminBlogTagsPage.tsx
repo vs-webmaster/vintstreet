@@ -47,7 +47,7 @@ export default function AdminBlogTagsPage() {
       setNewTagName('');
       toast.success('Tag created successfully');
     },
-    onError: (error: any) => {
+    onError: (error: unknown) => {
       toast.error('Failed to create tag: ' + error.message);
     },
   });
@@ -63,7 +63,7 @@ export default function AdminBlogTagsPage() {
       setEditingTag(null);
       toast.success('Tag updated successfully');
     },
-    onError: (error: any) => {
+    onError: (error: unknown) => {
       toast.error('Failed to update tag: ' + error.message);
     },
   });
@@ -79,7 +79,7 @@ export default function AdminBlogTagsPage() {
       setDeleteTag(null);
       toast.success('Tag deleted successfully');
     },
-    onError: (error: any) => {
+    onError: (error: unknown) => {
       toast.error('Failed to delete tag: ' + error.message);
     },
   });
@@ -152,7 +152,7 @@ export default function AdminBlogTagsPage() {
                   </TableRow>
                 </TableHeader>
                 <TableBody>
-                  {tags.map((tag: any) => (
+                  {tags.map((tag: unknown) => (
                     <TableRow key={tag.id}>
                       <TableCell>
                         {editingTag?.id === tag.id ? (

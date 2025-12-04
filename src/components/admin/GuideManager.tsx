@@ -112,7 +112,7 @@ export const GuideManager = ({
     }
   };
 
-  const handleEdit = (guide: any) => {
+  const handleEdit = (guide: unknown) => {
     setEditingGuide(guide);
     setName(guide.name);
     setContent(guide.content);
@@ -203,7 +203,7 @@ export const GuideManager = ({
             </TableRow>
           </TableHeader>
           <TableBody>
-            {guides.map((guide: any) => (
+            {guides.map((guide: unknown) => (
               <TableRow key={guide.id}>
                 <TableCell className="font-medium">{guide.name}</TableCell>
                 <TableCell className="max-w-md truncate">{guide.content.substring(0, 100)}...</TableCell>

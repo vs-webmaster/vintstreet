@@ -240,7 +240,7 @@ export async function fetchAttributesByCategoryLevels(
       if (level3Data?.length) {
         const attributes = level3Data
           .map((item) => item.attributes)
-          .filter((attr): attr is any => Boolean(attr)) as Attribute[];
+          .filter((attr): attr is Attribute => Boolean(attr));
         return success(attributes);
       }
     }
@@ -270,7 +270,7 @@ export async function fetchAttributesByCategoryLevels(
       if (data?.length) {
         const attributes = data
           .map((item) => item.attributes)
-          .filter((attr): attr is any => Boolean(attr)) as Attribute[];
+          .filter((attr): attr is Attribute => Boolean(attr));
         return success(attributes);
       }
     }
@@ -382,7 +382,8 @@ export async function fetchCategoryAttributeFilters(params: {
   try {
     const { categoryId, subcategoryId, subSubcategoryId, filterType, isSubSubcategoryPage } = params;
 
-    let query: any;
+    // eslint-disable-next-line prefer-const
+    let query;
     if (filterType === 'attribute') {
       query = supabase
         .from('category_attribute_filters')
@@ -759,7 +760,7 @@ export async function fetchColorAttributeOptions(): Promise<Result<string[]>> {
       .limit(10000);
 
     if (error) throw error;
-    return success((data || []).map((opt: any) => opt.value));
+    return success((data || []).map((opt: { value: string }) => opt.value));
   } catch (error) {
     logError(error, 'attributeService:fetchColorAttributeOptions');
     return failure(normalizeError(error));
@@ -934,7 +935,7 @@ export async function fetchProductIdsByAttributeValues(params: {
       }
     }
 
-    data?.forEach((pav: any) => {
+    data?.forEach((pav: { value_text: string; attribute_options?: { value: string } }) => {
       const values = parseAttributeValues(pav.value_text);
       const normalized = values.map((s) => s.trim().toLowerCase()).filter(Boolean);
       if (normalized.some((v) => normalizedFilters.includes(v))) {
@@ -1026,7 +1027,7 @@ export async function fetchAvailableAttributeValues(params: {
       }
     }
 
-    data?.forEach((cv: any) => {
+    data?.forEach((cv: { value_text: string; attribute_options?: { value: string } }) => {
       const values = parseAttributeValues(cv.value_text);
       values.forEach((value) => {
         const trimmed = value.trim();

@@ -346,7 +346,7 @@ export async function fetchMegaMenuLayouts(): Promise<Result<MegaMenuLayout[]>> 
         // Normalize old format to new format
         if (columns && Array.isArray(columns)) {
           if (columns.length > 0 && !columns[0].items) {
-            columns = columns.map((col: any) => ({
+            columns = columns.map((col: unknown) => ({
               items: [{ type: col.type, label: col.label }],
             }));
           }
@@ -387,7 +387,7 @@ export async function upsertMegaMenuLayout(
     let columns = data.columns as any;
     if (columns && Array.isArray(columns)) {
       if (columns.length > 0 && !columns[0].items) {
-        columns = columns.map((col: any) => ({
+        columns = columns.map((col: unknown) => ({
           items: [{ type: col.type, label: col.label }],
         }));
       }

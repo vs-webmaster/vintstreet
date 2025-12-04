@@ -41,10 +41,10 @@ export const RelatedProducts = ({ products }: RelatedProductsProps) => {
 
 interface RelatedProductCardProps {
   product: Product;
-  cartItems: any[];
+  cartItems: unknown[];
   addToCart: (listingId: string) => Promise<void>;
-  toast: any;
-  navigate: any;
+  toast: unknown;
+  navigate: unknown;
 }
 
 const RelatedProductCard = ({ product, cartItems, addToCart, toast, navigate }: RelatedProductCardProps) => {

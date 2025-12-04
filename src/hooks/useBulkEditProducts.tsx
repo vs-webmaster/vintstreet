@@ -255,7 +255,7 @@ export const useBulkEditProducts = () => {
     if (!loading) loadLevel4();
   }, [visibleColumns.level4, loading, level4Categories.length]);
 
-  const updateProduct = useCallback((productId: string, field: string, value: any) => {
+  const updateProduct = useCallback((productId: string, field: string, value: unknown) => {
     setProducts((prev) => prev.map((product) => (product.id === productId ? { ...product, [field]: value } : product)));
   }, []);
 
@@ -267,7 +267,7 @@ export const useBulkEditProducts = () => {
     });
   }, []);
 
-  const updateAttributeValue = useCallback((productId: string, attributeId: string, field: string, value: any) => {
+  const updateAttributeValue = useCallback((productId: string, attributeId: string, field: string, value: unknown) => {
     setProductAttributes((prev) => {
       const newMap = new Map(prev);
       const attrs = newMap.get(productId) || [];
@@ -284,12 +284,12 @@ export const useBulkEditProducts = () => {
     });
   }, []);
 
-  const bulkUpdateField = useCallback((field: string, value: any) => {
+  const bulkUpdateField = useCallback((field: string, value: unknown) => {
     setProducts((prev) => prev.map((product) => ({ ...product, [field]: value })));
   }, []);
 
   const bulkUpdateAttribute = useCallback(
-    (attributeId: string, field: string, value: any) => {
+    (attributeId: string, field: string, value: unknown) => {
       setProductAttributes((prev) => {
         const newMap = new Map(prev);
         products.forEach((product) => {
@@ -420,13 +420,13 @@ export const useBulkEditProducts = () => {
       }
 
       // Handle attribute updates
-      const allAttributeUpdates: any[] = [];
-      const allAttributeInserts: any[] = [];
+      const allAttributeUpdates: unknown[] = [];
+      const allAttributeInserts: unknown[] = [];
 
       for (const product of products) {
         const attrs = productAttributes.get(product.id) || [];
         for (const attr of attrs) {
-          const updateData: any = {
+          const updateData: unknown = {
             product_id: product.id,
             attribute_id: attr.attribute_id,
             value_text: attr.value_text || null,

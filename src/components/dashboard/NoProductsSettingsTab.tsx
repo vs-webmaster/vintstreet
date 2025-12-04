@@ -52,7 +52,7 @@ export const NoProductsSettingsTab = () => {
       queryClient.invalidateQueries({ queryKey: ['no-products-settings'] });
       toast.success('Settings updated successfully');
     },
-    onError: (error: any) => {
+    onError: (error: unknown) => {
       toast.error(error?.message || 'Failed to update settings');
       console.error('Error updating settings:', error);
     },
@@ -73,7 +73,7 @@ export const NoProductsSettingsTab = () => {
       await updateMutation.mutateAsync({ image_url: uploadResult.data.url });
       setImageFile(null);
       toast.success('Image uploaded successfully');
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error('Error uploading image:', error);
       toast.error(error?.message || 'Failed to upload image');
     } finally {

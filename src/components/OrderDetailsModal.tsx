@@ -84,7 +84,7 @@ export const OrderDetailsModal = ({
       toast.success('Order status updated successfully');
       queryClient.invalidateQueries({ queryKey: ['orders'] });
       onStatusUpdate();
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error('Error updating status:', error);
       toast.error(error?.message || 'Failed to update order status');
     } finally {
@@ -111,7 +111,7 @@ export const OrderDetailsModal = ({
       toast.success('Tracking number saved successfully');
       queryClient.invalidateQueries({ queryKey: ['orders'] });
       onStatusUpdate();
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error('Error saving tracking number:', error);
       toast.error(error?.message || 'Failed to save tracking number');
     } finally {

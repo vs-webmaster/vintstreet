@@ -55,7 +55,7 @@ export const ReviewsTab = () => {
       setShowReplyBox((prev) => ({ ...prev, [reviewId]: false }));
       toast.success('Reply posted successfully!');
     },
-    onError: (error: any) => {
+    onError: (error: unknown) => {
       console.error('Error posting reply:', error);
       toast.error(error?.message || 'Failed to post reply');
     },

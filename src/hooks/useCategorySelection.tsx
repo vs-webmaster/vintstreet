@@ -1,7 +1,7 @@
 import { useCallback } from 'react';
 
 interface UseCategorySelectionProps {
-  updateFormData: (field: string, value: any) => void;
+  updateFormData: (field: string, value: unknown) => void;
   resetDynamicAttributes: () => void;
 }
 

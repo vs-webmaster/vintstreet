@@ -7,7 +7,7 @@ import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 
 interface SellerProductsTabProps {
-  products: any[];
+  products: unknown[];
 }
 
 const PRODUCTS_PER_PAGE = 24;
