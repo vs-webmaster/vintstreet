@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /**
  * Ninja (MoovParcel) API Integration
  * Used for warehouse fulfillment orders

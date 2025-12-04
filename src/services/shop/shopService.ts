@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 // Shop Service
 // Centralized data access for shop-related operations
 

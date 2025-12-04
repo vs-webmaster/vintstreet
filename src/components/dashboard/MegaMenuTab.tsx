@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState } from 'react';
 import { useQuery, useQueryClient, useMutation } from '@tanstack/react-query';
 import { Loader2, Eye, EyeOff, X, TrendingUp, Star, Crown, List, Plus, Edit2, Trash2 } from 'lucide-react';

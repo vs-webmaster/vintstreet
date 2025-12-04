@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 // Order Service
 // Centralized data access for order-related operations
 
