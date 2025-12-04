@@ -1,6 +1,6 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 // Algolia Service
 // Centralized access to Algolia sync operations
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { supabase } from '@/integrations/supabase/client';
 import { invokeEdgeFunction } from '@/services/functions';
