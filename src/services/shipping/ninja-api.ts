@@ -106,6 +106,20 @@ export interface NinjaOrderData {
   order_access_url?: string;
 }
 
+export interface NinjaImportResponse {
+  success: boolean;
+  order_id?: string;
+  message?: string;
+  [key: string]: unknown;
+}
+
+export interface NinjaOrderResponse {
+  order_id: string;
+  status: string;
+  tracking_number?: string;
+  [key: string]: unknown;
+}
+
 export class NinjaApiClient {
   private baseUrl = 'https://api.moovparcel.net/api';
   private credentials: NinjaCredentials;
@@ -153,7 +167,11 @@ export class NinjaApiClient {
   /**
    * Import order to Ninja
    */
+<<<<<<< HEAD
   async importOrder(orderData: NinjaOrderData[]): Promise<unknown> {
+=======
+  async importOrder(orderData: NinjaOrderData[]): Promise<NinjaImportResponse> {
+>>>>>>> a275e0e6fd466fe0415be180aa3be0c399054c93
     if (!this.accessToken) {
       await this.authenticate();
     }
@@ -180,7 +198,11 @@ export class NinjaApiClient {
   /**
    * Get order details
    */
+<<<<<<< HEAD
   async getOrder(orderId: string): Promise<unknown> {
+=======
+  async getOrder(orderId: string): Promise<NinjaOrderResponse> {
+>>>>>>> a275e0e6fd466fe0415be180aa3be0c399054c93
     if (!this.accessToken) {
       await this.authenticate();
     }

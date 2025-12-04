@@ -188,7 +188,7 @@ const ShopPage = () => {
     setSelectedColors(new Set());
     setSelectedSizes(new Set());
     setSelectedPriceRange('all');
-  }, [categorySlug, subcategorySlug, subSubcategorySlug]);
+  }, [categorySlug, subcategorySlug, subSubcategorySlug, setSelectedLowestLevel, setSelectedBrands, setSelectedColors, setSelectedSizes, setSelectedPriceRange]);
 
   // Price range filtering and sorting (client-side)
   const convertedPriceRanges = useMemo(

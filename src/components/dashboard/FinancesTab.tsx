@@ -75,13 +75,13 @@ export const FinancesTab = () => {
     if (user?.id) {
       checkConnection();
     }
-  }, [user?.id]);
+  }, [user?.id, checkConnection]);
 
   useEffect(() => {
     if (connected && user?.id) {
       fetchBalance();
     }
-  }, [connected, user?.id]);
+  }, [connected, user?.id, fetchBalance]);
 
   // Calculate available balance from cleared orders
   const availableFromOrders =

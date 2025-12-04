@@ -115,3 +115,17 @@ export interface DateFormatOptions {
   includeTime?: boolean;
   relative?: boolean;
 }
+
+// Excel/CSV row data type (for bulk uploads)
+export type ExcelRowData = Record<string, string | number | boolean | null | undefined>;
+
+// Failed row with error information
+export interface FailedRow extends ExcelRowData {
+  error_reason: string;
+}
+
+// Generic object update type (for partial updates)
+export type ObjectUpdate<T = Record<string, unknown>> = Partial<T> & Record<string, unknown>;
+
+// Supabase query result type helper
+export type SupabaseQueryResult<T> = T | null | undefined;

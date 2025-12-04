@@ -19,6 +19,8 @@ import { fetchBrands } from '@/services/brands';
 import { fetchSubcategories, fetchAllSubSubcategories, fetchAllSubSubSubcategories } from '@/services/categories';
 import { createProduct } from '@/services/products/productService';
 import { isFailure } from '@/types/api';
+import type { ExcelRowData, FailedRow } from '@/types/common';
+import type { Attribute } from '@/services/attributes/attributeService';
 
 interface MasterProductUploadProps {
   isOpen: boolean;
@@ -31,7 +33,11 @@ export const MasterProductUpload = ({ isOpen, onClose, categoryId, systemSellerI
   const { user } = useAuth();
   const [isUploading, setIsUploading] = useState(false);
   const [uploadResults, setUploadResults] = useState<{ success: number; failed: number } | null>(null);
+<<<<<<< HEAD
   const [failedRows, setFailedRows] = useState<unknown[]>([]);
+=======
+  const [failedRows, setFailedRows] = useState<FailedRow[]>([]);
+>>>>>>> a275e0e6fd466fe0415be180aa3be0c399054c93
   const [uploadProgress, setUploadProgress] = useState({ current: 0, total: 0 });
   const queryClient = useQueryClient();
 
@@ -203,7 +209,15 @@ export const MasterProductUpload = ({ isOpen, onClose, categoryId, systemSellerI
         }
 
         // Group attributes by subcategory_id
+<<<<<<< HEAD
         const subAttrMap = new Map<string, unknown[]>();
+=======
+        interface AttributeLink {
+          attributes?: Attribute;
+          subcategory_id?: string;
+        }
+        const subAttrMap = new Map<string, Attribute[]>();
+>>>>>>> a275e0e6fd466fe0415be180aa3be0c399054c93
         (subAttrResult.data || []).forEach((link) => {
           if (link.attributes && link.subcategory_id) {
             if (!subAttrMap.has(link.subcategory_id)) {
@@ -237,7 +251,11 @@ export const MasterProductUpload = ({ isOpen, onClose, categoryId, systemSellerI
         }
 
         // Group attributes by sub_subcategory_id
+<<<<<<< HEAD
         const subSubAttrMap = new Map<string, unknown[]>();
+=======
+        const subSubAttrMap = new Map<string, Attribute[]>();
+>>>>>>> a275e0e6fd466fe0415be180aa3be0c399054c93
         (subSubAttrResult.data || []).forEach((link) => {
           if (link.attributes && link.sub_subcategory_id) {
             if (!subSubAttrMap.has(link.sub_subcategory_id)) {
@@ -271,7 +289,11 @@ export const MasterProductUpload = ({ isOpen, onClose, categoryId, systemSellerI
       setUploadProgress({ current: 0, total: totalRows });
 
       for (let i = 0; i < jsonData.length; i++) {
+<<<<<<< HEAD
         const row = jsonData[i] as unknown;
+=======
+        const row = jsonData[i] as ExcelRowData;
+>>>>>>> a275e0e6fd466fe0415be180aa3be0c399054c93
         try {
           // Skip example rows
           if (row.product_name === 'Example Product') continue;
@@ -417,7 +439,11 @@ export const MasterProductUpload = ({ isOpen, onClose, categoryId, systemSellerI
           const subSubcatAttrs = subSubcategoryId ? attributesBySubSubcategory.get(subSubcategoryId) || [] : [];
 
           // Deduplicate by attribute id, prioritizing deeper levels
+<<<<<<< HEAD
           const uniqueAttrMap = new Map<string, unknown>();
+=======
+          const uniqueAttrMap = new Map<string, Attribute>();
+>>>>>>> a275e0e6fd466fe0415be180aa3be0c399054c93
           [...catAttrs, ...subcatAttrs, ...subSubcatAttrs].forEach((a: unknown) => uniqueAttrMap.set(a.id, a));
           const attributes = Array.from(uniqueAttrMap.values());
           const attributeValues: unknown[] = [];
@@ -445,7 +471,7 @@ export const MasterProductUpload = ({ isOpen, onClose, categoryId, systemSellerI
             };
 
             switch (attr.data_type) {
-              case 'multi-select':
+              case 'multi-select': {
                 // Handle semicolon-separated values (since commas are CSV delimiters)
                 const values = String(value)
                   .split(';')
@@ -455,20 +481,23 @@ export const MasterProductUpload = ({ isOpen, onClose, categoryId, systemSellerI
                   valueObj.value_text = JSON.stringify(values);
                 }
                 break;
+              }
               case 'string':
-              case 'textarea':
+              case 'textarea': {
                 // Safe string conversion with null check
                 const strValue = String(value).trim();
                 if (strValue) {
                   valueObj.value_text = strValue;
                 }
                 break;
-              case 'number':
+              }
+              case 'number': {
                 const numValue = typeof value === 'number' ? value : parseFloat(String(value));
                 if (!isNaN(numValue)) {
                   valueObj.value_number = numValue;
                 }
                 break;
+              }
               case 'boolean':
                 valueObj.value_boolean = String(value).toUpperCase() === 'TRUE';
                 break;

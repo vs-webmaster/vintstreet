@@ -20,7 +20,17 @@ export const ModerationTab = () => {
   const [testText, setTestText] = useState('');
   const [testImageUrl, setTestImageUrl] = useState('');
   const { moderateText, moderateImage, isChecking } = useHiveModeration();
+<<<<<<< HEAD
   const [testResult, setTestResult] = useState<unknown>(null);
+=======
+  interface ModerationResult {
+    isApproved: boolean;
+    reason?: string;
+    categories?: string[];
+    [key: string]: unknown;
+  }
+  const [testResult, setTestResult] = useState<ModerationResult | null>(null);
+>>>>>>> a275e0e6fd466fe0415be180aa3be0c399054c93
 
   const handleTestText = async () => {
     if (!testText.trim()) {

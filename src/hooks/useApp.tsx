@@ -20,6 +20,7 @@ import {
 } from '@/services/megaMenu';
 import { fetchSiteContent, fetchPromoMessage, type SiteContent } from '@/services/settings';
 import { isFailure } from '@/types/api';
+import type { MegaMenuCustomList, MegaMenuCustomListItem } from '@/services/megaMenu/megaMenuService';
 
 interface FooterColumn {
   id: string;
@@ -95,8 +96,13 @@ interface AppContextType {
   footerColumns: FooterColumn[];
   footerLinks: FooterLink[];
   megaMenuCategories: ProductCategory[];
+<<<<<<< HEAD
   megaMenuCustomLists: unknown[];
   megaMenuCustomListItems: unknown[];
+=======
+  megaMenuCustomLists: MegaMenuCustomList[];
+  megaMenuCustomListItems: MegaMenuCustomListItem[];
+>>>>>>> a275e0e6fd466fe0415be180aa3be0c399054c93
   loading: boolean;
 }
 
@@ -109,8 +115,13 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
   const [footerColumns, setFooterColumns] = useState<FooterColumn[]>([]);
   const [footerLinks, setFooterLinks] = useState<FooterLink[]>([]);
   const [megaMenuCategories, setMegaMenuCategories] = useState<ProductCategory[]>([]);
+<<<<<<< HEAD
   const [megaMenuCustomLists, setMegaMenuCustomLists] = useState<unknown[]>([]);
   const [megaMenuCustomListItems, setMegaMenuCustomListItems] = useState<unknown[]>([]);
+=======
+  const [megaMenuCustomLists, setMegaMenuCustomLists] = useState<MegaMenuCustomList[]>([]);
+  const [megaMenuCustomListItems, setMegaMenuCustomListItems] = useState<MegaMenuCustomListItem[]>([]);
+>>>>>>> a275e0e6fd466fe0415be180aa3be0c399054c93
   const [loading, setLoading] = useState(true);
 
   const fetchSiteContentAsync = async () => {

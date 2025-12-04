@@ -32,7 +32,7 @@ serve(async (req) => {
       throw new Error('Missing required fields: type and content');
     }
 
-    let formData = new FormData();
+    const formData = new FormData();
 
     if (type === 'text') {
       formData.append('text_data', content);

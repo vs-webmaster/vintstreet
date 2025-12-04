@@ -16,18 +16,26 @@ COPY . .
 # Build the application
 RUN npm run build
 
+<<<<<<< HEAD
 <<<<<<< Updated upstream
 # Serve the app with a lightweight web server
 FROM node:20-alpine
 =======
 # Production stage
 FROM node:18-alpine
+=======
+# Production stage
+FROM node:20-alpine
+>>>>>>> a275e0e6fd466fe0415be180aa3be0c399054c93
 
 # Create non-root user for security
 RUN addgroup -g 1001 -S nodejs && \
     adduser -S nodejs -u 1001
 
+<<<<<<< HEAD
 >>>>>>> Stashed changes
+=======
+>>>>>>> a275e0e6fd466fe0415be180aa3be0c399054c93
 WORKDIR /app
 
 # Install serve as non-root user

@@ -7,6 +7,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/u
 import { useToast } from '@/hooks/useToast';
 import { bulkCreateBrands, CreateBrandInput } from '@/services/brands';
 import { isFailure } from '@/types/api';
+import type { ExcelRowData } from '@/types/common';
 
 interface BulkBrandUploadProps {
   isOpen: boolean;
@@ -67,7 +68,11 @@ export const BulkBrandUpload: React.FC<BulkBrandUploadProps> = ({ isOpen, onClos
       const brandsToCreate: CreateBrandInput[] = [];
       const skippedRows: unknown[] = [];
 
+<<<<<<< HEAD
       for (const row of jsonData as unknown[]) {
+=======
+      for (const row of jsonData as ExcelRowData[]) {
+>>>>>>> a275e0e6fd466fe0415be180aa3be0c399054c93
         // Skip example rows
         if (row.name === 'Example Brand Name') continue;
 

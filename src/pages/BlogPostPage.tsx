@@ -70,9 +70,10 @@ export default function BlogPostPage() {
     const { section_type, content } = section;
 
     switch (section_type) {
-      case 'heading':
+      case 'heading': {
         const HeadingTag = content.level as keyof JSX.IntrinsicElements;
         return <HeadingTag className="mb-4 font-bold">{content.text}</HeadingTag>;
+      }
 
       case 'paragraph':
         return <p className="mb-4 leading-relaxed">{content.text}</p>;
@@ -95,7 +96,7 @@ export default function BlogPostPage() {
           </blockquote>
         );
 
-      case 'list':
+      case 'list': {
         const ListTag = content.type === 'numbered' ? 'ol' : 'ul';
         return (
           <ListTag className="mb-6 ml-6 space-y-2">
@@ -104,6 +105,7 @@ export default function BlogPostPage() {
             ))}
           </ListTag>
         );
+      }
 
       case 'divider':
         return <hr className="my-8 border-t" />;
@@ -118,7 +120,7 @@ export default function BlogPostPage() {
           </div>
         );
 
-      case 'video':
+      case 'video': {
         // Extract video ID from YouTube URL
         const getYouTubeId = (url: string) => {
           const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
@@ -151,6 +153,7 @@ export default function BlogPostPage() {
             )}
           </figure>
         );
+      }
 
       case 'author_note':
         return (

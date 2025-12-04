@@ -60,7 +60,11 @@ export default function AdminDataRecoveryPage() {
   // Fetch product history for a specific product
   const { data: productHistory, isLoading: historyLoading } = useQuery({
     queryKey: ['product-audit-history', searchedProductId, selectedAuditType],
+<<<<<<< HEAD
     queryFn: async (): Promise<unknown[] | null> => {
+=======
+    queryFn: async (): Promise<Array<{ id: string; product_id: string; change_type: string; old_value: unknown; new_value: unknown; changed_by: string; created_at: string }> | null> => {
+>>>>>>> a275e0e6fd466fe0415be180aa3be0c399054c93
       if (!searchedProductId) return null;
 
       let result;

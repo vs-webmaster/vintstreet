@@ -17,6 +17,7 @@ import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { fetchAttributesByCategoryLevels } from '@/lib/attributeUtils';
 import { escapeCsv } from '@/lib/csvUtils';
+import type { Product } from '@/types/product';
 import {
   groupAttributesByProduct,
   buildAttributeColumns,
@@ -353,7 +354,11 @@ export const MasterListingsTab = () => {
       const products = allProducts;
       const csvSections: string[] = [];
 
+<<<<<<< HEAD
       Object.entries(productsBySubcategory).forEach(([subcategoryName, products]: [string, unknown]) => {
+=======
+      Object.entries(productsBySubcategory).forEach(([subcategoryName, products]: [string, Product[]]) => {
+>>>>>>> a275e0e6fd466fe0415be180aa3be0c399054c93
         // Get all attributes for this group of products
         const relevantAttributes: unknown[] = [];
         const attributeMap = new Map();

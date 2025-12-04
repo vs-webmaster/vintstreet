@@ -112,7 +112,11 @@ export const ShopSectionsTab = () => {
         id: p.id,
         product_name: p.product_name,
         thumbnail: p.thumbnail || '',
+<<<<<<< HEAD
         sku: (p as unknown).sku || null,
+=======
+        sku: p.sku || null,
+>>>>>>> a275e0e6fd466fe0415be180aa3be0c399054c93
       })) as Product[];
     },
     enabled: !!systemSeller?.user_id && debouncedSearch.length >= 2,

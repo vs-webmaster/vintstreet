@@ -211,7 +211,11 @@ export const ProductImageGallery = ({ productName, productImages, productImageAl
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
+<<<<<<< HEAD
   }, [totalImages, goToPrevious, goToNext]);
+=======
+  }, [totalImages, goToNext, goToPrevious]);
+>>>>>>> a275e0e6fd466fe0415be180aa3be0c399054c93
 
   return (
     <div className="space-y-4">

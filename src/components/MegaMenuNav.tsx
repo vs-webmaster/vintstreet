@@ -55,7 +55,7 @@ export const MegaMenuNav = () => {
           </>
         );
 
-      case 'categories':
+      case 'categories': {
         if (!category.product_subcategories || category.product_subcategories.length === 0) return null;
         const visibleSubcategories = category.product_subcategories.filter(
           (sub: unknown) => sub.show_in_mega_menu !== false,
@@ -93,6 +93,7 @@ export const MegaMenuNav = () => {
             ))}
           </>
         );
+      }
 
       case 'trending':
         if (!category.trending || category.trending.length === 0) return null;
@@ -167,7 +168,7 @@ export const MegaMenuNav = () => {
           </>
         );
 
-      case 'custom':
+      case 'custom': {
         // Resolve custom list globally by its system_name (unique identifier)
         const list = (megaMenuCustomLists as unknown)?.find((l: unknown) => l.system_name === label);
         if (!list) {
@@ -226,6 +227,7 @@ export const MegaMenuNav = () => {
             </ul>
           </>
         );
+      }
 
       default:
         return null;

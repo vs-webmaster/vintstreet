@@ -25,7 +25,9 @@ const SmartSearch = ({ className }: SmartSearchProps) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!containerRef.current) {
+    // Capture container ref value for cleanup
+    const container = containerRef.current;
+    if (!container) {
       return;
     }
 
@@ -246,7 +248,7 @@ const SmartSearch = ({ className }: SmartSearchProps) => {
     });
 
     const search = autocomplete({
-      container: containerRef.current,
+      container: container,
       placeholder: 'Search . . .',
       openOnFocus: true,
       // Disable full-screen mode on mobile - keep UI consistent with web
@@ -668,7 +670,6 @@ const SmartSearch = ({ className }: SmartSearchProps) => {
       setTimeout(() => {
         // Check if focus moved to an element within the autocomplete container
         const relatedTarget = e.relatedTarget as HTMLElement;
-        const container = containerRef.current;
 
         if (container && relatedTarget && container.contains(relatedTarget)) {
           // Focus moved to an element within the autocomplete (e.g., dropdown item)
@@ -682,7 +683,7 @@ const SmartSearch = ({ className }: SmartSearchProps) => {
 
     // Wait for input to be rendered, then add blur listener
     const setupBlurHandler = () => {
-      const input = containerRef.current?.querySelector('input[type="search"]') as HTMLInputElement;
+      const input = container?.querySelector('input[type="search"]') as HTMLInputElement;
       if (input) {
         input.addEventListener('blur', handleBlur);
         return true;
@@ -715,8 +716,11 @@ const SmartSearch = ({ className }: SmartSearchProps) => {
       if (checkInputInterval) {
         clearInterval(checkInputInterval);
       }
+<<<<<<< HEAD
       // Copy ref value to avoid stale closure
       const container = containerRef.current;
+=======
+>>>>>>> a275e0e6fd466fe0415be180aa3be0c399054c93
       if (container) {
         const inputElement = container.querySelector('input[type="search"]') as HTMLInputElement;
         if (inputElement) {

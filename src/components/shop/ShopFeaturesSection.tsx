@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef, useMemo } from 'react';
 import { fetchHomepageCardWithItems } from '@/services/homepage';
 import { isFailure } from '@/types/api';
 
@@ -79,11 +79,15 @@ export const ShopFeaturesSection = () => {
     },
   });
 
-  const features = cardData?.items || [];
+  const features = useMemo(() => cardData?.items || [], [cardData?.items]);
 
-  const gifIndices = features
-    .map((f, i) => (f.image_url?.toLowerCase().endsWith('.gif') ? i : -1))
-    .filter((i) => i !== -1);
+  const gifIndices = useMemo(
+    () =>
+      features
+        .map((f, i) => (f.image_url?.toLowerCase().endsWith('.gif') ? i : -1))
+        .filter((i) => i !== -1),
+    [features],
+  );
 
   // Cycle through GIFs every 5 seconds
   useEffect(() => {

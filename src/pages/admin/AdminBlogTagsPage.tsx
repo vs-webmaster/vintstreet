@@ -19,12 +19,25 @@ import { Input } from '@/components/ui/input';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { fetchBlogTags, createBlogTag, updateBlogTag, deleteBlogTag } from '@/services/blog';
 import { isFailure } from '@/types/api';
+
+interface BlogTag {
+  id: string;
+  name: string;
+  slug: string;
+  created_at?: string;
+  updated_at?: string;
+}
 import { AdminLayout } from './AdminLayout';
 
 export default function AdminBlogTagsPage() {
   const [newTagName, setNewTagName] = useState('');
+<<<<<<< HEAD
   const [editingTag, setEditingTag] = useState<unknown>(null);
   const [deleteTag, setDeleteTag] = useState<unknown>(null);
+=======
+  const [editingTag, setEditingTag] = useState<BlogTag | null>(null);
+  const [deleteTag, setDeleteTag] = useState<BlogTag | null>(null);
+>>>>>>> a275e0e6fd466fe0415be180aa3be0c399054c93
   const queryClient = useQueryClient();
 
   const { data: tags = [], isLoading } = useQuery({

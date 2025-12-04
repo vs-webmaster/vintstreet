@@ -1,4 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
+import type { LucideIcon } from 'lucide-react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -37,7 +38,11 @@ const SupportPage = () => {
   });
 
   const getIcon = (iconName: string) => {
+<<<<<<< HEAD
     const icons: Record<string, unknown> = {
+=======
+    const icons: Record<string, LucideIcon> = {
+>>>>>>> a275e0e6fd466fe0415be180aa3be0c399054c93
       Mail,
       MessageCircle,
       Book,

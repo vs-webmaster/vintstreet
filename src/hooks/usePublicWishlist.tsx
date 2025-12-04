@@ -4,6 +4,13 @@ import { fetchProductsByIds } from '@/services/products';
 import { fetchSellerInfoMap } from '@/services/users/userService';
 import { fetchPublicWishlistData } from '@/services/wishlist';
 import { isFailure } from '@/types/api';
+import type { Product } from '@/types/product';
+
+interface WishlistItemWithProduct {
+  id: string;
+  listing_id: string;
+  listings: Product & { seller_profiles: unknown };
+}
 
 export const usePublicWishlist = (shareToken: string) => {
   return useQuery({
@@ -56,7 +63,11 @@ export const usePublicWishlist = (shareToken: string) => {
             },
           };
         })
+<<<<<<< HEAD
         .filter(Boolean) as unknown[];
+=======
+        .filter((item): item is WishlistItemWithProduct => item !== null);
+>>>>>>> a275e0e6fd466fe0415be180aa3be0c399054c93
 
       return {
         sharedWishlist,

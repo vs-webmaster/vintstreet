@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { Timer, Gavel, Crown, ArrowUp } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -12,6 +12,7 @@ import { useToast } from '@/hooks/useToast';
 import { fetchAuctionByListingId } from '@/services/auctions';
 import { invokeEdgeFunction } from '@/services/functions';
 import { fetchProductsByStream } from '@/services/products';
+import type { Product } from '@/types/product';
 import { subscribeToPostgresChanges } from '@/services/realtime';
 import { isFailure, isSuccess } from '@/types/api';
 
@@ -44,16 +45,27 @@ const BiddingSection = ({ streamId, isStreamer = false }: BiddingSectionProps) =
   const [bidAmounts, setBidAmounts] = useState<Record<string, string>>({});
   const [loading, setLoading] = useState(false);
   const [showCustomBid, setShowCustomBid] = useState<Record<string, boolean>>({});
-  useEffect(() => {
-    fetchListings();
-    const unsubscribe = subscribeToUpdates();
-    return unsubscribe;
-  }, [streamId]);
-  const fetchListings = async () => {
+  
+  const fetchListings = useCallback(async () => {
     const result = await fetchProductsByStream(streamId, { status: 'published' });
 
     if (isSuccess(result) && result.data && result.data.length > 0) {
+<<<<<<< HEAD
       setListings(result.data as unknown);
+=======
+      // Map Product[] to Listing[] format
+      const mappedListings: Listing[] = result.data.map((product) => ({
+        id: product.id,
+        product_name: product.product_name,
+        product_description: product.product_description || '',
+        starting_price: product.starting_price,
+        current_bid: product.auctions?.[0]?.current_bid || product.starting_price,
+        status: product.status,
+        auction_end_time: product.auction_end_time || null,
+        seller_id: product.seller_id,
+      }));
+      setListings(mappedListings);
+>>>>>>> a275e0e6fd466fe0415be180aa3be0c399054c93
 
       // Note: Bids table not yet implemented - commenting out for now
       // for (const listing of listingsData) {
@@ -107,8 +119,8 @@ const BiddingSection = ({ streamId, isStreamer = false }: BiddingSectionProps) =
         ],
       });
     }
-  };
-  const subscribeToUpdates = () => {
+  }, [streamId]);
+  const subscribeToUpdates = useCallback(() => {
     // Subscribe to listing updates
     const unsubscribeListings = subscribeToPostgresChanges(
       'listings_updates',
@@ -142,7 +154,14 @@ const BiddingSection = ({ streamId, isStreamer = false }: BiddingSectionProps) =
       unsubscribeListings();
       unsubscribeBids();
     };
-  };
+  }, [streamId, fetchListings]);
+
+  useEffect(() => {
+    fetchListings();
+    const unsubscribe = subscribeToUpdates();
+    return unsubscribe;
+  }, [streamId, fetchListings, subscribeToUpdates]);
+
   const placeBid = async (listingId: string) => {
     if (!user) {
       toast({

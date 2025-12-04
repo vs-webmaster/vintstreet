@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { Video, VideoOff, Mic, MicOff, Share2, Settings, Timer, Gift, Box, Plus, Play } from 'lucide-react';
 import Header from '@/components/Header';
@@ -213,9 +213,9 @@ const StartStreamPage = () => {
     return () => {
       if (interval) clearInterval(interval);
     };
-  }, [isAuctionActive, auctionEndTime]);
+  }, [isAuctionActive, auctionEndTime, endAuction]);
 
-  const endAuction = async () => {
+  const endAuction = useCallback(async () => {
     if (!activeListing) return;
 
     try {
@@ -238,7 +238,7 @@ const StartStreamPage = () => {
         variant: 'destructive',
       });
     }
-  };
+  }, [activeListing, toast]);
 
   const handleStartStream = async () => {
     try {

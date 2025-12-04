@@ -240,7 +240,7 @@ export async function fetchAttributesByCategoryLevels(
       if (level3Data?.length) {
         const attributes = level3Data
           .map((item) => item.attributes)
-          .filter((attr): attr is any => Boolean(attr)) as Attribute[];
+          .filter((attr): attr is Attribute => Boolean(attr));
         return success(attributes);
       }
     }
@@ -270,7 +270,7 @@ export async function fetchAttributesByCategoryLevels(
       if (data?.length) {
         const attributes = data
           .map((item) => item.attributes)
-          .filter((attr): attr is any => Boolean(attr)) as Attribute[];
+          .filter((attr): attr is Attribute => Boolean(attr));
         return success(attributes);
       }
     }
@@ -299,7 +299,7 @@ export async function fetchAttributesByCategoryLevels(
 
       const attributes = (data || [])
         .map((item) => item.attributes)
-        .filter((attr): attr is any => Boolean(attr)) as Attribute[];
+        .filter((attr): attr is Attribute => Boolean(attr));
       return success(attributes);
     }
 
@@ -382,7 +382,11 @@ export async function fetchCategoryAttributeFilters(params: {
   try {
     const { categoryId, subcategoryId, subSubcategoryId, filterType, isSubSubcategoryPage } = params;
 
+<<<<<<< HEAD
     let query: ReturnType<typeof supabase.from>;
+=======
+    let query;
+>>>>>>> a275e0e6fd466fe0415be180aa3be0c399054c93
     if (filterType === 'attribute') {
       query = supabase
         .from('category_attribute_filters')

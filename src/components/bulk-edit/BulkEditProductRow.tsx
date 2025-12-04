@@ -9,6 +9,10 @@ import { Label } from '@/components/ui/label';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { TableCell, TableRow } from '@/components/ui/table';
+import type { Product } from '@/types/product';
+import type { Subcategory, SubSubcategory, SubSubSubcategory } from '@/types/category';
+import type { Attribute } from '@/services/attributes/attributeService';
+import type { ProductAttributeValue } from '@/services/attributes/attributeService';
 
 interface ProductRowProps {
   product: unknown;
@@ -21,10 +25,17 @@ interface ProductRowProps {
   updateProduct: (productId: string, field: string, value: unknown) => void;
   updateAttributeValue: (productId: string, attributeId: string, field: string, value: unknown) => void;
   updateProductTags: (productId: string, tagIds: string[]) => void;
+<<<<<<< HEAD
   getAttributeValue: (productId: string, attributeId: string) => unknown;
   getFilteredLevel2: (level1Id: string) => unknown[];
   getFilteredLevel3: (level2Id: string) => unknown[];
   getFilteredLevel4: (level3Id: string) => unknown[];
+=======
+  getAttributeValue: (productId: string, attributeId: string) => ProductAttributeValue | undefined;
+  getFilteredLevel2: (level1Id: string) => Subcategory[];
+  getFilteredLevel3: (level2Id: string) => SubSubcategory[];
+  getFilteredLevel4: (level3Id: string) => SubSubSubcategory[];
+>>>>>>> a275e0e6fd466fe0415be180aa3be0c399054c93
   isAttributeVisible: (attributeId: string, attributeName: string) => boolean;
 }
 

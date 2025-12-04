@@ -63,7 +63,11 @@ import {
   archiveProduct,
 } from '@/services/products';
 import { isFailure } from '@/types/api';
+import type { Product } from '@/types/product';
+import type { Database } from '@/integrations/supabase/types';
 import { ProductEditModal } from './ProductEditModal';
+
+type ListingUpdate = Database['public']['Tables']['listings']['Update'];
 
 interface MasterProductsTableProps {
   systemSellerId?: string;
@@ -96,7 +100,11 @@ export const MasterProductsTable = ({
     });
 
     try {
+<<<<<<< HEAD
       const result = await updateProduct(productId, { status: newStatus } as unknown);
+=======
+      const result = await updateProduct(productId, { status: newStatus } as ListingUpdate);
+>>>>>>> a275e0e6fd466fe0415be180aa3be0c399054c93
 
       if (isFailure(result)) {
         throw result.error;
@@ -122,7 +130,11 @@ export const MasterProductsTable = ({
   const [filterLevel2, setFilterLevel2] = useState<string>('all');
   const { sortField, sortDirection, setSortField, setSortDirection, handleSort, SortIcon } = useTableSort(null, 'asc');
   const [lastUpdatedFilter, setLastUpdatedFilter] = useState<string>('all');
+<<<<<<< HEAD
   const [editingProduct, setEditingProduct] = useState<unknown>(null);
+=======
+  const [editingProduct, setEditingProduct] = useState<Product | null>(null);
+>>>>>>> a275e0e6fd466fe0415be180aa3be0c399054c93
   const [brandSearchOpen, setBrandSearchOpen] = useState(false);
   const [advancedFilterOpen, setAdvancedFilterOpen] = useState(false);
   const [missingAttributeFilter, setMissingAttributeFilter] = useState<string | null>(null);

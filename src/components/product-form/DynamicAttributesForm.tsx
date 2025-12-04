@@ -14,7 +14,11 @@ import { cn } from '@/lib/utils';
 
 interface DynamicAttributesFormProps {
   attributes: unknown[];
+<<<<<<< HEAD
   dynamicAttributes: Record<string, unknown>;
+=======
+  dynamicAttributes: Record<string, string | number | boolean | string[] | null>;
+>>>>>>> a275e0e6fd466fe0415be180aa3be0c399054c93
   onAttributeChange: (attributeId: string, value: unknown) => void;
 }
 

@@ -24,6 +24,7 @@ import {
   deleteMegaMenuCustomListItem,
 } from '@/services/megaMenu';
 import { isFailure } from '@/types/api';
+import type { MegaMenuCustomListItem } from '@/services/megaMenu/megaMenuService';
 
 interface EditCustomListModalProps {
   listId: string | null;
@@ -43,7 +44,11 @@ export const EditCustomListModal = ({ listId, open, onOpenChange }: EditCustomLi
   const [selectedLevel2, setSelectedLevel2] = useState<string>('');
   const [selectedLevel3, setSelectedLevel3] = useState<string>('');
   const [selectedLevel4, setSelectedLevel4] = useState<string>('');
+<<<<<<< HEAD
   const [editingItem, setEditingItem] = useState<unknown>(null);
+=======
+  const [editingItem, setEditingItem] = useState<MegaMenuCustomListItem | null>(null);
+>>>>>>> a275e0e6fd466fe0415be180aa3be0c399054c93
 
   const { data: list } = useQuery({
     queryKey: ['mega-menu-custom-list', listId],

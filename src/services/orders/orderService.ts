@@ -80,7 +80,11 @@ export async function fetchAllOrdersMinimal(): Promise<
     const { data, error } = await supabase.from('orders').select('order_amount, status, delivery_status');
 
     if (error) throw error;
+<<<<<<< HEAD
     return { data: (data || []) as unknown, error: null };
+=======
+    return { data: (data || []) as Array<{ order_amount: number; status: string; delivery_status: string }>, error: null };
+>>>>>>> a275e0e6fd466fe0415be180aa3be0c399054c93
   }, 'fetchAllOrdersMinimal');
 }
 
@@ -168,7 +172,7 @@ export async function fetchUserOrders(
   pageSize = 1000,
 ): Promise<Result<{ data: Order[]; totalCount: number }>> {
   return withErrorHandling(async () => {
-    let query = supabase
+    const query = supabase
       .from('orders')
       .select(ORDER_SELECT, { count: 'exact' })
       .or(`buyer_id.eq.${userId},seller_id.eq.${userId}`);
@@ -350,6 +354,10 @@ export async function fetchOrdersByStreamId(
     const { data, error } = await query;
 
     if (error) throw error;
+<<<<<<< HEAD
     return { data: (data || []) as unknown, error: null };
+=======
+    return { data: (data || []) as Order[], error: null };
+>>>>>>> a275e0e6fd466fe0415be180aa3be0c399054c93
   }, 'fetchOrdersByStreamId');
 }

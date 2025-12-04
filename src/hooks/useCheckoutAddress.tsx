@@ -115,7 +115,7 @@ export const useCheckoutAddress = ({ userId, userEmail, profileFullName }: UseCh
         lastName,
       }));
     }
-  }, [profileFullName]);
+  }, [profileFullName, shippingDetails.firstName, shippingDetails.lastName]);
 
   // Get final shipping details (from selected address or form)
   const getFinalShippingDetails = (): ShippingDetails => {

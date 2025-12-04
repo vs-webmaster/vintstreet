@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { serve } from 'https://deno.land/std@0.190.0/http/server.ts';
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2.57.4';
 
@@ -430,7 +431,11 @@ async function generateVoilaLabel(
   shippingAddress: ShippingAddress | null,
   sellerProfile: SellerProfile | null,
   shippingOption: unknown,
+<<<<<<< HEAD
 ): Promise<unknown> {
+=======
+): Promise<any> {
+>>>>>>> a275e0e6fd466fe0415be180aa3be0c399054c93
   const VOILA_API_USER = Deno.env.get('VOILA_API_USER') || '';
   const VOILA_API_TOKEN = Deno.env.get('VOILA_API_TOKEN') || '';
 

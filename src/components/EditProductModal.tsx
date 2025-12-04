@@ -10,6 +10,9 @@ import { useProhibitedWordsValidation } from '@/hooks/useProhibitedWordsValidati
 import { validateProductInput } from '@/lib/prohibitedWordsValidation';
 import { updateProduct, archiveProduct } from '@/services/products';
 import { isFailure } from '@/types/api';
+import type { Database } from '@/integrations/supabase/types';
+
+type ListingUpdate = Database['public']['Tables']['listings']['Update'];
 
 interface ListingProduct {
   id: string;
@@ -84,7 +87,11 @@ export const EditProductModal = ({ isOpen, onClose, product, onProductUpdated }:
         starting_price: parseFloat(formData.starting_price),
         product_description: formData.product_description || null,
         thumbnail: formData.thumbnail || null,
+<<<<<<< HEAD
       } as unknown);
+=======
+      } as ListingUpdate);
+>>>>>>> a275e0e6fd466fe0415be180aa3be0c399054c93
 
       if (isFailure(result)) {
         throw result.error;

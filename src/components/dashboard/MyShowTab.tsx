@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Gift, Box, Users, Plus, Trash2, Edit, Package } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -21,6 +21,7 @@ import { useAuth } from '@/hooks/useAuth';
 import { useToast } from '@/hooks/useToast';
 import { fetchProductsBySeller } from '@/services/products';
 import { isFailure } from '@/types/api';
+import type { Product } from '@/types/product';
 
 interface MysteryBox {
   id: string;
@@ -70,18 +71,22 @@ export const MyShowTab = () => {
   const navigate = useNavigate();
   const [mysteryBoxes, setMysteryBoxes] = useState<MysteryBox[]>([]);
   const [giveaways, setGiveaways] = useState<Giveaway[]>([]);
+<<<<<<< HEAD
   const [livestreamProducts, setLivestreamProducts] = useState<unknown[]>([]);
   const [isAddDialogOpen, setIsAddDialogOpen] = useState(false);
   const [selectedTemplate, setSelectedTemplate] = useState<string | null>(null);
   const [isEditMode, setIsEditMode] = useState(false);
   const [editingItem, setEditingItem] = useState<unknown>(null);
+=======
+  const [livestreamProducts, setLivestreamProducts] = useState<Product[]>([]);
+  const [isAddDialogOpen, setIsAddDialogOpen] = useState(false);
+  const [selectedTemplate, setSelectedTemplate] = useState<string | null>(null);
+  const [isEditMode, setIsEditMode] = useState(false);
+  const [editingItem, setEditingItem] = useState<MysteryBox | Giveaway | null>(null);
+>>>>>>> a275e0e6fd466fe0415be180aa3be0c399054c93
   const { toast } = useToast();
 
-  useEffect(() => {
-    fetchLivestreamProducts();
-  }, [user]);
-
-  const fetchLivestreamProducts = async () => {
+  const fetchLivestreamProducts = useCallback(async () => {
     if (!user?.id) return;
 
     const result = await fetchProductsBySeller(user.id, {
@@ -94,7 +99,11 @@ export const MyShowTab = () => {
     }
 
     setLivestreamProducts(result.data || []);
-  };
+  }, [user]);
+
+  useEffect(() => {
+    fetchLivestreamProducts();
+  }, [user, fetchLivestreamProducts]);
 
   // Form states
   const [mysteryBoxForm, setMysteryBoxForm] = useState({

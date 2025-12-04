@@ -5,6 +5,7 @@ import { supabase } from '@/integrations/supabase/client';
 import type { Result } from '@/types/api';
 import { success, failure } from '@/types/api';
 import { normalizeError, logError } from '@/lib/errors';
+import type { ProductAttributeValue } from '@/services/attributes/attributeService';
 
 export interface Listing {
   id: string;
@@ -159,10 +160,17 @@ export async function fetchAuctionProducts(params: {
 }
 
 // Fetch product attribute values in batches
+<<<<<<< HEAD
 export async function fetchProductAttributeValues(productIds: string[]): Promise<Result<unknown[]>> {
   try {
     const batchSize = 500;
     const allAttributeValues: unknown[] = [];
+=======
+export async function fetchProductAttributeValues(productIds: string[]): Promise<Result<ProductAttributeValue[]>> {
+  try {
+    const batchSize = 500;
+    const allAttributeValues: ProductAttributeValue[] = [];
+>>>>>>> a275e0e6fd466fe0415be180aa3be0c399054c93
 
     for (let i = 0; i < productIds.length; i += batchSize) {
       const batchIds = productIds.slice(i, i + batchSize);
@@ -187,7 +195,7 @@ export async function fetchProductAttributeValues(productIds: string[]): Promise
       }
 
       if (batchValues) {
-        allAttributeValues.push(...batchValues);
+        allAttributeValues.push(...(batchValues as ProductAttributeValue[]));
       }
     }
 

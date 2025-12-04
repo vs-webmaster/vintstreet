@@ -15,6 +15,8 @@ import { useSellerFees, calculateSellerFee } from '@/hooks/useSellerFees';
 import { fetchSellerOrders } from '@/services/orders';
 import { fetchProfilesByUserIds, fetchBuyerProfilesByUserIds } from '@/services/users';
 import { isFailure } from '@/types/api';
+import type { Order, DeliveryStatus } from '@/types/order';
+import type { Product } from '@/types/product';
 
 interface OrderDetails {
   id: string;
@@ -100,7 +102,18 @@ export const OrdersTab = () => {
       // Map to OrderDetails format - filter out any orders without listings
       const mappedOrders: OrderDetails[] = ordersData
         .map((order) => {
+<<<<<<< HEAD
           const listing = (order as unknown).listings;
+=======
+          interface OrderWithListing extends Order {
+            listings?: {
+              product_name: string;
+              thumbnail: string | null;
+            } | null;
+            order_date?: string;
+          }
+          const listing = (order as OrderWithListing).listings;
+>>>>>>> a275e0e6fd466fe0415be180aa3be0c399054c93
 
           // Skip orders without listing data
           if (!listing) return null;
@@ -135,8 +148,13 @@ export const OrdersTab = () => {
             },
             quantity: order.quantity,
             totalAmount: Number(order.order_amount),
+<<<<<<< HEAD
             orderDate: (order as unknown).order_date || order.created_at,
             status: order.delivery_status as unknown,
+=======
+            orderDate: (order as OrderWithListing).order_date || order.created_at,
+            status: (order.delivery_status || 'pending') as DeliveryStatus,
+>>>>>>> a275e0e6fd466fe0415be180aa3be0c399054c93
             trackingNumber: order.tracking_number || undefined,
             shippingMethod: 'Standard Shipping',
             estimatedDelivery: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000).toLocaleDateString(),

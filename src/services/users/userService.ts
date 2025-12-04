@@ -398,14 +398,32 @@ export async function fetchAllUsers(
   } catch (error) {
     return {
       success: false,
+<<<<<<< HEAD
       error: error as unknown,
+=======
+      error: normalizeError(error),
+>>>>>>> a275e0e6fd466fe0415be180aa3be0c399054c93
     };
   }
 }
 
 // Get user type stats for dashboard
 // Fetch seller info map for multiple sellers (using seller_info_view)
+<<<<<<< HEAD
 export async function fetchSellerInfoMap(sellerIds: string[]): Promise<Result<Map<string, unknown>>> {
+=======
+export interface SellerInfo {
+  user_id: string;
+  shop_name: string | null;
+  display_name_format: string | null;
+  full_name: string | null;
+  username: string | null;
+  avatar_url: string | null;
+  [key: string]: unknown;
+}
+
+export async function fetchSellerInfoMap(sellerIds: string[]): Promise<Result<Map<string, SellerInfo>>> {
+>>>>>>> a275e0e6fd466fe0415be180aa3be0c399054c93
   try {
     if (sellerIds.length === 0) {
       return { success: true, data: new Map() };
@@ -450,7 +468,24 @@ export async function fetchSellerProfilesByShopNames(shopNames: string[]): Promi
 }
 
 // Fetch seller profile with user profile
+<<<<<<< HEAD
 export async function fetchSellerProfileWithUser(sellerId: string): Promise<Result<unknown>> {
+=======
+export interface SellerProfileWithUser {
+  shop_name: string | null;
+  display_name_format: string | null;
+  profile: {
+    full_name: string | null;
+    username: string | null;
+  } | null;
+  profiles: {
+    full_name: string | null;
+    username: string | null;
+  } | null;
+}
+
+export async function fetchSellerProfileWithUser(sellerId: string): Promise<Result<SellerProfileWithUser | null>> {
+>>>>>>> a275e0e6fd466fe0415be180aa3be0c399054c93
   try {
     const [sellerResult, profileResult] = await Promise.all([
       supabase.from('seller_profiles').select('shop_name, display_name_format').eq('user_id', sellerId).single(),
@@ -464,16 +499,15 @@ export async function fetchSellerProfileWithUser(sellerId: string): Promise<Resu
       throw profileResult.error;
     }
 
-    return success({
-      success: true,
-      data: sellerResult.data
+    return success(
+      sellerResult.data
         ? {
             ...sellerResult.data,
             profile: profileResult.data,
             profiles: profileResult.data,
           }
         : null,
-    });
+    );
   } catch (error) {
     logError(error, 'fetchSellerProfileWithUser');
     return failure(normalizeError(error));
@@ -500,7 +534,11 @@ export async function fetchUserStats(): Promise<Result<Record<string, number>>> 
 
     return { success: true, data: counts };
   } catch (error) {
+<<<<<<< HEAD
     return { success: false, error: error as unknown };
+=======
+    return { success: false, error: normalizeError(error) };
+>>>>>>> a275e0e6fd466fe0415be180aa3be0c399054c93
   }
 }
 

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Package, PoundSterling, Edit, Trash2, Eye, EyeOff, Upload, FileEdit } from 'lucide-react';
 import { AddProductModal } from '@/components/AddProductModal';
@@ -20,6 +20,7 @@ import { useAuth } from '@/hooks/useAuth';
 import { useToast } from '@/hooks/useToast';
 import { fetchProductsBySeller, archiveProduct } from '@/services/products';
 import { isFailure } from '@/types/api';
+import type { Product } from '@/types/product';
 
 interface ProductTemplatesProps {
   streamId?: string;
@@ -29,7 +30,11 @@ export const ProductTemplates = ({ streamId }: ProductTemplatesProps) => {
   const navigate = useNavigate();
   const { user } = useAuth();
   const { toast } = useToast();
+<<<<<<< HEAD
   const [shopProducts, setShopProducts] = useState<unknown[]>([]);
+=======
+  const [shopProducts, setShopProducts] = useState<Product[]>([]);
+>>>>>>> a275e0e6fd466fe0415be180aa3be0c399054c93
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
   const [selectedProductType, setSelectedProductType] = useState<'livestream' | 'shop'>('livestream');
   const [loading, setLoading] = useState(true);
@@ -38,7 +43,7 @@ export const ProductTemplates = ({ streamId }: ProductTemplatesProps) => {
   const [statusFilter, setStatusFilter] = useState<'live' | 'sold' | 'draft' | 'private'>('live');
   const [isBulkUploadOpen, setIsBulkUploadOpen] = useState(false);
 
-  const fetchShopProducts = async () => {
+  const fetchShopProducts = useCallback(async () => {
     try {
       if (!user) return;
 
@@ -49,21 +54,25 @@ export const ProductTemplates = ({ streamId }: ProductTemplatesProps) => {
         return;
       }
 
+<<<<<<< HEAD
       setShopProducts((result.data || []) as unknown);
+=======
+      setShopProducts(result.data || []);
+>>>>>>> a275e0e6fd466fe0415be180aa3be0c399054c93
     } catch (error) {
       console.error('Error in fetchShopProducts:', error);
     }
-  };
+  }, [user]);
 
-  const fetchProducts = async () => {
+  const fetchProducts = useCallback(async () => {
     setLoading(true);
     await fetchShopProducts();
     setLoading(false);
-  };
+  }, [fetchShopProducts]);
 
   useEffect(() => {
     fetchProducts();
-  }, []);
+  }, [fetchProducts]);
 
   const handleDeleteProduct = async (productId: string) => {
     try {
