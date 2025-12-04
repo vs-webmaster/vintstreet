@@ -131,7 +131,15 @@ jobs:
       - name: Build Docker image
         run: |
           IMAGE_URI="$GAR_LOCATION-docker.pkg.dev/$PROJECT_ID/$GAR_REPOSITORY/$SERVICE_NAME"
-          docker build -t $IMAGE_URI:$GITHUB_SHA -t $IMAGE_URI:latest .
+          docker build \
+            --build-arg VITE_SUPABASE_URL="${{ secrets.VITE_SUPABASE_URL }}" \
+            --build-arg VITE_SUPABASE_PUBLISHABLE_KEY="${{ secrets.VITE_SUPABASE_PUBLISHABLE_KEY }}" \
+            --build-arg VITE_AGORA_APP_ID="${{ secrets.VITE_AGORA_APP_ID }}" \
+            --build-arg VITE_ALGOLIA_APP_ID="${{ secrets.VITE_ALGOLIA_APP_ID }}" \
+            --build-arg VITE_ALGOLIA_SEARCH_API_KEY="${{ secrets.VITE_ALGOLIA_SEARCH_API_KEY }}" \
+            --build-arg VITE_GOOGLE_MAPS_API_KEY="${{ secrets.VITE_GOOGLE_MAPS_API_KEY }}" \
+            -t $IMAGE_URI:$GITHUB_SHA \
+            -t $IMAGE_URI:latest .
 
       - name: Push Docker image
         run: |
