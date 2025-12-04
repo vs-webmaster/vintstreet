@@ -7,6 +7,9 @@ import { useShippingProviderPrices } from '@/hooks/useShippingProviderPrices';
 import { fetchShippingOptionsBySellers, type ShippingOptionRow } from '@/services/shipping';
 import { isFailure } from '@/types/api';
 
+// UUID regex constant - moved outside component for stability
+const UUID_REGEX = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
+
 interface CartItem {
   id: string;
   listing_id: string;
@@ -33,8 +36,6 @@ export const useCheckoutShipping = ({
   shippingCountry,
 }: UseCheckoutShippingProps) => {
   const [selectedShippingOptions, setSelectedShippingOptions] = useState<Record<string, string>>({});
-  // Regex is a constant, memoize it to avoid recreating on every render
-  const uuidRegex = useMemo(() => /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i, []);
 
   // Fetch shipping options with provider names for all resolved seller IDs
   const { data: shippingOptionsData } = useQuery({
@@ -73,7 +74,7 @@ export const useCheckoutShipping = ({
   const getSellerItems = useCallback(
     (sellerId: string) => {
       return cartItems.filter((item) => {
-        if (uuidRegex.test(item.listings?.seller_id || '')) return item.listings?.seller_id === sellerId;
+        if (UUID_REGEX.test(item.listings?.seller_id || '')) return item.listings?.seller_id === sellerId;
         const mapped = nameMappings?.find((m) => m.shop_name === item.listings?.seller_id)?.user_id;
         return mapped === sellerId;
       });
