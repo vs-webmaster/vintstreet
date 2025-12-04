@@ -72,7 +72,7 @@ serve(async (req) => {
     }
 
     // Update or create shipping label record
-    const labelData: any = {
+    const labelData: unknown = {
       order_id: order.id,
       label_type: 'ninja',
       label_data: webhookData,

@@ -121,7 +121,7 @@ export const AdminProductFilters = ({
               ) : (
                 <ScrollArea className="h-[140px]">
                   <div className="space-y-0.5 pr-4">
-                    {level3Categories.map((category: any) => (
+                    {level3Categories.map((category: unknown) => (
                       <label
                         key={category.name}
                         className="flex cursor-pointer items-center gap-2 rounded p-1 hover:bg-accent/50"
@@ -157,7 +157,7 @@ export const AdminProductFilters = ({
               ) : (
                 <ScrollArea className="h-[140px]">
                   <div className="space-y-0.5 pr-4">
-                    {level4Categories.map((category: any) => (
+                    {level4Categories.map((category: unknown) => (
                       <label
                         key={category.name}
                         className="flex cursor-pointer items-center gap-2 rounded p-1 hover:bg-accent/50"

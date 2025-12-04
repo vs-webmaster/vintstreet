@@ -132,7 +132,7 @@ export const ShippingAddressDialog = ({
   // Auto-select default or first address
   useEffect(() => {
     if (savedAddresses.length > 0 && !selectedAddressId) {
-      const defaultAddress = savedAddresses.find((addr: any) => addr.is_default) || savedAddresses[0];
+      const defaultAddress = savedAddresses.find((addr: unknown) => addr.is_default) || savedAddresses[0];
       setSelectedAddressId(defaultAddress.id);
     }
   }, [savedAddresses, selectedAddressId]);
@@ -149,7 +149,7 @@ export const ShippingAddressDialog = ({
 
   // Calculate shipping cost based on weight and shipping option
   const calculateShippingCost = useCallback(
-    (shippingOption: any): number => {
+    (shippingOption: unknown): number => {
       if (!shippingOption || !product) {
         return 0;
       }
@@ -172,7 +172,7 @@ export const ShippingAddressDialog = ({
       const productWeight = Number(product.weight) || 0;
 
       // Find the first valid option with a price band
-      const validOption = shippingOptions.find((option: any) => {
+      const validOption = shippingOptions.find((option: unknown) => {
         const providerBand = getProviderBandForWeightLocal(option.provider_id, productWeight);
         return providerBand && providerBand.price;
       });
@@ -199,7 +199,7 @@ export const ShippingAddressDialog = ({
       return;
     }
 
-    const option = shippingOptions.find((opt: any) => String(opt.id) === selectedShippingOption);
+    const option = shippingOptions.find((opt: unknown) => String(opt.id) === selectedShippingOption);
     if (!option) {
       toast.error('Please select a valid shipping option');
       return;
@@ -220,7 +220,7 @@ export const ShippingAddressDialog = ({
     let address: ShippingAddress;
 
     if (useExistingAddress) {
-      const selected = savedAddresses.find((addr: any) => addr.id === selectedAddressId);
+      const selected = savedAddresses.find((addr: unknown) => addr.id === selectedAddressId);
       if (!selected) {
         toast.error('Please select an address');
         return;
@@ -259,7 +259,7 @@ export const ShippingAddressDialog = ({
 
   const handleShippingOptionChange = (optionId: string) => {
     setSelectedShippingOption(optionId);
-    const option = shippingOptions.find((opt: any) => String(opt.id) === optionId);
+    const option = shippingOptions.find((opt: unknown) => String(opt.id) === optionId);
     if (option) {
       const cost = calculateShippingCost(option);
       setShippingCost(cost);
@@ -321,7 +321,7 @@ export const ShippingAddressDialog = ({
 
                         return true;
                       })
-                      .map((option: any) => {
+                      .map((option: unknown) => {
                         const productWeight = Number(product?.weight) || 0;
                         const providerBand = getProviderBandForWeightLocal(option.provider_id, productWeight);
 
@@ -433,7 +433,7 @@ export const ShippingAddressDialog = ({
                 <div className="space-y-3">
                   <Label>Select Address</Label>
                   <RadioGroup value={selectedAddressId} onValueChange={setSelectedAddressId}>
-                    {savedAddresses.map((address: any) => (
+                    {savedAddresses.map((address: unknown) => (
                       <Card key={address.id} className="cursor-pointer p-4 transition-colors hover:border-primary">
                         <div className="flex items-start gap-3">
                           <RadioGroupItem value={address.id} id={address.id} className="mt-1" />

@@ -1,3 +1,4 @@
+/* eslint-disable no-case-declarations */
 import { useState } from 'react';
 import { useQueryClient } from '@tanstack/react-query';
 import { Upload, AlertCircle, Download } from 'lucide-react';
@@ -36,12 +37,12 @@ export const MasterProductUpload = ({ isOpen, onClose, categoryId, systemSellerI
   const queryClient = useQueryClient();
 
   // Helper function to parse CSV
-  const parseCsv = (text: string): any[] => {
+  const parseCsv = (text: string): unknown[] => {
     const lines = text.split('\n').filter((line) => line.trim() && !line.trim().startsWith('#'));
     if (lines.length < 2) return [];
 
     const headers = lines[0].split(',').map((h) => h.trim().replace(/^"|"$/g, ''));
-    const rows: any[] = [];
+    const rows: unknown[] = [];
 
     for (let i = 1; i < lines.length; i++) {
       const line = lines[i].trim();
@@ -69,7 +70,7 @@ export const MasterProductUpload = ({ isOpen, onClose, categoryId, systemSellerI
       }
       values.push(currentValue.trim());
 
-      const row: any = {};
+      const row: unknown = {};
       headers.forEach((header, index) => {
         row[header] = values[index] || '';
       });
@@ -165,9 +166,9 @@ export const MasterProductUpload = ({ isOpen, onClose, categoryId, systemSellerI
       const brandMap = new Map((brandsRes.data || []).map((b) => [b.name.toLowerCase().trim(), b.id]));
 
       // Fetch all attributes for categories, subcategories and sub-subcategories
-      const attributesByCategory = new Map<string, any[]>();
-      const attributesBySubcategory = new Map<string, any[]>();
-      const attributesBySubSubcategory = new Map<string, any[]>();
+      const attributesByCategory = new Map<string, unknown[]>();
+      const attributesBySubcategory = new Map<string, unknown[]>();
+      const attributesBySubSubcategory = new Map<string, unknown[]>();
       const attributeOptionsMap = new Map<string, Map<string, string>>();
 
       // Fetch attributes for the category (level 1)
@@ -182,10 +183,10 @@ export const MasterProductUpload = ({ isOpen, onClose, categoryId, systemSellerI
       attributesByCategory.set(categoryId, catAttrs);
 
       // Build option maps for category attributes
-      catAttrs.forEach((attr: any) => {
+      catAttrs.forEach((attr: unknown) => {
         if (!attributeOptionsMap.has(attr.id)) {
           const optionMap = new Map<string, string>();
-          (attr.attribute_options || []).forEach((opt: any) => {
+          (attr.attribute_options || []).forEach((opt: unknown) => {
             optionMap.set(opt.value.toLowerCase().trim(), opt.id);
           });
           attributeOptionsMap.set(attr.id, optionMap);
@@ -216,9 +217,9 @@ export const MasterProductUpload = ({ isOpen, onClose, categoryId, systemSellerI
         subAttrMap.forEach((attrs, subId) => {
           attributesBySubcategory.set(subId, attrs);
           // Build option maps for this subcategory
-          attrs.forEach((attr: any) => {
+          attrs.forEach((attr: unknown) => {
             const optionMap = new Map<string, string>();
-            (attr.attribute_options || []).forEach((opt: any) => {
+            (attr.attribute_options || []).forEach((opt: unknown) => {
               optionMap.set(opt.value.toLowerCase().trim(), opt.id);
             });
             attributeOptionsMap.set(attr.id, optionMap);
@@ -250,10 +251,10 @@ export const MasterProductUpload = ({ isOpen, onClose, categoryId, systemSellerI
         subSubAttrMap.forEach((attrs, subSubId) => {
           attributesBySubSubcategory.set(subSubId, attrs);
           // Build option maps for these attributes as well
-          attrs.forEach((attr: any) => {
+          attrs.forEach((attr: unknown) => {
             if (!attributeOptionsMap.has(attr.id)) {
               const optionMap = new Map<string, string>();
-              (attr.attribute_options || []).forEach((opt: any) => {
+              (attr.attribute_options || []).forEach((opt: unknown) => {
                 optionMap.set(opt.value.toLowerCase().trim(), opt.id);
               });
               attributeOptionsMap.set(attr.id, optionMap);
@@ -264,7 +265,7 @@ export const MasterProductUpload = ({ isOpen, onClose, categoryId, systemSellerI
 
       let successCount = 0;
       let failedCount = 0;
-      const failedItems: any[] = [];
+      const failedItems: unknown[] = [];
 
       // Set total for progress tracking
       const totalRows = jsonData.length;
@@ -339,7 +340,7 @@ export const MasterProductUpload = ({ isOpen, onClose, categoryId, systemSellerI
             : [];
 
           // Helper matchers for flexible column detection
-          const normalize = (s: any) =>
+          const normalize = (s: unknown) =>
             String(s || '')
               .toLowerCase()
               .replace(/[^a-z0-9]/g, '');
@@ -418,11 +419,11 @@ export const MasterProductUpload = ({ isOpen, onClose, categoryId, systemSellerI
 
           // Deduplicate by attribute id, prioritizing deeper levels
           const uniqueAttrMap = new Map<string, any>();
-          [...catAttrs, ...subcatAttrs, ...subSubcatAttrs].forEach((a: any) => uniqueAttrMap.set(a.id, a));
+          [...catAttrs, ...subcatAttrs, ...subSubcatAttrs].forEach((a: unknown) => uniqueAttrMap.set(a.id, a));
           const attributes = Array.from(uniqueAttrMap.values());
-          const attributeValues: any[] = [];
+          const attributeValues: unknown[] = [];
 
-          attributes.forEach((attr: any) => {
+          attributes.forEach((attr: unknown) => {
             // Find column that matches the attribute name directly
             const columnKey = Object.keys(row).find(
               (key) => key.toLowerCase().trim() === attr.name.toLowerCase().trim(),
@@ -435,7 +436,7 @@ export const MasterProductUpload = ({ isOpen, onClose, categoryId, systemSellerI
             // Skip null, undefined, or empty values
             if (value === null || value === undefined || value === '') return;
 
-            const valueObj: any = {
+            const valueObj: unknown = {
               product_id: listing.id,
               attribute_id: attr.id,
               value_text: null,
@@ -445,7 +446,7 @@ export const MasterProductUpload = ({ isOpen, onClose, categoryId, systemSellerI
             };
 
             switch (attr.data_type) {
-              case 'multi-select':
+              case 'multi-select': {
                 // Handle semicolon-separated values (since commas are CSV delimiters)
                 const values = String(value)
                   .split(';')
@@ -455,20 +456,23 @@ export const MasterProductUpload = ({ isOpen, onClose, categoryId, systemSellerI
                   valueObj.value_text = JSON.stringify(values);
                 }
                 break;
+              }
               case 'string':
-              case 'textarea':
+              case 'textarea': {
                 // Safe string conversion with null check
                 const strValue = String(value).trim();
                 if (strValue) {
                   valueObj.value_text = strValue;
                 }
                 break;
-              case 'number':
+              }
+              case 'number': {
                 const numValue = typeof value === 'number' ? value : parseFloat(String(value));
                 if (!isNaN(numValue)) {
                   valueObj.value_number = numValue;
                 }
                 break;
+              }
               case 'boolean':
                 valueObj.value_boolean = String(value).toUpperCase() === 'TRUE';
                 break;

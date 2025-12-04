@@ -60,7 +60,7 @@ export const InstagramPostsManager = () => {
       queryClient.invalidateQueries({ queryKey: ['instagram-posts'] });
       toast.success('Instagram posts updated successfully');
     },
-    onError: (error: any) => {
+    onError: (error: unknown) => {
       toast.error(`Failed to update: ${error.message}`);
     },
   });

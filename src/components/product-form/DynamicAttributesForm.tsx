@@ -13,9 +13,9 @@ import { Textarea } from '@/components/ui/textarea';
 import { cn } from '@/lib/utils';
 
 interface DynamicAttributesFormProps {
-  attributes: any[];
+  attributes: unknown[];
   dynamicAttributes: Record<string, any>;
-  onAttributeChange: (attributeId: string, value: any) => void;
+  onAttributeChange: (attributeId: string, value: unknown) => void;
 }
 
 export const DynamicAttributesForm = ({
@@ -29,8 +29,8 @@ export const DynamicAttributesForm = ({
     <div className="mt-4 border-t pt-4">
       <h4 className="mb-4 text-sm font-semibold text-muted-foreground">Category-Specific Attributes</h4>
       <div className="space-y-4">
-        {attributes.map((attribute: any) => {
-          const options = attribute.attribute_options?.filter((opt: any) => opt.is_active) || [];
+        {attributes.map((attribute: unknown) => {
+          const options = attribute.attribute_options?.filter((opt: unknown) => opt.is_active) || [];
           const hasOptions = options.length > 0;
           const selectedValues = dynamicAttributes[attribute.id] || [];
 
@@ -59,7 +59,7 @@ export const DynamicAttributesForm = ({
                       className={cn(
                         'bg-background',
                         dynamicAttributes[attribute.id] &&
-                          !options.some((opt: any) => opt.value === dynamicAttributes[attribute.id]) &&
+                          !options.some((opt: unknown) => opt.value === dynamicAttributes[attribute.id]) &&
                           'border-destructive',
                       )}
                     >
@@ -68,7 +68,7 @@ export const DynamicAttributesForm = ({
                       />
                     </SelectTrigger>
                     <SelectContent className="z-[100] border border-border bg-popover shadow-lg">
-                      {options.map((option: any) => (
+                      {options.map((option: unknown) => (
                         <SelectItem
                           key={option.id}
                           value={option.value}
@@ -79,7 +79,7 @@ export const DynamicAttributesForm = ({
                       ))}
                       {/* Add custom value if it exists but not in options */}
                       {dynamicAttributes[attribute.id] &&
-                        !options.some((opt: any) => opt.value === dynamicAttributes[attribute.id]) && (
+                        !options.some((opt: unknown) => opt.value === dynamicAttributes[attribute.id]) && (
                           <SelectItem
                             key="custom-value"
                             value={dynamicAttributes[attribute.id]}
@@ -100,7 +100,7 @@ export const DynamicAttributesForm = ({
                   </Select>
                   {/* Show custom value indicator below select */}
                   {dynamicAttributes[attribute.id] &&
-                    !options.some((opt: any) => opt.value === dynamicAttributes[attribute.id]) && (
+                    !options.some((opt: unknown) => opt.value === dynamicAttributes[attribute.id]) && (
                       <p className="mt-1 text-xs text-destructive">Not in approved options</p>
                     )}
                 </>

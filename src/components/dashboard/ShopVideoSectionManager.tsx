@@ -80,7 +80,7 @@ export const ShopVideoSectionManager = () => {
       } else {
         setConfig({ ...config, [field]: publicUrl });
       }
-    } catch (error: any) {
+    } catch (error: unknown) {
       toast.error(`Upload failed: ${error.message}`);
     } finally {
       setUploading(null);
@@ -120,7 +120,7 @@ export const ShopVideoSectionManager = () => {
       queryClient.invalidateQueries({ queryKey: ['shop-video-section'] });
       toast.success('Video section saved successfully');
     },
-    onError: (error: any) => {
+    onError: (error: unknown) => {
       toast.error(`Failed to save: ${error.message}`);
     },
   });

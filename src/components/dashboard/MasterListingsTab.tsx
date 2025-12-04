@@ -162,7 +162,7 @@ export const MasterListingsTab = () => {
   const templateCategory = categories.find((c) => c.id === templateCategoryId);
 
   // Helper function to convert data to CSV
-  const convertToCSV = (data: any[]): string => {
+  const convertToCSV = (data: unknown[]): string => {
     if (data.length === 0) return '';
 
     const headers = Object.keys(data[0]);
@@ -207,7 +207,7 @@ export const MasterListingsTab = () => {
 
       // Fetch all product attribute values in batches to avoid query limits
       const productIds = products.map((p) => p.id);
-      let attributeValues: any[] = [];
+      let attributeValues: unknown[] = [];
 
       // Batch size for .in() queries (Supabase limit is around 1000)
       const batchSize = 500;
@@ -243,7 +243,7 @@ export const MasterListingsTab = () => {
       setIsDownloadDialogOpen(false);
       setDownloadCategoryId('');
       setDownloadSubcategoryId('');
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error('Error downloading products:', error);
       toast.error('Failed to download products: ' + error.message);
     } finally {
@@ -256,7 +256,7 @@ export const MasterListingsTab = () => {
     try {
       // Fetch all products in batches
       const batchSize = 1000;
-      let allProducts: any[] = [];
+      let allProducts: unknown[] = [];
       let offset = 0;
       let hasMore = true;
 
@@ -288,7 +288,7 @@ export const MasterListingsTab = () => {
       const uniqueSubcategoryIds = [...new Set(allProducts.map((p) => p.subcategory_id).filter(Boolean))];
       const uniqueSubSubcategoryIds = [...new Set(allProducts.map((p) => p.sub_subcategory_id).filter(Boolean))];
 
-      let allAttributes: any[] = [];
+      let allAttributes: unknown[] = [];
 
       // Fetch level 3 attributes
       if (uniqueSubSubcategoryIds.length > 0) {
@@ -309,8 +309,8 @@ export const MasterListingsTab = () => {
       }
 
       // Create a map of subcategory/sub-subcategory to their attributes
-      const attributesByCategory: any = {};
-      allAttributes.forEach((item: any) => {
+      const attributesByCategory: unknown = {};
+      allAttributes.forEach((item: unknown) => {
         const categoryKey = item.sub_subcategory_id || item.subcategory_id;
         if (!attributesByCategory[categoryKey]) {
           attributesByCategory[categoryKey] = [];
@@ -322,7 +322,7 @@ export const MasterListingsTab = () => {
 
       // Fetch all product attribute values for all products in batches
       const productIds = allProducts.map((p) => p.id);
-      let attributeValues: any[] = [];
+      let attributeValues: unknown[] = [];
 
       // Batch size for .in() queries (Supabase limit is around 1000)
       const attrBatchSize = 500;
@@ -340,7 +340,7 @@ export const MasterListingsTab = () => {
       const attributesByProduct = groupAttributesByProduct(attributeValues);
 
       // Group products by subcategory
-      const productsBySubcategory = allProducts.reduce((acc: any, product) => {
+      const productsBySubcategory = allProducts.reduce((acc: unknown, product) => {
         const subcategoryName = product.product_subcategories?.name || 'Uncategorized';
         if (!acc[subcategoryName]) {
           acc[subcategoryName] = [];
@@ -355,14 +355,14 @@ export const MasterListingsTab = () => {
 
       Object.entries(productsBySubcategory).forEach(([subcategoryName, products]: [string, any]) => {
         // Get all attributes for this group of products
-        const relevantAttributes: any[] = [];
+        const relevantAttributes: unknown[] = [];
         const attributeMap = new Map();
 
-        products.forEach((product: any) => {
+        products.forEach((product: unknown) => {
           // Check level 3 first, then level 2
           const categoryKey = product.sub_subcategory_id || product.subcategory_id;
           const attrs = attributesByCategory[categoryKey] || [];
-          attrs.forEach((attr: any) => {
+          attrs.forEach((attr: unknown) => {
             if (!attributeMap.has(attr.id)) {
               attributeMap.set(attr.id, attr);
               relevantAttributes.push(attr);
@@ -371,10 +371,10 @@ export const MasterListingsTab = () => {
         });
 
         // Sort attributes by display_order
-        relevantAttributes.sort((a: any, b: any) => (a.display_order || 0) - (b.display_order || 0));
+        relevantAttributes.sort((a: unknown, b: unknown) => (a.display_order || 0) - (b.display_order || 0));
 
         // Format products for CSV
-        const excelData = products.map((product: any) => {
+        const excelData = products.map((product: unknown) => {
           const productAttrs = attributesByProduct[product.id] || {};
           const attrColumns = buildAttributeColumns(productAttrs, relevantAttributes);
           return formatProductForExport(product, attrColumns);
@@ -394,7 +394,7 @@ export const MasterListingsTab = () => {
       toast.success(
         `Downloaded ${products.length} products across ${Object.keys(productsBySubcategory).length} subcategories`,
       );
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error('Error downloading all products:', error);
       toast.error('Failed to download products: ' + error.message);
     } finally {
@@ -657,7 +657,7 @@ export const MasterListingsTab = () => {
                 </SelectTrigger>
                 <SelectContent>
                   {categories && categories.length > 0 ? (
-                    categories.map((cat: any) => (
+                    categories.map((cat: unknown) => (
                       <SelectItem key={cat.id} value={cat.id}>
                         {cat.name}
                       </SelectItem>
@@ -680,7 +680,7 @@ export const MasterListingsTab = () => {
                     <SelectValue placeholder="All subcategories" />
                   </SelectTrigger>
                   <SelectContent>
-                    {downloadSubcategories.map((subcat: any) => (
+                    {downloadSubcategories.map((subcat: unknown) => (
                       <SelectItem key={subcat.id} value={subcat.id}>
                         {subcat.name}
                       </SelectItem>

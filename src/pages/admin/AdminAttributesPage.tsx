@@ -181,7 +181,7 @@ const AdminAttributesPage = () => {
       setSelectedCategoryId('');
       setIsCreateOpen(false);
       refetch();
-    } catch (error: any) {
+    } catch (error: unknown) {
       toast.error(`Failed to create attribute: ${error.message}`);
     }
   };
@@ -207,7 +207,7 @@ const AdminAttributesPage = () => {
       setEditingAttribute(null);
       setIsEditOpen(false);
       refetch();
-    } catch (error: any) {
+    } catch (error: unknown) {
       toast.error(`Failed to update attribute: ${error.message}`);
     }
   };
@@ -220,7 +220,7 @@ const AdminAttributesPage = () => {
       if (isFailure(result)) throw result.error;
       toast.success('Attribute deleted successfully');
       refetch();
-    } catch (error: any) {
+    } catch (error: unknown) {
       toast.error(`Failed to delete attribute: ${error.message}`);
     }
   };
@@ -242,7 +242,7 @@ const AdminAttributesPage = () => {
       setNewOptionValue('');
       refetchOptions();
       refetchCounts();
-    } catch (error: any) {
+    } catch (error: unknown) {
       toast.error(`Failed to add option: ${error.message}`);
     }
   };
@@ -273,7 +273,7 @@ const AdminAttributesPage = () => {
       setIsBulkAddOpen(false);
       refetchOptions();
       refetchCounts();
-    } catch (error: any) {
+    } catch (error: unknown) {
       toast.error(`Failed to add options: ${error.message}`);
     }
   };
@@ -287,7 +287,7 @@ const AdminAttributesPage = () => {
       toast.success('Option deleted successfully');
       refetchOptions();
       refetchCounts();
-    } catch (error: any) {
+    } catch (error: unknown) {
       toast.error(`Failed to delete option: ${error.message}`);
     }
   };
@@ -298,7 +298,7 @@ const AdminAttributesPage = () => {
       if (isFailure(result)) throw result.error;
       toast.success(`Option ${!currentActive ? 'activated' : 'deactivated'} successfully`);
       refetchOptions();
-    } catch (error: any) {
+    } catch (error: unknown) {
       toast.error(`Failed to update option: ${error.message}`);
     }
   };
@@ -330,7 +330,7 @@ const AdminAttributesPage = () => {
       setIsGroupDialogOpen(false);
       setEditingGroup(null);
       refetchGroups();
-    } catch (error: any) {
+    } catch (error: unknown) {
       toast.error(`Failed to create group: ${error.message}`);
     }
   };
@@ -352,7 +352,7 @@ const AdminAttributesPage = () => {
       setEditingGroup(null);
       setIsGroupDialogOpen(false);
       refetchGroups();
-    } catch (error: any) {
+    } catch (error: unknown) {
       toast.error(`Failed to update group: ${error.message}`);
     }
   };
@@ -365,7 +365,7 @@ const AdminAttributesPage = () => {
       if (isFailure(result)) throw result.error;
       toast.success('Group deleted successfully');
       refetchGroups();
-    } catch (error: any) {
+    } catch (error: unknown) {
       toast.error(`Failed to delete group: ${error.message}`);
     }
   };
@@ -874,7 +874,7 @@ const AdminAttributesPage = () => {
                           </TableCell>
                         </TableRow>
                       ) : (
-                        attributeOptions.map((option: any) => (
+                        attributeOptions.map((option: unknown) => (
                           <TableRow key={option.id}>
                             <TableCell className="font-medium">{option.value}</TableCell>
                             <TableCell>

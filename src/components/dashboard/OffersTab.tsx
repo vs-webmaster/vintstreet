@@ -67,7 +67,7 @@ export const OffersTab = () => {
       queryClient.invalidateQueries({ queryKey: ['seller-offers', user?.id] });
       toast.success('Offer updated successfully');
     },
-    onError: (error: any) => {
+    onError: (error: unknown) => {
       console.error('Error updating offer:', error);
       toast.error(error?.message || 'Failed to update offer');
     },

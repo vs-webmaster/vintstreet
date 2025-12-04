@@ -46,7 +46,7 @@ export const WaitlistModal = ({ open, onOpenChange }: WaitlistModalProps) => {
         description: "You're on the waitlist! We'll be in touch soon.",
       });
       navigate('/');
-    } catch (error: any) {
+    } catch (error: unknown) {
       toast({
         title: 'Error',
         description: error?.message || 'Failed to join waitlist. Please try again.',

@@ -81,7 +81,7 @@ export default function AdminBlogPage() {
               </CardContent>
             </Card>
           ) : (
-            posts.map((post: any) => (
+            posts.map((post: unknown) => (
               <Card key={post.id}>
                 <CardHeader>
                   <div className="flex items-start justify-between">

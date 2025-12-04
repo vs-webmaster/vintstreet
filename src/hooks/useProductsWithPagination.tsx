@@ -281,7 +281,7 @@ export const useProductsWithPagination = ({
   });
 
   // Fetch sales status for current page products
-  const productIds = products.map((p: any) => p.id);
+  const productIds = products.map((p: unknown) => p.id);
   const { data: salesStatus = [] } = useQuery({
     queryKey: ['product-sales-status', productIds],
     queryFn: async () => {
@@ -356,7 +356,7 @@ export const useProductsWithPagination = ({
   // Create a lookup map for sales status
   const salesStatusMap = useMemo(() => {
     const map = new Map<string, boolean>();
-    salesStatus.forEach((item: any) => {
+    salesStatus.forEach((item: unknown) => {
       map.set(item.product_id, item.has_sales);
     });
     return map;
@@ -364,17 +364,17 @@ export const useProductsWithPagination = ({
 
   // Add sales status, additional Level 4 categories, and tags to products
   const productsWithSales = useMemo(() => {
-    return products.map((product: any) => {
+    return products.map((product: unknown) => {
       const additionalCategories = additionalLevel4Categories
-        .filter((cat: any) => cat.product_id === product.id)
-        .map((cat: any) => ({
+        .filter((cat: unknown) => cat.product_id === product.id)
+        .map((cat: unknown) => ({
           id: cat.sub_sub_subcategory_id,
           name: cat.product_sub_sub_subcategories?.name || '',
         }));
 
       const tags = productTags
-        .filter((tag: any) => tag.product_id === product.id)
-        .map((tag: any) => tag.product_tags)
+        .filter((tag: unknown) => tag.product_id === product.id)
+        .map((tag: unknown) => tag.product_tags)
         .filter(Boolean);
 
       return {

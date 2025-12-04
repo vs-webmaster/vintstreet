@@ -69,7 +69,7 @@ export default function AdminShopHeroImagesPage() {
       toast.success('Shop hero images saved successfully');
       setHasChanges(false);
     },
-    onError: (error: any) => {
+    onError: (error: unknown) => {
       toast.error('Failed to save: ' + error.message);
     },
   });
@@ -82,7 +82,7 @@ export default function AdminShopHeroImagesPage() {
       updatedImages[index] = { ...updatedImages[index], image_url: publicUrl };
       setLocalImages(updatedImages);
       setHasChanges(true);
-    } catch (error: any) {
+    } catch (error: unknown) {
       toast.error('Failed to upload image: ' + error.message);
     } finally {
       setUploadingIndex(null);

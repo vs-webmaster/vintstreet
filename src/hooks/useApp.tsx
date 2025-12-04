@@ -54,14 +54,14 @@ interface ProductCategory {
   slug: string;
   icon?: string;
   disable_main_link?: boolean;
-  layout?: any;
+  layout?: unknown;
   brands: CategoryBrand[];
   product_subcategories: ProductSubcategory[];
-  trending: any[];
-  bestSellers: any[];
+  trending: unknown[];
+  bestSellers: unknown[];
   luxuryBrands: CategoryBrand[];
-  customLists: any[];
-  images: any[];
+  customLists: unknown[];
+  images: unknown[];
 }
 
 interface ProductSubcategory {
@@ -95,8 +95,8 @@ interface AppContextType {
   footerColumns: FooterColumn[];
   footerLinks: FooterLink[];
   megaMenuCategories: ProductCategory[];
-  megaMenuCustomLists: any[];
-  megaMenuCustomListItems: any[];
+  megaMenuCustomLists: unknown[];
+  megaMenuCustomListItems: unknown[];
   loading: boolean;
 }
 
@@ -197,9 +197,9 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
 
     // Build hierarchy client-side for optimal performance
     const categories = (cats || []).map((cat) => {
-      const layout = (layouts || []).find((l: any) => l.category_id === cat.id);
-      const images = (menuImages || []).filter((img: any) => {
-        const layoutMatch = (layouts || []).find((l: any) => l.category_id === cat.id);
+      const layout = (layouts || []).find((l: unknown) => l.category_id === cat.id);
+      const images = (menuImages || []).filter((img: unknown) => {
+        const layoutMatch = (layouts || []).find((l: unknown) => l.category_id === cat.id);
         return layoutMatch && img.layout_id === layoutMatch.id;
       });
 
@@ -211,9 +211,9 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
           brand_id: cb.brand_id,
           brands: cb.brands as Brand,
         })),
-        trending: filterByCategoryId(trending, cat.id).map((t: any) => {
+        trending: filterByCategoryId(trending, cat.id).map((t: unknown) => {
           const level = t.item_level;
-          let itemData: any = { id: '', name: '', path: '' };
+          let itemData: unknown = { id: '', name: '', path: '' };
 
           if (level === 2) {
             const l2 = l2Map.get(t.subcategory_id);
@@ -243,9 +243,9 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
 
           return itemData;
         }),
-        bestSellers: filterByCategoryId(bestSellers, cat.id).map((bs: any) => {
+        bestSellers: filterByCategoryId(bestSellers, cat.id).map((bs: unknown) => {
           const level = bs.item_level;
-          let itemData: any = { id: '', name: '', path: '' };
+          let itemData: unknown = { id: '', name: '', path: '' };
 
           if (level === 2) {
             const l2 = l2Map.get(bs.subcategory_id);
@@ -280,13 +280,13 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
           brands: lb.brands as Brand,
         })),
         customLists: (customLists || [])
-          .filter((cl: any) => cl.category_id === cat.id)
-          .map((cl: any) => ({
+          .filter((cl: unknown) => cl.category_id === cat.id)
+          .map((cl: unknown) => ({
             id: cl.id,
             name: cl.name,
             items: (customListItems || [])
-              .filter((item: any) => item.list_id === cl.id)
-              .map((item: any) => ({
+              .filter((item: unknown) => item.list_id === cl.id)
+              .map((item: unknown) => ({
                 id: item.id,
                 name: item.name,
                 url: item.url,
@@ -297,7 +297,7 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
     });
 
     // Enhance custom list items with generated URLs and dynamic display names for category-based items
-    const enhancedItems = (customListItems || []).map((item: any) => {
+    const enhancedItems = (customListItems || []).map((item: unknown) => {
       if (item.url) {
         return { ...item, display_name: item.name };
       }

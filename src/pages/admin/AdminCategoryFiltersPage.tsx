@@ -74,7 +74,7 @@ const AdminCategoryFiltersPage = () => {
 
   // Get current category IDs based on level
   const getCurrentCategoryIds = () => {
-    const ids: any = {
+    const ids: unknown = {
       category_id: null,
       subcategory_id: null,
       sub_subcategory_id: null,
@@ -193,7 +193,7 @@ const AdminCategoryFiltersPage = () => {
       const enabledIds = new Set<string>();
       const topLineIds = new Set<string>();
 
-      enabledFilters.forEach((f: any) => {
+      enabledFilters.forEach((f: unknown) => {
         const id = f.filter_type === 'default' ? f.filter_name : f.attribute_id;
         if (id) {
           enabledIds.add(id);
@@ -228,7 +228,7 @@ const AdminCategoryFiltersPage = () => {
       queryClient.invalidateQueries({ queryKey: ['category-available-attributes'] });
       toast.success('Filter settings saved successfully');
     },
-    onError: (error: any) => {
+    onError: (error: unknown) => {
       toast.error(`Failed to save: ${error.message}`);
     },
   });
@@ -289,7 +289,7 @@ const AdminCategoryFiltersPage = () => {
                     <SelectValue placeholder="Select main category..." />
                   </SelectTrigger>
                   <SelectContent className="max-h-[300px]">
-                    {level1Categories.map((cat: any) => (
+                    {level1Categories.map((cat: unknown) => (
                       <SelectItem key={cat.id} value={cat.id}>
                         {cat.name}
                       </SelectItem>
@@ -307,7 +307,7 @@ const AdminCategoryFiltersPage = () => {
                     <SelectValue placeholder="Select subcategory..." />
                   </SelectTrigger>
                   <SelectContent className="max-h-[300px]">
-                    {level2Categories.map((cat: any) => (
+                    {level2Categories.map((cat: unknown) => (
                       <SelectItem key={cat.id} value={cat.id}>
                         {cat.name}
                       </SelectItem>
@@ -325,7 +325,7 @@ const AdminCategoryFiltersPage = () => {
                     <SelectValue placeholder="Select sub-subcategory..." />
                   </SelectTrigger>
                   <SelectContent className="max-h-[300px]">
-                    {level3Categories.map((cat: any) => (
+                    {level3Categories.map((cat: unknown) => (
                       <SelectItem key={cat.id} value={cat.id}>
                         {cat.name}
                       </SelectItem>
@@ -343,7 +343,7 @@ const AdminCategoryFiltersPage = () => {
                     <SelectValue placeholder="Select sub-sub-subcategory..." />
                   </SelectTrigger>
                   <SelectContent className="max-h-[300px]">
-                    {level4Categories.map((cat: any) => (
+                    {level4Categories.map((cat: unknown) => (
                       <SelectItem key={cat.id} value={cat.id}>
                         {cat.name}
                       </SelectItem>
@@ -366,7 +366,7 @@ const AdminCategoryFiltersPage = () => {
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-6">
-              {allFilters.map((attr: any) => (
+              {allFilters.map((attr: unknown) => (
                 <div key={attr.id} className="flex items-center justify-between rounded-lg border p-3">
                   <div className="flex-1 space-y-0.5">
                     <Label>

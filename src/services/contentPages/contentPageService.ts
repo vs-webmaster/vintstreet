@@ -20,7 +20,7 @@ export interface PageSection {
   id?: string;
   page_id: string;
   section_type: string;
-  content: any;
+  content: unknown;
   display_order: number;
 }
 

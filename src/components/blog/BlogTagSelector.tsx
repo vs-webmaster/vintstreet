@@ -46,7 +46,7 @@ export const BlogTagSelector = ({ selectedTags, onTagsChange }: BlogTagSelectorP
       setIsCreating(false);
       toast.success('Tag created successfully');
     },
-    onError: (error: any) => {
+    onError: (error: unknown) => {
       toast.error('Failed to create tag: ' + (error?.message || 'Unknown error'));
     },
   });
@@ -108,7 +108,7 @@ export const BlogTagSelector = ({ selectedTags, onTagsChange }: BlogTagSelectorP
           <div className="text-sm text-muted-foreground">No tags available. Create your first tag above.</div>
         ) : (
           <div className="flex flex-wrap gap-2">
-            {tags.map((tag: any) => (
+            {tags.map((tag: unknown) => (
               <div key={tag.id} onClick={() => toggleTag(tag.id)} className="cursor-pointer">
                 <Badge
                   variant={selectedTags.includes(tag.id) ? 'default' : 'outline'}

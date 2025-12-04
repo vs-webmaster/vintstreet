@@ -33,9 +33,9 @@ interface CategoryHierarchyParams {
 
 // Utility: Apply category hierarchy filter for category_attribute_filters table (uses OR patterns)
 function applyCategoryFilterHierarchy(
-  query: any,
+  query: unknown,
   { activeSubcategory, activeSubSubcategory, isSubSubcategoryPage }: CategoryHierarchyParams,
-): any {
+): unknown {
   if (activeSubcategory && !activeSubSubcategory) {
     query = query.or(`subcategory_id.eq.${activeSubcategory},subcategory_id.is.null`);
     query = query.is('sub_subcategory_id', null);
@@ -60,7 +60,7 @@ interface ListingFilterParams {
 
 // Utility: Apply listing filters for product queries (uses eq/in patterns on listings join)
 function applyListingFilters(
-  query: any,
+  query: unknown,
   {
     activeCategory,
     activeSubcategory,
@@ -69,7 +69,7 @@ function applyListingFilters(
     selectedBrands,
     isSubSubcategoryPage,
   }: ListingFilterParams,
-): any {
+): unknown {
   if (activeCategory) query = query.eq('listings.category_id', activeCategory);
   if (activeSubcategory) query = query.eq('listings.subcategory_id', activeSubcategory);
   if (activeSubSubcategory && isSubSubcategoryPage) {
@@ -189,7 +189,7 @@ export const useDynamicAttributeFilters = ({
   const attributeFiltersQuery = useQuery({
     queryKey: [
       'attribute-filter-values',
-      enabledAttributes.map((a: any) => a.id).join(','),
+      enabledAttributes.map((a: unknown) => a.id).join(','),
       activeCategory,
       activeSubcategory,
       activeSubSubcategory,
@@ -274,7 +274,7 @@ export const useDynamicAttributeFilters = ({
   const { data: attributeFilteredProductIds } = useQuery({
     queryKey: [
       'attribute-filtered-products',
-      enabledAttributes.map((a: any) => a.id).join(','),
+      enabledAttributes.map((a: unknown) => a.id).join(','),
       activeCategory,
       activeSubcategory,
       activeSubSubcategory,

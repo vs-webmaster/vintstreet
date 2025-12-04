@@ -81,7 +81,7 @@ export const SetupTab = () => {
         title: 'Download link sent!',
         description: `Check your email (${user?.email}) for the ${platform === 'ios' ? 'App Store' : 'Google Play'} download link`,
       });
-    } catch (error: any) {
+    } catch (error: unknown) {
       toast({
         title: 'Error',
         description: 'Failed to send download link',
@@ -162,7 +162,7 @@ export const SetupTab = () => {
 
         toast({ title: 'Success', description: 'Shipping settings saved' });
         setSetupStep(setupStep + 1);
-      } catch (error: any) {
+      } catch (error: unknown) {
         toast({
           title: 'Error',
           description: error.message || 'Failed to save shipping settings',
@@ -191,7 +191,7 @@ export const SetupTab = () => {
 
         // Redirect to add product page
         window.location.href = 'https://vintstreet.com/add-product';
-      } catch (error: any) {
+      } catch (error: unknown) {
         toast({
           title: 'Error',
           description: error.message || 'Failed to complete setup',
@@ -510,7 +510,7 @@ export const SetupTab = () => {
               <div className="space-y-4">
                 <h3 className="text-lg font-semibold">Shipping Providers *</h3>
                 <div className="grid grid-cols-2 gap-3 md:grid-cols-3">
-                  {providers.map((provider: any) => (
+                  {providers.map((provider: unknown) => (
                     <Card
                       key={provider.id}
                       className={`cursor-pointer transition-all ${

@@ -8,7 +8,7 @@ import type { Review } from '@/services/reviews';
 
 interface SellerReviewsTabProps {
   reviews: Review[];
-  userReview: any;
+  userReview: unknown;
   userId: string | undefined;
   sellerId: string;
   onSubmitReview: (rating: number, comment: string) => void;

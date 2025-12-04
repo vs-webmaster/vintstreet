@@ -228,7 +228,7 @@ const BiddingSection = ({ streamId, isStreamer = false }: BiddingSectionProps) =
       } else {
         throw new Error(data.error || 'Failed to place bid');
       }
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error('Error placing bid:', error);
       toast({
         title: 'Error placing bid',

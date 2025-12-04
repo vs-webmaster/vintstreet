@@ -48,7 +48,7 @@ import { fetchTags, fetchProductTags } from '@/services/tags';
 import { isFailure } from '@/types/api';
 
 interface ProductEditModalProps {
-  product?: any;
+  product?: unknown;
   sellerId?: string;
   isOpen: boolean;
   onClose: () => void;
@@ -135,7 +135,7 @@ export const ProductEditModal = ({ product, sellerId, isOpen, onClose, onSave }:
     // Don't process during initial load or if no attributes
     if (!attributes || attributes.length === 0 || isInitialLoadRef.current) return;
 
-    const currentAttributeIds = new Set(attributes.map((attr: any) => attr.id));
+    const currentAttributeIds = new Set(attributes.map((attr: unknown) => attr.id));
 
     // ONLY show in "Old Attributes" if they have values AND are NOT in current attributes
     // If an attribute overlaps between old and new category, it shows in main "Attributes" only
@@ -402,7 +402,7 @@ export const ProductEditModal = ({ product, sellerId, isOpen, onClose, onSave }:
       const finalMainImage = finalImages[mainImageIndex] || formData.thumbnail || finalImages[0];
       const finalAltTags = finalImages.map((_, index) => imageAltTags[index] || '');
 
-      const productData: any = {
+      const productData: unknown = {
         product_name: formData.product_name,
         slug: formData.slug || null,
         excerpt: formData.excerpt || null,
@@ -469,7 +469,7 @@ export const ProductEditModal = ({ product, sellerId, isOpen, onClose, onSave }:
       if (productId) {
         try {
           await saveAttributeValues(productId, dynamicAttributes);
-        } catch (attrError: any) {
+        } catch (attrError: unknown) {
           console.error('[ProductEditModal] Attribute save failed', attrError);
           toast.error(`Failed to save attributes: ${attrError.message || 'Unknown error'}`);
           throw attrError;
@@ -572,7 +572,7 @@ export const ProductEditModal = ({ product, sellerId, isOpen, onClose, onSave }:
 
       toast.success(product ? 'Product updated successfully' : 'Product created successfully');
       onSave();
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error('[ProductEditModal] Error saving product:', error);
       // Only show generic error if we haven't already shown a specific one
       if (!error?.message?.includes('Validation failed')) {
@@ -586,7 +586,7 @@ export const ProductEditModal = ({ product, sellerId, isOpen, onClose, onSave }:
     }
   };
 
-  const updateField = (field: string, value: any) => {
+  const updateField = (field: string, value: unknown) => {
     setFormData((prev) => {
       const updated = { ...prev, [field]: value };
 
@@ -606,7 +606,7 @@ export const ProductEditModal = ({ product, sellerId, isOpen, onClose, onSave }:
     });
   };
 
-  const updateAttribute = (attributeId: string, value: any) => {
+  const updateAttribute = (attributeId: string, value: unknown) => {
     setDynamicAttributes((prev) => ({ ...prev, [attributeId]: value }));
   };
 
@@ -998,7 +998,7 @@ export const ProductEditModal = ({ product, sellerId, isOpen, onClose, onSave }:
                             <SelectValue placeholder="Select" />
                           </SelectTrigger>
                           <SelectContent className="z-[100] bg-popover">
-                            {categories.map((cat: any) => (
+                            {categories.map((cat: unknown) => (
                               <SelectItem key={cat.id} value={cat.id}>
                                 {cat.name}
                               </SelectItem>
@@ -1018,7 +1018,7 @@ export const ProductEditModal = ({ product, sellerId, isOpen, onClose, onSave }:
                             <SelectValue placeholder="Select" />
                           </SelectTrigger>
                           <SelectContent className="z-[100] bg-popover">
-                            {subcategories.map((sub: any) => (
+                            {subcategories.map((sub: unknown) => (
                               <SelectItem key={sub.id} value={sub.id}>
                                 {sub.name}
                               </SelectItem>
@@ -1038,7 +1038,7 @@ export const ProductEditModal = ({ product, sellerId, isOpen, onClose, onSave }:
                             <SelectValue placeholder="Select" />
                           </SelectTrigger>
                           <SelectContent className="z-[100] bg-popover">
-                            {subSubcategories.map((sub: any) => (
+                            {subSubcategories.map((sub: unknown) => (
                               <SelectItem key={sub.id} value={sub.id}>
                                 {sub.name}
                               </SelectItem>
@@ -1058,7 +1058,7 @@ export const ProductEditModal = ({ product, sellerId, isOpen, onClose, onSave }:
                             <SelectValue placeholder="Select" />
                           </SelectTrigger>
                           <SelectContent className="z-[100] bg-popover">
-                            {subSubSubcategories.map((sub: any) => (
+                            {subSubSubcategories.map((sub: unknown) => (
                               <SelectItem key={sub.id} value={sub.id}>
                                 {sub.name}
                               </SelectItem>
@@ -1116,7 +1116,7 @@ export const ProductEditModal = ({ product, sellerId, isOpen, onClose, onSave }:
                       </p>
                     ) : (
                       <div className="grid grid-cols-4 gap-3">
-                        {attributes.map((attr: any) => {
+                        {attributes.map((attr: unknown) => {
                           const currentValue = dynamicAttributes[attr.id];
                           const { options, hasOptions, isCustomValue } = analyzeAttribute(attr, currentValue);
                           const selectedValues = dynamicAttributes[attr.id] || [];
@@ -1143,9 +1143,9 @@ export const ProductEditModal = ({ product, sellerId, isOpen, onClose, onSave }:
                                     </SelectTrigger>
                                     <SelectContent className="z-[100] bg-popover">
                                       {options
-                                        .filter((opt: any) => opt.is_active)
-                                        .sort((a: any, b: any) => a.display_order - b.display_order)
-                                        .map((option: any) => (
+                                        .filter((opt: unknown) => opt.is_active)
+                                        .sort((a: unknown, b: unknown) => a.display_order - b.display_order)
+                                        .map((option: unknown) => (
                                           <SelectItem key={option.id} value={option.value}>
                                             {option.value}
                                           </SelectItem>
@@ -1203,7 +1203,7 @@ export const ProductEditModal = ({ product, sellerId, isOpen, onClose, onSave }:
                           These attributes are from a previous category selection and will be saved.
                         </p>
                         <div className="grid grid-cols-4 gap-3">
-                          {oldAttributes.map((attr: any) => {
+                          {oldAttributes.map((attr: unknown) => {
                             const currentValue = dynamicAttributes[attr.id];
                             const { options, hasOptions, isCustomValue } = analyzeAttribute(attr, currentValue);
                             const selectedValues = dynamicAttributes[attr.id] || [];
@@ -1230,9 +1230,9 @@ export const ProductEditModal = ({ product, sellerId, isOpen, onClose, onSave }:
                                       </SelectTrigger>
                                       <SelectContent className="z-[100] bg-popover">
                                         {options
-                                          .filter((opt: any) => opt.is_active)
-                                          .sort((a: any, b: any) => a.display_order - b.display_order)
-                                          .map((option: any) => (
+                                          .filter((opt: unknown) => opt.is_active)
+                                          .sort((a: unknown, b: unknown) => a.display_order - b.display_order)
+                                          .map((option: unknown) => (
                                             <SelectItem key={option.id} value={option.value}>
                                               {option.value}
                                             </SelectItem>
@@ -1742,7 +1742,7 @@ export const ProductEditModal = ({ product, sellerId, isOpen, onClose, onSave }:
                           }
 
                           toast.success('Meta tags generated successfully!');
-                        } catch (error: any) {
+                        } catch (error: unknown) {
                           console.error('Error generating meta tags:', error);
                           toast.error(`Failed to generate meta tags: ${error?.message || 'Please try again.'}`);
                         } finally {

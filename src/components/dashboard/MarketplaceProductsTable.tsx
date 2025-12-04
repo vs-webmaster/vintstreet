@@ -111,7 +111,7 @@ export const MarketplaceProductsTable = () => {
 
       // If system seller wasn't found, filter out by shop_name as a safeguard
       const filtered = !systemSeller?.user_id
-        ? (result.data || []).filter((p: any) => p.seller?.shop_name !== 'VintStreet System')
+        ? (result.data || []).filter((p: unknown) => p.seller?.shop_name !== 'VintStreet System')
         : result.data;
 
       return filtered || [];
@@ -238,7 +238,7 @@ export const MarketplaceProductsTable = () => {
               </SelectTrigger>
               <SelectContent>
                 <SelectItem value="all">All Categories</SelectItem>
-                {level1Categories.map((cat: any) => (
+                {level1Categories.map((cat: unknown) => (
                   <SelectItem key={cat.id} value={cat.id}>
                     {cat.name}
                   </SelectItem>
@@ -253,7 +253,7 @@ export const MarketplaceProductsTable = () => {
                 </SelectTrigger>
                 <SelectContent>
                   <SelectItem value="all">All Subcategories</SelectItem>
-                  {level2Categories.map((cat: any) => (
+                  {level2Categories.map((cat: unknown) => (
                     <SelectItem key={cat.id} value={cat.id}>
                       {cat.name}
                     </SelectItem>
@@ -268,7 +268,7 @@ export const MarketplaceProductsTable = () => {
               </SelectTrigger>
               <SelectContent>
                 <SelectItem value="all">All Brands</SelectItem>
-                {brands.map((brand: any) => (
+                {brands.map((brand: unknown) => (
                   <SelectItem key={brand.id} value={brand.id}>
                     {brand.name}
                   </SelectItem>
@@ -324,7 +324,7 @@ export const MarketplaceProductsTable = () => {
             )}
             {filterLevel1 !== 'all' && (
               <Badge variant="secondary">
-                Category: {level1Categories.find((c: any) => c.id === filterLevel1)?.name}
+                Category: {level1Categories.find((c: unknown) => c.id === filterLevel1)?.name}
                 <button
                   onClick={() => {
                     setFilterLevel1('all');
@@ -338,7 +338,7 @@ export const MarketplaceProductsTable = () => {
             )}
             {filterLevel2 !== 'all' && (
               <Badge variant="secondary">
-                Subcategory: {level2Categories.find((c: any) => c.id === filterLevel2)?.name}
+                Subcategory: {level2Categories.find((c: unknown) => c.id === filterLevel2)?.name}
                 <button onClick={() => setFilterLevel2('all')} className="ml-1">
                   <X className="h-3 w-3" />
                 </button>
@@ -346,7 +346,7 @@ export const MarketplaceProductsTable = () => {
             )}
             {filterBrand !== 'all' && (
               <Badge variant="secondary">
-                Brand: {brands.find((b: any) => b.id === filterBrand)?.name}
+                Brand: {brands.find((b: unknown) => b.id === filterBrand)?.name}
                 <button onClick={() => setFilterBrand('all')} className="ml-1">
                   <X className="h-3 w-3" />
                 </button>
@@ -411,7 +411,7 @@ export const MarketplaceProductsTable = () => {
                   </TableCell>
                 </TableRow>
               ) : (
-                products.map((product: any) => (
+                products.map((product: unknown) => (
                   <TableRow key={product.id}>
                     <TableCell>
                       <img

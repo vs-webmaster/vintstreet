@@ -393,7 +393,7 @@ const ShopPage = () => {
                   })}
 
                   {Array.from(selectedBrands).map((brandId) => {
-                    const brand = availableBrands.find((b: any) => b.id === brandId);
+                    const brand = availableBrands.find((b: unknown) => b.id === brandId);
                     return brand ? (
                       <Badge key={brandId} variant="secondary" className="gap-2 pr-1">
                         {brand.name}
@@ -525,7 +525,7 @@ const ShopPage = () => {
                     {/* Category Grid Images */}
                     {categoryGridImages.length > 0 && (
                       <div className="mt-12 grid grid-cols-1 gap-4 md:grid-cols-2">
-                        {categoryGridImages.map((gridImage: any) => (
+                        {categoryGridImages.map((gridImage: unknown) => (
                           <div
                             key={gridImage.id}
                             className="group relative cursor-pointer overflow-hidden rounded-[10px] bg-muted"

@@ -45,7 +45,7 @@ serve(async (req) => {
     });
 
     const availableAmount = balance.available.reduce(
-      (sum: number, b: any) => (b.currency === currency ? sum + b.amount : sum),
+      (sum: number, b: unknown) => (b.currency === currency ? sum + b.amount : sum),
       0,
     );
 

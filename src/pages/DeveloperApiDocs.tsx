@@ -765,7 +765,8 @@ const { data, error } = await supabase
       filter: \`id=eq.\${streamId}\`
     },
     (payload) => {
-      console.log('Stream updated:', payload.new);
+      // Handle stream update
+      // payload.new contains updated stream data
     }
   )
   .subscribe();`,
@@ -792,7 +793,8 @@ const { data, error } = await supabase
       filter: \`listing_id=eq.\${listingId}\`
     },
     (payload) => {
-      console.log('New bid:', payload.new);
+      // Handle new bid
+      // payload.new contains new bid data
     }
   )
   .subscribe();`,

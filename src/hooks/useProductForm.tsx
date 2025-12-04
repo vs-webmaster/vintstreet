@@ -136,7 +136,7 @@ export const useProductForm = (id?: string) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
   };
 
-  const updateDynamicAttribute = (attributeId: string, value: any) => {
+  const updateDynamicAttribute = (attributeId: string, value: unknown) => {
     setDynamicAttributes((prev) => ({ ...prev, [attributeId]: value }));
   };
 

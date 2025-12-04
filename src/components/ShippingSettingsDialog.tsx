@@ -121,7 +121,7 @@ export const ShippingSettingsDialog = ({ open, onOpenChange }: ShippingSettingsD
   // Load existing selections when data is available
   useEffect(() => {
     if (existingOptions && existingOptions.length > 0) {
-      const providerIds = new Set(existingOptions.map((opt: any) => opt.provider_id).filter(Boolean));
+      const providerIds = new Set(existingOptions.map((opt: unknown) => opt.provider_id).filter(Boolean));
       setSelectedProviders(providerIds);
 
       // Use the first option's timeframe (since they should all be the same)
@@ -180,7 +180,7 @@ export const ShippingSettingsDialog = ({ open, onOpenChange }: ShippingSettingsD
 
       // First, delete all existing shipping options for this seller
       if (existingOptions.length > 0) {
-        const deletePromises = existingOptions.map((opt: any) => deleteShippingOption(opt.id));
+        const deletePromises = existingOptions.map((opt: unknown) => deleteShippingOption(opt.id));
         const deleteResults = await Promise.all(deletePromises);
         const failedDelete = deleteResults.find((r) => isFailure(r));
         if (failedDelete) {
@@ -428,7 +428,7 @@ export const ShippingSettingsDialog = ({ open, onOpenChange }: ShippingSettingsD
               <>
                 {/* Provider Cards Grid */}
                 <div className="grid grid-cols-2 gap-3 md:grid-cols-3">
-                  {providers.map((provider: any) => (
+                  {providers.map((provider: unknown) => (
                     <Card
                       key={provider.id}
                       className={`cursor-pointer transition-all ${

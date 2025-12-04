@@ -123,7 +123,7 @@ export const MegaMenuTab = () => {
       // Build hierarchy
       const categories = (cats.data || []).map((cat) => ({
         ...cat,
-        brands: filterByCategoryId(categoryBrands.data as any, cat.id).map((cb: any) => ({
+        brands: filterByCategoryId(categoryBrands.data as any, cat.id).map((cb: unknown) => ({
           id: cb.id,
           brand_id: cb.brand_id,
           display_order: cb.display_order,
@@ -231,7 +231,7 @@ export const MegaMenuTab = () => {
 };
 
 // Brand Management Component (moved from inline)
-function BrandManagement({ categories, brands }: { categories: any[]; brands: Brand[] }) {
+function BrandManagement({ categories, brands }: { categories: unknown[]; brands: Brand[] }) {
   const queryClient = useQueryClient();
   const [addingBrand, setAddingBrand] = useState<string | null>(null);
 
@@ -275,7 +275,7 @@ function BrandManagement({ categories, brands }: { categories: any[]; brands: Br
       <CardContent>
         <Accordion type="single" collapsible className="w-full">
           {categories.map((category) => {
-            const categoryBrandIds = category.brands.map((b: any) => b.brand_id);
+            const categoryBrandIds = category.brands.map((b: unknown) => b.brand_id);
             const availableBrands = brands.filter((b) => !categoryBrandIds.includes(b.id));
 
             return (
@@ -302,7 +302,7 @@ function BrandManagement({ categories, brands }: { categories: any[]; brands: Br
                     )}
                     {category.brands.length > 0 ? (
                       <div className="flex flex-wrap gap-2">
-                        {category.brands.map((categoryBrand: any) => (
+                        {category.brands.map((categoryBrand: unknown) => (
                           <Badge key={categoryBrand.id} variant="secondary" className="gap-1">
                             {categoryBrand.brands.name}
                             <Button
@@ -331,7 +331,7 @@ function BrandManagement({ categories, brands }: { categories: any[]; brands: Br
 }
 
 // Trending Management Component
-function TrendingManagement({ categories }: { categories: any[] }) {
+function TrendingManagement({ categories }: { categories: unknown[] }) {
   const queryClient = useQueryClient();
   const [addingItem, setAddingItem] = useState<string | null>(null);
 
@@ -397,7 +397,7 @@ function TrendingManagement({ categories }: { categories: any[] }) {
               category.id,
               selectedItemKeys,
             );
-            const selectedItems = trendingItems.filter((item: any) => item.category_id === category.id);
+            const selectedItems = trendingItems.filter((item: unknown) => item.category_id === category.id);
 
             return (
               <AccordionItem key={category.id} value={category.id}>
@@ -417,7 +417,7 @@ function TrendingManagement({ categories }: { categories: any[] }) {
                     )}
                     {selectedItems.length > 0 ? (
                       <div className="flex flex-wrap gap-2">
-                        {selectedItems.map((item: any) => (
+                        {selectedItems.map((item: unknown) => (
                           <Badge key={item.id} variant="secondary" className="gap-1">
                             <span className="text-xs opacity-70">[{getLevelLabel(item.item_level)}]</span>{' '}
                             {getItemDisplayName(item)}
@@ -447,7 +447,7 @@ function TrendingManagement({ categories }: { categories: any[] }) {
 }
 
 // Best Sellers Management Component
-function BestSellersManagement({ categories }: { categories: any[] }) {
+function BestSellersManagement({ categories }: { categories: unknown[] }) {
   const queryClient = useQueryClient();
   const [addingItem, setAddingItem] = useState<string | null>(null);
 
@@ -515,7 +515,7 @@ function BestSellersManagement({ categories }: { categories: any[] }) {
               category.id,
               selectedItemKeys,
             );
-            const selectedItems = bestSellers.filter((item: any) => item.category_id === category.id);
+            const selectedItems = bestSellers.filter((item: unknown) => item.category_id === category.id);
 
             return (
               <AccordionItem key={category.id} value={category.id}>
@@ -535,7 +535,7 @@ function BestSellersManagement({ categories }: { categories: any[] }) {
                     )}
                     {selectedItems.length > 0 ? (
                       <div className="flex flex-wrap gap-2">
-                        {selectedItems.map((item: any) => (
+                        {selectedItems.map((item: unknown) => (
                           <Badge key={item.id} variant="secondary" className="gap-1">
                             <span className="text-xs opacity-70">[{getLevelLabel(item.item_level)}]</span>{' '}
                             {getItemDisplayName(item)}
@@ -565,7 +565,7 @@ function BestSellersManagement({ categories }: { categories: any[] }) {
 }
 
 // Luxury Brands Management Component
-function LuxuryBrandsManagement({ categories, brands }: { categories: any[]; brands: Brand[] }) {
+function LuxuryBrandsManagement({ categories, brands }: { categories: unknown[]; brands: Brand[] }) {
   const queryClient = useQueryClient();
   const [addingBrand, setAddingBrand] = useState<string | null>(null);
 
@@ -622,12 +622,12 @@ function LuxuryBrandsManagement({ categories, brands }: { categories: any[]; bra
         <Accordion type="single" collapsible className="w-full">
           {categories.map((category) => {
             const categoryLuxuryBrandIds = luxuryBrands
-              .filter((item: any) => item.category_id === category.id)
-              .map((item: any) => item.brand_id);
+              .filter((item: unknown) => item.category_id === category.id)
+              .map((item: unknown) => item.brand_id);
 
             const availableBrands = brands.filter((b) => !categoryLuxuryBrandIds.includes(b.id));
 
-            const selectedBrands = luxuryBrands.filter((item: any) => item.category_id === category.id);
+            const selectedBrands = luxuryBrands.filter((item: unknown) => item.category_id === category.id);
 
             return (
               <AccordionItem key={category.id} value={category.id}>
@@ -653,7 +653,7 @@ function LuxuryBrandsManagement({ categories, brands }: { categories: any[]; bra
                     )}
                     {selectedBrands.length > 0 ? (
                       <div className="flex flex-wrap gap-2">
-                        {selectedBrands.map((luxuryBrand: any) => (
+                        {selectedBrands.map((luxuryBrand: unknown) => (
                           <Badge key={luxuryBrand.id} variant="secondary" className="gap-1">
                             {luxuryBrand.brands?.name}
                             <Button
@@ -726,7 +726,7 @@ function CustomListsManagement() {
       setNewListName('');
       setNewSystemName('');
     },
-    onError: (error: any) => {
+    onError: (error: unknown) => {
       toast.error(`Failed to create list: ${error.message}`);
     },
   });
@@ -742,14 +742,14 @@ function CustomListsManagement() {
       queryClient.invalidateQueries({ queryKey: ['mega-menu-categories'] });
       toast.success('List deleted');
     },
-    onError: (error: any) => {
+    onError: (error: unknown) => {
       toast.error(`Failed to delete list: ${error.message}`);
     },
   });
 
   // Get item count for each list
   const getItemCount = (listId: string) => {
-    return customItems.filter((item: any) => item.list_id === listId).length;
+    return customItems.filter((item: unknown) => item.list_id === listId).length;
   };
 
   return (
@@ -841,7 +841,7 @@ function CustomListsManagement() {
             <div className="space-y-2">
               <h3 className="text-sm font-semibold">Your Custom Lists</h3>
               <div className="space-y-2">
-                {customLists.map((list: any) => {
+                {customLists.map((list: unknown) => {
                   const itemCount = getItemCount(list.id);
 
                   return (
@@ -913,7 +913,7 @@ function CustomListsManagement() {
 }
 
 // Category Link Toggle Component
-function CategoryLinkToggle({ categories, refetch }: { categories: any[]; refetch: () => void }) {
+function CategoryLinkToggle({ categories, refetch }: { categories: unknown[]; refetch: () => void }) {
   const [updating, setUpdating] = useState<string | null>(null);
   const queryClient = useQueryClient();
 
@@ -976,7 +976,7 @@ function CategoryLinkToggle({ categories, refetch }: { categories: any[]; refetc
 }
 
 // Category Visibility Management Component
-function CategoryVisibilityManagement({ categories, refetch }: { categories: any[]; refetch: () => void }) {
+function CategoryVisibilityManagement({ categories, refetch }: { categories: unknown[]; refetch: () => void }) {
   const [updating, setUpdating] = useState<string | null>(null);
   const queryClient = useQueryClient();
 
@@ -1020,7 +1020,7 @@ function CategoryVisibilityManagement({ categories, refetch }: { categories: any
                 <div className="space-y-6 pt-4">
                   {category.subcategories && category.subcategories.length > 0 ? (
                     <div className="space-y-3">
-                      {category.subcategories.map((subcategory: any) => (
+                      {category.subcategories.map((subcategory: unknown) => (
                         <div key={subcategory.id} className="space-y-2">
                           {/* Level 2 - Subcategories */}
                           <div className="flex items-center justify-between rounded-lg border bg-card p-3">
@@ -1056,7 +1056,7 @@ function CategoryVisibilityManagement({ categories, refetch }: { categories: any
                           {/* Level 3 - Sub-subcategories */}
                           {subcategory.sub_subcategories && subcategory.sub_subcategories.length > 0 && (
                             <div className="ml-6 space-y-2">
-                              {subcategory.sub_subcategories.map((subSub: any) => (
+                              {subcategory.sub_subcategories.map((subSub: unknown) => (
                                 <div
                                   key={subSub.id}
                                   className="flex items-center justify-between rounded border bg-muted/30 p-2"

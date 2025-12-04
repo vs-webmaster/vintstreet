@@ -65,7 +65,7 @@ export const useStripeConnect = () => {
         window.open(result.data.url, '_blank');
         toast.success('Opening Stripe Connect onboarding...');
       }
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error('Error connecting Stripe account:', error);
       toast.error(error.message || 'Failed to connect Stripe account');
     } finally {
@@ -89,7 +89,7 @@ export const useStripeConnect = () => {
 
       setBalance(result.data);
       setConnected(result.data.accountStatus.onboarding_complete && result.data.accountStatus.charges_enabled);
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error('Error fetching balance:', error);
       if (!error.message?.includes('No Stripe account found')) {
         toast.error(error.message || 'Failed to fetch balance');
@@ -129,7 +129,7 @@ export const useStripeConnect = () => {
       toast.success('Payout requested successfully!');
       await fetchBalance(); // Refresh balance
       return true;
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error('Error requesting payout:', error);
       toast.error(error.message || 'Failed to request payout');
       return false;

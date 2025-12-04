@@ -94,7 +94,7 @@ export const TagsTab = () => {
       setIsCreateDialogOpen(false);
       resetForm();
     },
-    onError: (error: any) => {
+    onError: (error: unknown) => {
       toast.error(error.message || 'Failed to create tag');
     },
   });
@@ -122,7 +122,7 @@ export const TagsTab = () => {
       setEditingTag(null);
       resetForm();
     },
-    onError: (error: any) => {
+    onError: (error: unknown) => {
       toast.error(error.message || 'Failed to update tag');
     },
   });
@@ -140,7 +140,7 @@ export const TagsTab = () => {
       toast.success('Tag deleted successfully');
       if (selectedTag) setSelectedTag(null);
     },
-    onError: (error: any) => {
+    onError: (error: unknown) => {
       toast.error(error.message || 'Failed to delete tag');
     },
   });
@@ -248,7 +248,7 @@ export const TagsTab = () => {
                   </SelectTrigger>
                   <SelectContent>
                     <SelectItem value="none">None</SelectItem>
-                    {categories.map((cat: any) => (
+                    {categories.map((cat: unknown) => (
                       <SelectItem key={cat.id} value={cat.id}>
                         {cat.name}
                       </SelectItem>
@@ -327,7 +327,7 @@ export const TagsTab = () => {
                 </SelectTrigger>
                 <SelectContent>
                   <SelectItem value="none">None</SelectItem>
-                  {categories.map((cat: any) => (
+                  {categories.map((cat: unknown) => (
                     <SelectItem key={cat.id} value={cat.id}>
                       {cat.name}
                     </SelectItem>

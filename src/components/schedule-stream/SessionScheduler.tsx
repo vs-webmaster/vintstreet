@@ -29,7 +29,7 @@ interface SessionSchedulerProps {
   scheduledShows: ScheduledShow[];
   onScheduledShowsChange: (shows: ScheduledShow[]) => void;
   streamTitle?: string;
-  streamData: any;
+  streamData: unknown;
 }
 
 export interface SessionSchedulerRef {
@@ -181,7 +181,7 @@ export const SessionScheduler = forwardRef<SessionSchedulerRef, SessionScheduler
       setSelectedDays((prev) => (prev.includes(day) ? prev.filter((d) => d !== day) : [...prev, day]));
     };
 
-    const updateRepeatShow = (id: string, field: keyof ScheduledShow, value: any) => {
+    const updateRepeatShow = (id: string, field: keyof ScheduledShow, value: unknown) => {
       setRepeatShows((prev) => prev.map((show) => (show.id === id ? { ...show, [field]: value } : show)));
     };
 
@@ -202,7 +202,7 @@ export const SessionScheduler = forwardRef<SessionSchedulerRef, SessionScheduler
       }
     };
 
-    const updateScheduledShow = (id: string, field: keyof ScheduledShow, value: any) => {
+    const updateScheduledShow = (id: string, field: keyof ScheduledShow, value: unknown) => {
       onScheduledShowsChange(scheduledShows.map((show) => (show.id === id ? { ...show, [field]: value } : show)));
     };
 
@@ -237,7 +237,7 @@ export const SessionScheduler = forwardRef<SessionSchedulerRef, SessionScheduler
       }
     };
 
-    const updateProduct = (showId: string, productId: string, field: keyof Product, value: any) => {
+    const updateProduct = (showId: string, productId: string, field: keyof Product, value: unknown) => {
       onScheduledShowsChange(
         scheduledShows.map((show) =>
           show.id === showId

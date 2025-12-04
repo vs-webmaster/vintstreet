@@ -27,7 +27,7 @@ serve(async (req) => {
     const { categoryIds, action } = await req.json();
 
     // Helper function to call Algolia API using native fetch
-    const algoliaRequest = async (method: string, endpoint: string, body?: any) => {
+    const algoliaRequest = async (method: string, endpoint: string, body?: unknown) => {
       const url = `${ALGOLIA_BASE_URL}${endpoint}`;
       const response = await fetch(url, {
         method,
@@ -150,10 +150,10 @@ serve(async (req) => {
     }
 
     // Transform categories for Algolia
-    const algoliaCategories: any[] = [];
+    const algoliaCategories: unknown[] = [];
 
     // Level 1: Categories
-    (categoriesResult.data || []).forEach((cat: any) => {
+    (categoriesResult.data || []).forEach((cat: unknown) => {
       algoliaCategories.push({
         objectID: cat.id,
         name: cat.name,
@@ -171,7 +171,7 @@ serve(async (req) => {
     });
 
     // Level 2: Subcategories
-    (subcategoriesResult.data || []).forEach((sub: any) => {
+    (subcategoriesResult.data || []).forEach((sub: unknown) => {
       const parentCategory = sub.product_categories;
       algoliaCategories.push({
         objectID: sub.id,
@@ -194,7 +194,7 @@ serve(async (req) => {
     });
 
     // Level 3: Sub-subcategories
-    (subSubcategoriesResult.data || []).forEach((subSub: any) => {
+    (subSubcategoriesResult.data || []).forEach((subSub: unknown) => {
       const parentSub = subSub.product_subcategories;
       const parentCategory = parentSub?.product_categories;
       algoliaCategories.push({
@@ -219,7 +219,7 @@ serve(async (req) => {
     });
 
     // Level 4: Sub-sub-subcategories
-    (subSubSubcategoriesResult.data || []).forEach((subSubSub: any) => {
+    (subSubSubcategoriesResult.data || []).forEach((subSubSub: unknown) => {
       const parentSubSub = subSubSub.product_sub_subcategories;
       const parentSub = parentSubSub?.product_subcategories;
       const parentCategory = parentSub?.product_categories;
@@ -250,7 +250,7 @@ serve(async (req) => {
     // Filter by categoryIds if provided (already filtered in queries, but double-check)
     let categoriesToSync = algoliaCategories;
     if (categoryIds && Array.isArray(categoryIds) && categoryIds.length > 0) {
-      categoriesToSync = algoliaCategories.filter((cat: any) => categoryIds.includes(cat.objectID));
+      categoriesToSync = algoliaCategories.filter((cat: unknown) => categoryIds.includes(cat.objectID));
     }
 
     if (categoriesToSync.length === 0) {
@@ -261,7 +261,7 @@ serve(async (req) => {
 
     // Save to Algolia using batch operation via REST API
     const batchResponse = await algoliaRequest('POST', '/batch', {
-      requests: categoriesToSync.map((category: any) => ({
+      requests: categoriesToSync.map((category: unknown) => ({
         action: 'updateObject',
         body: category,
       })),
@@ -276,7 +276,7 @@ serve(async (req) => {
       }),
       { headers: { ...corsHeaders, 'Content-Type': 'application/json' } },
     );
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('Error syncing categories to Algolia:', error);
     return new Response(
       JSON.stringify({

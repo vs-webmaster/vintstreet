@@ -131,14 +131,14 @@ const GuideCategoryAssignment = ({ guideId, guideType }: GuideCategoryAssignment
     });
   };
 
-  const getLevel3Label = (cat: any) => {
-    const parent2 = level2Categories.find((p: any) => p.id === cat.subcategory_id);
+  const getLevel3Label = (cat: unknown) => {
+    const parent2 = level2Categories.find((p: unknown) => p.id === cat.subcategory_id);
     return `${parent2?.name ?? 'Unknown'} → ${cat.name}`;
   };
 
-  const getLevel4Label = (cat: any) => {
-    const parent3 = level3Categories.find((p: any) => p.id === cat.sub_subcategory_id);
-    const parent2 = parent3 ? level2Categories.find((p: any) => p.id === parent3.subcategory_id) : undefined;
+  const getLevel4Label = (cat: unknown) => {
+    const parent3 = level3Categories.find((p: unknown) => p.id === cat.sub_subcategory_id);
+    const parent2 = parent3 ? level2Categories.find((p: unknown) => p.id === parent3.subcategory_id) : undefined;
     return `${parent2?.name ?? 'Unknown'} → ${parent3?.name ?? 'Unknown'} → ${cat.name}`;
   };
 
@@ -160,7 +160,7 @@ const GuideCategoryAssignment = ({ guideId, guideType }: GuideCategoryAssignment
         <TabsContent value="level1">
           <ScrollArea className="h-[300px] rounded-md border p-4">
             <div className="space-y-2">
-              {level1Categories.map((cat: any) => (
+              {level1Categories.map((cat: unknown) => (
                 <div key={cat.id} className="flex items-center space-x-2">
                   <Checkbox
                     id={`l1-${cat.id}`}
@@ -179,7 +179,7 @@ const GuideCategoryAssignment = ({ guideId, guideType }: GuideCategoryAssignment
         <TabsContent value="level2">
           <ScrollArea className="h-[300px] rounded-md border p-4">
             <div className="space-y-2">
-              {level2Categories.map((cat: any) => (
+              {level2Categories.map((cat: unknown) => (
                 <div key={cat.id} className="flex items-center space-x-2">
                   <Checkbox
                     id={`l2-${cat.id}`}
@@ -198,7 +198,7 @@ const GuideCategoryAssignment = ({ guideId, guideType }: GuideCategoryAssignment
         <TabsContent value="level3">
           <ScrollArea className="h-[300px] rounded-md border p-4">
             <div className="space-y-2">
-              {level3Categories.map((cat: any) => (
+              {level3Categories.map((cat: unknown) => (
                 <div key={cat.id} className="flex items-center space-x-2">
                   <Checkbox
                     id={`l3-${cat.id}`}
@@ -217,7 +217,7 @@ const GuideCategoryAssignment = ({ guideId, guideType }: GuideCategoryAssignment
         <TabsContent value="level4">
           <ScrollArea className="h-[300px] rounded-md border p-4">
             <div className="space-y-2">
-              {level4Categories.map((cat: any) => (
+              {level4Categories.map((cat: unknown) => (
                 <div key={cat.id} className="flex items-center space-x-2">
                   <Checkbox
                     id={`l4-${cat.id}`}

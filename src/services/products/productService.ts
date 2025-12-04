@@ -302,7 +302,7 @@ export async function updateProductWithLock(
   updates: Partial<Product>,
   expectedUpdatedAt: string | null,
   options?: { forceOverwrite?: boolean },
-): Promise<Result<{ product: Product | null; conflictData?: any }>> {
+): Promise<Result<{ product: Product | null; conflictData?: unknown }>> {
   try {
     // Remove relation fields that can't be updated directly
     const { product_categories, brands, seller_info_view, auctions, ...cleanUpdates } = updates;
@@ -994,7 +994,7 @@ export async function fetchRelatedBrandsForCategory(
 
     // Count products per brand
     const brandMap = new Map<string, { name: string; count: number }>();
-    (data || []).forEach((item: any) => {
+    (data || []).forEach((item: { brands?: { id: string; name: string }; brand_id?: string }) => {
       const brand = item.brands;
       if (brand && brand.id) {
         if (!brandMap.has(brand.id)) {
@@ -1124,13 +1124,13 @@ export interface CreateProductInput {
   stock_quantity?: number | null;
   discounted_price?: number | null;
   offers_enabled?: boolean;
-  [key: string]: any; // Allow additional fields
+  [key: string]: unknown; // Allow additional fields
 }
 
 // Create a new product/listing
 export async function createProduct(input: CreateProductInput): Promise<Result<Product>> {
   try {
-    const insertData: any = {
+    const insertData: Record<string, unknown> = {
       seller_id: input.seller_id,
       stream_id: input.stream_id,
       product_name: input.product_name.trim(),
@@ -1298,7 +1298,7 @@ export async function duplicateProduct(productId: string): Promise<Result<Produc
 
     // Copy attribute values
     if (attributeValues && attributeValues.length > 0) {
-      const newAttributeValues = attributeValues.map((av: any) => {
+      const newAttributeValues = attributeValues.map((av: Record<string, unknown>) => {
         const { id, created_at, updated_at, ...attrData } = av;
         return {
           ...attrData,
@@ -1312,7 +1312,7 @@ export async function duplicateProduct(productId: string): Promise<Result<Produc
 
     // Copy level 4 categories
     if (level4Categories && level4Categories.length > 0) {
-      const newLevel4Categories = level4Categories.map((cat: any) => {
+      const newLevel4Categories = level4Categories.map((cat: Record<string, unknown>) => {
         const { id, created_at, ...catData } = cat;
         return {
           ...catData,
@@ -1326,7 +1326,7 @@ export async function duplicateProduct(productId: string): Promise<Result<Produc
 
     // Copy product tag links
     if (productTagLinks && productTagLinks.length > 0) {
-      const newProductTagLinks = productTagLinks.map((tag: any) => {
+      const newProductTagLinks = productTagLinks.map((tag: Record<string, unknown>) => {
         const { id, created_at, ...tagData } = tag;
         return {
           ...tagData,
@@ -1552,7 +1552,7 @@ export async function fetchProductsForExport(filters: {
   Result<
     Array<{
       id: string;
-      [key: string]: any;
+      [key: string]: unknown;
       product_categories?: { name: string } | null;
       product_subcategories?: { name: string } | null;
       product_sub_subcategories?: { name: string } | null;
@@ -1598,7 +1598,7 @@ export async function fetchProductsForExport(filters: {
     return success(
       (data || []) as Array<{
         id: string;
-        [key: string]: any;
+        [key: string]: unknown;
         product_categories?: { name: string } | null;
         product_subcategories?: { name: string } | null;
         product_sub_subcategories?: { name: string } | null;
@@ -1627,7 +1627,7 @@ export async function fetchMarketplaceProducts(filters: {
   Result<
     Array<{
       id: string;
-      [key: string]: any;
+      [key: string]: unknown;
       brands?: { name: string } | null;
       product_categories?: { name: string } | null;
       product_subcategories?: { name: string } | null;
@@ -1687,7 +1687,7 @@ export async function fetchMarketplaceProducts(filters: {
     return success(
       (data || []) as Array<{
         id: string;
-        [key: string]: any;
+        [key: string]: unknown;
         brands?: { name: string } | null;
         product_categories?: { name: string } | null;
         product_subcategories?: { name: string } | null;
@@ -1705,7 +1705,7 @@ export async function updateProductModerationStatus(
   moderationStatus: string,
 ): Promise<Result<boolean>> {
   try {
-    const updateData: any = {
+    const updateData: Record<string, unknown> = {
       moderation_status: moderationStatus,
     };
 
@@ -1760,7 +1760,7 @@ export async function fetchAvailableBrands(params: {
     if (error) throw error;
 
     const brandsMap = new Map<string, { id: string; name: string }>();
-    data?.forEach((item: any) => {
+    data?.forEach((item: { brands?: { id: string; name: string }; brand_id?: string }) => {
       if (item.brands && item.brand_id) {
         brandsMap.set(item.brand_id, item.brands);
       }
@@ -1878,7 +1878,7 @@ export async function fetchProductsMissingAttribute(params: {
     });
 
     if (error) throw error;
-    return success((data || []).map((row: any) => row.product_id));
+    return success((data || []).map((row: { product_id: string }) => row.product_id));
   } catch (error) {
     logError(error, 'productService:fetchProductsMissingAttribute');
     return failure(normalizeError(error));

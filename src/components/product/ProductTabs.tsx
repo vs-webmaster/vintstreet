@@ -9,14 +9,14 @@ import { Product } from '@/hooks/useProductData';
 
 interface ProductTabsProps {
   product: Product;
-  productAttributes: any[];
+  productAttributes: unknown[];
   onContactSeller: () => void;
 }
 
 export const ProductTabs = ({ product, productAttributes, onContactSeller }: ProductTabsProps) => {
   const navigate = useNavigate();
 
-  const renderAttributeValue = (attr: any) => {
+  const renderAttributeValue = (attr: unknown) => {
     if (attr.attributes?.data_type === 'multi-select') {
       try {
         const values = typeof attr.value_text === 'string' ? JSON.parse(attr.value_text) : attr.value_text;
@@ -125,7 +125,7 @@ export const ProductTabs = ({ product, productAttributes, onContactSeller }: Pro
             {productAttributes.length > 0 || product.sku ? (
               <Table>
                 <TableBody>
-                  {sortedAttributes.map((attr: any) => (
+                  {sortedAttributes.map((attr: unknown) => (
                     <TableRow key={attr.id} className="border-b">
                       <TableCell className="w-1/3 py-1.5 font-medium">{attr.attributes?.name || 'Unknown'}</TableCell>
                       <TableCell className="py-1.5">{renderAttributeValue(attr)}</TableCell>

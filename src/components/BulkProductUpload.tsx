@@ -219,7 +219,7 @@ export const BulkProductUpload: React.FC<BulkProductUploadProps> = ({ isOpen, on
       // Process each row
       let successCount = 0;
       let failedCount = 0;
-      const failedItems: any[] = [];
+      const failedItems: unknown[] = [];
 
       // Set total for progress tracking
       const totalRows = jsonData.length;
@@ -330,14 +330,14 @@ export const BulkProductUpload: React.FC<BulkProductUploadProps> = ({ isOpen, on
           } else {
             const insertedProduct = productResult.data;
             // Save product attributes if any exist in the row
-            const attributeValues: any[] = [];
+            const attributeValues: unknown[] = [];
 
             for (const [key, value] of Object.entries(row)) {
               // Check if this column name matches an attribute
               const attribute = attributesMap.get(key.toLowerCase());
 
               if (attribute && value !== null && value !== undefined && value !== '') {
-                const valueObj: any = {
+                const valueObj: unknown = {
                   product_id: insertedProduct.id,
                   attribute_id: (attribute as any).id,
                   value_text: null,

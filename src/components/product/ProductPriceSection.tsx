@@ -19,7 +19,7 @@ import { isFailure } from '@/types/api';
 
 interface ProductPriceSectionProps {
   product: Product;
-  cartItems: any[];
+  cartItems: unknown[];
   onAddToCart: () => void;
 }
 
@@ -106,7 +106,7 @@ export const ProductPriceSection = ({ product, cartItems, onAddToCart }: Product
     setShowShippingDialog(true);
   };
 
-  const handleShippingConfirm = async (address: any, shippingCost: number, shippingOptionId: string) => {
+  const handleShippingConfirm = async (address: unknown, shippingCost: number, shippingOptionId: string) => {
     if (!user) {
       toast.error('Please log in to complete your order');
       return;
@@ -117,7 +117,7 @@ export const ProductPriceSection = ({ product, cartItems, onAddToCart }: Product
       setShowShippingDialog(false);
 
       // Check if this is a new address (not from saved addresses)
-      const isNewAddress = !address.id || !savedAddresses.some((addr: any) => addr.id === address.id);
+      const isNewAddress = !address.id || !savedAddresses.some((addr: unknown) => addr.id === address.id);
 
       // Save shipping info to buyer profile and saved addresses if new address
       if (isNewAddress) {
@@ -227,7 +227,7 @@ export const ProductPriceSection = ({ product, cartItems, onAddToCart }: Product
       } else {
         throw new Error('No checkout URL returned');
       }
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error('Error creating checkout:', error);
       toast.error('Failed to process checkout. Please try again.');
       setIsBuyingNow(false);

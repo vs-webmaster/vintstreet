@@ -5,10 +5,10 @@ import { cn } from '@/lib/utils';
 import { MultiSelectLevel4Categories } from './MultiSelectLevel4Categories';
 
 interface CategorySelectionFormProps {
-  categories: any[];
-  subcategories: any[];
-  subSubcategories: any[];
-  subSubSubcategories: any[];
+  categories: unknown[];
+  subcategories: unknown[];
+  subSubcategories: unknown[];
+  subSubSubcategories: unknown[];
   selectedCategoryId: string;
   selectedSubcategoryId: string;
   selectedSubSubcategoryId: string;

@@ -23,7 +23,7 @@ import { AdminLayout } from './AdminLayout';
 interface Section {
   id?: string;
   section_type: string;
-  content: any;
+  content: unknown;
   display_order: number;
 }
 
@@ -110,7 +110,7 @@ export default function AdminContentEditorPage() {
         description: 'Page saved successfully',
       });
     },
-    onError: (error: any) => {
+    onError: (error: unknown) => {
       toast({
         title: 'Error',
         description: error.message,
@@ -128,7 +128,7 @@ export default function AdminContentEditorPage() {
     setSections([...sections, newSection]);
   };
 
-  const updateSection = (index: number, content: any) => {
+  const updateSection = (index: number, content: unknown) => {
     const updated = [...sections];
     updated[index].content = content;
     setSections(updated);
@@ -162,7 +162,7 @@ export default function AdminContentEditorPage() {
       setSections(updated);
 
       toast({ title: 'Success', description: 'Image uploaded successfully' });
-    } catch (error: any) {
+    } catch (error: unknown) {
       toast({ title: 'Error', description: error.message, variant: 'destructive' });
     } finally {
       setUploadingImage(null);
@@ -270,7 +270,7 @@ export default function AdminContentEditorPage() {
                 <div key={index} className="mx-auto max-w-4xl px-4 py-8">
                   <h2 className="mb-8 text-3xl font-bold">{content.title || 'FAQ'}</h2>
                   <div className="space-y-4">
-                    {content.items?.map((item: any, i: number) => (
+                    {content.items?.map((item: unknown, i: number) => (
                       <div key={i} className="rounded-lg border p-4">
                         <h3 className="mb-2 font-semibold">{item.question || 'Question?'}</h3>
                         <p className="text-muted-foreground">{item.answer || 'Answer...'}</p>
@@ -285,7 +285,7 @@ export default function AdminContentEditorPage() {
                 <div key={index} className="mx-auto max-w-7xl px-4 py-8">
                   {content.title && <h2 className="mb-8 text-center text-3xl font-bold">{content.title}</h2>}
                   <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
-                    {content.cards?.map((card: any, i: number) => (
+                    {content.cards?.map((card: unknown, i: number) => (
                       <Card key={i}>
                         <CardContent className="p-6">
                           <h3 className="mb-3 text-xl font-semibold">{card.title || 'Card Title'}</h3>
@@ -557,7 +557,7 @@ export default function AdminContentEditorPage() {
                 />
               </div>
               <div className="space-y-3">
-                {content.items?.map((item: any, itemIndex: number) => (
+                {content.items?.map((item: unknown, itemIndex: number) => (
                   <Card key={itemIndex} className="bg-background p-4">
                     <div className="space-y-3">
                       <div>
@@ -591,7 +591,7 @@ export default function AdminContentEditorPage() {
                         variant="ghost"
                         size="sm"
                         onClick={() => {
-                          const newItems = content.items.filter((_: any, i: number) => i !== itemIndex);
+                          const newItems = content.items.filter((_: unknown, i: number) => i !== itemIndex);
                           updateSection(index, { ...content, items: newItems });
                         }}
                       >
@@ -628,7 +628,7 @@ export default function AdminContentEditorPage() {
               </div>
               <div className="space-y-3">
                 <Label className="text-base">Cards</Label>
-                {content.cards?.map((card: any, cardIndex: number) => (
+                {content.cards?.map((card: unknown, cardIndex: number) => (
                   <Card key={cardIndex} className="border-2 border-primary/20 bg-primary/10 p-4">
                     <div className="space-y-3">
                       <div>
@@ -689,7 +689,7 @@ export default function AdminContentEditorPage() {
                                 updateSection(index, { ...content, cards: newCards });
 
                                 toast({ title: 'Success', description: 'Image uploaded successfully' });
-                              } catch (error: any) {
+                              } catch (error: unknown) {
                                 toast({ title: 'Error', description: error.message, variant: 'destructive' });
                               } finally {
                                 setUploadingImage(null);
@@ -713,7 +713,7 @@ export default function AdminContentEditorPage() {
                         variant="ghost"
                         size="sm"
                         onClick={() => {
-                          const newCards = content.cards.filter((_: any, i: number) => i !== cardIndex);
+                          const newCards = content.cards.filter((_: unknown, i: number) => i !== cardIndex);
                           updateSection(index, { ...content, cards: newCards });
                         }}
                       >

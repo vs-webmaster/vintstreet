@@ -213,7 +213,7 @@ export const ShippingProvidersTab = () => {
       toast.success('Weight band added');
       setNewBandName('');
       refetchPrices();
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error('Add band error:', error);
       toast.error(`Failed to add band: ${error.message || 'Unknown error'}`);
     }
@@ -247,7 +247,7 @@ export const ShippingProvidersTab = () => {
         return;
       }
 
-      const updateData: any = { [field]: numValue };
+      const updateData: unknown = { [field]: numValue };
       const result = await updateShippingProviderPrice(priceId, updateData);
       if (isFailure(result)) {
         throw result.error;
@@ -255,7 +255,7 @@ export const ShippingProvidersTab = () => {
 
       toast.success('Updated successfully');
       refetchPrices();
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error('Update error:', error);
       toast.error(`Failed to update: ${error.message || 'Unknown error'}`);
     }
@@ -272,7 +272,7 @@ export const ShippingProvidersTab = () => {
 
       toast.success('Weight band deleted');
       refetchPrices();
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error('Delete band error:', error);
       toast.error(`Failed to delete band: ${error.message || 'Unknown error'}`);
     }
@@ -484,7 +484,7 @@ export const ShippingProvidersTab = () => {
                     </TableCell>
                   </TableRow>
                 ) : (
-                  providerPrices.map((priceRow: any) => (
+                  providerPrices.map((priceRow: unknown) => (
                     <TableRow key={priceRow.id}>
                       <TableCell>
                         <Input

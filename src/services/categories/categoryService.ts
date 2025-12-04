@@ -302,7 +302,7 @@ export async function fetchBrandsForCategory(
 
     // Extract unique brands
     const brandsMap = new Map<string, { id: string; name: string }>();
-    data?.forEach((item: any) => {
+    data?.forEach((item: unknown) => {
       if (item.brands?.id && item.brands?.name) {
         brandsMap.set(item.brands.id, {
           id: item.brands.id,

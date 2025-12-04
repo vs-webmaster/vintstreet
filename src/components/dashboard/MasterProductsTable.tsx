@@ -90,9 +90,9 @@ export const MasterProductsTable = ({
   // Handler to update product status with optimistic updates
   const handleStatusChange = async (productId: string, newStatus: string) => {
     // Optimistically update the UI
-    queryClient.setQueriesData({ queryKey: ['master-products-paginated'] }, (oldData: any) => {
+    queryClient.setQueriesData({ queryKey: ['master-products-paginated'] }, (oldData: unknown) => {
       if (!oldData) return oldData;
-      return oldData.map((product: any) => (product.id === productId ? { ...product, status: newStatus } : product));
+      return oldData.map((product: unknown) => (product.id === productId ? { ...product, status: newStatus } : product));
     });
 
     try {
@@ -315,19 +315,19 @@ export const MasterProductsTable = ({
 
     const normalize = (v: string) => v?.trim().toLowerCase();
 
-    products.forEach((product: any) => {
-      const productValues = productAttributeValues.filter((pav: any) => pav.product_id === product.id);
+    products.forEach((product: unknown) => {
+      const productValues = productAttributeValues.filter((pav: unknown) => pav.product_id === product.id);
       let customCount = 0;
 
-      productValues.forEach((pav: any) => {
+      productValues.forEach((pav: unknown) => {
         if (!pav.value_text) return;
 
-        const attribute = allAttributes.find((attr: any) => attr.id === pav.attribute_id);
+        const attribute = allAttributes.find((attr: unknown) => attr.id === pav.attribute_id);
         if (!attribute) return;
 
         const activeOptions = attributeOptions
-          .filter((opt: any) => opt.attribute_id === pav.attribute_id)
-          .map((opt: any) => normalize(opt.value));
+          .filter((opt: unknown) => opt.attribute_id === pav.attribute_id)
+          .map((opt: unknown) => normalize(opt.value));
 
         if (activeOptions.length === 0) return;
 
@@ -365,7 +365,7 @@ export const MasterProductsTable = ({
 
     // Client-side sorting for custom_opts (since it's calculated client-side)
     if (sortField === 'custom_opts') {
-      filtered = [...filtered].sort((a: any, b: any) => {
+      filtered = [...filtered].sort((a: unknown, b: unknown) => {
         const countA = customAttributeCounts.get(a.id) || 0;
         const countB = customAttributeCounts.get(b.id) || 0;
         return sortDirection === 'asc' ? countA - countB : countB - countA;
@@ -610,8 +610,8 @@ export const MasterProductsTable = ({
             <SelectContent>
               <SelectItem value="all">All Level 1</SelectItem>
               {level1Categories
-                .filter((cat: any) => cat.id)
-                .map((cat: any) => (
+                .filter((cat: unknown) => cat.id)
+                .map((cat: unknown) => (
                   <SelectItem key={cat.id} value={cat.id}>
                     {cat.name}
                   </SelectItem>
@@ -626,8 +626,8 @@ export const MasterProductsTable = ({
             <SelectContent>
               <SelectItem value="all">All Level 2</SelectItem>
               {level2Categories
-                .filter((cat: any) => cat.id)
-                .map((cat: any) => (
+                .filter((cat: unknown) => cat.id)
+                .map((cat: unknown) => (
                   <SelectItem key={cat.id} value={cat.id}>
                     {cat.name}
                   </SelectItem>
@@ -649,7 +649,7 @@ export const MasterProductsTable = ({
                 <CommandList>
                   <CommandEmpty>No results found.</CommandEmpty>
                   <CommandGroup>
-                    {level3Categories.map((cat: any) => {
+                    {level3Categories.map((cat: unknown) => {
                       const isSelected = filterLevel3.includes(cat.id);
                       return (
                         <CommandItem
@@ -685,7 +685,7 @@ export const MasterProductsTable = ({
                 <CommandList>
                   <CommandEmpty>No results found.</CommandEmpty>
                   <CommandGroup>
-                    {level4Categories.map((cat: any) => {
+                    {level4Categories.map((cat: unknown) => {
                       const isSelected = filterLevel4.includes(cat.id);
                       return (
                         <CommandItem
@@ -753,7 +753,7 @@ export const MasterProductsTable = ({
               >
                 {filterBrand === 'all'
                   ? 'All Brands'
-                  : brands.find((brand: any) => brand.id === filterBrand)?.name || 'Select brand'}
+                  : brands.find((brand: unknown) => brand.id === filterBrand)?.name || 'Select brand'}
                 <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
               </Button>
             </PopoverTrigger>
@@ -772,7 +772,7 @@ export const MasterProductsTable = ({
                     <Check className={cn('mr-2 h-4 w-4', filterBrand === 'all' ? 'opacity-100' : 'opacity-0')} />
                     All Brands
                   </CommandItem>
-                  {brands.map((brand: any) => (
+                  {brands.map((brand: unknown) => (
                     <CommandItem
                       key={brand.id}
                       value={brand.name}
@@ -956,7 +956,7 @@ export const MasterProductsTable = ({
                         Click an attribute to find products that don't have a value for it
                       </p>
                       <div className="grid max-h-[400px] grid-cols-2 gap-2 overflow-y-auto p-1 md:grid-cols-3">
-                        {allAttributes.map((attr: any) => (
+                        {allAttributes.map((attr: unknown) => (
                           <Badge
                             key={attr.id}
                             variant={missingAttributeFilter === attr.id ? 'default' : 'outline'}
@@ -1043,17 +1043,17 @@ export const MasterProductsTable = ({
                       checked={
                         selectedProducts.length === filteredProducts.length &&
                         filteredProducts.length > 0 &&
-                        filteredProducts.every((p: any) => selectedProducts.includes(p.id))
+                        filteredProducts.every((p: unknown) => selectedProducts.includes(p.id))
                       }
                       onCheckedChange={() => {
-                        const allSelected = filteredProducts.every((p: any) => selectedProducts.includes(p.id));
+                        const allSelected = filteredProducts.every((p: unknown) => selectedProducts.includes(p.id));
                         if (allSelected) {
                           setSelectedProducts((prev) =>
-                            prev.filter((id) => !filteredProducts.some((p: any) => p.id === id)),
+                            prev.filter((id) => !filteredProducts.some((p: unknown) => p.id === id)),
                           );
                         } else {
                           setSelectedProducts((prev) => [
-                            ...new Set([...prev, ...filteredProducts.map((p: any) => p.id)]),
+                            ...new Set([...prev, ...filteredProducts.map((p: unknown) => p.id)]),
                           ]);
                         }
                       }}
@@ -1138,7 +1138,7 @@ export const MasterProductsTable = ({
                     </TableCell>
                   </TableRow>
                 ) : (
-                  filteredProducts.map((product: any) => (
+                  filteredProducts.map((product: unknown) => (
                     <TableRow
                       key={product.id}
                       className="cursor-pointer hover:bg-muted/50"
@@ -1182,7 +1182,7 @@ export const MasterProductsTable = ({
                               {product.product_sub_sub_subcategories.name}
                             </Badge>
                           )}
-                          {product.additionalLevel4Categories?.map((cat: any) => (
+                          {product.additionalLevel4Categories?.map((cat: unknown) => (
                             <Badge key={cat.id} variant="secondary" className="text-xs">
                               {cat.name}
                             </Badge>
@@ -1196,7 +1196,7 @@ export const MasterProductsTable = ({
                       <TableCell>
                         <div className="flex flex-wrap gap-1">
                           {product.tags && product.tags.length > 0 ? (
-                            product.tags.map((tag: any) => (
+                            product.tags.map((tag: unknown) => (
                               <Badge
                                 key={tag.id}
                                 variant="secondary"

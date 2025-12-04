@@ -150,7 +150,7 @@ export const BannersTab = () => {
 
       setFormData((prev) => ({ ...prev, image_url: result.data.url }));
       toast.success('Image uploaded successfully');
-    } catch (error: any) {
+    } catch (error: unknown) {
       toast.error('Failed to upload image: ' + error.message);
     } finally {
       setUploading(false);

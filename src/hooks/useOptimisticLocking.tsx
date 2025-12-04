@@ -5,7 +5,7 @@ import { isFailure, type ApiError } from '@/types/api';
 interface OptimisticLockState {
   originalUpdatedAt: string | null;
   hasConflict: boolean;
-  conflictData: any | null;
+  conflictData: unknown | null;
 }
 
 export const useOptimisticLocking = () => {
@@ -27,7 +27,7 @@ export const useOptimisticLocking = () => {
 
   // Check if product was modified by someone else
   const checkForConflict = useCallback(
-    async (productId: string): Promise<{ hasConflict: boolean; currentData: any | null }> => {
+    async (productId: string): Promise<{ hasConflict: boolean; currentData: unknown | null }> => {
       if (!lockState.originalUpdatedAt) {
         return { hasConflict: false, currentData: null };
       }
@@ -63,9 +63,9 @@ export const useOptimisticLocking = () => {
   const updateWithLock = useCallback(
     async (
       productId: string,
-      updateData: any,
+      updateData: unknown,
       options?: { forceOverwrite?: boolean },
-    ): Promise<{ success: boolean; error?: string; conflictData?: any }> => {
+    ): Promise<{ success: boolean; error?: string; conflictData?: unknown }> => {
       // If force overwrite, skip the conflict check
       if (!options?.forceOverwrite && lockState.originalUpdatedAt) {
         const { hasConflict, currentData } = await checkForConflict(productId);

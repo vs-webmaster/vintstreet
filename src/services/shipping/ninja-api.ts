@@ -10,7 +10,7 @@ export interface NinjaCredentials {
 
 export interface NinjaLoginResponse {
   accessToken: string;
-  [key: string]: any;
+  [key: string]: unknown;
 }
 
 export interface NinjaOrderData {
@@ -59,8 +59,8 @@ export interface NinjaOrderData {
     zip: string;
     phone?: string;
   };
-  fulfillment?: any;
-  return?: any;
+  fulfillment?: unknown;
+  return?: unknown;
   payment_method: string;
   send_via_webhook: boolean;
   payment_details: {

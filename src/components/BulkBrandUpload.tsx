@@ -65,7 +65,7 @@ export const BulkBrandUpload: React.FC<BulkBrandUploadProps> = ({ isOpen, onClos
 
       // Prepare brands for bulk creation
       const brandsToCreate: CreateBrandInput[] = [];
-      const skippedRows: any[] = [];
+      const skippedRows: unknown[] = [];
 
       for (const row of jsonData as any[]) {
         // Skip example rows

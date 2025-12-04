@@ -125,7 +125,7 @@ function SynonymEditor({
         setEditedSynonyms(result.data.synonyms);
         toast.success(`Generated ${result.data.synonyms.length} synonyms`);
       }
-    } catch (error: any) {
+    } catch (error: unknown) {
       toast.error(`Failed to generate synonyms: ${error.message}`);
     } finally {
       setGenerating(false);
@@ -350,7 +350,7 @@ export default function CategoryHierarchyManager({ category }: { category: Produ
       toast.success('Subcategory created');
       setNewL2Name('');
       await qc.invalidateQueries({ queryKey: ['product_subcategories', category.id] });
-    } catch (err: any) {
+    } catch (err: unknown) {
       toast.error(`Failed to create: ${err.message}`);
     } finally {
       setCreating((prev) => ({ ...prev, l2: false }));
@@ -373,7 +373,7 @@ export default function CategoryHierarchyManager({ category }: { category: Produ
       toast.success('Sub-subcategory created');
       setNewL3Names((prev) => ({ ...prev, [l2Id]: '' }));
       await qc.invalidateQueries({ queryKey: ['all_product_sub_subcategories', category.id] });
-    } catch (err: any) {
+    } catch (err: unknown) {
       toast.error(`Failed to create: ${err.message}`);
     } finally {
       setCreating((prev) => ({ ...prev, [`l3_${l2Id}`]: false }));
@@ -398,7 +398,7 @@ export default function CategoryHierarchyManager({ category }: { category: Produ
       toast.success('Level 4 subcategory created');
       setNewL4Names((prev) => ({ ...prev, [l3Id]: '' }));
       await qc.invalidateQueries({ queryKey: ['all_product_sub_sub_subcategories', category.id] });
-    } catch (err: any) {
+    } catch (err: unknown) {
       toast.error(`Failed to create: ${err.message}`);
     } finally {
       setCreating((prev) => ({ ...prev, [`l4_${l3Id}`]: false }));
@@ -416,7 +416,7 @@ export default function CategoryHierarchyManager({ category }: { category: Produ
       await qc.invalidateQueries({ queryKey: ['product_subcategories', category.id] });
       await qc.invalidateQueries({ queryKey: ['all_product_sub_subcategories', category.id] });
       await qc.invalidateQueries({ queryKey: ['all_product_sub_sub_subcategories', category.id] });
-    } catch (err: any) {
+    } catch (err: unknown) {
       toast.error(`Failed to delete: ${err.message}`);
     }
   };
@@ -431,7 +431,7 @@ export default function CategoryHierarchyManager({ category }: { category: Produ
       toast.success('Sub-subcategory deleted');
       await qc.invalidateQueries({ queryKey: ['all_product_sub_subcategories', category.id] });
       await qc.invalidateQueries({ queryKey: ['all_product_sub_sub_subcategories', category.id] });
-    } catch (err: any) {
+    } catch (err: unknown) {
       toast.error(`Failed to delete: ${err.message}`);
     }
   };
@@ -444,7 +444,7 @@ export default function CategoryHierarchyManager({ category }: { category: Produ
       if (isFailure(result)) throw result.error;
       toast.success('Level 4 subcategory deleted');
       await qc.invalidateQueries({ queryKey: ['all_product_sub_sub_subcategories', category.id] });
-    } catch (err: any) {
+    } catch (err: unknown) {
       toast.error(`Failed to delete: ${err.message}`);
     }
   };
@@ -496,7 +496,7 @@ export default function CategoryHierarchyManager({ category }: { category: Produ
 
       // Close the dialog and reset state
       setEditingSynonyms(null);
-    } catch (error: any) {
+    } catch (error: unknown) {
       toast.error(`Failed to update: ${error.message}`);
     }
   };
