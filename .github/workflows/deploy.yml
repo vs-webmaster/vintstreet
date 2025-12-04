@@ -97,6 +97,10 @@ jobs:
         run: |
           gcloud auth configure-docker $GAR_LOCATION-docker.pkg.dev --quiet
 
+      - name: Clear Docker build cache (optional - comment out for faster builds)
+        run: |
+          docker builder prune -af || true
+
       - name: Build Docker image
         run: |
           IMAGE_URI="$GAR_LOCATION-docker.pkg.dev/$PROJECT_ID/$GAR_REPOSITORY/$SERVICE_NAME"
