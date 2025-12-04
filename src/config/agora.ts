@@ -2,6 +2,8 @@
 import { invokeEdgeFunction } from '@/services/functions';
 import { isFailure } from '@/types/api';
 
+const AGORA_APP_ID = import.meta.env.VITE_AGORA_APP_ID || '';
+
 // Cached configs to avoid multiple API calls
 let cachedConfig: any = null;
 let cachedRTMConfig: any = null;
@@ -67,7 +69,7 @@ export const clearAgoraRTMConfigCache = () => {
 
 // Default fallback config for development (will be replaced by secure config)
 export const AGORA_CONFIG = {
-  appId: '578fc4cf2194471794d0198d1f6a595b',
+  appId: AGORA_APP_ID,
   token: null,
   codec: 'vp8' as const,
   mode: 'live' as const,
