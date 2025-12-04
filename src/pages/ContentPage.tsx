@@ -13,7 +13,7 @@ import { isFailure } from '@/types/api';
 
 interface PageSection {
   section_type: string;
-  content: any;
+  content: unknown;
 }
 
 interface Product {
@@ -154,7 +154,7 @@ export default function ContentPage() {
             <div className="container mx-auto max-w-3xl">
               {content.title && <h2 className="mb-8 text-center text-3xl font-bold">{content.title}</h2>}
               <Accordion type="single" collapsible className="w-full">
-                {content.items?.map((item: any, itemIndex: number) => (
+                {content.items?.map((item: unknown, itemIndex: number) => (
                   <AccordionItem key={itemIndex} value={`item-${itemIndex}`}>
                     <AccordionTrigger className="text-left">{item.question}</AccordionTrigger>
                     <AccordionContent>
@@ -173,7 +173,7 @@ export default function ContentPage() {
             <div className="container mx-auto">
               {content.title && <h2 className="mb-8 text-center text-3xl font-bold">{content.title}</h2>}
               <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
-                {content.cards?.map((card: any, cardIndex: number) => (
+                {content.cards?.map((card: unknown, cardIndex: number) => (
                   <Card key={cardIndex} className="overflow-hidden">
                     {card.image && (
                       <div className="aspect-video w-full overflow-hidden">

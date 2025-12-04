@@ -196,7 +196,7 @@ const MyOrdersPage = () => {
       }
 
       // Transform orders to match the expected format
-      const ordersWithListings = result.data.data.map((order: any) => {
+      const ordersWithListings = result.data.data.map((order: unknown) => {
         const listing = order.listings;
         return {
           id: order.id,

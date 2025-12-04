@@ -91,7 +91,7 @@ const LiveStreamCard = ({
       onFollowToggle?.(streamerId, isFollowing);
       queryClient.invalidateQueries({ queryKey: ['user-follows-homepage'] });
       queryClient.invalidateQueries({ queryKey: ['follow-status'] });
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error('Error toggling follow:', error);
       toast.error(error?.message || 'Failed to update follow status');
     } finally {

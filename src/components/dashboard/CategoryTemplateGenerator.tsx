@@ -70,7 +70,7 @@ export const CategoryTemplateGenerator = ({
       const categoryLevelAttrs = (categoryAttrResult.data || [])
         .map((link) => link.attributes)
         .filter(Boolean)
-        .sort((a: any, b: any) => (a.display_order || 0) - (b.display_order || 0));
+        .sort((a: unknown, b: unknown) => (a.display_order || 0) - (b.display_order || 0));
 
       // For each subcategory, fetch its attributes
       const attributesBySubcategory = new Map<string, any[]>();
@@ -115,7 +115,7 @@ export const CategoryTemplateGenerator = ({
           // Get attributes linked to subcategory
           const attrs = (subAttrMap.get(sub.id) || [])
             .filter(Boolean)
-            .sort((a: any, b: any) => (a.display_order || 0) - (b.display_order || 0));
+            .sort((a: unknown, b: unknown) => (a.display_order || 0) - (b.display_order || 0));
 
           attributesBySubcategory.set(sub.id, attrs);
 
@@ -126,11 +126,11 @@ export const CategoryTemplateGenerator = ({
           for (const subSub of subSubsForThisSubcat) {
             const subSubAttrs = (subSubAttrMap.get(subSub.id) || [])
               .filter(Boolean)
-              .sort((a: any, b: any) => (a.display_order || 0) - (b.display_order || 0));
+              .sort((a: unknown, b: unknown) => (a.display_order || 0) - (b.display_order || 0));
 
             // Merge with existing attributes (avoid duplicates)
-            const existingAttrIds = new Set(attrs.map((a: any) => a.id));
-            subSubAttrs.forEach((attr: any) => {
+            const existingAttrIds = new Set(attrs.map((a: unknown) => a.id));
+            subSubAttrs.forEach((attr: unknown) => {
               if (!existingAttrIds.has(attr.id)) {
                 attrs.push(attr);
               }
@@ -138,11 +138,11 @@ export const CategoryTemplateGenerator = ({
           }
 
           // Collect attribute options
-          attrs.forEach((attr: any) => {
+          attrs.forEach((attr: unknown) => {
             if (attr.attribute_options && attr.attribute_options.length > 0) {
               const activeOptions = attr.attribute_options
-                .filter((opt: any) => opt.is_active)
-                .sort((a: any, b: any) => (a.display_order || 0) - (b.display_order || 0));
+                .filter((opt: unknown) => opt.is_active)
+                .sort((a: unknown, b: unknown) => (a.display_order || 0) - (b.display_order || 0));
               allAttributeOptions.set(attr.id, activeOptions);
             }
           });
@@ -150,7 +150,7 @@ export const CategoryTemplateGenerator = ({
       }
 
       // Build the Products sheet columns
-      const productColumns: any = {
+      const productColumns: unknown = {
         product_name: 'Example Product',
         slug: 'example-product-url-slug',
         excerpt: 'Short product excerpt for listings (150-200 chars)',
@@ -181,25 +181,25 @@ export const CategoryTemplateGenerator = ({
       const uniqueAttributes = new Map<string, any>();
 
       // Always include category-level attributes first
-      categoryLevelAttrs.forEach((attr: any) => {
+      categoryLevelAttrs.forEach((attr: unknown) => {
         if (!uniqueAttributes.has(attr.name)) {
           uniqueAttributes.set(attr.name, attr);
         }
         // Also collect attribute options for category-level attributes
         if (attr.attribute_options && attr.attribute_options.length > 0) {
           const activeOptions = attr.attribute_options
-            .filter((opt: any) => opt.is_active)
-            .sort((a: any, b: any) => (a.display_order || 0) - (b.display_order || 0));
+            .filter((opt: unknown) => opt.is_active)
+            .sort((a: unknown, b: unknown) => (a.display_order || 0) - (b.display_order || 0));
           allAttributeOptions.set(attr.id, activeOptions);
         }
       });
 
       if (subSubcategoryId) {
         // If specific sub-subcategory selected, only include its attributes
-        const selectedSubSub = subSubcategories?.find((ss: any) => ss.id === subSubcategoryId);
+        const selectedSubSub = subSubcategories?.find((ss: unknown) => ss.id === subSubcategoryId);
         if (selectedSubSub) {
           const attrs = attributesBySubcategory.get(selectedSubSub.subcategory_id) || [];
-          attrs.forEach((attr: any) => {
+          attrs.forEach((attr: unknown) => {
             if (!uniqueAttributes.has(attr.name)) {
               uniqueAttributes.set(attr.name, attr);
             }
@@ -208,7 +208,7 @@ export const CategoryTemplateGenerator = ({
       } else if (subcategoryId) {
         // If specific subcategory selected, include its attributes + all its sub-subcategories' attributes
         const attrs = attributesBySubcategory.get(subcategoryId) || [];
-        attrs.forEach((attr: any) => {
+        attrs.forEach((attr: unknown) => {
           if (!uniqueAttributes.has(attr.name)) {
             uniqueAttributes.set(attr.name, attr);
           }
@@ -217,7 +217,7 @@ export const CategoryTemplateGenerator = ({
         // If only category selected, include all subcategories' attributes
         (subcategories || []).forEach((sub) => {
           const attrs = attributesBySubcategory.get(sub.id) || [];
-          attrs.forEach((attr: any) => {
+          attrs.forEach((attr: unknown) => {
             if (!uniqueAttributes.has(attr.name)) {
               uniqueAttributes.set(attr.name, attr);
             }
@@ -227,8 +227,8 @@ export const CategoryTemplateGenerator = ({
 
       // Add columns for all unique attributes
       Array.from(uniqueAttributes.values())
-        .sort((a: any, b: any) => (a.display_order || 0) - (b.display_order || 0))
-        .forEach((attr: any) => {
+        .sort((a: unknown, b: unknown) => (a.display_order || 0) - (b.display_order || 0))
+        .forEach((attr: unknown) => {
           const hasOptions = allAttributeOptions.has(attr.id);
 
           let placeholder = '';
@@ -301,7 +301,7 @@ export const CategoryTemplateGenerator = ({
       // Add sub-subcategories reference
       if (subSubcategories && subSubcategories.length > 0) {
         csvRows.push('# SUB-SUBCATEGORIES:');
-        subSubcategories.forEach((s: any) => {
+        subSubcategories.forEach((s: unknown) => {
           csvRows.push(`# ${s.name}`);
         });
         csvRows.push('');
@@ -320,11 +320,11 @@ export const CategoryTemplateGenerator = ({
       allAttributeOptions.forEach((options, attributeId) => {
         const attr = Array.from(attributesBySubcategory.values())
           .flat()
-          .find((a: any) => a.id === attributeId);
+          .find((a: unknown) => a.id === attributeId);
 
         if (attr && options.length > 0) {
           csvRows.push(`# ${attr.name.toUpperCase()} OPTIONS:`);
-          options.forEach((opt: any) => {
+          options.forEach((opt: unknown) => {
             csvRows.push(`# ${opt.value}`);
           });
           csvRows.push('');

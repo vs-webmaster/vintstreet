@@ -56,7 +56,7 @@ export default function AdminBlogCategoriesPage() {
     setEditingCategory(null);
   };
 
-  const handleEdit = (category: any) => {
+  const handleEdit = (category: unknown) => {
     setEditingCategory(category);
     setFormData({
       name: category.name,
@@ -230,7 +230,7 @@ export default function AdminBlogCategoriesPage() {
                   </TableRow>
                 </TableHeader>
                 <TableBody>
-                  {categories.map((category: any) => (
+                  {categories.map((category: unknown) => (
                     <TableRow key={category.id}>
                       <TableCell className="font-medium">{category.name}</TableCell>
                       <TableCell className="text-muted-foreground">{category.slug}</TableCell>

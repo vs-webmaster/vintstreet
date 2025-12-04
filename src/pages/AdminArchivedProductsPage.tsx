@@ -50,7 +50,7 @@ const AdminArchivedProductsPage = () => {
       const allAttributeValues = attributeValuesResult.data;
 
       const attributesByProduct = new Map();
-      allAttributeValues?.forEach((attr: any) => {
+      allAttributeValues?.forEach((attr: unknown) => {
         if (!attributesByProduct.has(attr.product_id)) {
           attributesByProduct.set(attr.product_id, {});
         }
@@ -58,12 +58,12 @@ const AdminArchivedProductsPage = () => {
       });
 
       const excelData =
-        products?.map((product: any) => {
+        products?.map((product: unknown) => {
           const productAttrs = attributesByProduct.get(product.id) || {};
-          const attributeObj: any = {};
+          const attributeObj: unknown = {};
 
           // Add columns for ALL attributes (even if empty) - no prefix for re-upload compatibility
-          uniqueAttributes.forEach((attr: any) => {
+          uniqueAttributes.forEach((attr: unknown) => {
             const attrName = attr.name;
             const productAttr = productAttrs[attr.id];
             let value = '';
@@ -106,7 +106,7 @@ const AdminArchivedProductsPage = () => {
       XLSX.writeFile(wb, fileName);
 
       toast.success(`Downloaded ${products?.length || 0} archived products with all attributes`);
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error('Error downloading products:', error);
       toast.error(`Failed to download products: ${error.message}`);
     }

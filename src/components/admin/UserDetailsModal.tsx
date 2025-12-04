@@ -49,7 +49,7 @@ export const UserDetailsModal = ({ userId, userName, open, onOpenChange }: UserD
       if (isFailure(result)) throw result.error;
 
       // Orders from service already include listing details
-      return result.data.data.map((order: any) => ({
+      return result.data.data.map((order: unknown) => ({
         ...order,
         listing: order.listings
           ? {

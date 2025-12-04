@@ -102,7 +102,7 @@ const StreamPage = () => {
         return [];
       }
 
-      return result.data.map((listing: any) => ({
+      return result.data.map((listing: unknown) => ({
         id: listing.id,
         name: listing.product_name,
         price: `£${listing.starting_price}`,

@@ -23,7 +23,7 @@ export async function syncProducts(productIds: string[]): Promise<Result<any>> {
       throw result.error;
     }
     return result;
-  } catch (error: any) {
+  } catch (error: unknown) {
     logError(error, 'algoliaService:syncProducts');
     return failure(normalizeError(error));
   }
@@ -142,7 +142,7 @@ export async function syncCategories(categoryIds: string[]): Promise<Result<any>
       throw result.error;
     }
     return result;
-  } catch (error: any) {
+  } catch (error: unknown) {
     logError(error, 'algoliaService:syncCategories');
     return failure(normalizeError(error));
   }
@@ -323,7 +323,7 @@ export async function syncBrands(brandIds: string[]): Promise<Result<any>> {
       throw result.error;
     }
     return result;
-  } catch (error: any) {
+  } catch (error: unknown) {
     logError(error, 'algoliaService:syncBrands');
     return failure(normalizeError(error));
   }

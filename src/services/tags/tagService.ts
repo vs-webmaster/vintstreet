@@ -128,7 +128,7 @@ export async function fetchFeaturedTagsWithCategories(): Promise<Result<Featured
 
     if (error) throw error;
 
-    const tags = (data || []).map((tag: any) => ({
+    const tags = (data || []).map((tag: unknown) => ({
       id: tag.id,
       name: tag.name,
       slug: tag.slug,
@@ -414,7 +414,7 @@ export async function fetchTagDetailsWithProducts(tagId: string): Promise<Result
     if (linksError) throw linksError;
 
     const products =
-      links?.map((link: any) => ({
+      links?.map((link: unknown) => ({
         id: link.listings.id,
         product_name: link.listings.product_name,
         thumbnail: link.listings.thumbnail,

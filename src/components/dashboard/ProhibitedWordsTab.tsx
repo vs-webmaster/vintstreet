@@ -72,7 +72,7 @@ export const ProhibitedWordsTab = () => {
       queryClient.invalidateQueries({ queryKey: ['prohibited-words'] });
       toast.success('Prohibited word added successfully');
       setNewWord('');
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error('Error adding word:', error);
       toast.error(error.message || 'Failed to add prohibited word');
     } finally {
@@ -88,7 +88,7 @@ export const ProhibitedWordsTab = () => {
       clearProhibitedWordsCache();
       queryClient.invalidateQueries({ queryKey: ['prohibited-words'] });
       toast.success(`Word ${!currentState ? 'activated' : 'deactivated'}`);
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error('Error toggling word:', error);
       toast.error('Failed to update word status');
     }
@@ -105,7 +105,7 @@ export const ProhibitedWordsTab = () => {
       queryClient.invalidateQueries({ queryKey: ['prohibited-words'] });
       toast.success('Prohibited word deleted');
       setDeleteId(null);
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error('Error deleting word:', error);
       toast.error('Failed to delete prohibited word');
     }
@@ -139,7 +139,7 @@ export const ProhibitedWordsTab = () => {
       toast.success(`Successfully added ${wordsArray.length} prohibited word${wordsArray.length > 1 ? 's' : ''}`);
       setBulkWords('');
       setIsBulkDialogOpen(false);
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error('Error adding bulk words:', error);
       toast.error(error.message || 'Failed to add prohibited words');
     } finally {

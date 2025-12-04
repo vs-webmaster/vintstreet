@@ -53,10 +53,12 @@ serve(async (req) => {
     }
 
     // Parse request body for channel and uid
-    let body: any = {};
+    let body: unknown = {};
     try {
       body = await req.json();
-    } catch {}
+    } catch {
+      // Ignore JSON parse error
+    }
 
     const channelName: string | undefined = body?.channelName;
     const uid: number = body.uid;
@@ -143,7 +145,7 @@ serve(async (req) => {
         },
       },
     );
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('Error in get-agora-config function:', error);
     return new Response(JSON.stringify({ error: error.message }), {
       status: 500,

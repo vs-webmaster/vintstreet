@@ -88,7 +88,7 @@ export interface VoilaCreateLabelResponse {
   uri?: string;
   label_base64?: string;
   barcode_base64?: string;
-  [key: string]: any;
+  [key: string]: unknown;
 }
 
 export class VoilaApiClient {

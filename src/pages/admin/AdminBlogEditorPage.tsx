@@ -122,10 +122,10 @@ export default function AdminBlogEditorPage() {
         author_bio: existingPost.author_bio || '',
       };
       const sectionsData =
-        existingPost.blog_post_sections?.sort((a: any, b: any) => a.display_order - b.display_order) || [];
-      const tagsData = existingPost.blog_post_tags?.map((t: any) => t.tag_id) || [];
-      const productsData = existingPost.blog_post_products?.map((p: any) => p.product_id) || [];
-      const relatedPostsData = existingPost.blog_post_related_posts?.map((r: any) => r.related_post_id) || [];
+        existingPost.blog_post_sections?.sort((a: unknown, b: unknown) => a.display_order - b.display_order) || [];
+      const tagsData = existingPost.blog_post_tags?.map((t: unknown) => t.tag_id) || [];
+      const productsData = existingPost.blog_post_products?.map((p: unknown) => p.product_id) || [];
+      const relatedPostsData = existingPost.blog_post_related_posts?.map((r: unknown) => r.related_post_id) || [];
 
       setFormData(formDataState);
       setSections(sectionsData);
@@ -458,7 +458,7 @@ export default function AdminBlogEditorPage() {
                         <SelectValue placeholder="Select category" />
                       </SelectTrigger>
                       <SelectContent>
-                        {categories.map((cat: any) => (
+                        {categories.map((cat: unknown) => (
                           <SelectItem key={cat.id} value={cat.id}>
                             {cat.name}
                           </SelectItem>

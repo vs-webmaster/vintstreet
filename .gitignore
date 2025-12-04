@@ -29,3 +29,7 @@ dist-ssr
 *.sw?
 
 .env
+
+# Audit and working files (local only)
+audit-findings/
+working_files/

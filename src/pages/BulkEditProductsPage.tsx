@@ -240,7 +240,7 @@ const BulkEditProductsPage = () => {
                         </div>
                       </TableHead>
                     )}
-                    {displayAttributes.map((attr: any) => {
+                    {displayAttributes.map((attr: unknown) => {
                       if (!isAttributeVisible(attr.id, attr.name)) return null;
                       return (
                         <TableHead key={attr.id} className="min-w-[150px] font-semibold">
@@ -284,7 +284,7 @@ const BulkEditProductsPage = () => {
                                 Status (Always Visible)
                               </Label>
                             </div>
-                            {allUniqueAttributes.map((attr: any) => (
+                            {allUniqueAttributes.map((attr: unknown) => (
                               <div key={attr.id} className="flex items-center space-x-2">
                                 <Switch
                                   id={`col-attr-${attr.id}`}
@@ -412,7 +412,7 @@ const BulkEditProductsPage = () => {
                       </Select>
                     </TableHead>
                     {visibleColumns.tags && <TableHead className="py-2" />}
-                    {displayAttributes.map((attr: any) => {
+                    {displayAttributes.map((attr: unknown) => {
                       if (!isAttributeVisible(attr.id, attr.name)) return null;
                       const options = attr.attribute_options || [];
                       const hasOptions = options.length > 0;
@@ -426,7 +426,7 @@ const BulkEditProductsPage = () => {
                               </SelectTrigger>
                               <SelectContent className="z-[100] max-h-[300px] overflow-auto border bg-popover shadow-md">
                                 <SelectItem value="none">None</SelectItem>
-                                {options.map((opt: any) => (
+                                {options.map((opt: unknown) => (
                                   <SelectItem key={opt.id} value={opt.value}>{opt.value}</SelectItem>
                                 ))}
                               </SelectContent>

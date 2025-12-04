@@ -40,7 +40,7 @@ export const ShopSections = () => {
       // Transform the nested data structure
       const sectionsMap = new Map<string, { section: ShopSection; products: Product[] }>();
 
-      data?.forEach((section: any) => {
+      data?.forEach((section: unknown) => {
         if (!sectionsMap.has(section.id)) {
           sectionsMap.set(section.id, {
             section: {
@@ -57,7 +57,7 @@ export const ShopSections = () => {
         }
 
         const sectionData = sectionsMap.get(section.id)!;
-        section.shop_section_products?.forEach((sp: any) => {
+        section.shop_section_products?.forEach((sp: unknown) => {
           if (sp.listings && sp.listings.status === 'published' && sectionData.products.length < 3) {
             sectionData.products.push({
               id: sp.listings.id,

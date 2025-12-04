@@ -53,7 +53,7 @@ export default function AdminMarketplaceOrdersPage() {
                   </TableRow>
                 </TableHeader>
                 <TableBody>
-                  {orders.map((order: any) => (
+                  {orders.map((order: unknown) => (
                     <TableRow key={order.id}>
                       <TableCell className="font-mono text-xs">{order.id.slice(0, 8)}</TableCell>
                       <TableCell>

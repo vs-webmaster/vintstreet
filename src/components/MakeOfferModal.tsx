@@ -88,7 +88,7 @@ const MakeOfferModal = ({ productId, productName, currentPrice, sellerId, childr
       setIsOpen(false);
       setOfferAmount('');
       setMessage('');
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error('Error submitting offer:', error);
       toast({
         title: 'Error',

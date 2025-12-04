@@ -65,7 +65,7 @@ const AdminSupportPage = () => {
 
   // Update settings mutation
   const updateSettingsMutation = useMutation({
-    mutationFn: async (values: any) => {
+    mutationFn: async (values: unknown) => {
       if (!settings?.id) throw new Error('Settings ID not found');
       const result = await updateSupportSettings(settings.id, values);
       if (isFailure(result)) throw result.error;
@@ -75,14 +75,14 @@ const AdminSupportPage = () => {
       toast.success('Settings updated successfully');
       setEditingSettings(false);
     },
-    onError: (error: any) => {
+    onError: (error: unknown) => {
       toast.error('Failed to update settings: ' + error.message);
     },
   });
 
   // Update FAQ mutation
   const updateFaqMutation = useMutation({
-    mutationFn: async ({ id, values }: { id: string; values: any }) => {
+    mutationFn: async ({ id, values }: { id: string; values: unknown }) => {
       const result = await updateFAQ(id, values);
       if (isFailure(result)) throw result.error;
     },
@@ -91,14 +91,14 @@ const AdminSupportPage = () => {
       toast.success('FAQ updated successfully');
       setEditingFaq(null);
     },
-    onError: (error: any) => {
+    onError: (error: unknown) => {
       toast.error('Failed to update FAQ: ' + error.message);
     },
   });
 
   // Add FAQ mutation
   const addFaqMutation = useMutation({
-    mutationFn: async (values: any) => {
+    mutationFn: async (values: unknown) => {
       const result = await createFAQ(values);
       if (isFailure(result)) throw result.error;
     },
@@ -107,7 +107,7 @@ const AdminSupportPage = () => {
       toast.success('FAQ added successfully');
       setShowAddFaqDialog(false);
     },
-    onError: (error: any) => {
+    onError: (error: unknown) => {
       toast.error('Failed to add FAQ: ' + error.message);
     },
   });
@@ -122,14 +122,14 @@ const AdminSupportPage = () => {
       queryClient.invalidateQueries({ queryKey: ['support-faqs-admin'] });
       toast.success('FAQ deleted successfully');
     },
-    onError: (error: any) => {
+    onError: (error: unknown) => {
       toast.error('Failed to delete FAQ: ' + error.message);
     },
   });
 
   // Update contact card mutation
   const updateContactMutation = useMutation({
-    mutationFn: async ({ id, values }: { id: string; values: any }) => {
+    mutationFn: async ({ id, values }: { id: string; values: unknown }) => {
       const result = await updateContactCard(id, values);
       if (isFailure(result)) throw result.error;
     },
@@ -138,14 +138,14 @@ const AdminSupportPage = () => {
       toast.success('Contact card updated successfully');
       setEditingContact(null);
     },
-    onError: (error: any) => {
+    onError: (error: unknown) => {
       toast.error('Failed to update contact card: ' + error.message);
     },
   });
 
   // Add contact card mutation
   const addContactMutation = useMutation({
-    mutationFn: async (values: any) => {
+    mutationFn: async (values: unknown) => {
       const result = await createContactCard(values);
       if (isFailure(result)) throw result.error;
     },
@@ -154,7 +154,7 @@ const AdminSupportPage = () => {
       toast.success('Contact card added successfully');
       setShowAddContactDialog(false);
     },
-    onError: (error: any) => {
+    onError: (error: unknown) => {
       toast.error('Failed to add contact card: ' + error.message);
     },
   });
@@ -169,7 +169,7 @@ const AdminSupportPage = () => {
       queryClient.invalidateQueries({ queryKey: ['support-contact-cards-admin'] });
       toast.success('Contact card deleted successfully');
     },
-    onError: (error: any) => {
+    onError: (error: unknown) => {
       toast.error('Failed to delete contact card: ' + error.message);
     },
   });

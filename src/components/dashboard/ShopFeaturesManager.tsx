@@ -87,7 +87,7 @@ export const ShopFeaturesManager = () => {
       const newItems = [...items];
       newItems[index] = { ...newItems[index], image_url: result.data.url };
       setItems(newItems);
-    } catch (error: any) {
+    } catch (error: unknown) {
       toast.error(`Upload failed: ${error.message}`);
     } finally {
       setUploading(null);
@@ -131,7 +131,7 @@ export const ShopFeaturesManager = () => {
       queryClient.invalidateQueries({ queryKey: ['homepage-cards'] });
       toast.success('Homepage cards saved successfully');
     },
-    onError: (error: any) => {
+    onError: (error: unknown) => {
       toast.error(`Failed to save: ${error.message}`);
     },
   });

@@ -134,7 +134,7 @@ const ShippingTab = () => {
     },
   });
 
-  const handleOpenDialog = (option?: any) => {
+  const handleOpenDialog = (option?: unknown) => {
     if (option) {
       setEditingOption(option);
       setFormData({
@@ -219,7 +219,7 @@ const ShippingTab = () => {
                       <SelectValue placeholder="Select a provider" />
                     </SelectTrigger>
                     <SelectContent className="bg-background">
-                      {providers.map((provider: any) => (
+                      {providers.map((provider: unknown) => (
                         <SelectItem key={provider.id} value={provider.id}>
                           {provider.name}
                         </SelectItem>
@@ -290,7 +290,7 @@ const ShippingTab = () => {
         </Card>
       ) : (
         <div className="grid gap-4">
-          {shippingOptions.map((option: any) => (
+          {shippingOptions.map((option: unknown) => (
             <Card key={option.id}>
               <CardHeader>
                 <div className="flex items-start justify-between">

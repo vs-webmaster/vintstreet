@@ -7,18 +7,18 @@ import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover
 import { cn } from '@/lib/utils';
 
 interface MultiSelectAttributeProps {
-  attribute: any;
+  attribute: unknown;
   selectedValues: string[];
   onChange: (values: string[]) => void;
 }
 
 export const MultiSelectAttribute = ({ attribute, selectedValues, onChange }: MultiSelectAttributeProps) => {
   const [open, setOpen] = useState(false);
-  const options = attribute.attribute_options?.filter((opt: any) => opt.is_active) || [];
+  const options = attribute.attribute_options?.filter((opt: unknown) => opt.is_active) || [];
 
   // Check which selected values are custom (not in approved options)
   const customValues = Array.isArray(selectedValues)
-    ? selectedValues.filter((val) => !options.some((opt: any) => opt.value === val))
+    ? selectedValues.filter((val) => !options.some((opt: unknown) => opt.value === val))
     : [];
 
   const handleSelect = (value: string) => {
@@ -50,7 +50,7 @@ export const MultiSelectAttribute = ({ attribute, selectedValues, onChange }: Mu
             <CommandList className="bg-popover">
               <CommandEmpty>No option found.</CommandEmpty>
               <CommandGroup className="bg-popover">
-                {options.map((option: any) => (
+                {options.map((option: unknown) => (
                   <CommandItem
                     key={option.id}
                     value={option.value}

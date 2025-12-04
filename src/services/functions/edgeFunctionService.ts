@@ -7,7 +7,7 @@ import type { Result } from '@/types/api';
 
 export interface InvokeFunctionOptions {
   functionName: string;
-  body?: any;
+  body?: unknown;
   headers?: Record<string, string>;
 }
 

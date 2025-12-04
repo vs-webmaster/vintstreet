@@ -219,7 +219,7 @@ const AdminManageAttributesPage = () => {
         }
         refetchSubSubcategoryLinks();
       }
-    } catch (error: any) {
+    } catch (error: unknown) {
       toast.error(`Error: ${error.message}`);
     }
   };
@@ -265,7 +265,7 @@ const AdminManageAttributesPage = () => {
           <div className="max-h-[400px] space-y-1.5 overflow-y-auto">
             {filteredAttributes.map((attr) => {
               const isLinked = allLinks.some(
-                (link: any) => link.attribute_id === attr.id && link[idKey] === categoryId,
+                (link: unknown) => link.attribute_id === attr.id && link[idKey] === categoryId,
               );
 
               return (

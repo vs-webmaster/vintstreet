@@ -45,7 +45,7 @@ const CategoryGuideSelector = ({
           </SelectTrigger>
           <SelectContent>
             <SelectItem value="none">None</SelectItem>
-            {sizeGuides.map((guide: any) => (
+            {sizeGuides.map((guide: unknown) => (
               <SelectItem key={guide.id} value={guide.id}>
                 {guide.name}
               </SelectItem>
@@ -62,7 +62,7 @@ const CategoryGuideSelector = ({
           </SelectTrigger>
           <SelectContent>
             <SelectItem value="none">None</SelectItem>
-            {gradingGuides.map((guide: any) => (
+            {gradingGuides.map((guide: unknown) => (
               <SelectItem key={guide.id} value={guide.id}>
                 {guide.name}
               </SelectItem>

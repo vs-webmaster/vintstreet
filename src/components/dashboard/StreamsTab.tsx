@@ -83,7 +83,7 @@ export const StreamsTab = ({
       });
 
       onRefresh();
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error('Error cancelling stream:', error);
       toast({
         title: 'Error',

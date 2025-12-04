@@ -162,7 +162,7 @@ export async function fetchAuctionProducts(params: {
 export async function fetchProductAttributeValues(productIds: string[]): Promise<Result<any[]>> {
   try {
     const batchSize = 500;
-    let allAttributeValues: any[] = [];
+    let allAttributeValues: unknown[] = [];
 
     for (let i = 0; i < productIds.length; i += batchSize) {
       const batchIds = productIds.slice(i, i + batchSize);

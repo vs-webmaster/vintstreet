@@ -76,7 +76,7 @@ export const AuctionListingModal = ({
       toast.success('Auction listing created successfully!');
       onOpenChange(false);
       onSuccess?.();
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error('Error creating auction:', error);
       toast.error(error.message || 'Failed to create auction listing');
     } finally {

@@ -272,7 +272,7 @@ export const MegaMenuLayoutTab = () => {
   });
 
   const updateImageMutation = useMutation({
-    mutationFn: async ({ id, ...data }: any) => {
+    mutationFn: async ({ id, ...data }: unknown) => {
       const result = await updateMegaMenuImage(id, data);
       if (isFailure(result)) throw result.error;
     },
@@ -341,7 +341,7 @@ export const MegaMenuLayoutTab = () => {
       }
 
       toast.success('Image uploaded successfully');
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error('Error uploading image:', error);
       toast.error(`Failed to upload image: ${error.message}`);
     } finally {
@@ -459,7 +459,7 @@ export const MegaMenuLayoutTab = () => {
                                   </SelectTrigger>
                                   <SelectContent>
                                     {customLists && customLists.length > 0 ? (
-                                      customLists.map((list: any) => (
+                                      customLists.map((list: unknown) => (
                                         <SelectItem key={list.id} value={list.system_name}>
                                           {list.name} ({list.system_name})
                                         </SelectItem>
@@ -474,7 +474,7 @@ export const MegaMenuLayoutTab = () => {
                                 {item.label && (
                                   <p className="text-xs text-muted-foreground">
                                     Selected:{' '}
-                                    {customLists?.find((l: any) => l.system_name === item.label)?.name || item.label}
+                                    {customLists?.find((l: unknown) => l.system_name === item.label)?.name || item.label}
                                   </p>
                                 )}
                               </div>
@@ -520,7 +520,7 @@ export const MegaMenuLayoutTab = () => {
 
                       {menuImages && menuImages.length > 0 ? (
                         <div className="space-y-4">
-                          {menuImages.map((image: any, index: number) => (
+                          {menuImages.map((image: unknown, index: number) => (
                             <Card key={image.id} className="space-y-3 p-4">
                               <div className="flex items-center justify-between">
                                 <Label className="text-sm font-semibold">Image {index + 1}</Label>

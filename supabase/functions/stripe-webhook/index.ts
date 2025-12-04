@@ -70,6 +70,7 @@ serve(async (req) => {
         if (error) {
           console.error('[STRIPE-WEBHOOK] Error updating transaction:', error);
         } else {
+          // Transaction updated successfully
         }
         break;
       }

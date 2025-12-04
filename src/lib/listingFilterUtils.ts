@@ -14,7 +14,7 @@ interface ListingFilterParams {
  * Works with queries that join listings table (e.g., product_attribute_values with listings!inner)
  */
 export function applyListingFilters(
-  query: any,
+  query: unknown,
   {
     activeCategory,
     activeSubcategory,
@@ -23,7 +23,7 @@ export function applyListingFilters(
     selectedBrands,
     selectedLowestLevel,
   }: ListingFilterParams
-): any {
+): unknown {
   if (activeCategory) {
     query = query.eq('listings.category_id', activeCategory);
   }
@@ -46,7 +46,7 @@ export function applyListingFilters(
  * Applies category hierarchy filters directly to listings table (no join prefix)
  */
 export function applyDirectListingFilters(
-  query: any,
+  query: unknown,
   {
     activeCategory,
     activeSubcategory,
@@ -54,7 +54,7 @@ export function applyDirectListingFilters(
     isSubSubcategoryPage,
     selectedLowestLevel,
   }: Omit<ListingFilterParams, 'selectedBrands'>
-): any {
+): unknown {
   if (activeCategory) {
     query = query.eq('category_id', activeCategory);
   }

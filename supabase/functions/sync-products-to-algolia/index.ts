@@ -51,7 +51,7 @@ serve(async (req) => {
     const { productIds, action } = await req.json();
 
     // Helper function to call Algolia API using native fetch
-    const algoliaRequest = async (method: string, endpoint: string, body?: any) => {
+    const algoliaRequest = async (method: string, endpoint: string, body?: unknown) => {
       const url = `${ALGOLIA_BASE_URL}${endpoint}`;
       const response = await fetch(url, {
         method,
@@ -255,7 +255,7 @@ serve(async (req) => {
       }),
       { headers: { ...corsHeaders, 'Content-Type': 'application/json' } },
     );
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('Error syncing products to Algolia:', error);
     return new Response(
       JSON.stringify({

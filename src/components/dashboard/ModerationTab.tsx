@@ -130,7 +130,7 @@ export const ModerationTab = () => {
                       <div className="mt-2">
                         <p className="mb-1 text-sm font-medium">Flagged Categories:</p>
                         <div className="flex flex-wrap gap-1">
-                          {testResult.categories.map((cat: any, idx: number) => (
+                          {testResult.categories.map((cat: unknown, idx: number) => (
                             <Badge key={idx} variant="outline" className="text-xs">
                               {cat.class}: {(cat.score * 100).toFixed(1)}%
                             </Badge>

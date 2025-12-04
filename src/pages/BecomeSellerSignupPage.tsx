@@ -88,7 +88,7 @@ const BecomeSellerSignupPage = () => {
 
           if (isFailure(registrationResult)) throw registrationResult.error;
         }
-      } catch (error: any) {
+      } catch (error: unknown) {
         toast({
           title: 'Error',
           description: error.message || 'Failed to save registration. Please try again.',

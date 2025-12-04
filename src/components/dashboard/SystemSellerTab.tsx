@@ -212,7 +212,7 @@ export const SystemSellerTab = () => {
         });
       }
     },
-    onError: (error: any) => {
+    onError: (error: unknown) => {
       toast({
         title: 'Error',
         description: error.message || 'Failed to add admin email',
@@ -234,7 +234,7 @@ export const SystemSellerTab = () => {
         description: 'Admin removed (role remains active until manually revoked)',
       });
     },
-    onError: (error: any) => {
+    onError: (error: unknown) => {
       toast({
         title: 'Error',
         description: error.message || 'Failed to remove admin email',
@@ -250,7 +250,7 @@ export const SystemSellerTab = () => {
       if (isFailure(result)) throw result.error;
       return result.data;
     },
-    onSuccess: (data: any) => {
+    onSuccess: (data: unknown) => {
       refetchAdmins();
       const result = data[0];
       toast({
@@ -258,7 +258,7 @@ export const SystemSellerTab = () => {
         description: `Synced: ${result.synced_count}, Already synced: ${result.already_synced}, Pending signup: ${result.pending_signup}`,
       });
     },
-    onError: (error: any) => {
+    onError: (error: unknown) => {
       toast({
         title: 'Error',
         description: error.message || 'Failed to sync admins',
@@ -349,7 +349,7 @@ export const SystemSellerTab = () => {
     addAdminMutation.mutate(newAdminEmail);
   };
 
-  const handleOpenShippingDialog = (option?: any) => {
+  const handleOpenShippingDialog = (option?: unknown) => {
     if (option) {
       setEditingShippingOption(option);
       setShippingFormData({
@@ -457,7 +457,7 @@ export const SystemSellerTab = () => {
 
       setSystemSellerEmail('');
       queryClient.invalidateQueries({ queryKey: ['system-seller-profile'] });
-    } catch (error: any) {
+    } catch (error: unknown) {
       toast({
         title: 'Error',
         description: error.message || 'Failed to create system seller profile',
@@ -561,7 +561,7 @@ export const SystemSellerTab = () => {
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {systemAdmins.map((admin: any) => {
+                {systemAdmins.map((admin: unknown) => {
                   return (
                     <TableRow key={admin.id}>
                       <TableCell className="font-medium">
@@ -834,7 +834,7 @@ export const SystemSellerTab = () => {
                           <SelectValue placeholder="Select a provider" />
                         </SelectTrigger>
                         <SelectContent className="bg-background">
-                          {shippingProviders.map((provider: any) => (
+                          {shippingProviders.map((provider: unknown) => (
                             <SelectItem key={provider.id} value={provider.id}>
                               {provider.name}
                             </SelectItem>
@@ -881,7 +881,7 @@ export const SystemSellerTab = () => {
             </div>
           ) : (
             <div className="grid gap-4">
-              {shippingOptions.map((option: any) => (
+              {shippingOptions.map((option: unknown) => (
                 <Card key={option.id}>
                   <CardHeader>
                     <div className="flex items-start justify-between">

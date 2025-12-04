@@ -6,7 +6,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 interface Section {
   id?: string;
   section_type: string;
-  content: any;
+  content: unknown;
   display_order: number;
 }
 

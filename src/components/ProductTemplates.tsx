@@ -104,11 +104,11 @@ export const ProductTemplates = ({ streamId }: ProductTemplatesProps) => {
     }).format(price);
   };
 
-  const handleEditProduct = (product: any) => {
+  const handleEditProduct = (product: unknown) => {
     navigate(`/edit-product/${product.id}`);
   };
 
-  const renderProductGrid = (products: any[]) => {
+  const renderProductGrid = (products: unknown[]) => {
     if (products.length === 0) {
       return (
         <Card className="p-4 text-center">

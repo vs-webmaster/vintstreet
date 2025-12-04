@@ -40,7 +40,7 @@ serve(async (req) => {
     }
 
     // Extract order IDs for cleanup in case of error
-    orderIds = orders.map((o: any) => o.id).filter((id: string) => id);
+    orderIds = orders.map((o: unknown) => o.id).filter((id: string) => id);
 
     const stripe = new Stripe(Deno.env.get('STRIPE_SECRET_KEY') || '', {
       apiVersion: '2025-08-27.basil',
@@ -59,7 +59,7 @@ serve(async (req) => {
       ordersBySeller[order.seller_id].push(order);
     }
 
-    const lineItems: any[] = [];
+    const lineItems: unknown[] = [];
 
     // For multiple sellers, we'll create separate checkout sessions
     // For now, we'll create a single checkout with line items from all sellers
@@ -115,7 +115,7 @@ serve(async (req) => {
       cancel_url: cancelUrl,
       metadata: {
         buyer_id: user.id,
-        order_ids: orders.map((o: any) => o.id).join(','),
+        order_ids: orders.map((o: unknown) => o.id).join(','),
       },
     });
 
@@ -139,8 +139,9 @@ serve(async (req) => {
 
         if (deleteError) {
           console.error('[CREATE-CHECKOUT-SPLIT] Error deleting orders:', deleteError);
-        } else {
-        }
+      } else {
+        // Success - no action needed
+      }
       } catch (cleanupError) {
         console.error('[CREATE-CHECKOUT-SPLIT] Error during cleanup:', cleanupError);
       }

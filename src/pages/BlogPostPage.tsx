@@ -34,7 +34,7 @@ const ProductRowSection = ({ products }: { products: string[] }) => {
     <div className="mb-8">
       <h3 className="mb-4 text-xl font-bold">Featured Products</h3>
       <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-5">
-        {productsData.map((product: any) => (
+        {productsData.map((product: unknown) => (
           <Link key={product.id} to={`/product/${product.id}`} className="group">
             <div className="mb-2 aspect-square overflow-hidden rounded-lg">
               <img
@@ -66,7 +66,7 @@ export default function BlogPostPage() {
     enabled: !!slug,
   });
 
-  const renderSection = (section: any) => {
+  const renderSection = (section: unknown) => {
     const { section_type, content } = section;
 
     switch (section_type) {
@@ -318,8 +318,8 @@ export default function BlogPostPage() {
 
           <div className="prose prose-lg max-w-none">
             {post.blog_post_sections
-              ?.sort((a: any, b: any) => a.display_order - b.display_order)
-              .map((section: any) => (
+              ?.sort((a: unknown, b: unknown) => a.display_order - b.display_order)
+              .map((section: unknown) => (
                 <div key={section.id}>{renderSection(section)}</div>
               ))}
           </div>

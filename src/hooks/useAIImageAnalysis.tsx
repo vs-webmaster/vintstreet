@@ -19,7 +19,7 @@ interface FormData {
 
 interface UseAIImageAnalysisProps {
   formData: FormData;
-  updateFormData: (field: string, value: any) => void;
+  updateFormData: (field: string, value: unknown) => void;
   onImageRejected?: (reason: string, type: 'rejected' | 'uncertain') => void;
 }
 
@@ -98,7 +98,7 @@ export const useAIImageAnalysis = ({ formData, updateFormData, onImageRejected }
 
           toast.success('✨ AI suggestions applied! Feel free to edit.');
         }
-      } catch (functionError: any) {
+      } catch (functionError: unknown) {
         // When the edge function returns 400, we need to manually fetch the response
         console.error('Function error:', functionError);
 

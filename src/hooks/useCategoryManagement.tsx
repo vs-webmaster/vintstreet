@@ -89,7 +89,7 @@ export const useCategoryManagement = () => {
       toast.success('Category created successfully');
       refetch();
       return true;
-    } catch (error: any) {
+    } catch (error: unknown) {
       toast.error(`Failed to create category: ${error.message}`);
       return false;
     }
@@ -122,7 +122,7 @@ export const useCategoryManagement = () => {
       toast.success('Category updated successfully');
       refetch();
       return true;
-    } catch (error: any) {
+    } catch (error: unknown) {
       toast.error(`Failed to update category: ${error.message}`);
       return false;
     }
@@ -137,7 +137,7 @@ export const useCategoryManagement = () => {
 
       toast.success('Category deleted successfully');
       refetch();
-    } catch (error: any) {
+    } catch (error: unknown) {
       toast.error(`Failed to delete category: ${error.message}`);
     }
   };
@@ -149,7 +149,7 @@ export const useCategoryManagement = () => {
 
       toast.success(`Category ${!currentStatus ? 'activated' : 'deactivated'}`);
       refetch();
-    } catch (error: any) {
+    } catch (error: unknown) {
       toast.error('Failed to update category');
     }
   };
@@ -162,7 +162,7 @@ export const useCategoryManagement = () => {
 
       toast.success(`Generated ${result.data.length} synonyms for ${categoryName}`);
       refetch();
-    } catch (error: any) {
+    } catch (error: unknown) {
       toast.error(`Failed to generate synonyms: ${error.message}`);
     } finally {
       setGeneratingSynonyms(null);
@@ -181,7 +181,7 @@ export const useCategoryManagement = () => {
         }`,
       );
       refetch();
-    } catch (error: any) {
+    } catch (error: unknown) {
       toast.error(`Failed to generate synonyms: ${error.message}`);
     } finally {
       setBulkGenerating(false);
@@ -208,7 +208,7 @@ export const useCategoryManagement = () => {
 
       toast.success('Category order updated');
       await refetch();
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error('Reorder error:', error);
       toast.error(`Failed to reorder category: ${error.message}`);
     }
@@ -228,7 +228,7 @@ export const useCategoryManagement = () => {
         level4: level4Categories,
       } = result.data;
 
-      const rows: any[] = [];
+      const rows: unknown[] = [];
 
       level1Categories?.forEach((l1) => {
         const l2Items = filterByCategoryId(level2Categories, l1.id);
@@ -265,7 +265,7 @@ export const useCategoryManagement = () => {
       XLSX.writeFile(workbook, `product-categories-${new Date().toISOString().split('T')[0]}.xlsx`);
 
       toast.success('Categories downloaded successfully', { id: 'download-categories' });
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error('Download error:', error);
       toast.error(`Failed to download categories: ${error.message}`, { id: 'download-categories' });
     }

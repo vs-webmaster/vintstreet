@@ -56,7 +56,7 @@ export function BlogImageUpload({ value, onChange, label, id, onUploadStateChang
       setPreviewUrl(result.data.url);
       onChange(result.data.url);
       toast.success('Image uploaded successfully');
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error('Error uploading image:', error);
       toast.error('Failed to upload image: ' + error.message);
     } finally {

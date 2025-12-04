@@ -134,7 +134,7 @@ const MobileCategoryNav = () => {
           brand_id: cb.brand_id,
           brands: cb.brands as Brand,
         })),
-        trending: filterByCategoryId(trending.data, cat.id).map((t: any) => {
+        trending: filterByCategoryId(trending.data, cat.id).map((t: unknown) => {
           const l4 = l4Map.get(t.sub_sub_subcategory_id);
           const l3 = l4 ? l3Map.get(l4.sub_subcategory_id) : undefined;
           const l2 = l3 ? l2Map.get(l3.subcategory_id) : undefined;
@@ -144,7 +144,7 @@ const MobileCategoryNav = () => {
             path: l2 && l3 && l4 ? `/shop/${cat.slug}/${l2.slug}/${l3.slug}/${l4.slug}` : undefined,
           };
         }),
-        bestSellers: filterByCategoryId(bestSellers.data, cat.id).map((bs: any) => {
+        bestSellers: filterByCategoryId(bestSellers.data, cat.id).map((bs: unknown) => {
           const l4 = l4Map.get(bs.sub_sub_subcategory_id);
           const l3 = l4 ? l3Map.get(l4.sub_subcategory_id) : undefined;
           const l2 = l3 ? l2Map.get(l3.subcategory_id) : undefined;

@@ -11,15 +11,15 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { TableCell, TableRow } from '@/components/ui/table';
 
 interface ProductRowProps {
-  product: any;
+  product: unknown;
   visibleColumns: Record<string, boolean>;
-  brands: any[];
-  level1Categories: any[];
-  displayAttributes: any[];
-  availableTags: any[];
+  brands: unknown[];
+  level1Categories: unknown[];
+  displayAttributes: unknown[];
+  availableTags: unknown[];
   productTags: Map<string, string[]>;
-  updateProduct: (productId: string, field: string, value: any) => void;
-  updateAttributeValue: (productId: string, attributeId: string, field: string, value: any) => void;
+  updateProduct: (productId: string, field: string, value: unknown) => void;
+  updateAttributeValue: (productId: string, attributeId: string, field: string, value: unknown) => void;
   updateProductTags: (productId: string, tagIds: string[]) => void;
   getAttributeValue: (productId: string, attributeId: string) => any;
   getFilteredLevel2: (level1Id: string) => any[];
@@ -130,7 +130,7 @@ export const BulkEditProductRow = memo(({
             </SelectTrigger>
             <SelectContent className="z-[100] border bg-popover shadow-md">
               <SelectItem value="none">No Brand</SelectItem>
-              {brands.map((brand: any) => (
+              {brands.map((brand: unknown) => (
                 <SelectItem key={brand.id} value={brand.id}>{brand.name}</SelectItem>
               ))}
             </SelectContent>
@@ -154,7 +154,7 @@ export const BulkEditProductRow = memo(({
             </SelectTrigger>
             <SelectContent className="z-[100] border bg-popover shadow-md">
               <SelectItem value="none">None</SelectItem>
-              {level1Categories.map((cat: any) => (
+              {level1Categories.map((cat: unknown) => (
                 <SelectItem key={cat.id} value={cat.id}>{cat.name}</SelectItem>
               ))}
             </SelectContent>
@@ -178,7 +178,7 @@ export const BulkEditProductRow = memo(({
             </SelectTrigger>
             <SelectContent className="z-[100] border bg-popover shadow-md">
               <SelectItem value="none">None</SelectItem>
-              {getFilteredLevel2(product.category_id).map((cat: any) => (
+              {getFilteredLevel2(product.category_id).map((cat: unknown) => (
                 <SelectItem key={cat.id} value={cat.id}>{cat.name}</SelectItem>
               ))}
             </SelectContent>
@@ -201,7 +201,7 @@ export const BulkEditProductRow = memo(({
             </SelectTrigger>
             <SelectContent className="z-[100] border bg-popover shadow-md">
               <SelectItem value="none">None</SelectItem>
-              {getFilteredLevel3(product.subcategory_id).map((cat: any) => (
+              {getFilteredLevel3(product.subcategory_id).map((cat: unknown) => (
                 <SelectItem key={cat.id} value={cat.id}>{cat.name}</SelectItem>
               ))}
             </SelectContent>
@@ -220,7 +220,7 @@ export const BulkEditProductRow = memo(({
             </SelectTrigger>
             <SelectContent className="z-[100] border bg-popover shadow-md">
               <SelectItem value="none">None</SelectItem>
-              {getFilteredLevel4(product.sub_subcategory_id).map((cat: any) => (
+              {getFilteredLevel4(product.sub_subcategory_id).map((cat: unknown) => (
                 <SelectItem key={cat.id} value={cat.id}>{cat.name}</SelectItem>
               ))}
             </SelectContent>
@@ -258,7 +258,7 @@ export const BulkEditProductRow = memo(({
               <div className="space-y-2">
                 <Label>Select Tags</Label>
                 <div className="max-h-[300px] space-y-2 overflow-auto">
-                  {availableTags.map((tag: any) => (
+                  {availableTags.map((tag: unknown) => (
                     <div key={tag.id} className="flex items-center space-x-2">
                       <Checkbox
                         id={`${product.id}-${tag.id}`}
@@ -284,7 +284,7 @@ export const BulkEditProductRow = memo(({
         </TableCell>
       )}
       {/* Dynamic attribute values */}
-      {displayAttributes?.map((attr: any) => {
+      {displayAttributes?.map((attr: unknown) => {
         if (!isAttributeVisible(attr.id, attr.name)) return null;
 
         const attrValue = getAttributeValue(product.id, attr.id);
@@ -305,7 +305,7 @@ export const BulkEditProductRow = memo(({
                 </SelectTrigger>
                 <SelectContent className="z-[100] max-h-[300px] overflow-auto border bg-popover shadow-md">
                   <SelectItem value="none">None</SelectItem>
-                  {options.map((opt: any) => (
+                  {options.map((opt: unknown) => (
                     <SelectItem key={opt.id} value={opt.value}>{opt.value}</SelectItem>
                   ))}
                 </SelectContent>

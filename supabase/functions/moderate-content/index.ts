@@ -101,25 +101,25 @@ serve(async (req) => {
         ];
 
         const flaggedCategories = classes
-          .filter((c: any) => restrictedCategories.includes(c.class) && c.score > REVIEW_THRESHOLD)
-          .map((c: any) => ({ class: c.class, score: c.score }));
+          .filter((c: unknown) => restrictedCategories.includes(c.class) && c.score > REVIEW_THRESHOLD)
+          .map((c: unknown) => ({ class: c.class, score: c.score }));
 
         moderationResult.categories = flaggedCategories;
 
         // Check if any category exceeds reject threshold
-        const shouldReject = flaggedCategories.some((c: any) => c.score >= REJECT_THRESHOLD);
+        const shouldReject = flaggedCategories.some((c: unknown) => c.score >= REJECT_THRESHOLD);
         const shouldReview = flaggedCategories.some(
-          (c: any) => c.score >= REVIEW_THRESHOLD && c.score < REJECT_THRESHOLD,
+          (c: unknown) => c.score >= REVIEW_THRESHOLD && c.score < REJECT_THRESHOLD,
         );
 
         if (shouldReject) {
           moderationResult.isApproved = false;
           moderationResult.requiresReview = false;
-          moderationResult.message = `Content violates community guidelines. Flagged categories: ${flaggedCategories.map((c: any) => c.class).join(', ')}`;
+          moderationResult.message = `Content violates community guidelines. Flagged categories: ${flaggedCategories.map((c: unknown) => c.class).join(', ')}`;
         } else if (shouldReview) {
           moderationResult.isApproved = true;
           moderationResult.requiresReview = true;
-          moderationResult.message = `Content flagged for manual review. Categories: ${flaggedCategories.map((c: any) => c.class).join(', ')}`;
+          moderationResult.message = `Content flagged for manual review. Categories: ${flaggedCategories.map((c: unknown) => c.class).join(', ')}`;
         }
       }
     }

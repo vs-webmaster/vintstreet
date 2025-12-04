@@ -91,7 +91,7 @@ export const BlogProductSelector = ({ selectedProducts, onProductsChange }: Blog
               <div className="space-y-2">
                 {searchResults
                   .filter((product) => !selectedProducts.includes(product.id))
-                  .map((product: any) => (
+                  .map((product: unknown) => (
                     <div
                       key={product.id}
                       className="flex cursor-pointer items-center gap-3 rounded p-2 hover:bg-accent"
@@ -122,7 +122,7 @@ export const BlogProductSelector = ({ selectedProducts, onProductsChange }: Blog
           <div className="space-y-2">
             <Label>Selected Products ({selectedProductsData.length})</Label>
             <div className="grid gap-2">
-              {selectedProductsData.map((product: any) => (
+              {selectedProductsData.map((product: unknown) => (
                 <div key={product.id} className="flex items-center gap-3 rounded-lg border p-3">
                   {product.thumbnail && (
                     <img

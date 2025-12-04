@@ -20,7 +20,7 @@ import { ScrollArea } from '@/components/ui/scroll-area';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 
 interface BlogSidebarProps {
-  sections: any[];
+  sections: unknown[];
   onAddSection: (type: string) => void;
   onNavigateToSection: (index: number) => void;
 }
@@ -42,7 +42,7 @@ const SECTION_ICONS: Record<string, any> = {
   cta_banner: Frame,
 };
 
-const getSectionLabel = (section: any) => {
+const getSectionLabel = (section: unknown) => {
   const type = section.section_type;
   const content = section.content;
 
