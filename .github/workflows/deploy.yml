@@ -105,6 +105,21 @@ jobs:
             --location=$GAR_LOCATION \
             --project=$PROJECT_ID || echo "Repository may already exist"
 
+      - name: Verify service account permissions
+        run: |
+          echo "Verifying service account has required permissions..."
+          SA_EMAIL=$(gcloud auth list --filter=status:ACTIVE --format="value(account)")
+          echo "Service account: $SA_EMAIL"
+          echo ""
+          echo "Required roles for Artifact Registry:"
+          echo "  - roles/artifactregistry.writer (or roles/artifactregistry.admin)"
+          echo "  - roles/artifactregistry.reader (if pulling images)"
+          echo ""
+          echo "To grant permissions, run:"
+          echo "  gcloud projects add-iam-policy-binding $PROJECT_ID \\"
+          echo "    --member='serviceAccount:$SA_EMAIL' \\"
+          echo "    --role='roles/artifactregistry.writer'"
+
       - name: Configure Docker for Artifact Registry
         run: |
           gcloud auth configure-docker $GAR_LOCATION-docker.pkg.dev --quiet
