@@ -123,7 +123,7 @@ export const MegaMenuTab = () => {
       // Build hierarchy
       const categories = (cats.data || []).map((cat) => ({
         ...cat,
-        brands: filterByCategoryId(categoryBrands.data as any, cat.id).map((cb: unknown) => ({
+        brands: filterByCategoryId(categoryBrands.data as unknown, cat.id).map((cb: unknown) => ({
           id: cb.id,
           brand_id: cb.brand_id,
           display_order: cb.display_order,

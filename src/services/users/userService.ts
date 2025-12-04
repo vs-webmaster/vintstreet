@@ -398,14 +398,14 @@ export async function fetchAllUsers(
   } catch (error) {
     return {
       success: false,
-      error: error as any,
+      error: error as unknown,
     };
   }
 }
 
 // Get user type stats for dashboard
 // Fetch seller info map for multiple sellers (using seller_info_view)
-export async function fetchSellerInfoMap(sellerIds: string[]): Promise<Result<Map<string, any>>> {
+export async function fetchSellerInfoMap(sellerIds: string[]): Promise<Result<Map<string, unknown>>> {
   try {
     if (sellerIds.length === 0) {
       return { success: true, data: new Map() };
@@ -450,7 +450,7 @@ export async function fetchSellerProfilesByShopNames(shopNames: string[]): Promi
 }
 
 // Fetch seller profile with user profile
-export async function fetchSellerProfileWithUser(sellerId: string): Promise<Result<any>> {
+export async function fetchSellerProfileWithUser(sellerId: string): Promise<Result<unknown>> {
   try {
     const [sellerResult, profileResult] = await Promise.all([
       supabase.from('seller_profiles').select('shop_name, display_name_format').eq('user_id', sellerId).single(),
@@ -500,7 +500,7 @@ export async function fetchUserStats(): Promise<Result<Record<string, number>>> 
 
     return { success: true, data: counts };
   } catch (error) {
-    return { success: false, error: error as any };
+    return { success: false, error: error as unknown };
   }
 }
 
@@ -930,7 +930,7 @@ export async function removeSystemSellerAdmin(adminId: string): Promise<Result<b
 }
 
 // Sync system seller admins with user_roles
-export async function syncSystemSellerAdmins(): Promise<Result<any>> {
+export async function syncSystemSellerAdmins(): Promise<Result<unknown>> {
   try {
     const { data, error } = await supabase.rpc('sync_system_seller_admins');
 

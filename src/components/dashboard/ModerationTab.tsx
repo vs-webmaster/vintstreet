@@ -20,7 +20,7 @@ export const ModerationTab = () => {
   const [testText, setTestText] = useState('');
   const [testImageUrl, setTestImageUrl] = useState('');
   const { moderateText, moderateImage, isChecking } = useHiveModeration();
-  const [testResult, setTestResult] = useState<any>(null);
+  const [testResult, setTestResult] = useState<unknown>(null);
 
   const handleTestText = async () => {
     if (!testText.trim()) {

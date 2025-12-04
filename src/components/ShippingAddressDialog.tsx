@@ -58,7 +58,7 @@ export const ShippingAddressDialog = ({
   const { user } = useAuth();
   const [step, setStep] = useState<'shipping' | 'address'>('shipping');
   const [confirmedAddress, setConfirmedAddress] = useState<ShippingAddress | null>(null);
-  const [confirmedShippingOption, setConfirmedShippingOption] = useState<any>(null);
+  const [confirmedShippingOption, setConfirmedShippingOption] = useState<unknown>(null);
   const [shippingCost, setShippingCost] = useState<number>(0);
   const [selectedShippingOption, setSelectedShippingOption] = useState<string>('');
   const [useExistingAddress, setUseExistingAddress] = useState(true);
@@ -97,7 +97,7 @@ export const ShippingAddressDialog = ({
         throw result.error;
       }
       // Filter to only active options
-      return (result.data || []).filter((opt) => opt.is_active) as any[];
+      return (result.data || []).filter((opt) => opt.is_active) as unknown[];
     },
     enabled: open && !!sellerId,
   });

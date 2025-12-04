@@ -88,7 +88,7 @@ export async function fetchShopSectionsWithProducts(): Promise<
       .order('display_order', { foreignTable: 'shop_section_products' });
 
     if (error) throw error;
-    return { data: (data || []) as any, error: null };
+    return { data: (data || []) as unknown, error: null };
   }, 'fetchShopSectionsWithProducts');
 }
 

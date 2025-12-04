@@ -31,7 +31,7 @@ export const MasterProductUpload = ({ isOpen, onClose, categoryId, systemSellerI
   const { user } = useAuth();
   const [isUploading, setIsUploading] = useState(false);
   const [uploadResults, setUploadResults] = useState<{ success: number; failed: number } | null>(null);
-  const [failedRows, setFailedRows] = useState<any[]>([]);
+  const [failedRows, setFailedRows] = useState<unknown[]>([]);
   const [uploadProgress, setUploadProgress] = useState({ current: 0, total: 0 });
   const queryClient = useQueryClient();
 
@@ -165,9 +165,9 @@ export const MasterProductUpload = ({ isOpen, onClose, categoryId, systemSellerI
       const brandMap = new Map((brandsRes.data || []).map((b) => [b.name.toLowerCase().trim(), b.id]));
 
       // Fetch all attributes for categories, subcategories and sub-subcategories
-      const attributesByCategory = new Map<string, any[]>();
-      const attributesBySubcategory = new Map<string, any[]>();
-      const attributesBySubSubcategory = new Map<string, any[]>();
+      const attributesByCategory = new Map<string, unknown[]>();
+      const attributesBySubcategory = new Map<string, unknown[]>();
+      const attributesBySubSubcategory = new Map<string, unknown[]>();
       const attributeOptionsMap = new Map<string, Map<string, string>>();
 
       // Fetch attributes for the category (level 1)
@@ -203,7 +203,7 @@ export const MasterProductUpload = ({ isOpen, onClose, categoryId, systemSellerI
         }
 
         // Group attributes by subcategory_id
-        const subAttrMap = new Map<string, any[]>();
+        const subAttrMap = new Map<string, unknown[]>();
         (subAttrResult.data || []).forEach((link) => {
           if (link.attributes && link.subcategory_id) {
             if (!subAttrMap.has(link.subcategory_id)) {
@@ -237,7 +237,7 @@ export const MasterProductUpload = ({ isOpen, onClose, categoryId, systemSellerI
         }
 
         // Group attributes by sub_subcategory_id
-        const subSubAttrMap = new Map<string, any[]>();
+        const subSubAttrMap = new Map<string, unknown[]>();
         (subSubAttrResult.data || []).forEach((link) => {
           if (link.attributes && link.sub_subcategory_id) {
             if (!subSubAttrMap.has(link.sub_subcategory_id)) {
@@ -271,7 +271,7 @@ export const MasterProductUpload = ({ isOpen, onClose, categoryId, systemSellerI
       setUploadProgress({ current: 0, total: totalRows });
 
       for (let i = 0; i < jsonData.length; i++) {
-        const row = jsonData[i] as any;
+        const row = jsonData[i] as unknown;
         try {
           // Skip example rows
           if (row.product_name === 'Example Product') continue;
@@ -417,7 +417,7 @@ export const MasterProductUpload = ({ isOpen, onClose, categoryId, systemSellerI
           const subSubcatAttrs = subSubcategoryId ? attributesBySubSubcategory.get(subSubcategoryId) || [] : [];
 
           // Deduplicate by attribute id, prioritizing deeper levels
-          const uniqueAttrMap = new Map<string, any>();
+          const uniqueAttrMap = new Map<string, unknown>();
           [...catAttrs, ...subcatAttrs, ...subSubcatAttrs].forEach((a: unknown) => uniqueAttrMap.set(a.id, a));
           const attributes = Array.from(uniqueAttrMap.values());
           const attributeValues: unknown[] = [];

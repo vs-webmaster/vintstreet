@@ -37,7 +37,7 @@ const SupportPage = () => {
   });
 
   const getIcon = (iconName: string) => {
-    const icons: Record<string, any> = {
+    const icons: Record<string, unknown> = {
       Mail,
       MessageCircle,
       Book,

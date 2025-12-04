@@ -29,7 +29,7 @@ export const BulkProductUpload: React.FC<BulkProductUploadProps> = ({ isOpen, on
   const { toast } = useToast();
   const [isUploading, setIsUploading] = useState(false);
   const [uploadResults, setUploadResults] = useState<{ success: number; failed: number } | null>(null);
-  const [failedRows, setFailedRows] = useState<any[]>([]);
+  const [failedRows, setFailedRows] = useState<unknown[]>([]);
   const [uploadProgress, setUploadProgress] = useState({ current: 0, total: 0 });
 
   const downloadTemplate = async () => {
@@ -226,7 +226,7 @@ export const BulkProductUpload: React.FC<BulkProductUploadProps> = ({ isOpen, on
       setUploadProgress({ current: 0, total: totalRows });
 
       for (let i = 0; i < jsonData.length; i++) {
-        const row = jsonData[i] as any;
+        const row = jsonData[i] as unknown;
         try {
           // Skip example rows
           if (row.product_name === 'Example Product Name') continue;
@@ -339,14 +339,14 @@ export const BulkProductUpload: React.FC<BulkProductUploadProps> = ({ isOpen, on
               if (attribute && value !== null && value !== undefined && value !== '') {
                 const valueObj: unknown = {
                   product_id: insertedProduct.id,
-                  attribute_id: (attribute as any).id,
+                  attribute_id: (attribute as unknown).id,
                   value_text: null,
                   value_number: null,
                   value_boolean: null,
                   value_date: null,
                 };
 
-                switch ((attribute as any).data_type) {
+                switch ((attribute as unknown).data_type) {
                   case 'multi-select':
                     // Handle comma-separated values for multi-select with safe conversion
                     const multiValues = String(value)

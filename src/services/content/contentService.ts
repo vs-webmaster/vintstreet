@@ -17,7 +17,7 @@ export async function fetchContentPageProducts(
       .order('display_order');
 
     if (error) throw error;
-    return { data: (data || []) as any, error: null };
+    return { data: (data || []) as unknown, error: null };
   }, 'fetchContentPageProducts');
 }
 
@@ -147,7 +147,7 @@ export async function fetchContentPageBySlug(slug: string): Promise<Result<Conte
 }
 
 // Fetch page sections
-export async function fetchPageSections(pageId: string): Promise<Result<any[]>> {
+export async function fetchPageSections(pageId: string): Promise<Result<unknown[]>> {
   return withErrorHandling(async () => {
     const { data, error } = await supabase
       .from('page_sections')
@@ -156,7 +156,7 @@ export async function fetchPageSections(pageId: string): Promise<Result<any[]>> 
       .order('display_order');
 
     if (error) throw error;
-    return { data: (data || []) as any[], error: null };
+    return { data: (data || []) as unknown[], error: null };
   }, 'fetchPageSections');
 }
 

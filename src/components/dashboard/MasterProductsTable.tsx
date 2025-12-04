@@ -96,7 +96,7 @@ export const MasterProductsTable = ({
     });
 
     try {
-      const result = await updateProduct(productId, { status: newStatus } as any);
+      const result = await updateProduct(productId, { status: newStatus } as unknown);
 
       if (isFailure(result)) {
         throw result.error;
@@ -122,7 +122,7 @@ export const MasterProductsTable = ({
   const [filterLevel2, setFilterLevel2] = useState<string>('all');
   const { sortField, sortDirection, setSortField, setSortDirection, handleSort, SortIcon } = useTableSort(null, 'asc');
   const [lastUpdatedFilter, setLastUpdatedFilter] = useState<string>('all');
-  const [editingProduct, setEditingProduct] = useState<any>(null);
+  const [editingProduct, setEditingProduct] = useState<unknown>(null);
   const [brandSearchOpen, setBrandSearchOpen] = useState(false);
   const [advancedFilterOpen, setAdvancedFilterOpen] = useState(false);
   const [missingAttributeFilter, setMissingAttributeFilter] = useState<string | null>(null);
@@ -545,7 +545,7 @@ export const MasterProductsTable = ({
     const items = [];
     const maxVisiblePages = 5;
     let startPage = Math.max(1, currentPage - Math.floor(maxVisiblePages / 2));
-    let endPage = Math.min(totalPages, startPage + maxVisiblePages - 1);
+    const endPage = Math.min(totalPages, startPage + maxVisiblePages - 1);
 
     if (endPage - startPage + 1 < maxVisiblePages) {
       startPage = Math.max(1, endPage - maxVisiblePages + 1);

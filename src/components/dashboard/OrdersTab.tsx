@@ -100,7 +100,7 @@ export const OrdersTab = () => {
       // Map to OrderDetails format - filter out any orders without listings
       const mappedOrders: OrderDetails[] = ordersData
         .map((order) => {
-          const listing = (order as any).listings;
+          const listing = (order as unknown).listings;
 
           // Skip orders without listing data
           if (!listing) return null;
@@ -135,8 +135,8 @@ export const OrdersTab = () => {
             },
             quantity: order.quantity,
             totalAmount: Number(order.order_amount),
-            orderDate: (order as any).order_date || order.created_at,
-            status: order.delivery_status as any,
+            orderDate: (order as unknown).order_date || order.created_at,
+            status: order.delivery_status as unknown,
             trackingNumber: order.tracking_number || undefined,
             shippingMethod: 'Standard Shipping',
             estimatedDelivery: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000).toLocaleDateString(),

@@ -37,7 +37,7 @@ export const useAgora = ({ channelName, userId, isHost = false }: UseAgoraProps)
     configError: null,
   });
 
-  const [agoraConfig, setAgoraConfig] = useState<any>(null);
+  const [agoraConfig, setAgoraConfig] = useState<unknown>(null);
   const clientRef = useRef<IAgoraRTCClient | null>(null);
   const remoteVideoTracksRef = useRef<Map<number, IRemoteVideoTrack>>(new Map());
   const remoteAudioTracksRef = useRef<Map<number, IRemoteAudioTrack>>(new Map());

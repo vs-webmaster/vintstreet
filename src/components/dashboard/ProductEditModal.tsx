@@ -58,8 +58,8 @@ interface ProductEditModalProps {
 export const ProductEditModal = ({ product, sellerId, isOpen, onClose, onSave }: ProductEditModalProps) => {
   const [loading, setLoading] = useState(false);
   const [showUnsavedDialog, setShowUnsavedDialog] = useState(false);
-  const [initialFormData, setInitialFormData] = useState<any>(null);
-  const [initialDynamicAttributes, setInitialDynamicAttributes] = useState<Record<string, any>>({});
+  const [initialFormData, setInitialFormData] = useState<unknown>(null);
+  const [initialDynamicAttributes, setInitialDynamicAttributes] = useState<Record<string, unknown>>({});
   const [initialSelectedTags, setInitialSelectedTags] = useState<string[]>([]);
   const [initialImages, setInitialImagesState] = useState<string[]>([]);
   const isInitialLoadRef = useRef(false);
@@ -94,8 +94,8 @@ export const ProductEditModal = ({ product, sellerId, isOpen, onClose, onSave }:
     starting_bid: '',
     auction_duration: '7',
   });
-  const [dynamicAttributes, setDynamicAttributes] = useState<Record<string, any>>({});
-  const [oldAttributes, setOldAttributes] = useState<any[]>([]);
+  const [dynamicAttributes, setDynamicAttributes] = useState<Record<string, unknown>>({});
+  const [oldAttributes, setOldAttributes] = useState<unknown[]>([]);
   const [newImageUrl, setNewImageUrl] = useState('');
   const [imageAltTags, setImageAltTags] = useState<Record<number, string>>({});
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
@@ -277,7 +277,7 @@ export const ProductEditModal = ({ product, sellerId, isOpen, onClose, onSave }:
       const fetchAttributes = async () => {
         const result = await fetchProductAttributes(product.id);
         if (result.success && result.data) {
-          const attrValues: Record<string, any> = {};
+          const attrValues: Record<string, unknown> = {};
           result.data.forEach((attr) => {
             const dataType = attr.attributes?.data_type;
 

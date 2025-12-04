@@ -109,8 +109,8 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
   const [footerColumns, setFooterColumns] = useState<FooterColumn[]>([]);
   const [footerLinks, setFooterLinks] = useState<FooterLink[]>([]);
   const [megaMenuCategories, setMegaMenuCategories] = useState<ProductCategory[]>([]);
-  const [megaMenuCustomLists, setMegaMenuCustomLists] = useState<any[]>([]);
-  const [megaMenuCustomListItems, setMegaMenuCustomListItems] = useState<any[]>([]);
+  const [megaMenuCustomLists, setMegaMenuCustomLists] = useState<unknown[]>([]);
+  const [megaMenuCustomListItems, setMegaMenuCustomListItems] = useState<unknown[]>([]);
   const [loading, setLoading] = useState(true);
 
   const fetchSiteContentAsync = async () => {

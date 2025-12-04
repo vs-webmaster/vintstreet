@@ -792,7 +792,7 @@ export async function searchProductsByName(
       .limit(limit);
 
     if (error) throw error;
-    return success((data || []) as any);
+    return success((data || []) as unknown);
   } catch (error) {
     logError(error, 'productService:searchProductsByName');
     return failure(normalizeError(error));
@@ -1274,7 +1274,7 @@ export async function duplicateProduct(productId: string): Promise<Result<Produc
     const { data: productTagLinks } = await supabase.from('product_tag_links').select('*').eq('product_id', productId);
 
     // Create new product with modified data
-    const { id, created_at, updated_at, slug, ...productData } = originalProduct as any;
+    const { id, created_at, updated_at, slug, ...productData } = originalProduct as unknown;
     const newProductName = `${originalProduct.product_name} (Copy)`;
     const newSlug = `${slug || originalProduct.product_name.toLowerCase().replace(/\s+/g, '-')}-${Date.now()}`;
 
@@ -1949,7 +1949,7 @@ export async function fetchProductsByIdsForBulkEdit(productIds: string[]): Promi
 
 // Bulk update products
 export async function bulkUpdateProducts(
-  updates: Array<{ id: string; updates: Record<string, any> }>,
+  updates: Array<{ id: string; updates: Record<string, unknown> }>,
 ): Promise<Result<boolean>> {
   try {
     const updatePromises = updates.map(({ id, updates: updateData }) =>
@@ -2182,7 +2182,7 @@ export async function fetchProductsWithFiltersAndPagination(params: {
   sortField?: string | null;
   sortDirection?: 'asc' | 'desc';
   statusFilter?: string;
-}): Promise<Result<any[]>> {
+}): Promise<Result<unknown[]>> {
   try {
     const {
       systemSellerId,

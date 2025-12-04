@@ -207,7 +207,7 @@ export const MasterListingsTab = () => {
 
       // Fetch all product attribute values in batches to avoid query limits
       const productIds = products.map((p) => p.id);
-      let attributeValues: unknown[] = [];
+      const attributeValues: unknown[] = [];
 
       // Batch size for .in() queries (Supabase limit is around 1000)
       const batchSize = 500;
@@ -256,7 +256,7 @@ export const MasterListingsTab = () => {
     try {
       // Fetch all products in batches
       const batchSize = 1000;
-      let allProducts: unknown[] = [];
+      const allProducts: unknown[] = [];
       let offset = 0;
       let hasMore = true;
 
@@ -288,7 +288,7 @@ export const MasterListingsTab = () => {
       const uniqueSubcategoryIds = [...new Set(allProducts.map((p) => p.subcategory_id).filter(Boolean))];
       const uniqueSubSubcategoryIds = [...new Set(allProducts.map((p) => p.sub_subcategory_id).filter(Boolean))];
 
-      let allAttributes: unknown[] = [];
+      const allAttributes: unknown[] = [];
 
       // Fetch level 3 attributes
       if (uniqueSubSubcategoryIds.length > 0) {
@@ -322,7 +322,7 @@ export const MasterListingsTab = () => {
 
       // Fetch all product attribute values for all products in batches
       const productIds = allProducts.map((p) => p.id);
-      let attributeValues: unknown[] = [];
+      const attributeValues: unknown[] = [];
 
       // Batch size for .in() queries (Supabase limit is around 1000)
       const attrBatchSize = 500;
@@ -353,7 +353,7 @@ export const MasterListingsTab = () => {
       const products = allProducts;
       const csvSections: string[] = [];
 
-      Object.entries(productsBySubcategory).forEach(([subcategoryName, products]: [string, any]) => {
+      Object.entries(productsBySubcategory).forEach(([subcategoryName, products]: [string, unknown]) => {
         // Get all attributes for this group of products
         const relevantAttributes: unknown[] = [];
         const attributeMap = new Map();

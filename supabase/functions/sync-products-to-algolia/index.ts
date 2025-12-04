@@ -96,7 +96,7 @@ serve(async (req) => {
     };
 
     // Fetch products from database
-    let query = supabase
+    const query = supabase
       .from('listings')
       .select(
         `
@@ -167,7 +167,7 @@ serve(async (req) => {
     const attributesByProduct = new Map<string, Map<string, string[]>>();
 
     if (attributeValues) {
-      for (const attrValue of attributeValues as any[]) {
+      for (const attrValue of attributeValues as unknown[]) {
         const productId = attrValue.product_id;
         const attrName = (attrValue.attributes?.display_label || attrValue.attributes?.name || '').toLowerCase();
         const values = parseAttributeValue(attrValue.attributes?.data_type, attrValue.value_text);

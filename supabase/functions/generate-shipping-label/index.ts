@@ -262,7 +262,7 @@ async function generateNinjaLabel(
   order: OrderData,
   listing: ListingData,
   shippingAddress: ShippingAddress | null,
-): Promise<any> {
+): Promise<unknown> {
   const NINJA_EMAIL = Deno.env.get('NINJA_EMAIL') || '';
   const NINJA_PASSWORD = Deno.env.get('NINJA_PASSWORD') || '';
 
@@ -430,7 +430,7 @@ async function generateVoilaLabel(
   shippingAddress: ShippingAddress | null,
   sellerProfile: SellerProfile | null,
   shippingOption: unknown,
-): Promise<any> {
+): Promise<unknown> {
   const VOILA_API_USER = Deno.env.get('VOILA_API_USER') || '';
   const VOILA_API_TOKEN = Deno.env.get('VOILA_API_TOKEN') || '';
 

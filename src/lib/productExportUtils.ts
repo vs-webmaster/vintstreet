@@ -19,8 +19,8 @@ export function downloadCsv(csvContent: string, fileName: string): void {
 /**
  * Groups attribute values by product ID
  */
-export function groupAttributesByProduct(attributeValues: unknown[]): Record<string, Record<string, any>> {
-  return (attributeValues || []).reduce((acc: Record<string, Record<string, any>>, attr: unknown) => {
+export function groupAttributesByProduct(attributeValues: unknown[]): Record<string, Record<string, unknown>> {
+  return (attributeValues || []).reduce((acc: Record<string, Record<string, unknown>>, attr: unknown) => {
     if (!acc[attr.product_id]) {
       acc[attr.product_id] = {};
     }
@@ -45,8 +45,8 @@ export function getAttributeValue(attr: unknown): string | number | boolean | nu
  */
 export function formatProductForExport(
   product: unknown,
-  attrColumns: Record<string, any>
-): Record<string, any> {
+  attrColumns: Record<string, unknown>
+): Record<string, unknown> {
   return {
     product_name: product.product_name,
     thumbnail: product.thumbnail || '',
@@ -80,10 +80,10 @@ export function formatProductForExport(
  * Builds attribute columns for a product
  */
 export function buildAttributeColumns(
-  productAttrs: Record<string, any>,
+  productAttrs: Record<string, unknown>,
   attributes: unknown[]
-): Record<string, any> {
-  const attrColumns: Record<string, any> = {};
+): Record<string, unknown> {
+  const attrColumns: Record<string, unknown> = {};
   attributes.forEach((attr: unknown) => {
     const attrName = attr.name;
     const productAttr = productAttrs[attr.id];

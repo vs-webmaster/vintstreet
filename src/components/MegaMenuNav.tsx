@@ -169,11 +169,11 @@ export const MegaMenuNav = () => {
 
       case 'custom':
         // Resolve custom list globally by its system_name (unique identifier)
-        const list = (megaMenuCustomLists as any)?.find((l: unknown) => l.system_name === label);
+        const list = (megaMenuCustomLists as unknown)?.find((l: unknown) => l.system_name === label);
         if (!list) {
           return null;
         }
-        const items = (megaMenuCustomListItems as any)?.filter((i: unknown) => i.list_id === list.id) || [];
+        const items = (megaMenuCustomListItems as unknown)?.filter((i: unknown) => i.list_id === list.id) || [];
         if (items.length === 0) {
           return null;
         }

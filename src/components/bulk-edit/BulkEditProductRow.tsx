@@ -21,10 +21,10 @@ interface ProductRowProps {
   updateProduct: (productId: string, field: string, value: unknown) => void;
   updateAttributeValue: (productId: string, attributeId: string, field: string, value: unknown) => void;
   updateProductTags: (productId: string, tagIds: string[]) => void;
-  getAttributeValue: (productId: string, attributeId: string) => any;
-  getFilteredLevel2: (level1Id: string) => any[];
-  getFilteredLevel3: (level2Id: string) => any[];
-  getFilteredLevel4: (level3Id: string) => any[];
+  getAttributeValue: (productId: string, attributeId: string) => unknown;
+  getFilteredLevel2: (level1Id: string) => unknown[];
+  getFilteredLevel3: (level2Id: string) => unknown[];
+  getFilteredLevel4: (level3Id: string) => unknown[];
   isAttributeVisible: (attributeId: string, attributeName: string) => boolean;
 }
 

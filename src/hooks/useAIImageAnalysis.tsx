@@ -58,7 +58,7 @@ export const useAIImageAnalysis = ({ formData, updateFormData, onImageRejected }
           }
 
           // Handle identified status
-          const { suggestedName, suggestedDescription, suggestedCategory } = data as any;
+          const { suggestedName, suggestedDescription, suggestedCategory } = data as unknown;
 
           // Only populate fields if they're currently empty
           if (suggestedName && !formData.name) {

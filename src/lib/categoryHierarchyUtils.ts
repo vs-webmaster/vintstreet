@@ -93,10 +93,10 @@ export function buildAdminCategoryHierarchy<T extends Level2Category>(
 // ============================================
 
 export interface CategoryLevelMaps {
-  l1Map: Map<string, any>;
-  l2Map: Map<string, any>;
-  l3Map: Map<string, any>;
-  l4Map: Map<string, any>;
+  l1Map: Map<string, unknown>;
+  l2Map: Map<string, unknown>;
+  l3Map: Map<string, unknown>;
+  l4Map: Map<string, unknown>;
 }
 
 /**

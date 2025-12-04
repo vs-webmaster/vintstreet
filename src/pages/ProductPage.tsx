@@ -342,7 +342,7 @@ const ProductPage = () => {
           <ProductEditModal
             isOpen={showEditModal}
             onClose={() => setShowEditModal(false)}
-            product={product as any}
+            product={product as unknown}
             onSave={handleProductUpdated}
           />
         )}

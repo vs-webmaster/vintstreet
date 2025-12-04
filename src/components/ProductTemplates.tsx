@@ -29,7 +29,7 @@ export const ProductTemplates = ({ streamId }: ProductTemplatesProps) => {
   const navigate = useNavigate();
   const { user } = useAuth();
   const { toast } = useToast();
-  const [shopProducts, setShopProducts] = useState<any[]>([]);
+  const [shopProducts, setShopProducts] = useState<unknown[]>([]);
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
   const [selectedProductType, setSelectedProductType] = useState<'livestream' | 'shop'>('livestream');
   const [loading, setLoading] = useState(true);
@@ -49,7 +49,7 @@ export const ProductTemplates = ({ streamId }: ProductTemplatesProps) => {
         return;
       }
 
-      setShopProducts((result.data || []) as any);
+      setShopProducts((result.data || []) as unknown);
     } catch (error) {
       console.error('Error in fetchShopProducts:', error);
     }

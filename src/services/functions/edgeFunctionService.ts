@@ -12,7 +12,7 @@ export interface InvokeFunctionOptions {
 }
 
 // Invoke a Supabase Edge Function
-export async function invokeEdgeFunction<T = any>(options: InvokeFunctionOptions): Promise<Result<T>> {
+export async function invokeEdgeFunction<T = unknown>(options: InvokeFunctionOptions): Promise<Result<T>> {
   return withErrorHandling(async () => {
     const { data, error } = await supabase.functions.invoke(options.functionName, {
       body: options.body,

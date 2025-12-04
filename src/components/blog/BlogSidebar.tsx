@@ -25,7 +25,7 @@ interface BlogSidebarProps {
   onNavigateToSection: (index: number) => void;
 }
 
-const SECTION_ICONS: Record<string, any> = {
+const SECTION_ICONS: Record<string, unknown> = {
   heading: Heading,
   paragraph: FileText,
   image: Image,

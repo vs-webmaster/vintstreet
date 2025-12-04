@@ -23,8 +23,8 @@ import { AdminLayout } from './AdminLayout';
 
 export default function AdminBlogTagsPage() {
   const [newTagName, setNewTagName] = useState('');
-  const [editingTag, setEditingTag] = useState<any>(null);
-  const [deleteTag, setDeleteTag] = useState<any>(null);
+  const [editingTag, setEditingTag] = useState<unknown>(null);
+  const [deleteTag, setDeleteTag] = useState<unknown>(null);
   const queryClient = useQueryClient();
 
   const { data: tags = [], isLoading } = useQuery({

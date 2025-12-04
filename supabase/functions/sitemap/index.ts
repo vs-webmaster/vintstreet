@@ -95,7 +95,7 @@ serve(async (req) => {
     // Level 2 subcategory pages
     if (subcategoriesResult.data) {
       for (const sub of subcategoriesResult.data) {
-        const parentSlug = (sub as any).product_categories?.slug;
+        const parentSlug = (sub as unknown).product_categories?.slug;
         if (parentSlug) {
           xml += `  <url>
     <loc>${SITE_URL}/shop/${parentSlug}/${sub.slug}</loc>
@@ -111,7 +111,7 @@ serve(async (req) => {
     // Level 3 sub-subcategory pages
     if (subSubcategoriesResult.data) {
       for (const subSub of subSubcategoriesResult.data) {
-        const subcat = (subSub as any).product_subcategories;
+        const subcat = (subSub as unknown).product_subcategories;
         const parentSlug = subcat?.product_categories?.slug;
         const subcatSlug = subcat?.slug;
         if (parentSlug && subcatSlug) {

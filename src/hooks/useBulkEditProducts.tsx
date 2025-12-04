@@ -53,17 +53,17 @@ export const useBulkEditProducts = () => {
 
   // Reference data
   const [level1Categories, setLevel1Categories] = useState<Category[]>([]);
-  const [level2Categories, setLevel2Categories] = useState<any[]>([]);
-  const [level3Categories, setLevel3Categories] = useState<any[]>([]);
-  const [level4Categories, setLevel4Categories] = useState<any[]>([]);
-  const [brands, setBrands] = useState<any[]>([]);
-  const [availableTags, setAvailableTags] = useState<any[]>([]);
+  const [level2Categories, setLevel2Categories] = useState<unknown[]>([]);
+  const [level3Categories, setLevel3Categories] = useState<unknown[]>([]);
+  const [level4Categories, setLevel4Categories] = useState<unknown[]>([]);
+  const [brands, setBrands] = useState<unknown[]>([]);
+  const [availableTags, setAvailableTags] = useState<unknown[]>([]);
 
   // Attributes
-  const [attributes, setAttributes] = useState<Map<string, any[]>>(new Map());
-  const [productAttributes, setProductAttributes] = useState<Map<string, any[]>>(new Map());
-  const [allUniqueAttributes, setAllUniqueAttributes] = useState<any[]>([]);
-  const [allAvailableAttributes, setAllAvailableAttributes] = useState<any[]>([]);
+  const [attributes, setAttributes] = useState<Map<string, unknown[]>>(new Map());
+  const [productAttributes, setProductAttributes] = useState<Map<string, unknown[]>>(new Map());
+  const [allUniqueAttributes, setAllUniqueAttributes] = useState<unknown[]>([]);
+  const [allAvailableAttributes, setAllAvailableAttributes] = useState<unknown[]>([]);
 
   // Tags
   const [productTags, setProductTags] = useState<Map<string, string[]>>(new Map());
@@ -75,7 +75,7 @@ export const useBulkEditProducts = () => {
   // Unsaved changes tracking
   const [showUnsavedDialog, setShowUnsavedDialog] = useState(false);
   const [initialProducts, setInitialProducts] = useState<BulkEditProduct[]>([]);
-  const [initialProductAttributes, setInitialProductAttributes] = useState<Map<string, any[]>>(new Map());
+  const [initialProductAttributes, setInitialProductAttributes] = useState<Map<string, unknown[]>>(new Map());
 
   const productIds: string[] = location.state?.productIds || [];
 
@@ -164,7 +164,7 @@ export const useBulkEditProducts = () => {
 
   // Merge all available attributes with unique attributes for display
   const displayAttributes = useMemo(() => {
-    const attrMap = new Map<string, any>();
+    const attrMap = new Map<string, unknown>();
     allUniqueAttributes.forEach((attr) => attrMap.set(attr.id, attr));
     allAvailableAttributes.forEach((attr) => {
       const existing = attrMap.get(attr.id);

@@ -66,7 +66,7 @@ export default function AdminBlogEditorPage() {
     author_bio: '',
   });
 
-  const [sections, setSections] = useState<any[]>([]);
+  const [sections, setSections] = useState<unknown[]>([]);
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
   const [selectedProducts, setSelectedProducts] = useState<string[]>([]);
   const [selectedRelatedPosts, setSelectedRelatedPosts] = useState<string[]>([]);
@@ -76,8 +76,8 @@ export default function AdminBlogEditorPage() {
   // Track initial state for unsaved changes detection
   const [showUnsavedDialog, setShowUnsavedDialog] = useState(false);
   const [pendingNavigation, setPendingNavigation] = useState<string | null>(null);
-  const [initialFormData, setInitialFormData] = useState<any>(null);
-  const [initialSections, setInitialSections] = useState<any[]>([]);
+  const [initialFormData, setInitialFormData] = useState<unknown>(null);
+  const [initialSections, setInitialSections] = useState<unknown[]>([]);
   const [initialTags, setInitialTags] = useState<string[]>([]);
   const [initialProducts, setInitialProducts] = useState<string[]>([]);
   const [initialRelatedPosts, setInitialRelatedPosts] = useState<string[]>([]);

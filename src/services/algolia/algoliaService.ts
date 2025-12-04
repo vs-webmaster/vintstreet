@@ -10,7 +10,7 @@ import { normalizeError, logError } from '@/lib/errors';
 /**
  * Manually trigger a sync for specific product IDs
  */
-export async function syncProducts(productIds: string[]): Promise<Result<any>> {
+export async function syncProducts(productIds: string[]): Promise<Result<unknown>> {
   try {
     const result = await invokeEdgeFunction({
       functionName: 'sync-products-to-algolia',
@@ -32,7 +32,7 @@ export async function syncProducts(productIds: string[]): Promise<Result<any>> {
 /**
  * Delete products from Algolia
  */
-export async function deleteProducts(productIds: string[]): Promise<Result<any>> {
+export async function deleteProducts(productIds: string[]): Promise<Result<unknown>> {
   try {
     const result = await invokeEdgeFunction({
       functionName: 'sync-products-to-algolia',
@@ -129,7 +129,7 @@ export async function syncAllProducts(): Promise<
 /**
  * Manually trigger a sync for specific category IDs
  */
-export async function syncCategories(categoryIds: string[]): Promise<Result<any>> {
+export async function syncCategories(categoryIds: string[]): Promise<Result<unknown>> {
   try {
     const result = await invokeEdgeFunction({
       functionName: 'sync-categories-to-algolia',
@@ -310,7 +310,7 @@ export async function syncAllCategories(): Promise<
 /**
  * Manually trigger a sync for specific brand IDs
  */
-export async function syncBrands(brandIds: string[]): Promise<Result<any>> {
+export async function syncBrands(brandIds: string[]): Promise<Result<unknown>> {
   try {
     const result = await invokeEdgeFunction({
       functionName: 'sync-brands-to-algolia',

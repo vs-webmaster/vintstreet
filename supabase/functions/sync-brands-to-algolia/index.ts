@@ -72,7 +72,7 @@ serve(async (req) => {
     }
 
     // Fetch brands from database
-    let query = supabase
+    const query = supabase
       .from('brands')
       .select(
         `

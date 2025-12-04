@@ -20,13 +20,13 @@ const HomePage = () => {
 
   useEffect(() => {
     // Load Instagram embed script
-    if (!(window as any).instgrm) {
+    if (!(window as unknown).instgrm) {
       const script = document.createElement('script');
       script.async = true;
       script.src = 'https://www.instagram.com/embed.js';
       document.body.appendChild(script);
     } else {
-      (window as any).instgrm.Embeds.process();
+      (window as unknown).instgrm.Embeds.process();
     }
   }, [siteContent]);
 

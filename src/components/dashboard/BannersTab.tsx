@@ -180,9 +180,9 @@ export const BannersTab = () => {
       button_link: banner.button_link || '',
       image_url: banner.image_url,
       is_active: banner.is_active,
-      rotation_interval: (banner as any).rotation_interval || 6,
-      button_bg_color: (banner as any).button_bg_color || '#000000',
-      button_text_color: (banner as any).button_text_color || '#FFFFFF',
+      rotation_interval: (banner as unknown).rotation_interval || 6,
+      button_bg_color: (banner as unknown).button_bg_color || '#000000',
+      button_text_color: (banner as unknown).button_text_color || '#FFFFFF',
     });
     setIsEditOpen(true);
   };

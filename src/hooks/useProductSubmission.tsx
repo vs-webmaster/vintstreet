@@ -36,9 +36,9 @@ interface UseProductSubmissionProps {
   isEditMode: boolean;
   productId?: string;
   formData: ProductFormData;
-  dynamicAttributes: Record<string, any>;
+  dynamicAttributes: Record<string, unknown>;
   uploadImages: () => Promise<string[]>;
-  saveAttributeValues: (productId: string, attributes: Record<string, any>) => Promise<void>;
+  saveAttributeValues: (productId: string, attributes: Record<string, unknown>) => Promise<void>;
   needsModeration?: boolean;
   listingType?: 'marketplace' | 'auction';
   auctionData?: {

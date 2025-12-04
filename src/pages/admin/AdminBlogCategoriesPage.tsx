@@ -19,7 +19,7 @@ export default function AdminBlogCategoriesPage() {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
   const [isDialogOpen, setIsDialogOpen] = useState(false);
-  const [editingCategory, setEditingCategory] = useState<any>(null);
+  const [editingCategory, setEditingCategory] = useState<unknown>(null);
 
   const [formData, setFormData] = useState({
     name: '',

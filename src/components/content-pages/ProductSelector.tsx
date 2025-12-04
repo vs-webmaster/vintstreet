@@ -60,7 +60,7 @@ export const ProductSelector = ({ pageId }: ProductSelectorProps) => {
         id: p.id,
         product_name: p.product_name,
         thumbnail: p.thumbnail || '',
-        sku: (p as any).sku || null,
+        sku: (p as unknown).sku || null,
       })) as Product[];
     },
     enabled: selectedProductsData.length > 0,
@@ -86,7 +86,7 @@ export const ProductSelector = ({ pageId }: ProductSelectorProps) => {
         id: p.id,
         product_name: p.product_name,
         thumbnail: p.thumbnail || '',
-        sku: (p as any).sku || null,
+        sku: (p as unknown).sku || null,
       })) as Product[];
     },
     enabled: !!systemSeller?.user_id && debouncedSearch.length >= 2,

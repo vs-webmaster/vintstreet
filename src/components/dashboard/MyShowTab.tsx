@@ -70,11 +70,11 @@ export const MyShowTab = () => {
   const navigate = useNavigate();
   const [mysteryBoxes, setMysteryBoxes] = useState<MysteryBox[]>([]);
   const [giveaways, setGiveaways] = useState<Giveaway[]>([]);
-  const [livestreamProducts, setLivestreamProducts] = useState<any[]>([]);
+  const [livestreamProducts, setLivestreamProducts] = useState<unknown[]>([]);
   const [isAddDialogOpen, setIsAddDialogOpen] = useState(false);
   const [selectedTemplate, setSelectedTemplate] = useState<string | null>(null);
   const [isEditMode, setIsEditMode] = useState(false);
-  const [editingItem, setEditingItem] = useState<any>(null);
+  const [editingItem, setEditingItem] = useState<unknown>(null);
   const { toast } = useToast();
 
   useEffect(() => {

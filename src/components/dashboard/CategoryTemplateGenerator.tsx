@@ -73,8 +73,8 @@ export const CategoryTemplateGenerator = ({
         .sort((a: unknown, b: unknown) => (a.display_order || 0) - (b.display_order || 0));
 
       // For each subcategory, fetch its attributes
-      const attributesBySubcategory = new Map<string, any[]>();
-      const allAttributeOptions = new Map<string, any[]>();
+      const attributesBySubcategory = new Map<string, unknown[]>();
+      const allAttributeOptions = new Map<string, unknown[]>();
 
       // Fetch attributes for all subcategories at once
       const subcategoryIds = subcategories.map((s) => s.id);
@@ -83,7 +83,7 @@ export const CategoryTemplateGenerator = ({
         if (isFailure(subAttrResult)) throw subAttrResult.error;
 
         // Group attributes by subcategory_id
-        const subAttrMap = new Map<string, any[]>();
+        const subAttrMap = new Map<string, unknown[]>();
         (subAttrResult.data || []).forEach((link) => {
           if (link.attributes && link.subcategory_id) {
             if (!subAttrMap.has(link.subcategory_id)) {
@@ -95,7 +95,7 @@ export const CategoryTemplateGenerator = ({
 
         // Fetch attributes for all sub-subcategories at once
         const subSubcategoryIds = subSubcategories.map((ss) => ss.id);
-        let subSubAttrMap = new Map<string, any[]>();
+        const subSubAttrMap = new Map<string, unknown[]>();
         if (subSubcategoryIds.length > 0) {
           const subSubAttrResult = await fetchAttributeSubSubcategoriesBySubSubcategoryIds(subSubcategoryIds);
           if (isFailure(subSubAttrResult)) throw subSubAttrResult.error;
@@ -178,7 +178,7 @@ export const CategoryTemplateGenerator = ({
       };
 
       // Collect attributes based on selection level
-      const uniqueAttributes = new Map<string, any>();
+      const uniqueAttributes = new Map<string, unknown>();
 
       // Always include category-level attributes first
       categoryLevelAttrs.forEach((attr: unknown) => {

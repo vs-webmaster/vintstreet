@@ -33,7 +33,7 @@ export const GuideManager = ({
   contentPlaceholder,
 }: GuideManagerProps) => {
   const [isAddDialogOpen, setIsAddDialogOpen] = useState(false);
-  const [editingGuide, setEditingGuide] = useState<any>(null);
+  const [editingGuide, setEditingGuide] = useState<unknown>(null);
   const [name, setName] = useState('');
   const [content, setContent] = useState('');
   const queryClient = useQueryClient();

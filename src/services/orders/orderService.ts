@@ -80,7 +80,7 @@ export async function fetchAllOrdersMinimal(): Promise<
     const { data, error } = await supabase.from('orders').select('order_amount, status, delivery_status');
 
     if (error) throw error;
-    return { data: (data || []) as any, error: null };
+    return { data: (data || []) as unknown, error: null };
   }, 'fetchAllOrdersMinimal');
 }
 
@@ -350,6 +350,6 @@ export async function fetchOrdersByStreamId(
     const { data, error } = await query;
 
     if (error) throw error;
-    return { data: (data || []) as any, error: null };
+    return { data: (data || []) as unknown, error: null };
   }, 'fetchOrdersByStreamId');
 }

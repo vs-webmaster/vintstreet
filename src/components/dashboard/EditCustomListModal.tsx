@@ -43,7 +43,7 @@ export const EditCustomListModal = ({ listId, open, onOpenChange }: EditCustomLi
   const [selectedLevel2, setSelectedLevel2] = useState<string>('');
   const [selectedLevel3, setSelectedLevel3] = useState<string>('');
   const [selectedLevel4, setSelectedLevel4] = useState<string>('');
-  const [editingItem, setEditingItem] = useState<any>(null);
+  const [editingItem, setEditingItem] = useState<unknown>(null);
 
   const { data: list } = useQuery({
     queryKey: ['mega-menu-custom-list', listId],

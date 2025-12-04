@@ -56,7 +56,7 @@ export const usePublicWishlist = (shareToken: string) => {
             },
           };
         })
-        .filter(Boolean) as any[];
+        .filter(Boolean) as unknown[];
 
       return {
         sharedWishlist,

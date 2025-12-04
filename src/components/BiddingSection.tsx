@@ -53,7 +53,7 @@ const BiddingSection = ({ streamId, isStreamer = false }: BiddingSectionProps) =
     const result = await fetchProductsByStream(streamId, { status: 'published' });
 
     if (isSuccess(result) && result.data && result.data.length > 0) {
-      setListings(result.data as any);
+      setListings(result.data as unknown);
 
       // Note: Bids table not yet implemented - commenting out for now
       // for (const listing of listingsData) {
