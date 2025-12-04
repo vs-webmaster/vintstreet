@@ -25,9 +25,6 @@ export async function fetchMegaMenuCategoryBrands(): Promise<
       .order('display_order', { ascending: true });
 
     if (error) throw error;
-<<<<<<< HEAD
-    return { data: (data || []) as unknown, error: null };
-=======
     return { data: (data || []) as Array<{
       id: string;
       category_id: string;
@@ -35,7 +32,6 @@ export async function fetchMegaMenuCategoryBrands(): Promise<
       display_order: number;
       brands: { id: string; name: string };
     }>, error: null };
->>>>>>> a275e0e6fd466fe0415be180aa3be0c399054c93
   }, 'fetchMegaMenuCategoryBrands');
 }
 
@@ -59,9 +55,6 @@ export async function fetchMegaMenuTrendingItems(): Promise<
       .order('display_order', { ascending: true });
 
     if (error) throw error;
-<<<<<<< HEAD
-    return { data: (data || []) as unknown, error: null };
-=======
     return { data: (data || []) as Array<{
       category_id: string;
       item_level: number;
@@ -69,7 +62,6 @@ export async function fetchMegaMenuTrendingItems(): Promise<
       sub_subcategory_id: string | null;
       sub_sub_subcategory_id: string | null;
     }>, error: null };
->>>>>>> a275e0e6fd466fe0415be180aa3be0c399054c93
   }, 'fetchMegaMenuTrendingItems');
 }
 
@@ -93,9 +85,6 @@ export async function fetchMegaMenuBestSellers(): Promise<
       .order('display_order', { ascending: true });
 
     if (error) throw error;
-<<<<<<< HEAD
-    return { data: (data || []) as unknown, error: null };
-=======
     return { data: (data || []) as Array<{
       category_id: string;
       item_level: number;
@@ -103,7 +92,6 @@ export async function fetchMegaMenuBestSellers(): Promise<
       sub_subcategory_id: string | null;
       sub_sub_subcategory_id: string | null;
     }>, error: null };
->>>>>>> a275e0e6fd466fe0415be180aa3be0c399054c93
   }, 'fetchMegaMenuBestSellers');
 }
 
@@ -127,9 +115,6 @@ export async function fetchMegaMenuLuxuryBrands(): Promise<
       .order('display_order', { ascending: true });
 
     if (error) throw error;
-<<<<<<< HEAD
-    return { data: (data || []) as unknown, error: null };
-=======
     return { data: (data || []) as Array<{
       id: string;
       category_id: string;
@@ -137,14 +122,10 @@ export async function fetchMegaMenuLuxuryBrands(): Promise<
       display_order: number;
       brands: { id: string; name: string };
     }>, error: null };
->>>>>>> a275e0e6fd466fe0415be180aa3be0c399054c93
   }, 'fetchMegaMenuLuxuryBrands');
 }
 
 // Fetch mega menu trending items (admin - with full details)
-<<<<<<< HEAD
-export async function fetchMegaMenuTrendingItemsAdmin(): Promise<Result<unknown[]>> {
-=======
 export async function fetchMegaMenuTrendingItemsAdmin(): Promise<Result<Array<{
   id: string;
   category_id: string;
@@ -157,7 +138,6 @@ export async function fetchMegaMenuTrendingItemsAdmin(): Promise<Result<Array<{
   product_sub_subcategories: { name: string; slug: string } | null;
   product_sub_sub_subcategories: { name: string; slug: string } | null;
 }>>> {
->>>>>>> a275e0e6fd466fe0415be180aa3be0c399054c93
   return withErrorHandling(async () => {
     const { data, error } = await supabase
       .from('mega_menu_trending_items')
@@ -179,9 +159,6 @@ export async function fetchMegaMenuTrendingItemsAdmin(): Promise<Result<Array<{
       .order('display_order');
 
     if (error) throw error;
-<<<<<<< HEAD
-    return { data: (data || []) as unknown, error: null };
-=======
     return { data: (data || []) as Array<{
       id: string;
       category_id: string;
@@ -194,14 +171,10 @@ export async function fetchMegaMenuTrendingItemsAdmin(): Promise<Result<Array<{
       product_sub_subcategories: { name: string; slug: string } | null;
       product_sub_sub_subcategories: { name: string; slug: string } | null;
     }>, error: null };
->>>>>>> a275e0e6fd466fe0415be180aa3be0c399054c93
   }, 'fetchMegaMenuTrendingItemsAdmin');
 }
 
 // Fetch mega menu best sellers (admin - with full details)
-<<<<<<< HEAD
-export async function fetchMegaMenuBestSellersAdmin(): Promise<Result<unknown[]>> {
-=======
 export async function fetchMegaMenuBestSellersAdmin(): Promise<Result<Array<{
   id: string;
   category_id: string;
@@ -214,7 +187,6 @@ export async function fetchMegaMenuBestSellersAdmin(): Promise<Result<Array<{
   product_sub_subcategories: { name: string; slug: string } | null;
   product_sub_sub_subcategories: { name: string; slug: string } | null;
 }>>> {
->>>>>>> a275e0e6fd466fe0415be180aa3be0c399054c93
   return withErrorHandling(async () => {
     const { data, error } = await supabase
       .from('mega_menu_best_sellers')
@@ -236,9 +208,6 @@ export async function fetchMegaMenuBestSellersAdmin(): Promise<Result<Array<{
       .order('display_order');
 
     if (error) throw error;
-<<<<<<< HEAD
-    return { data: (data || []) as unknown, error: null };
-=======
     return { data: (data || []) as Array<{
       id: string;
       category_id: string;
@@ -251,14 +220,10 @@ export async function fetchMegaMenuBestSellersAdmin(): Promise<Result<Array<{
       product_sub_subcategories: { name: string; slug: string } | null;
       product_sub_sub_subcategories: { name: string; slug: string } | null;
     }>, error: null };
->>>>>>> a275e0e6fd466fe0415be180aa3be0c399054c93
   }, 'fetchMegaMenuBestSellersAdmin');
 }
 
 // Fetch mega menu luxury brands (admin - with full details)
-<<<<<<< HEAD
-export async function fetchMegaMenuLuxuryBrandsAdmin(): Promise<Result<unknown[]>> {
-=======
 export async function fetchMegaMenuLuxuryBrandsAdmin(): Promise<Result<Array<{
   id: string;
   category_id: string;
@@ -266,7 +231,6 @@ export async function fetchMegaMenuLuxuryBrandsAdmin(): Promise<Result<Array<{
   display_order: number;
   brands: { id: string; name: string } | null;
 }>>> {
->>>>>>> a275e0e6fd466fe0415be180aa3be0c399054c93
   return withErrorHandling(async () => {
     const { data, error } = await supabase
       .from('mega_menu_luxury_brands')
@@ -275,9 +239,6 @@ export async function fetchMegaMenuLuxuryBrandsAdmin(): Promise<Result<Array<{
       .order('display_order');
 
     if (error) throw error;
-<<<<<<< HEAD
-    return { data: (data || []) as unknown, error: null };
-=======
     return { data: (data || []) as Array<{
       id: string;
       category_id: string;
@@ -285,7 +246,6 @@ export async function fetchMegaMenuLuxuryBrandsAdmin(): Promise<Result<Array<{
       display_order: number;
       brands: { id: string; name: string } | null;
     }>, error: null };
->>>>>>> a275e0e6fd466fe0415be180aa3be0c399054c93
   }, 'fetchMegaMenuLuxuryBrandsAdmin');
 }
 
@@ -462,11 +422,7 @@ export async function fetchMegaMenuLayouts(): Promise<Result<MegaMenuLayout[]>> 
     if (error) throw error;
     return {
       data: (data || []).map((item) => {
-<<<<<<< HEAD
-        let columns = item.columns as unknown;
-=======
         let columns = item.columns as Array<{ items: Array<{ type: string; label: string }> }> | Array<{ type: string; label: string }> | null;
->>>>>>> a275e0e6fd466fe0415be180aa3be0c399054c93
         // Normalize old format to new format
         if (columns && Array.isArray(columns)) {
           if (columns.length > 0 && !columns[0].items) {
@@ -508,11 +464,7 @@ export async function upsertMegaMenuLayout(
     if (error) throw error;
 
     // Normalize columns data (same logic as fetchMegaMenuLayouts)
-<<<<<<< HEAD
-    let columns = data.columns as unknown;
-=======
     let columns = data.columns as Array<{ items: Array<{ type: string; label: string }> }> | Array<{ type: string; label: string }> | null;
->>>>>>> a275e0e6fd466fe0415be180aa3be0c399054c93
     if (columns && Array.isArray(columns)) {
       if (columns.length > 0 && !columns[0].items) {
         columns = columns.map((col: unknown) => ({

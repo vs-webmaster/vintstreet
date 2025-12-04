@@ -20,9 +20,6 @@ const HomePage = () => {
 
   useEffect(() => {
     // Load Instagram embed script
-<<<<<<< HEAD
-    if (!(window as unknown).instgrm) {
-=======
     interface WindowWithInstagram {
       instgrm?: {
         Embeds: {
@@ -32,17 +29,12 @@ const HomePage = () => {
     }
     const win = window as WindowWithInstagram;
     if (!win.instgrm) {
->>>>>>> a275e0e6fd466fe0415be180aa3be0c399054c93
       const script = document.createElement('script');
       script.async = true;
       script.src = 'https://www.instagram.com/embed.js';
       document.body.appendChild(script);
     } else {
-<<<<<<< HEAD
-      (window as unknown).instgrm.Embeds.process();
-=======
       win.instgrm.Embeds.process();
->>>>>>> a275e0e6fd466fe0415be180aa3be0c399054c93
     }
   }, [siteContent]);
 

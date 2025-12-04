@@ -17,11 +17,7 @@ export async function fetchContentPageProducts(
       .order('display_order');
 
     if (error) throw error;
-<<<<<<< HEAD
-    return { data: (data || []) as unknown, error: null };
-=======
     return { data: (data || []) as Array<{ product_id: string; display_order: number }>, error: null };
->>>>>>> a275e0e6fd466fe0415be180aa3be0c399054c93
   }, 'fetchContentPageProducts');
 }
 
@@ -151,11 +147,7 @@ export async function fetchContentPageBySlug(slug: string): Promise<Result<Conte
 }
 
 // Fetch page sections
-<<<<<<< HEAD
-export async function fetchPageSections(pageId: string): Promise<Result<unknown[]>> {
-=======
 export async function fetchPageSections(pageId: string): Promise<Result<PageSection[]>> {
->>>>>>> a275e0e6fd466fe0415be180aa3be0c399054c93
   return withErrorHandling(async () => {
     const { data, error } = await supabase
       .from('page_sections')
@@ -164,11 +156,7 @@ export async function fetchPageSections(pageId: string): Promise<Result<PageSect
       .order('display_order');
 
     if (error) throw error;
-<<<<<<< HEAD
-    return { data: (data || []) as unknown[], error: null };
-=======
     return { data: (data || []) as PageSection[], error: null };
->>>>>>> a275e0e6fd466fe0415be180aa3be0c399054c93
   }, 'fetchPageSections');
 }
 

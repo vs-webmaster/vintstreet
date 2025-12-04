@@ -73,10 +73,6 @@ export const CategoryTemplateGenerator = ({
         .sort((a: unknown, b: unknown) => (a.display_order || 0) - (b.display_order || 0));
 
       // For each subcategory, fetch its attributes
-<<<<<<< HEAD
-      const attributesBySubcategory = new Map<string, unknown[]>();
-      const allAttributeOptions = new Map<string, unknown[]>();
-=======
       interface AttributeLink {
         attributes?: { id: string; name: string; data_type: string };
         subcategory_id?: string;
@@ -89,7 +85,6 @@ export const CategoryTemplateGenerator = ({
       }
       const attributesBySubcategory = new Map<string, AttributeLink[]>();
       const allAttributeOptions = new Map<string, AttributeOption[]>();
->>>>>>> a275e0e6fd466fe0415be180aa3be0c399054c93
 
       // Fetch attributes for all subcategories at once
       const subcategoryIds = subcategories.map((s) => s.id);
@@ -98,11 +93,7 @@ export const CategoryTemplateGenerator = ({
         if (isFailure(subAttrResult)) throw subAttrResult.error;
 
         // Group attributes by subcategory_id
-<<<<<<< HEAD
-        const subAttrMap = new Map<string, unknown[]>();
-=======
         const subAttrMap = new Map<string, AttributeLink[]>();
->>>>>>> a275e0e6fd466fe0415be180aa3be0c399054c93
         (subAttrResult.data || []).forEach((link) => {
           if (link.attributes && link.subcategory_id) {
             if (!subAttrMap.has(link.subcategory_id)) {
@@ -197,9 +188,6 @@ export const CategoryTemplateGenerator = ({
       };
 
       // Collect attributes based on selection level
-<<<<<<< HEAD
-      const uniqueAttributes = new Map<string, unknown>();
-=======
       interface Attribute {
         id: string;
         name: string;
@@ -207,7 +195,6 @@ export const CategoryTemplateGenerator = ({
         display_order?: number | null;
       }
       const uniqueAttributes = new Map<string, Attribute>();
->>>>>>> a275e0e6fd466fe0415be180aa3be0c399054c93
 
       // Always include category-level attributes first
       categoryLevelAttrs.forEach((attr: unknown) => {

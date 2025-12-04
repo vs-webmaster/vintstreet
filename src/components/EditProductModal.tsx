@@ -87,11 +87,7 @@ export const EditProductModal = ({ isOpen, onClose, product, onProductUpdated }:
         starting_price: parseFloat(formData.starting_price),
         product_description: formData.product_description || null,
         thumbnail: formData.thumbnail || null,
-<<<<<<< HEAD
-      } as unknown);
-=======
       } as ListingUpdate);
->>>>>>> a275e0e6fd466fe0415be180aa3be0c399054c93
 
       if (isFailure(result)) {
         throw result.error;

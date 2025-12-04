@@ -215,12 +215,8 @@ vi.mock('@/config/agora', () => ({
 
 ## CI/CD Integration
 
-<<<<<<< HEAD
-Tests are automatically run in the GitHub Actions pipeline. 
-=======
 Tests are automatically run in the GitHub Actions pipeline. PRs cannot merge if tests fail.
 
->>>>>>> a275e0e6fd466fe0415be180aa3be0c399054c93
 ## Best Practices
 
 1. **Arrange-Act-Assert:** Structure tests clearly

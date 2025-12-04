@@ -25,17 +25,10 @@ interface ProductRowProps {
   updateProduct: (productId: string, field: string, value: unknown) => void;
   updateAttributeValue: (productId: string, attributeId: string, field: string, value: unknown) => void;
   updateProductTags: (productId: string, tagIds: string[]) => void;
-<<<<<<< HEAD
-  getAttributeValue: (productId: string, attributeId: string) => unknown;
-  getFilteredLevel2: (level1Id: string) => unknown[];
-  getFilteredLevel3: (level2Id: string) => unknown[];
-  getFilteredLevel4: (level3Id: string) => unknown[];
-=======
   getAttributeValue: (productId: string, attributeId: string) => ProductAttributeValue | undefined;
   getFilteredLevel2: (level1Id: string) => Subcategory[];
   getFilteredLevel3: (level2Id: string) => SubSubcategory[];
   getFilteredLevel4: (level3Id: string) => SubSubSubcategory[];
->>>>>>> a275e0e6fd466fe0415be180aa3be0c399054c93
   isAttributeVisible: (attributeId: string, attributeName: string) => boolean;
 }
 

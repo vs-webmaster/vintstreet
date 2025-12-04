@@ -53,11 +53,7 @@ serve(async (req) => {
     }
 
     // Parse request body for channel and uid
-<<<<<<< HEAD
-    const body: unknown = {};
-=======
     let body: unknown = {};
->>>>>>> a275e0e6fd466fe0415be180aa3be0c399054c93
     try {
       body = await req.json();
     } catch {

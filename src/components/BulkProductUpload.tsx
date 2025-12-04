@@ -31,11 +31,7 @@ export const BulkProductUpload: React.FC<BulkProductUploadProps> = ({ isOpen, on
   const { toast } = useToast();
   const [isUploading, setIsUploading] = useState(false);
   const [uploadResults, setUploadResults] = useState<{ success: number; failed: number } | null>(null);
-<<<<<<< HEAD
-  const [failedRows, setFailedRows] = useState<unknown[]>([]);
-=======
   const [failedRows, setFailedRows] = useState<FailedRow[]>([]);
->>>>>>> a275e0e6fd466fe0415be180aa3be0c399054c93
   const [uploadProgress, setUploadProgress] = useState({ current: 0, total: 0 });
 
   const downloadTemplate = async () => {
@@ -225,22 +221,14 @@ export const BulkProductUpload: React.FC<BulkProductUploadProps> = ({ isOpen, on
       // Process each row
       let successCount = 0;
       let failedCount = 0;
-<<<<<<< HEAD
-      const failedItems: unknown[] = [];
-=======
       const failedItems: FailedRow[] = [];
->>>>>>> a275e0e6fd466fe0415be180aa3be0c399054c93
 
       // Set total for progress tracking
       const totalRows = jsonData.length;
       setUploadProgress({ current: 0, total: totalRows });
 
       for (let i = 0; i < jsonData.length; i++) {
-<<<<<<< HEAD
-        const row = jsonData[i] as unknown;
-=======
         const row = jsonData[i];
->>>>>>> a275e0e6fd466fe0415be180aa3be0c399054c93
         try {
           // Skip example rows
           if (row.product_name === 'Example Product Name') continue;
@@ -344,9 +332,6 @@ export const BulkProductUpload: React.FC<BulkProductUploadProps> = ({ isOpen, on
           } else {
             const insertedProduct = productResult.data;
             // Save product attributes if any exist in the row
-<<<<<<< HEAD
-            const attributeValues: unknown[] = [];
-=======
             const attributeValues: Array<{
               product_id: string;
               attribute_id: string;
@@ -355,18 +340,12 @@ export const BulkProductUpload: React.FC<BulkProductUploadProps> = ({ isOpen, on
               value_boolean: boolean | null;
               value_date: string | null;
             }> = [];
->>>>>>> a275e0e6fd466fe0415be180aa3be0c399054c93
 
             for (const [key, value] of Object.entries(row)) {
               // Check if this column name matches an attribute
               const attribute = attributesMap.get(key.toLowerCase()) as Attribute | undefined;
 
               if (attribute && value !== null && value !== undefined && value !== '') {
-<<<<<<< HEAD
-                const valueObj: unknown = {
-                  product_id: insertedProduct.id,
-                  attribute_id: (attribute as unknown).id,
-=======
                 const valueObj: {
                   product_id: string;
                   attribute_id: string;
@@ -377,20 +356,14 @@ export const BulkProductUpload: React.FC<BulkProductUploadProps> = ({ isOpen, on
                 } = {
                   product_id: insertedProduct.id,
                   attribute_id: attribute.id,
->>>>>>> a275e0e6fd466fe0415be180aa3be0c399054c93
                   value_text: null,
                   value_number: null,
                   value_boolean: null,
                   value_date: null,
                 };
 
-<<<<<<< HEAD
-                switch ((attribute as unknown).data_type) {
-                  case 'multi-select':
-=======
                 switch (attribute.data_type) {
                   case 'multi-select': {
->>>>>>> a275e0e6fd466fe0415be180aa3be0c399054c93
                     // Handle comma-separated values for multi-select with safe conversion
                     const multiValues = String(value)
                       .split(',')

@@ -43,11 +43,7 @@ export const useProductForm = (id?: string) => {
     selectedTags: [],
     auctionType: null,
   });
-<<<<<<< HEAD
-  const [dynamicAttributes, setDynamicAttributes] = useState<Record<string, unknown>>({});
-=======
   const [dynamicAttributes, setDynamicAttributes] = useState<Record<string, string | number | boolean | string[] | null>>({});
->>>>>>> a275e0e6fd466fe0415be180aa3be0c399054c93
   const [productImages, setProductImages] = useState<string[]>([]);
   const [isLoading, setIsLoading] = useState(!!id);
   const [originalUpdatedAt, setOriginalUpdatedAt] = useState<string | null>(null);
@@ -103,11 +99,7 @@ export const useProductForm = (id?: string) => {
         // Fetch dynamic attribute values
         const attrsResult = await fetchProductAttributes(id);
         if (!isFailure(attrsResult) && attrsResult.data) {
-<<<<<<< HEAD
-          const attrValues: Record<string, unknown> = {};
-=======
           const attrValues: Record<string, string | number | boolean | string[] | null> = {};
->>>>>>> a275e0e6fd466fe0415be180aa3be0c399054c93
           attrsResult.data.forEach((attr) => {
             const dataType = attr.attributes?.data_type;
 

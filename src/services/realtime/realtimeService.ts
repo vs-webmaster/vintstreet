@@ -34,11 +34,7 @@ export function subscribeToPostgresChanges<T = unknown>(
   const channel = supabase
     .channel(channelName)
     .on(
-<<<<<<< HEAD
-      'postgres_changes' as unknown,
-=======
       'postgres_changes',
->>>>>>> a275e0e6fd466fe0415be180aa3be0c399054c93
       {
         event: filter.event || '*',
         schema: filter.schema || 'public',
@@ -77,11 +73,7 @@ export function subscribeToMultiplePostgresChanges(
 
   subscriptions.forEach(({ filter, callback }) => {
     channel = channel.on(
-<<<<<<< HEAD
-      'postgres_changes' as unknown,
-=======
       'postgres_changes',
->>>>>>> a275e0e6fd466fe0415be180aa3be0c399054c93
       {
         event: filter.event || '*',
         schema: filter.schema || 'public',

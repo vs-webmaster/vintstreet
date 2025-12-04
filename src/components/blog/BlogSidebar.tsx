@@ -25,13 +25,9 @@ interface BlogSidebarProps {
   onNavigateToSection: (index: number) => void;
 }
 
-<<<<<<< HEAD
-const SECTION_ICONS: Record<string, unknown> = {
-=======
 import type { LucideIcon } from 'lucide-react';
 
 const SECTION_ICONS: Record<string, LucideIcon> = {
->>>>>>> a275e0e6fd466fe0415be180aa3be0c399054c93
   heading: Heading,
   paragraph: FileText,
   image: Image,

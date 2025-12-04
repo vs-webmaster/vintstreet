@@ -50,11 +50,7 @@ import type { Product } from '@/types/product';
 import type { ProductAttributeValue } from '@/services/attributes/attributeService';
 
 interface ProductEditModalProps {
-<<<<<<< HEAD
-  product?: unknown;
-=======
   product?: Product | null;
->>>>>>> a275e0e6fd466fe0415be180aa3be0c399054c93
   sellerId?: string;
   isOpen: boolean;
   onClose: () => void;
@@ -64,13 +60,8 @@ interface ProductEditModalProps {
 export const ProductEditModal = ({ product, sellerId, isOpen, onClose, onSave }: ProductEditModalProps) => {
   const [loading, setLoading] = useState(false);
   const [showUnsavedDialog, setShowUnsavedDialog] = useState(false);
-<<<<<<< HEAD
-  const [initialFormData, setInitialFormData] = useState<unknown>(null);
-  const [initialDynamicAttributes, setInitialDynamicAttributes] = useState<Record<string, unknown>>({});
-=======
   const [initialFormData, setInitialFormData] = useState<Product | null>(null);
   const [initialDynamicAttributes, setInitialDynamicAttributes] = useState<Record<string, string | number | boolean | null>>({});
->>>>>>> a275e0e6fd466fe0415be180aa3be0c399054c93
   const [initialSelectedTags, setInitialSelectedTags] = useState<string[]>([]);
   const [initialImages, setInitialImagesState] = useState<string[]>([]);
   const isInitialLoadRef = useRef(false);
@@ -105,13 +96,8 @@ export const ProductEditModal = ({ product, sellerId, isOpen, onClose, onSave }:
     starting_bid: '',
     auction_duration: '7',
   });
-<<<<<<< HEAD
-  const [dynamicAttributes, setDynamicAttributes] = useState<Record<string, unknown>>({});
-  const [oldAttributes, setOldAttributes] = useState<unknown[]>([]);
-=======
   const [dynamicAttributes, setDynamicAttributes] = useState<Record<string, string | number | boolean | null>>({});
   const [oldAttributes, setOldAttributes] = useState<ProductAttributeValue[]>([]);
->>>>>>> a275e0e6fd466fe0415be180aa3be0c399054c93
   const [newImageUrl, setNewImageUrl] = useState('');
   const [imageAltTags, setImageAltTags] = useState<Record<number, string>>({});
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
@@ -293,11 +279,7 @@ export const ProductEditModal = ({ product, sellerId, isOpen, onClose, onSave }:
       const fetchAttributes = async () => {
         const result = await fetchProductAttributes(product.id);
         if (result.success && result.data) {
-<<<<<<< HEAD
-          const attrValues: Record<string, unknown> = {};
-=======
           const attrValues: Record<string, string | number | boolean | string[] | null> = {};
->>>>>>> a275e0e6fd466fe0415be180aa3be0c399054c93
           result.data.forEach((attr) => {
             const dataType = attr.attributes?.data_type;
 

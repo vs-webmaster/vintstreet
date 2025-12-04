@@ -716,11 +716,8 @@ const SmartSearch = ({ className }: SmartSearchProps) => {
       if (checkInputInterval) {
         clearInterval(checkInputInterval);
       }
-<<<<<<< HEAD
       // Copy ref value to avoid stale closure
       const container = containerRef.current;
-=======
->>>>>>> a275e0e6fd466fe0415be180aa3be0c399054c93
       if (container) {
         const inputElement = container.querySelector('input[type="search"]') as HTMLInputElement;
         if (inputElement) {

@@ -26,11 +26,7 @@ const SECTION_TEMPLATES = [
   { value: 'cards', label: 'Cards Section', description: 'Row of cards with title and text' },
 ];
 
-<<<<<<< HEAD
-const SECTION_ICONS: Record<string, unknown> = {
-=======
 const SECTION_ICONS: Record<string, LucideIcon> = {
->>>>>>> a275e0e6fd466fe0415be180aa3be0c399054c93
   hero: Image,
   text_block: Type,
   image_text: Layout,

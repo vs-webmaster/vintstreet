@@ -68,11 +68,7 @@ export const BulkBrandUpload: React.FC<BulkBrandUploadProps> = ({ isOpen, onClos
       const brandsToCreate: CreateBrandInput[] = [];
       const skippedRows: unknown[] = [];
 
-<<<<<<< HEAD
-      for (const row of jsonData as unknown[]) {
-=======
       for (const row of jsonData as ExcelRowData[]) {
->>>>>>> a275e0e6fd466fe0415be180aa3be0c399054c93
         // Skip example rows
         if (row.name === 'Example Brand Name') continue;
 

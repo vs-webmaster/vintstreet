@@ -71,19 +71,11 @@ export const MyShowTab = () => {
   const navigate = useNavigate();
   const [mysteryBoxes, setMysteryBoxes] = useState<MysteryBox[]>([]);
   const [giveaways, setGiveaways] = useState<Giveaway[]>([]);
-<<<<<<< HEAD
-  const [livestreamProducts, setLivestreamProducts] = useState<unknown[]>([]);
-  const [isAddDialogOpen, setIsAddDialogOpen] = useState(false);
-  const [selectedTemplate, setSelectedTemplate] = useState<string | null>(null);
-  const [isEditMode, setIsEditMode] = useState(false);
-  const [editingItem, setEditingItem] = useState<unknown>(null);
-=======
   const [livestreamProducts, setLivestreamProducts] = useState<Product[]>([]);
   const [isAddDialogOpen, setIsAddDialogOpen] = useState(false);
   const [selectedTemplate, setSelectedTemplate] = useState<string | null>(null);
   const [isEditMode, setIsEditMode] = useState(false);
   const [editingItem, setEditingItem] = useState<MysteryBox | Giveaway | null>(null);
->>>>>>> a275e0e6fd466fe0415be180aa3be0c399054c93
   const { toast } = useToast();
 
   const fetchLivestreamProducts = useCallback(async () => {

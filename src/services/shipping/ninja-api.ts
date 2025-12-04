@@ -167,11 +167,7 @@ export class NinjaApiClient {
   /**
    * Import order to Ninja
    */
-<<<<<<< HEAD
-  async importOrder(orderData: NinjaOrderData[]): Promise<unknown> {
-=======
   async importOrder(orderData: NinjaOrderData[]): Promise<NinjaImportResponse> {
->>>>>>> a275e0e6fd466fe0415be180aa3be0c399054c93
     if (!this.accessToken) {
       await this.authenticate();
     }
@@ -198,11 +194,7 @@ export class NinjaApiClient {
   /**
    * Get order details
    */
-<<<<<<< HEAD
-  async getOrder(orderId: string): Promise<unknown> {
-=======
   async getOrder(orderId: string): Promise<NinjaOrderResponse> {
->>>>>>> a275e0e6fd466fe0415be180aa3be0c399054c93
     if (!this.accessToken) {
       await this.authenticate();
     }

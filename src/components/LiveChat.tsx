@@ -23,11 +23,7 @@ interface RtmClient {
   login: (params: { uid: string; token: string | null }) => Promise<void>;
   createChannel: (channelId: string) => RtmChannel;
   setLocalUserAttributes: (attributes: { name: string; color: string }) => Promise<void>;
-<<<<<<< HEAD
-  getUserAttributes: (uid: string) => Promise<unknown>;
-=======
   getUserAttributes: (uid: string) => Promise<Record<string, string> | null>;
->>>>>>> a275e0e6fd466fe0415be180aa3be0c399054c93
 }
 
 interface RtmChannel {
@@ -64,15 +60,11 @@ const LiveChat = ({ streamId }: LiveChatProps) => {
   const [isLoading, setIsLoading] = useState(true);
 
   // RTM related refs and state
-<<<<<<< HEAD
-  const [agoraRTMConfig, setAgoraRTMConfig] = useState<unknown>(null);
-=======
   interface AgoraRTMConfig {
     appId: string;
     token: string | null;
   }
   const [agoraRTMConfig, setAgoraRTMConfig] = useState<AgoraRTMConfig | null>(null);
->>>>>>> a275e0e6fd466fe0415be180aa3be0c399054c93
   const clientRef = useRef<RtmClient | null>(null);
   const channelRef = useRef<RtmChannel | null>(null);
   const userColorRef = useRef<string>(randomColor({ luminosity: 'dark' }));

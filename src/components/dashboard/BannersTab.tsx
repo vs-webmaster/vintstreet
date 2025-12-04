@@ -183,15 +183,9 @@ export const BannersTab = () => {
       button_link: banner.button_link || '',
       image_url: banner.image_url,
       is_active: banner.is_active,
-<<<<<<< HEAD
-      rotation_interval: (banner as unknown).rotation_interval || 6,
-      button_bg_color: (banner as unknown).button_bg_color || '#000000',
-      button_text_color: (banner as unknown).button_text_color || '#FFFFFF',
-=======
       rotation_interval: banner.rotation_interval || 6,
       button_bg_color: banner.button_bg_color || '#000000',
       button_text_color: banner.button_text_color || '#FFFFFF',
->>>>>>> a275e0e6fd466fe0415be180aa3be0c399054c93
     });
     setIsEditOpen(true);
   };

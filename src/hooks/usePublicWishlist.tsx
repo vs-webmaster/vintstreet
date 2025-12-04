@@ -63,11 +63,7 @@ export const usePublicWishlist = (shareToken: string) => {
             },
           };
         })
-<<<<<<< HEAD
-        .filter(Boolean) as unknown[];
-=======
         .filter((item): item is WishlistItemWithProduct => item !== null);
->>>>>>> a275e0e6fd466fe0415be180aa3be0c399054c93
 
       return {
         sharedWishlist,

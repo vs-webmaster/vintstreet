@@ -22,13 +22,8 @@ export function downloadCsv(csvContent: string, fileName: string): void {
 /**
  * Groups attribute values by product ID
  */
-<<<<<<< HEAD
-export function groupAttributesByProduct(attributeValues: unknown[]): Record<string, Record<string, unknown>> {
-  return (attributeValues || []).reduce((acc: Record<string, Record<string, unknown>>, attr: unknown) => {
-=======
 export function groupAttributesByProduct(attributeValues: ProductAttributeValue[]): Record<string, Record<string, ProductAttributeValue>> {
   return (attributeValues || []).reduce((acc: Record<string, Record<string, ProductAttributeValue>>, attr: ProductAttributeValue) => {
->>>>>>> a275e0e6fd466fe0415be180aa3be0c399054c93
     if (!acc[attr.product_id]) {
       acc[attr.product_id] = {};
     }
@@ -52,15 +47,9 @@ export function getAttributeValue(attr: unknown): string | number | boolean | nu
  * Formats a product for CSV/Excel export
  */
 export function formatProductForExport(
-<<<<<<< HEAD
-  product: unknown,
-  attrColumns: Record<string, unknown>
-): Record<string, unknown> {
-=======
   product: Product,
   attrColumns: Record<string, string | number | boolean | null>
 ): Record<string, string | number | boolean | null> {
->>>>>>> a275e0e6fd466fe0415be180aa3be0c399054c93
   return {
     product_name: product.product_name,
     thumbnail: product.thumbnail || '',
@@ -100,19 +89,11 @@ interface Attribute {
 }
 
 export function buildAttributeColumns(
-<<<<<<< HEAD
-  productAttrs: Record<string, unknown>,
-  attributes: unknown[]
-): Record<string, unknown> {
-  const attrColumns: Record<string, unknown> = {};
-  attributes.forEach((attr: unknown) => {
-=======
   productAttrs: Record<string, ProductAttributeValue>,
   attributes: Attribute[]
 ): Record<string, string | number | boolean | null> {
   const attrColumns: Record<string, string | number | boolean | null> = {};
   attributes.forEach((attr: Attribute) => {
->>>>>>> a275e0e6fd466fe0415be180aa3be0c399054c93
     const attrName = attr.name;
     const productAttr = productAttrs[attr.id];
     const value = productAttr ? getAttributeValue(productAttr) : '';

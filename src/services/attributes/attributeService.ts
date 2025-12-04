@@ -382,11 +382,7 @@ export async function fetchCategoryAttributeFilters(params: {
   try {
     const { categoryId, subcategoryId, subSubcategoryId, filterType, isSubSubcategoryPage } = params;
 
-<<<<<<< HEAD
-    let query: ReturnType<typeof supabase.from>;
-=======
     let query;
->>>>>>> a275e0e6fd466fe0415be180aa3be0c399054c93
     if (filterType === 'attribute') {
       query = supabase
         .from('category_attribute_filters')

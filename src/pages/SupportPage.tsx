@@ -38,11 +38,7 @@ const SupportPage = () => {
   });
 
   const getIcon = (iconName: string) => {
-<<<<<<< HEAD
-    const icons: Record<string, unknown> = {
-=======
     const icons: Record<string, LucideIcon> = {
->>>>>>> a275e0e6fd466fe0415be180aa3be0c399054c93
       Mail,
       MessageCircle,
       Book,

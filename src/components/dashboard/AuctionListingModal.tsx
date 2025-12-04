@@ -56,11 +56,7 @@ export const AuctionListingModal = ({
       endTime.setDate(endTime.getDate() + durationDays);
 
       // Update listing to auction type
-<<<<<<< HEAD
-      const listingResult = await updateProduct(productId, { auction_type: 'auction' as unknown });
-=======
       const listingResult = await updateProduct(productId, { auction_type: 'auction' as const });
->>>>>>> a275e0e6fd466fe0415be180aa3be0c399054c93
       if (isFailure(listingResult)) throw listingResult.error;
 
       // Create auction

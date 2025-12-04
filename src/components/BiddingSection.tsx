@@ -50,9 +50,6 @@ const BiddingSection = ({ streamId, isStreamer = false }: BiddingSectionProps) =
     const result = await fetchProductsByStream(streamId, { status: 'published' });
 
     if (isSuccess(result) && result.data && result.data.length > 0) {
-<<<<<<< HEAD
-      setListings(result.data as unknown);
-=======
       // Map Product[] to Listing[] format
       const mappedListings: Listing[] = result.data.map((product) => ({
         id: product.id,
@@ -65,7 +62,6 @@ const BiddingSection = ({ streamId, isStreamer = false }: BiddingSectionProps) =
         seller_id: product.seller_id,
       }));
       setListings(mappedListings);
->>>>>>> a275e0e6fd466fe0415be180aa3be0c399054c93
 
       // Note: Bids table not yet implemented - commenting out for now
       // for (const listing of listingsData) {

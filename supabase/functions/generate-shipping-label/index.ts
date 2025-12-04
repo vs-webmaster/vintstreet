@@ -431,11 +431,7 @@ async function generateVoilaLabel(
   shippingAddress: ShippingAddress | null,
   sellerProfile: SellerProfile | null,
   shippingOption: unknown,
-<<<<<<< HEAD
-): Promise<unknown> {
-=======
 ): Promise<any> {
->>>>>>> a275e0e6fd466fe0415be180aa3be0c399054c93
   const VOILA_API_USER = Deno.env.get('VOILA_API_USER') || '';
   const VOILA_API_TOKEN = Deno.env.get('VOILA_API_TOKEN') || '';
 

@@ -295,11 +295,7 @@ async function extractAttributeCombinations(products: Array<{ id: string }>): Pr
     Array<{ attributeId: string; attributeName: string; value: string; valueLabel: string }>
   >();
 
-<<<<<<< HEAD
-  for (const row of data as unknown[]) {
-=======
   for (const row of data as ProductAttributeValue[]) {
->>>>>>> a275e0e6fd466fe0415be180aa3be0c399054c93
     const attr = row.attributes;
     const value = row.value_text ?? String(row.value_number ?? row.value_boolean ?? '');
     const valueLabel = value;
