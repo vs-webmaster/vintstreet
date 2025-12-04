@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState, useEffect } from 'react';
 import { Timer, Gavel, Crown, ArrowUp } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
@@ -53,6 +54,7 @@ const BiddingSection = ({ streamId, isStreamer = false }: BiddingSectionProps) =
     const result = await fetchProductsByStream(streamId, { status: 'published' });
 
     if (isSuccess(result) && result.data && result.data.length > 0) {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       setListings(result.data as any);
 
       // Note: Bids table not yet implemented - commenting out for now

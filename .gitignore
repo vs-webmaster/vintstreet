@@ -28,3 +28,4 @@ dist-ssr
 # Audit and working files (local only)
 audit-findings/
 working_files/
+PR_SUMMARY.md

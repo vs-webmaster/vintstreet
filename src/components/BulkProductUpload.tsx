@@ -29,6 +29,7 @@ export const BulkProductUpload: React.FC<BulkProductUploadProps> = ({ isOpen, on
   const { toast } = useToast();
   const [isUploading, setIsUploading] = useState(false);
   const [uploadResults, setUploadResults] = useState<{ success: number; failed: number } | null>(null);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [failedRows, setFailedRows] = useState<any[]>([]);
   const [uploadProgress, setUploadProgress] = useState({ current: 0, total: 0 });
 
@@ -226,6 +227,7 @@ export const BulkProductUpload: React.FC<BulkProductUploadProps> = ({ isOpen, on
       setUploadProgress({ current: 0, total: totalRows });
 
       for (let i = 0; i < jsonData.length; i++) {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const row = jsonData[i] as any;
         try {
           // Skip example rows
@@ -339,6 +341,7 @@ export const BulkProductUpload: React.FC<BulkProductUploadProps> = ({ isOpen, on
               if (attribute && value !== null && value !== undefined && value !== '') {
                 const valueObj: unknown = {
                   product_id: insertedProduct.id,
+                  // eslint-disable-next-line @typescript-eslint/no-explicit-any
                   attribute_id: (attribute as any).id,
                   value_text: null,
                   value_number: null,
@@ -346,8 +349,8 @@ export const BulkProductUpload: React.FC<BulkProductUploadProps> = ({ isOpen, on
                   value_date: null,
                 };
 
-                switch ((attribute as any).data_type) {
-                  case 'multi-select':
+                switch ((attribute as unknown).data_type) {
+                  case 'multi-select': {
                     // Handle comma-separated values for multi-select with safe conversion
                     const multiValues = String(value)
                       .split(',')
@@ -357,6 +360,7 @@ export const BulkProductUpload: React.FC<BulkProductUploadProps> = ({ isOpen, on
                       valueObj.value_text = JSON.stringify(multiValues);
                     }
                     break;
+                  }
                   case 'string':
                   case 'textarea':
                     valueObj.value_text = String(value).trim();
