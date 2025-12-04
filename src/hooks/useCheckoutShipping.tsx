@@ -1,7 +1,7 @@
 // Checkout Shipping Hook
 // Handles shipping options, pricing, and weight calculations
 
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect, useMemo, useCallback } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { useShippingProviderPrices } from '@/hooks/useShippingProviderPrices';
 import { fetchShippingOptionsBySellers, type ShippingOptionRow } from '@/services/shipping';
@@ -78,35 +78,41 @@ export const useCheckoutShipping = ({
   };
 
   // Calculate total weight for a seller's items
-  const getSellerWeight = (sellerId: string): number => {
-    const sellerItems = getSellerItems(sellerId);
-    return sellerItems.reduce((sum, item) => {
-      const weight = item.listings?.weight ?? 0;
-      return sum + (typeof weight === 'number' ? weight : 0);
-    }, 0);
-  };
+  const getSellerWeight = useCallback(
+    (sellerId: string): number => {
+      const sellerItems = getSellerItems(sellerId);
+      return sellerItems.reduce((sum, item) => {
+        const weight = item.listings?.weight ?? 0;
+        return sum + (typeof weight === 'number' ? weight : 0);
+      }, 0);
+    },
+    [getSellerItems],
+  );
 
   // Get valid shipping options for a seller (filtered by weight)
-  const getValidOptions = (sellerId: string): ShippingOptionRow[] => {
-    const options = shippingOptionsBySeller[sellerId] || [];
-    const totalWeight = getSellerWeight(sellerId);
-    const isUK = shippingCountry === 'GB';
+  const getValidOptions = useCallback(
+    (sellerId: string): ShippingOptionRow[] => {
+      const options = shippingOptionsBySeller[sellerId] || [];
+      const totalWeight = getSellerWeight(sellerId);
+      const isUK = shippingCountry === 'GB';
 
-    return options.filter((option) => {
-      const providerBand = getProviderBandForWeight(option.provider_id, totalWeight);
-      if (!providerBand || !providerBand.price || providerBand.price <= 0) return false;
+      return options.filter((option) => {
+        const providerBand = getProviderBandForWeight(option.provider_id, totalWeight);
+        if (!providerBand || !providerBand.price || providerBand.price <= 0) return false;
 
-      const providerName = option.shipping_providers?.name?.toLowerCase() || '';
+        const providerName = option.shipping_providers?.name?.toLowerCase() || '';
 
-      // Filter out International Royal Mail Tracked if UK is selected
-      if (isUK && providerName.includes('international')) return false;
+        // Filter out International Royal Mail Tracked if UK is selected
+        if (isUK && providerName.includes('international')) return false;
 
-      // Show only international options for non-UK countries
-      if (!isUK && !providerName.includes('international')) return false;
+        // Show only international options for non-UK countries
+        if (!isUK && !providerName.includes('international')) return false;
 
-      return true;
-    });
-  };
+        return true;
+      });
+    },
+    [shippingOptionsBySeller, getSellerWeight, shippingCountry, getProviderBandForWeight],
+  );
 
   // Auto-select first valid shipping option for each seller
   useEffect(() => {
@@ -120,7 +126,7 @@ export const useCheckoutShipping = ({
     if (Object.keys(initialSelections).length > 0) {
       setSelectedShippingOptions((prev) => ({ ...prev, ...initialSelections }));
     }
-  }, [shippingOptionsData, providerPrices, cartItems, shippingCountry]);
+  }, [shippingOptionsData, providerPrices, cartItems, shippingCountry, getValidOptions, selectedShippingOptions, sellerIds]);
 
   // Calculate total shipping cost
   const shippingCost = useMemo(() => {
@@ -137,7 +143,7 @@ export const useCheckoutShipping = ({
 
       return total + postagePrice;
     }, 0);
-  }, [sellerIds, selectedShippingOptions, shippingOptionsData, cartItems, providerPrices]);
+  }, [sellerIds, selectedShippingOptions, shippingOptionsData, cartItems, providerPrices, getProviderBandForWeight, getSellerWeight]);
 
   // Get price for a specific option
   const getOptionPrice = (option: ShippingOptionRow, sellerId: string): number => {

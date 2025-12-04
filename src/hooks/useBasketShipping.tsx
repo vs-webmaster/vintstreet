@@ -145,7 +145,7 @@ export const useBasketShipping = (cartItems: CartItem[]) => {
 
       return groups;
     });
-  }, [validCartItems, sellerProfiles, shippingOptions, nameMappings, sellerIds.length, providerPrices]);
+  }, [validCartItems, sellerProfiles, shippingOptions, nameMappings, sellerIds.length, providerPrices, isUuid]);
 
   const handleShippingChange = (sellerId: string, shippingId: string) => {
     setSellerGroups((prev) => ({
@@ -194,7 +194,7 @@ export const useBasketShipping = (cartItems: CartItem[]) => {
       const providerBand = getProviderBandForWeight(selectedOption.provider_id, totalWeight);
       return sum + (providerBand ? Number(providerBand.price) : 0);
     }, 0);
-  }, [sellerGroups, shippingOptions, providerPrices]);
+  }, [sellerGroups, shippingOptions, providerPrices, getProviderBandForWeight]);
 
   const total = subtotal + totalShipping + totalBuyerProtectionFee;
 

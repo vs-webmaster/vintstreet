@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { toast } from 'sonner';
 import { useAuth } from '@/hooks/useAuth';
 import { invokeEdgeFunction } from '@/services/functions';
@@ -24,11 +24,7 @@ export const useStripeConnect = () => {
   const [balance, setBalance] = useState<StripeBalance | null>(null);
   const [balanceLoading, setBalanceLoading] = useState(false);
 
-  useEffect(() => {
-    checkConnection();
-  }, [user?.id]);
-
-  const checkConnection = async () => {
+  const checkConnection = useCallback(async () => {
     if (!user?.id) return;
 
     try {
@@ -40,7 +36,11 @@ export const useStripeConnect = () => {
     } catch (error) {
       console.error('Error checking Stripe connection:', error);
     }
-  };
+  }, [user?.id]);
+
+  useEffect(() => {
+    checkConnection();
+  }, [checkConnection]);
 
   const connectAccount = async () => {
     if (!user) {
