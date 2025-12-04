@@ -164,6 +164,3 @@ export const MultiSelectLevel3Categories = ({
   );
 };
 
-export const getSelectedAdditionalLevel3Categories = (selectedIds: string[]) => {
-  return selectedIds;
-};

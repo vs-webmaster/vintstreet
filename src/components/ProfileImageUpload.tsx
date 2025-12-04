@@ -37,7 +37,7 @@ export const ProfileImageUpload = ({
   const imageRef = useRef<HTMLImageElement>(null);
   const { toast } = useToast();
 
-  const handleFileSelect = (file: File) => {
+  const handleFileSelect = useCallback((file: File) => {
     if (!file.type.startsWith('image/')) {
       toast({
         title: 'Invalid file type',
@@ -60,13 +60,13 @@ export const ProfileImageUpload = ({
     const url = URL.createObjectURL(file);
     setPreviewUrl(url);
     setCropData({ x: 0, y: 0, scale: 1, rotation: 0 });
-  };
+  }, [toast]);
 
   const handleDrop = useCallback((e: React.DragEvent) => {
     e.preventDefault();
     const file = e.dataTransfer.files[0];
     if (file) handleFileSelect(file);
-  }, []);
+  }, [handleFileSelect]);
 
   const handleDragOver = useCallback((e: React.DragEvent) => {
     e.preventDefault();

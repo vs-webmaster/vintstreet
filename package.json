@@ -1,4 +1,4 @@
-{
+﻿{
   "name": "vintstreet",
   "private": true,
   "version": "0.0.0",
@@ -8,7 +8,10 @@
     "build": "vite build",
     "build:dev": "vite build --mode development",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage"
   },
   "dependencies": {
     "@algolia/autocomplete-js": "^1.19.4",
@@ -45,8 +48,7 @@
     "@radix-ui/react-tooltip": "^1.2.7",
     "@react-google-maps/api": "^2.20.7",
     "@reduxjs/toolkit": "^2.11.0",
-    "@sentry/react": "^10.28.0",
-    "@sentry/tracing": "^7.120.4",
+    "@sentry/react": "^8.0.0",
     "@supabase/supabase-js": "^2.57.4",
     "@tanstack/react-query": "^5.83.0",
     "@types/dompurify": "^3.2.0",

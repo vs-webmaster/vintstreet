@@ -98,7 +98,7 @@ export const ShopFeaturesSection = () => {
     }, 5000);
 
     return () => clearInterval(interval);
-  }, [gifIndices.length]);
+  }, [gifIndices]);
 
   if (isLoading) {
     return null;

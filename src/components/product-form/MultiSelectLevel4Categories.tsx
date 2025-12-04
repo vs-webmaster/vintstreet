@@ -159,5 +159,3 @@ export const MultiSelectLevel4Categories = ({
   );
 };
 
-// Export a function to get selected categories for non-edit mode
-export const getSelectedAdditionalCategories = (selectedCategories: string[]) => selectedCategories;

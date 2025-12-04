@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { CachedImage } from '@/components/CachedImage';
 import { Button } from '@/components/ui/button';
@@ -55,13 +55,13 @@ export const ProductImageGallery = ({ productName, productImages, productImageAl
     return Math.sqrt(dx * dx + dy * dy);
   };
 
-  const goToPrevious = () => {
+  const goToPrevious = useCallback(() => {
     setSelectedImageIndex((prev) => (prev === 0 ? totalImages - 1 : prev - 1));
-  };
+  }, [totalImages]);
 
-  const goToNext = () => {
+  const goToNext = useCallback(() => {
     setSelectedImageIndex((prev) => (prev === totalImages - 1 ? 0 : prev + 1));
-  };
+  }, [totalImages]);
 
   // Touch/swipe handlers for pinch-to-zoom and swipe navigation
   const onTouchStart = (e: React.TouchEvent) => {
@@ -211,7 +211,7 @@ export const ProductImageGallery = ({ productName, productImages, productImageAl
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [totalImages]);
+  }, [totalImages, goToPrevious, goToNext]);
 
   return (
     <div className="space-y-4">
