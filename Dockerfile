@@ -7,8 +7,8 @@ WORKDIR /app
 # Copy package files
 COPY package*.json ./
 
-# Use npm ci for deterministic builds
-RUN npm ci --only=production
+# Use npm ci for deterministic builds (need devDependencies for build)
+RUN npm ci
 
 # Copy source code
 COPY . .
