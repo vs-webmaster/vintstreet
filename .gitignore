@@ -27,9 +27,4 @@ dist-ssr
 
 # Audit and working files (local only)
 audit-findings/
-<<<<<<< HEAD
 working_files/
-=======
-working_files/
-PR_SUMMARY.md
->>>>>>> a275e0e6fd466fe0415be180aa3be0c399054c93
