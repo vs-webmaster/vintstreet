@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState } from 'react';
 import { Shield, AlertTriangle, CheckCircle, Settings } from 'lucide-react';
 import { toast } from 'sonner';

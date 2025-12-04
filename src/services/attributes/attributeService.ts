@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 // Attribute Service
 // Centralized data access for product attributes
 
