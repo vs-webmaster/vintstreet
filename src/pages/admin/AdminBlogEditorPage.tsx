@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { ArrowLeft, Save } from 'lucide-react';
@@ -148,7 +148,7 @@ export default function AdminBlogEditorPage() {
       setInitialProducts([]);
       setInitialRelatedPosts([]);
     }
-  }, [existingPost]);
+  }, [existingPost, formData]);
 
   const addSection = (type: string) => {
     const getDefaultContent = (type: string) => {
@@ -217,7 +217,7 @@ export default function AdminBlogEditorPage() {
       .replace(/^-|-$/g, '');
   };
 
-  const hasUnsavedChanges = () => {
+  const hasUnsavedChanges = useCallback(() => {
     if (!initialFormData) return false;
 
     const formDataChanged = JSON.stringify(formData) !== JSON.stringify(initialFormData);
@@ -228,7 +228,7 @@ export default function AdminBlogEditorPage() {
       JSON.stringify(selectedRelatedPosts.sort()) !== JSON.stringify(initialRelatedPosts.sort());
 
     return formDataChanged || sectionsChanged || tagsChanged || productsChanged || relatedPostsChanged;
-  };
+  }, [formData, initialFormData, sections, initialSections, selectedTags, initialTags, selectedProducts, initialProducts, selectedRelatedPosts, initialRelatedPosts]);
 
   const handleNavigateBack = () => {
     if (hasUnsavedChanges() && !saveMutation.isPending) {
@@ -264,9 +264,7 @@ export default function AdminBlogEditorPage() {
     window.addEventListener('beforeunload', handleBeforeUnload);
     return () => window.removeEventListener('beforeunload', handleBeforeUnload);
   }, [
-    formData,
-    sections,
-    selectedTags,
+    hasUnsavedChanges,
     selectedProducts,
     selectedRelatedPosts,
     initialFormData,

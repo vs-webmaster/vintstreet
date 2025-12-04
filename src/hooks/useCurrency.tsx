@@ -73,7 +73,7 @@ export const CurrencyProvider = ({ children }: { children: ReactNode }) => {
       setCurrencyState(pref);
       localStorage.setItem('preferredCurrency', pref);
     }
-  }, [profile?.preferred_currency]);
+  }, [profile?.preferred_currency, currency]);
 
   // Fetch rates from service
   const { data: ratesData, isLoading } = useQuery({

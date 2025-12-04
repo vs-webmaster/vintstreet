@@ -1,11 +1,14 @@
 // Checkout Shipping Hook
 // Handles shipping options, pricing, and weight calculations
 
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect, useMemo, useCallback } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { useShippingProviderPrices } from '@/hooks/useShippingProviderPrices';
 import { fetchShippingOptionsBySellers, type ShippingOptionRow } from '@/services/shipping';
 import { isFailure } from '@/types/api';
+
+// UUID regex constant - moved outside component for stability
+const UUID_REGEX = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
 
 interface CartItem {
   id: string;
@@ -33,7 +36,6 @@ export const useCheckoutShipping = ({
   shippingCountry,
 }: UseCheckoutShippingProps) => {
   const [selectedShippingOptions, setSelectedShippingOptions] = useState<Record<string, string>>({});
-  const uuidRegex = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
 
   // Fetch shipping options with provider names for all resolved seller IDs
   const { data: shippingOptionsData } = useQuery({
@@ -69,44 +71,53 @@ export const useCheckoutShipping = ({
   }, [shippingOptionsData]);
 
   // Get items for a specific seller
-  const getSellerItems = (sellerId: string) => {
-    return cartItems.filter((item) => {
-      if (uuidRegex.test(item.listings?.seller_id || '')) return item.listings?.seller_id === sellerId;
-      const mapped = nameMappings?.find((m) => m.shop_name === item.listings?.seller_id)?.user_id;
-      return mapped === sellerId;
-    });
-  };
+  const getSellerItems = useCallback(
+    (sellerId: string) => {
+      return cartItems.filter((item) => {
+        if (UUID_REGEX.test(item.listings?.seller_id || '')) return item.listings?.seller_id === sellerId;
+        const mapped = nameMappings?.find((m) => m.shop_name === item.listings?.seller_id)?.user_id;
+        return mapped === sellerId;
+      });
+    },
+    [cartItems, nameMappings],
+  );
 
   // Calculate total weight for a seller's items
-  const getSellerWeight = (sellerId: string): number => {
-    const sellerItems = getSellerItems(sellerId);
-    return sellerItems.reduce((sum, item) => {
-      const weight = item.listings?.weight ?? 0;
-      return sum + (typeof weight === 'number' ? weight : 0);
-    }, 0);
-  };
+  const getSellerWeight = useCallback(
+    (sellerId: string): number => {
+      const sellerItems = getSellerItems(sellerId);
+      return sellerItems.reduce((sum, item) => {
+        const weight = item.listings?.weight ?? 0;
+        return sum + (typeof weight === 'number' ? weight : 0);
+      }, 0);
+    },
+    [getSellerItems],
+  );
 
   // Get valid shipping options for a seller (filtered by weight)
-  const getValidOptions = (sellerId: string): ShippingOptionRow[] => {
-    const options = shippingOptionsBySeller[sellerId] || [];
-    const totalWeight = getSellerWeight(sellerId);
-    const isUK = shippingCountry === 'GB';
+  const getValidOptions = useCallback(
+    (sellerId: string): ShippingOptionRow[] => {
+      const options = shippingOptionsBySeller[sellerId] || [];
+      const totalWeight = getSellerWeight(sellerId);
+      const isUK = shippingCountry === 'GB';
 
-    return options.filter((option) => {
-      const providerBand = getProviderBandForWeight(option.provider_id, totalWeight);
-      if (!providerBand || !providerBand.price || providerBand.price <= 0) return false;
+      return options.filter((option) => {
+        const providerBand = getProviderBandForWeight(option.provider_id, totalWeight);
+        if (!providerBand || !providerBand.price || providerBand.price <= 0) return false;
 
-      const providerName = option.shipping_providers?.name?.toLowerCase() || '';
+        const providerName = option.shipping_providers?.name?.toLowerCase() || '';
 
-      // Filter out International Royal Mail Tracked if UK is selected
-      if (isUK && providerName.includes('international')) return false;
+        // Filter out International Royal Mail Tracked if UK is selected
+        if (isUK && providerName.includes('international')) return false;
 
-      // Show only international options for non-UK countries
-      if (!isUK && !providerName.includes('international')) return false;
+        // Show only international options for non-UK countries
+        if (!isUK && !providerName.includes('international')) return false;
 
-      return true;
-    });
-  };
+        return true;
+      });
+    },
+    [shippingOptionsBySeller, getSellerWeight, shippingCountry, getProviderBandForWeight],
+  );
 
   // Auto-select first valid shipping option for each seller
   useEffect(() => {
@@ -120,7 +131,7 @@ export const useCheckoutShipping = ({
     if (Object.keys(initialSelections).length > 0) {
       setSelectedShippingOptions((prev) => ({ ...prev, ...initialSelections }));
     }
-  }, [shippingOptionsData, providerPrices, cartItems, shippingCountry]);
+  }, [shippingOptionsData, providerPrices, cartItems, shippingCountry, getValidOptions, selectedShippingOptions, sellerIds]);
 
   // Calculate total shipping cost
   const shippingCost = useMemo(() => {
@@ -137,7 +148,7 @@ export const useCheckoutShipping = ({
 
       return total + postagePrice;
     }, 0);
-  }, [sellerIds, selectedShippingOptions, shippingOptionsData, cartItems, providerPrices]);
+  }, [sellerIds, selectedShippingOptions, shippingOptionsData, getProviderBandForWeight, getSellerWeight]);
 
   // Get price for a specific option
   const getOptionPrice = (option: ShippingOptionRow, sellerId: string): number => {
