@@ -1,7 +1,7 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 /**
  * Utility functions for building category hierarchy structures
  */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { filterByCategoryId, filterBySubcategoryId, filterBySubSubcategoryId } from './filterUtils';
 

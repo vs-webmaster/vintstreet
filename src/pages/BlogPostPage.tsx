@@ -1,4 +1,3 @@
-
 import { useParams, Link } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { ArrowLeft, Edit } from 'lucide-react';
