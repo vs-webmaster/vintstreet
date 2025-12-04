@@ -1,6 +1,5 @@
 // Realtime Service
 // Centralized realtime subscription service for Supabase Realtime
-/* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { supabase } from '@/integrations/supabase/client';
 import type { RealtimeChannel } from '@supabase/supabase-js';
@@ -14,7 +13,7 @@ export interface PostgresChangeFilter {
   event?: RealtimeEvent;
 }
 
-export interface PostgresChangePayload<T = any> {
+export interface PostgresChangePayload<T = unknown> {
   new?: T;
   old?: T;
   eventType: 'INSERT' | 'UPDATE' | 'DELETE';
@@ -27,7 +26,7 @@ export interface PostgresChangePayload<T = any> {
  * @param callback - Callback function to handle changes
  * @returns Unsubscribe function
  */
-export function subscribeToPostgresChanges<T = any>(
+export function subscribeToPostgresChanges<T = unknown>(
   channelName: string,
   filter: PostgresChangeFilter,
   callback: (payload: PostgresChangePayload<T>) => void,
@@ -35,7 +34,7 @@ export function subscribeToPostgresChanges<T = any>(
   const channel = supabase
     .channel(channelName)
     .on(
-      'postgres_changes' as any,
+      'postgres_changes',
       {
         event: filter.event || '*',
         schema: filter.schema || 'public',
@@ -74,7 +73,7 @@ export function subscribeToMultiplePostgresChanges(
 
   subscriptions.forEach(({ filter, callback }) => {
     channel = channel.on(
-      'postgres_changes' as any,
+      'postgres_changes',
       {
         event: filter.event || '*',
         schema: filter.schema || 'public',

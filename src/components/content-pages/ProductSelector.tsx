@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { X } from 'lucide-react';
@@ -61,7 +60,7 @@ export const ProductSelector = ({ pageId }: ProductSelectorProps) => {
         id: p.id,
         product_name: p.product_name,
         thumbnail: p.thumbnail || '',
-        sku: (p as any).sku || null,
+        sku: p.sku || null,
       })) as Product[];
     },
     enabled: selectedProductsData.length > 0,
@@ -87,7 +86,7 @@ export const ProductSelector = ({ pageId }: ProductSelectorProps) => {
         id: p.id,
         product_name: p.product_name,
         thumbnail: p.thumbnail || '',
-        sku: (p as any).sku || null,
+        sku: p.sku || null,
       })) as Product[];
     },
     enabled: !!systemSeller?.user_id && debouncedSearch.length >= 2,

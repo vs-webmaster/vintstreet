@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState, useEffect, useCallback } from 'react';
 import { Timer, Gavel, Crown, ArrowUp } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
@@ -13,6 +12,7 @@ import { useToast } from '@/hooks/useToast';
 import { fetchAuctionByListingId } from '@/services/auctions';
 import { invokeEdgeFunction } from '@/services/functions';
 import { fetchProductsByStream } from '@/services/products';
+import type { Product } from '@/types/product';
 import { subscribeToPostgresChanges } from '@/services/realtime';
 import { isFailure, isSuccess } from '@/types/api';
 
@@ -50,8 +50,18 @@ const BiddingSection = ({ streamId, isStreamer = false }: BiddingSectionProps) =
     const result = await fetchProductsByStream(streamId, { status: 'published' });
 
     if (isSuccess(result) && result.data && result.data.length > 0) {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      setListings(result.data as any);
+      // Map Product[] to Listing[] format
+      const mappedListings: Listing[] = result.data.map((product) => ({
+        id: product.id,
+        product_name: product.product_name,
+        product_description: product.product_description || '',
+        starting_price: product.starting_price,
+        current_bid: product.auctions?.[0]?.current_bid || product.starting_price,
+        status: product.status,
+        auction_end_time: product.auction_end_time || null,
+        seller_id: product.seller_id,
+      }));
+      setListings(mappedListings);
 
       // Note: Bids table not yet implemented - commenting out for now
       // for (const listing of listingsData) {

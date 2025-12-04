@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
@@ -18,6 +17,7 @@ import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { fetchAttributesByCategoryLevels } from '@/lib/attributeUtils';
 import { escapeCsv } from '@/lib/csvUtils';
+import type { Product } from '@/types/product';
 import {
   groupAttributesByProduct,
   buildAttributeColumns,
@@ -354,7 +354,7 @@ export const MasterListingsTab = () => {
       const products = allProducts;
       const csvSections: string[] = [];
 
-      Object.entries(productsBySubcategory).forEach(([subcategoryName, products]: [string, any]) => {
+      Object.entries(productsBySubcategory).forEach(([subcategoryName, products]: [string, Product[]]) => {
         // Get all attributes for this group of products
         const relevantAttributes: unknown[] = [];
         const attributeMap = new Map();

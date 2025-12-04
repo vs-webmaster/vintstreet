@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState, useMemo, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
@@ -64,7 +63,11 @@ import {
   archiveProduct,
 } from '@/services/products';
 import { isFailure } from '@/types/api';
+import type { Product } from '@/types/product';
+import type { Database } from '@/integrations/supabase/types';
 import { ProductEditModal } from './ProductEditModal';
+
+type ListingUpdate = Database['public']['Tables']['listings']['Update'];
 
 interface MasterProductsTableProps {
   systemSellerId?: string;
@@ -97,7 +100,7 @@ export const MasterProductsTable = ({
     });
 
     try {
-      const result = await updateProduct(productId, { status: newStatus } as any);
+      const result = await updateProduct(productId, { status: newStatus } as ListingUpdate);
 
       if (isFailure(result)) {
         throw result.error;
@@ -123,7 +126,7 @@ export const MasterProductsTable = ({
   const [filterLevel2, setFilterLevel2] = useState<string>('all');
   const { sortField, sortDirection, setSortField, setSortDirection, handleSort, SortIcon } = useTableSort(null, 'asc');
   const [lastUpdatedFilter, setLastUpdatedFilter] = useState<string>('all');
-  const [editingProduct, setEditingProduct] = useState<any>(null);
+  const [editingProduct, setEditingProduct] = useState<Product | null>(null);
   const [brandSearchOpen, setBrandSearchOpen] = useState(false);
   const [advancedFilterOpen, setAdvancedFilterOpen] = useState(false);
   const [missingAttributeFilter, setMissingAttributeFilter] = useState<string | null>(null);

@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState, useEffect } from 'react';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { Package, Printer, Download, Eye } from 'lucide-react';
@@ -16,6 +15,8 @@ import { useSellerFees, calculateSellerFee } from '@/hooks/useSellerFees';
 import { fetchSellerOrders } from '@/services/orders';
 import { fetchProfilesByUserIds, fetchBuyerProfilesByUserIds } from '@/services/users';
 import { isFailure } from '@/types/api';
+import type { Order, DeliveryStatus } from '@/types/order';
+import type { Product } from '@/types/product';
 
 interface OrderDetails {
   id: string;
@@ -101,7 +102,14 @@ export const OrdersTab = () => {
       // Map to OrderDetails format - filter out any orders without listings
       const mappedOrders: OrderDetails[] = ordersData
         .map((order) => {
-          const listing = (order as any).listings;
+          interface OrderWithListing extends Order {
+            listings?: {
+              product_name: string;
+              thumbnail: string | null;
+            } | null;
+            order_date?: string;
+          }
+          const listing = (order as OrderWithListing).listings;
 
           // Skip orders without listing data
           if (!listing) return null;
@@ -136,8 +144,8 @@ export const OrdersTab = () => {
             },
             quantity: order.quantity,
             totalAmount: Number(order.order_amount),
-            orderDate: (order as any).order_date || order.created_at,
-            status: order.delivery_status as any,
+            orderDate: (order as OrderWithListing).order_date || order.created_at,
+            status: (order.delivery_status || 'pending') as DeliveryStatus,
             trackingNumber: order.tracking_number || undefined,
             shippingMethod: 'Standard Shipping',
             estimatedDelivery: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000).toLocaleDateString(),

@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useQueryClient } from '@tanstack/react-query';
@@ -37,9 +36,9 @@ interface UseProductSubmissionProps {
   isEditMode: boolean;
   productId?: string;
   formData: ProductFormData;
-  dynamicAttributes: Record<string, any>;
+  dynamicAttributes: Record<string, string | number | boolean | string[] | null>;
   uploadImages: () => Promise<string[]>;
-  saveAttributeValues: (productId: string, attributes: Record<string, any>) => Promise<void>;
+  saveAttributeValues: (productId: string, attributes: Record<string, string | number | boolean | string[] | null>) => Promise<void>;
   needsModeration?: boolean;
   listingType?: 'marketplace' | 'auction';
   auctionData?: {

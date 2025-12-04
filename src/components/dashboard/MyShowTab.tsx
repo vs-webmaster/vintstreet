@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Gift, Box, Users, Plus, Trash2, Edit, Package } from 'lucide-react';
@@ -22,6 +21,7 @@ import { useAuth } from '@/hooks/useAuth';
 import { useToast } from '@/hooks/useToast';
 import { fetchProductsBySeller } from '@/services/products';
 import { isFailure } from '@/types/api';
+import type { Product } from '@/types/product';
 
 interface MysteryBox {
   id: string;
@@ -71,11 +71,11 @@ export const MyShowTab = () => {
   const navigate = useNavigate();
   const [mysteryBoxes, setMysteryBoxes] = useState<MysteryBox[]>([]);
   const [giveaways, setGiveaways] = useState<Giveaway[]>([]);
-  const [livestreamProducts, setLivestreamProducts] = useState<any[]>([]);
+  const [livestreamProducts, setLivestreamProducts] = useState<Product[]>([]);
   const [isAddDialogOpen, setIsAddDialogOpen] = useState(false);
   const [selectedTemplate, setSelectedTemplate] = useState<string | null>(null);
   const [isEditMode, setIsEditMode] = useState(false);
-  const [editingItem, setEditingItem] = useState<any>(null);
+  const [editingItem, setEditingItem] = useState<MysteryBox | Giveaway | null>(null);
   const { toast } = useToast();
 
   const fetchLivestreamProducts = useCallback(async () => {

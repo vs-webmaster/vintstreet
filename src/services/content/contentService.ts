@@ -1,6 +1,5 @@
 // Content Service
 // Centralized data access for content page operations
-/* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { supabase } from '@/integrations/supabase/client';
 import { withErrorHandling, withMutation } from '@/services/api/apiClient';
@@ -18,7 +17,7 @@ export async function fetchContentPageProducts(
       .order('display_order');
 
     if (error) throw error;
-    return { data: (data || []) as any, error: null };
+    return { data: (data || []) as Array<{ product_id: string; display_order: number }>, error: null };
   }, 'fetchContentPageProducts');
 }
 
@@ -148,7 +147,7 @@ export async function fetchContentPageBySlug(slug: string): Promise<Result<Conte
 }
 
 // Fetch page sections
-export async function fetchPageSections(pageId: string): Promise<Result<any[]>> {
+export async function fetchPageSections(pageId: string): Promise<Result<PageSection[]>> {
   return withErrorHandling(async () => {
     const { data, error } = await supabase
       .from('page_sections')
@@ -157,7 +156,7 @@ export async function fetchPageSections(pageId: string): Promise<Result<any[]>> 
       .order('display_order');
 
     if (error) throw error;
-    return { data: (data || []) as any[], error: null };
+    return { data: (data || []) as PageSection[], error: null };
   }, 'fetchPageSections');
 }
 

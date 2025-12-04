@@ -1,5 +1,4 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import AgoraRTC, {
   IAgoraRTCClient,
   IRemoteVideoTrack,
@@ -38,7 +37,11 @@ export const useAgora = ({ channelName, userId, isHost = false }: UseAgoraProps)
     configError: null,
   });
 
-  const [agoraConfig, setAgoraConfig] = useState<any>(null);
+  interface AgoraConfig {
+    appId: string;
+    token: string | null;
+  }
+  const [agoraConfig, setAgoraConfig] = useState<AgoraConfig | null>(null);
   const clientRef = useRef<IAgoraRTCClient | null>(null);
   const remoteVideoTracksRef = useRef<Map<number, IRemoteVideoTrack>>(new Map());
   const remoteAudioTracksRef = useRef<Map<number, IRemoteAudioTrack>>(new Map());
@@ -80,7 +83,7 @@ export const useAgora = ({ channelName, userId, isHost = false }: UseAgoraProps)
     return () => {
       clearAgoraConfigCache();
     };
-  }, []);
+  }, [channelName, userId, isHost]);
 
   useEffect(() => {
     if (!channelName || !agoraConfig || !state.configLoaded) {
@@ -191,7 +194,7 @@ export const useAgora = ({ channelName, userId, isHost = false }: UseAgoraProps)
   }, [channelName, userId, isHost, agoraConfig, state.configLoaded]);
 
   // Cleanup function for tracks
-  const cleanupTracks = () => {
+  const cleanupTracks = useCallback(() => {
     if (state.localVideoTrack) {
       state.localVideoTrack.close();
     }
@@ -200,7 +203,7 @@ export const useAgora = ({ channelName, userId, isHost = false }: UseAgoraProps)
     }
     remoteVideoTracksRef.current.clear();
     remoteAudioTracksRef.current.clear();
-  };
+  }, [state.localVideoTrack, state.localAudioTrack]);
 
   // Separate cleanup effect
   useEffect(() => {
@@ -213,7 +216,7 @@ export const useAgora = ({ channelName, userId, isHost = false }: UseAgoraProps)
       }
       initializingRef.current = false;
     };
-  }, []);
+  }, [cleanupTracks]);
 
   const startVideo = async () => {
     if (!clientRef.current || !isHost) {

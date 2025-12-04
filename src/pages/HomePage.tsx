@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import DOMPurify from 'dompurify';
@@ -21,13 +20,21 @@ const HomePage = () => {
 
   useEffect(() => {
     // Load Instagram embed script
-    if (!(window as any).instgrm) {
+    interface WindowWithInstagram {
+      instgrm?: {
+        Embeds: {
+          process: () => void;
+        };
+      };
+    }
+    const win = window as WindowWithInstagram;
+    if (!win.instgrm) {
       const script = document.createElement('script');
       script.async = true;
       script.src = 'https://www.instagram.com/embed.js';
       document.body.appendChild(script);
     } else {
-      (window as any).instgrm.Embeds.process();
+      win.instgrm.Embeds.process();
     }
   }, [siteContent]);
 

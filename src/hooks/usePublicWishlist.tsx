@@ -1,10 +1,16 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useQuery } from '@tanstack/react-query';
 import { extractSellerIds } from '@/lib/sellerNameUtils';
 import { fetchProductsByIds } from '@/services/products';
 import { fetchSellerInfoMap } from '@/services/users/userService';
 import { fetchPublicWishlistData } from '@/services/wishlist';
 import { isFailure } from '@/types/api';
+import type { Product } from '@/types/product';
+
+interface WishlistItemWithProduct {
+  id: string;
+  listing_id: string;
+  listings: Product & { seller_profiles: unknown };
+}
 
 export const usePublicWishlist = (shareToken: string) => {
   return useQuery({
@@ -57,7 +63,7 @@ export const usePublicWishlist = (shareToken: string) => {
             },
           };
         })
-        .filter(Boolean) as any[];
+        .filter((item): item is WishlistItemWithProduct => item !== null);
 
       return {
         sharedWishlist,

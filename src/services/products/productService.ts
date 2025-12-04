@@ -1,12 +1,15 @@
 // Product Service
 // Centralized product data access layer
-/* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { supabase } from '@/integrations/supabase/client';
 import { normalizeError, logError, NotFoundError } from '@/lib/errors';
 import type { Result } from '@/types/api';
 import { success, failure, isFailure } from '@/types/api';
 import type { Product, ProductFilters, ProductListResponse, ProductSortOption } from '@/types/product';
+import type { Database } from '@/integrations/supabase/types';
+
+type ListingRow = Database['public']['Tables']['listings']['Row'];
+type ListingUpdate = Database['public']['Tables']['listings']['Update'];
 
 // Base select for product queries (without seller_info_view which requires separate fetch)
 const DEFAULT_SELECT = `
@@ -793,7 +796,7 @@ export async function searchProductsByName(
       .limit(limit);
 
     if (error) throw error;
-    return success((data || []) as any);
+    return success((data || []) as Array<{ id: string; product_name: string; slug: string | null; thumbnail?: string | null; starting_price?: number }>);
   } catch (error) {
     logError(error, 'productService:searchProductsByName');
     return failure(normalizeError(error));
@@ -1275,7 +1278,7 @@ export async function duplicateProduct(productId: string): Promise<Result<Produc
     const { data: productTagLinks } = await supabase.from('product_tag_links').select('*').eq('product_id', productId);
 
     // Create new product with modified data
-    const { id, created_at, updated_at, slug, ...productData } = originalProduct as any;
+    const { id, created_at, updated_at, slug, ...productData } = originalProduct as Omit<Product, 'id' | 'created_at' | 'updated_at' | 'slug'> & Record<string, unknown>;
     const newProductName = `${originalProduct.product_name} (Copy)`;
     const newSlug = `${slug || originalProduct.product_name.toLowerCase().replace(/\s+/g, '-')}-${Date.now()}`;
 
@@ -1950,7 +1953,7 @@ export async function fetchProductsByIdsForBulkEdit(productIds: string[]): Promi
 
 // Bulk update products
 export async function bulkUpdateProducts(
-  updates: Array<{ id: string; updates: Record<string, any> }>,
+  updates: Array<{ id: string; updates: ListingUpdate }>,
 ): Promise<Result<boolean>> {
   try {
     const updatePromises = updates.map(({ id, updates: updateData }) =>
@@ -2183,7 +2186,7 @@ export async function fetchProductsWithFiltersAndPagination(params: {
   sortField?: string | null;
   sortDirection?: 'asc' | 'desc';
   statusFilter?: string;
-}): Promise<Result<any[]>> {
+}): Promise<Result<Product[]>> {
   try {
     const {
       systemSellerId,

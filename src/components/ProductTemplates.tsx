@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Package, PoundSterling, Edit, Trash2, Eye, EyeOff, Upload, FileEdit } from 'lucide-react';
@@ -21,6 +20,7 @@ import { useAuth } from '@/hooks/useAuth';
 import { useToast } from '@/hooks/useToast';
 import { fetchProductsBySeller, archiveProduct } from '@/services/products';
 import { isFailure } from '@/types/api';
+import type { Product } from '@/types/product';
 
 interface ProductTemplatesProps {
   streamId?: string;
@@ -30,7 +30,7 @@ export const ProductTemplates = ({ streamId }: ProductTemplatesProps) => {
   const navigate = useNavigate();
   const { user } = useAuth();
   const { toast } = useToast();
-  const [shopProducts, setShopProducts] = useState<any[]>([]);
+  const [shopProducts, setShopProducts] = useState<Product[]>([]);
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
   const [selectedProductType, setSelectedProductType] = useState<'livestream' | 'shop'>('livestream');
   const [loading, setLoading] = useState(true);
@@ -50,7 +50,7 @@ export const ProductTemplates = ({ streamId }: ProductTemplatesProps) => {
         return;
       }
 
-      setShopProducts((result.data || []) as any);
+      setShopProducts(result.data || []);
     } catch (error) {
       console.error('Error in fetchShopProducts:', error);
     }

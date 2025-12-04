@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState, useEffect, useCallback } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { MapPin, Plus } from 'lucide-react';
@@ -27,6 +26,7 @@ import {
 } from '@/services/shipping';
 import { fetchSavedAddresses } from '@/services/users';
 import { isFailure } from '@/types/api';
+import type { ShippingOptionRow } from '@/services/shipping/shippingService';
 
 interface ShippingAddress {
   id?: string;
@@ -59,7 +59,7 @@ export const ShippingAddressDialog = ({
   const { user } = useAuth();
   const [step, setStep] = useState<'shipping' | 'address'>('shipping');
   const [confirmedAddress, setConfirmedAddress] = useState<ShippingAddress | null>(null);
-  const [confirmedShippingOption, setConfirmedShippingOption] = useState<any>(null);
+  const [confirmedShippingOption, setConfirmedShippingOption] = useState<ShippingOptionRow | null>(null);
   const [shippingCost, setShippingCost] = useState<number>(0);
   const [selectedShippingOption, setSelectedShippingOption] = useState<string>('');
   const [useExistingAddress, setUseExistingAddress] = useState(true);
@@ -98,7 +98,7 @@ export const ShippingAddressDialog = ({
         throw result.error;
       }
       // Filter to only active options
-      return (result.data || []).filter((opt) => opt.is_active) as any[];
+      return (result.data || []).filter((opt) => opt.is_active);
     },
     enabled: open && !!sellerId,
   });

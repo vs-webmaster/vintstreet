@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate, Link, useLocation } from 'react-router-dom';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
@@ -343,7 +342,7 @@ const ProductPage = () => {
           <ProductEditModal
             isOpen={showEditModal}
             onClose={() => setShowEditModal(false)}
-            product={product as any}
+            product={product}
             onSave={handleProductUpdated}
           />
         )}

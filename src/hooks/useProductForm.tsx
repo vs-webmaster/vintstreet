@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState, useEffect } from 'react';
 import { toast } from 'sonner';
 import { fetchProductAttributes } from '@/services/attributes';
@@ -44,7 +43,7 @@ export const useProductForm = (id?: string) => {
     selectedTags: [],
     auctionType: null,
   });
-  const [dynamicAttributes, setDynamicAttributes] = useState<Record<string, any>>({});
+  const [dynamicAttributes, setDynamicAttributes] = useState<Record<string, string | number | boolean | string[] | null>>({});
   const [productImages, setProductImages] = useState<string[]>([]);
   const [isLoading, setIsLoading] = useState(!!id);
   const [originalUpdatedAt, setOriginalUpdatedAt] = useState<string | null>(null);
@@ -100,7 +99,7 @@ export const useProductForm = (id?: string) => {
         // Fetch dynamic attribute values
         const attrsResult = await fetchProductAttributes(id);
         if (!isFailure(attrsResult) && attrsResult.data) {
-          const attrValues: Record<string, any> = {};
+          const attrValues: Record<string, string | number | boolean | string[] | null> = {};
           attrsResult.data.forEach((attr) => {
             const dataType = attr.attributes?.data_type;
 

@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 // Attribute Service
 // Centralized data access for product attributes
 
@@ -300,7 +299,7 @@ export async function fetchAttributesByCategoryLevels(
 
       const attributes = (data || [])
         .map((item) => item.attributes)
-        .filter((attr): attr is any => Boolean(attr)) as Attribute[];
+        .filter((attr): attr is Attribute => Boolean(attr));
       return success(attributes);
     }
 

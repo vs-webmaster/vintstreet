@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useState } from 'react';
 import { Download, Upload, FileSpreadsheet, AlertCircle } from 'lucide-react';
 import * as XLSX from 'xlsx';
@@ -8,6 +7,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/u
 import { useToast } from '@/hooks/useToast';
 import { bulkCreateBrands, CreateBrandInput } from '@/services/brands';
 import { isFailure } from '@/types/api';
+import type { ExcelRowData } from '@/types/common';
 
 interface BulkBrandUploadProps {
   isOpen: boolean;
@@ -68,8 +68,7 @@ export const BulkBrandUpload: React.FC<BulkBrandUploadProps> = ({ isOpen, onClos
       const brandsToCreate: CreateBrandInput[] = [];
       const skippedRows: unknown[] = [];
 
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      for (const row of jsonData as any[]) {
+      for (const row of jsonData as ExcelRowData[]) {
         // Skip example rows
         if (row.name === 'Example Brand Name') continue;
 

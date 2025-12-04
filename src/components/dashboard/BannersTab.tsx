@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { Plus, Trash2, Edit, Loader2, ArrowUp, ArrowDown } from 'lucide-react';
@@ -33,6 +32,9 @@ interface ShopBanner {
   display_order: number;
   created_at: string;
   updated_at: string;
+  rotation_interval?: number;
+  button_bg_color?: string;
+  button_text_color?: string;
 }
 
 export const BannersTab = () => {
@@ -181,9 +183,9 @@ export const BannersTab = () => {
       button_link: banner.button_link || '',
       image_url: banner.image_url,
       is_active: banner.is_active,
-      rotation_interval: (banner as any).rotation_interval || 6,
-      button_bg_color: (banner as any).button_bg_color || '#000000',
-      button_text_color: (banner as any).button_text_color || '#FFFFFF',
+      rotation_interval: banner.rotation_interval || 6,
+      button_bg_color: banner.button_bg_color || '#000000',
+      button_text_color: banner.button_text_color || '#FFFFFF',
     });
     setIsEditOpen(true);
   };

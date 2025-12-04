@@ -1,6 +1,5 @@
 // Users Service
 // Centralized data access for user profiles, seller profiles, and buyer profiles
-/* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { supabase } from '@/integrations/supabase/client';
 import { withErrorHandling, withMutation } from '@/services/api/apiClient';
@@ -399,14 +398,24 @@ export async function fetchAllUsers(
   } catch (error) {
     return {
       success: false,
-      error: error as any,
+      error: normalizeError(error),
     };
   }
 }
 
 // Get user type stats for dashboard
 // Fetch seller info map for multiple sellers (using seller_info_view)
-export async function fetchSellerInfoMap(sellerIds: string[]): Promise<Result<Map<string, any>>> {
+export interface SellerInfo {
+  user_id: string;
+  shop_name: string | null;
+  display_name_format: string | null;
+  full_name: string | null;
+  username: string | null;
+  avatar_url: string | null;
+  [key: string]: unknown;
+}
+
+export async function fetchSellerInfoMap(sellerIds: string[]): Promise<Result<Map<string, SellerInfo>>> {
   try {
     if (sellerIds.length === 0) {
       return { success: true, data: new Map() };
@@ -451,7 +460,20 @@ export async function fetchSellerProfilesByShopNames(shopNames: string[]): Promi
 }
 
 // Fetch seller profile with user profile
-export async function fetchSellerProfileWithUser(sellerId: string): Promise<Result<any>> {
+export interface SellerProfileWithUser {
+  shop_name: string | null;
+  display_name_format: string | null;
+  profile: {
+    full_name: string | null;
+    username: string | null;
+  } | null;
+  profiles: {
+    full_name: string | null;
+    username: string | null;
+  } | null;
+}
+
+export async function fetchSellerProfileWithUser(sellerId: string): Promise<Result<SellerProfileWithUser | null>> {
   try {
     const [sellerResult, profileResult] = await Promise.all([
       supabase.from('seller_profiles').select('shop_name, display_name_format').eq('user_id', sellerId).single(),
@@ -465,16 +487,15 @@ export async function fetchSellerProfileWithUser(sellerId: string): Promise<Resu
       throw profileResult.error;
     }
 
-    return success({
-      success: true,
-      data: sellerResult.data
+    return success(
+      sellerResult.data
         ? {
             ...sellerResult.data,
             profile: profileResult.data,
             profiles: profileResult.data,
           }
         : null,
-    });
+    );
   } catch (error) {
     logError(error, 'fetchSellerProfileWithUser');
     return failure(normalizeError(error));
@@ -501,7 +522,7 @@ export async function fetchUserStats(): Promise<Result<Record<string, number>>> 
 
     return { success: true, data: counts };
   } catch (error) {
-    return { success: false, error: error as any };
+    return { success: false, error: normalizeError(error) };
   }
 }
 
@@ -931,7 +952,7 @@ export async function removeSystemSellerAdmin(adminId: string): Promise<Result<b
 }
 
 // Sync system seller admins with user_roles
-export async function syncSystemSellerAdmins(): Promise<Result<any>> {
+export async function syncSystemSellerAdmins(): Promise<Result<unknown>> {
   try {
     const { data, error } = await supabase.rpc('sync_system_seller_admins');
 

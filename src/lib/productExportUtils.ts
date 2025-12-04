@@ -1,5 +1,7 @@
 // Utility functions for product export operations
-/* eslint-disable @typescript-eslint/no-explicit-any */
+
+import type { ProductAttributeValue } from '@/services/attributes/attributeService';
+import type { Product } from '@/types/product';
 
 /**
  * Downloads content as a CSV file
@@ -20,8 +22,8 @@ export function downloadCsv(csvContent: string, fileName: string): void {
 /**
  * Groups attribute values by product ID
  */
-export function groupAttributesByProduct(attributeValues: unknown[]): Record<string, Record<string, any>> {
-  return (attributeValues || []).reduce((acc: Record<string, Record<string, any>>, attr: unknown) => {
+export function groupAttributesByProduct(attributeValues: ProductAttributeValue[]): Record<string, Record<string, ProductAttributeValue>> {
+  return (attributeValues || []).reduce((acc: Record<string, Record<string, ProductAttributeValue>>, attr: ProductAttributeValue) => {
     if (!acc[attr.product_id]) {
       acc[attr.product_id] = {};
     }
@@ -45,9 +47,9 @@ export function getAttributeValue(attr: unknown): string | number | boolean | nu
  * Formats a product for CSV/Excel export
  */
 export function formatProductForExport(
-  product: unknown,
-  attrColumns: Record<string, any>
-): Record<string, any> {
+  product: Product,
+  attrColumns: Record<string, string | number | boolean | null>
+): Record<string, string | number | boolean | null> {
   return {
     product_name: product.product_name,
     thumbnail: product.thumbnail || '',
@@ -80,12 +82,18 @@ export function formatProductForExport(
 /**
  * Builds attribute columns for a product
  */
+interface Attribute {
+  id: string;
+  name: string;
+  data_type?: string;
+}
+
 export function buildAttributeColumns(
-  productAttrs: Record<string, any>,
-  attributes: unknown[]
-): Record<string, any> {
-  const attrColumns: Record<string, any> = {};
-  attributes.forEach((attr: unknown) => {
+  productAttrs: Record<string, ProductAttributeValue>,
+  attributes: Attribute[]
+): Record<string, string | number | boolean | null> {
+  const attrColumns: Record<string, string | number | boolean | null> = {};
+  attributes.forEach((attr: Attribute) => {
     const attrName = attr.name;
     const productAttr = productAttrs[attr.id];
     const value = productAttr ? getAttributeValue(productAttr) : '';

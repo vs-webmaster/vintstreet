@@ -1,6 +1,5 @@
 // Order Service
 // Centralized data access for order-related operations
-/* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { supabase } from '@/integrations/supabase/client';
 import { withErrorHandling, withMutation } from '@/services/api/apiClient';
@@ -81,7 +80,7 @@ export async function fetchAllOrdersMinimal(): Promise<
     const { data, error } = await supabase.from('orders').select('order_amount, status, delivery_status');
 
     if (error) throw error;
-    return { data: (data || []) as any, error: null };
+    return { data: (data || []) as Array<{ order_amount: number; status: string; delivery_status: string }>, error: null };
   }, 'fetchAllOrdersMinimal');
 }
 
@@ -351,6 +350,6 @@ export async function fetchOrdersByStreamId(
     const { data, error } = await query;
 
     if (error) throw error;
-    return { data: (data || []) as any, error: null };
+    return { data: (data || []) as Order[], error: null };
   }, 'fetchOrdersByStreamId');
 }

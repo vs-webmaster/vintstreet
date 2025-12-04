@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState, useEffect } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { Pencil, Plus, Trash2, X } from 'lucide-react';
@@ -113,7 +112,7 @@ export const ShopSectionsTab = () => {
         id: p.id,
         product_name: p.product_name,
         thumbnail: p.thumbnail || '',
-        sku: (p as any).sku || null,
+        sku: p.sku || null,
       })) as Product[];
     },
     enabled: !!systemSeller?.user_id && debouncedSearch.length >= 2,
