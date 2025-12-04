@@ -7,7 +7,7 @@ import Footer from '@/components/Footer';
 import { CachedImage } from '@/components/CachedImage';
 import { MegaMenuNav } from '@/components/MegaMenuNav';
 import { PriceDisplay } from '@/components/PriceDisplay';
-import { ScrollToTopButton } from '@/components/ScrollToTopButton';
+import { ScrollToTopButtom } from '@/components/ScrollToTopButtom';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
@@ -300,7 +300,7 @@ const AuctionsPage = () => {
         )}
       </main>
 
-      <ScrollToTopButton />
+      <ScrollToTopButtom />
 
       <Suspense fallback={null}>
         <Footer />

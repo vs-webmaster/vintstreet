@@ -23,7 +23,7 @@ const HomePage = () => {
     if (!(window as any).instgrm) {
       const script = document.createElement('script');
       script.async = true;
-      script.src = '//www.instagram.com/embed.js';
+      script.src = 'https://www.instagram.com/embed.js';
       document.body.appendChild(script);
     } else {
       (window as any).instgrm.Embeds.process();

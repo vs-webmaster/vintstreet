@@ -6,7 +6,7 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { ProductCard, ProductSkeleton } from '@/components/product';
 import type { ProductCardProduct } from '@/components/product/ProductCard';
-import { ScrollToTopButton } from '@/components/ScrollToTopButton';
+import { ScrollToTopButtom } from '@/components/ScrollToTopButtom';
 import { NoProductsEmptyState } from '@/components/shop/NoProductsEmptyState';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -440,7 +440,7 @@ const SearchPage = () => {
         </div>
       </main>
       <Footer />
-      <ScrollToTopButton />
+      <ScrollToTopButtom />
     </div>
   );
 };

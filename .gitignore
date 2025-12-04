@@ -11,6 +11,8 @@ node_modules
 package-lock.json
 yarn.lock
 pnpm-lock.yaml
+bun.lock
+bun.lockb
 dist
 dist-ssr
 *.local

@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { Download, Upload, Package, Plus } from 'lucide-react';
 import { toast } from 'sonner';
-import { ScrollToTopButton } from '@/components/ScrollToTopButton';
+import { ScrollToTopButtom } from '@/components/ScrollToTopButtom';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
@@ -711,7 +711,7 @@ export const MasterListingsTab = () => {
         </DialogContent>
       </Dialog>
 
-      <ScrollToTopButton />
+      <ScrollToTopButtom />
     </div>
   );
 };

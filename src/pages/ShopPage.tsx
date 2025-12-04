@@ -9,7 +9,7 @@ import Footer from '@/components/Footer';
 import { CachedImage } from '@/components/CachedImage';
 import { MegaMenuNav } from '@/components/MegaMenuNav';
 import { ProductCard, ProductSkeleton } from '@/components/product';
-import { ScrollToTopButton } from '@/components/ScrollToTopButton';
+import { ScrollToTopButtom } from '@/components/ScrollToTopButtom';
 import { FeaturedTagsNav } from '@/components/shop/FeaturedTagsNav';
 import { HorizontalFilters } from '@/components/shop/HorizontalFilters';
 import { MobileFilterDialog } from '@/components/shop/MobileFilterDialog';
@@ -30,6 +30,13 @@ import { useShopProducts } from '@/hooks/useShopProducts';
 import { useProductFilters } from '@/hooks/useProductFilters';
 import { useRecentlyViewed } from '@/hooks/useRecentlyViewed';
 import { useDynamicAttributeFilters } from '@/hooks/useDynamicAttributeFilters';
+
+interface Tag {
+  id: string;
+  name: string;
+  slug: string;
+  color: string;
+}
 
 const priceRanges = [
   { label: 'All Prices', value: 'all' },
@@ -142,7 +149,13 @@ const ShopPage = () => {
   }, [isMainShopPage, categories, isCategoryPage, subSubcategories, lowestLevelCategories]);
 
   // Products with infinite scroll
-  const { products: allProducts, fetchNextPage, hasNextPage, isFetchingNextPage, isLoading } = useShopProducts({
+  const {
+    products: allProducts,
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
+    isLoading,
+  } = useShopProducts({
     activeCategory,
     activeSubcategory,
     activeSubSubcategory,
@@ -242,7 +255,7 @@ const ShopPage = () => {
         <MegaMenuNav />
       </Suspense>
 
-      <FeaturedTagsNav tags={featuredTags} />
+      <FeaturedTagsNav tags={featuredTags as Tag[]} />
 
       {/* Landing Page Sections */}
       {showLandingPage && <ShopHeroImagesSection />}
@@ -625,7 +638,7 @@ const ShopPage = () => {
         <Footer />
       </Suspense>
 
-      <ScrollToTopButton />
+      <ScrollToTopButtom />
     </div>
   );
 };
