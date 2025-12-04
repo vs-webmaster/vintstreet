@@ -238,7 +238,7 @@ const StartStreamPage = () => {
         variant: 'destructive',
       });
     }
-  };
+  }, [activeListing, toast]);
 
   const handleStartStream = async () => {
     try {
