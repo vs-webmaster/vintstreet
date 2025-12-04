@@ -383,7 +383,6 @@ export async function fetchCategoryAttributeFilters(params: {
   try {
     const { categoryId, subcategoryId, subSubcategoryId, filterType, isSubSubcategoryPage } = params;
 
-    // eslint-disable-next-line prefer-const
     let query;
     if (filterType === 'attribute') {
       query = supabase
