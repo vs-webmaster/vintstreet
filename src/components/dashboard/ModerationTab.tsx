@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState } from 'react';
 import { Shield, AlertTriangle, CheckCircle, Settings } from 'lucide-react';
 import { toast } from 'sonner';
@@ -21,7 +20,13 @@ export const ModerationTab = () => {
   const [testText, setTestText] = useState('');
   const [testImageUrl, setTestImageUrl] = useState('');
   const { moderateText, moderateImage, isChecking } = useHiveModeration();
-  const [testResult, setTestResult] = useState<any>(null);
+  interface ModerationResult {
+    isApproved: boolean;
+    reason?: string;
+    categories?: string[];
+    [key: string]: unknown;
+  }
+  const [testResult, setTestResult] = useState<ModerationResult | null>(null);
 
   const handleTestText = async () => {
     if (!testText.trim()) {

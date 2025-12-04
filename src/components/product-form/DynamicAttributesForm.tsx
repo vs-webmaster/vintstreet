@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { CalendarIcon } from 'lucide-react';
 import { format } from 'date-fns';
 import { MultiSelectAttribute } from '@/components/MultiSelectAttribute';
@@ -15,7 +14,7 @@ import { cn } from '@/lib/utils';
 
 interface DynamicAttributesFormProps {
   attributes: unknown[];
-  dynamicAttributes: Record<string, any>;
+  dynamicAttributes: Record<string, string | number | boolean | string[] | null>;
   onAttributeChange: (attributeId: string, value: unknown) => void;
 }
 

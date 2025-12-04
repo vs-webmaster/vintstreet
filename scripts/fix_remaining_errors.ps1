@@ -36,3 +36,4 @@ foreach ($file in $errorFiles) {
 
 Write-Host "Done! Running lint to check..."
 
+

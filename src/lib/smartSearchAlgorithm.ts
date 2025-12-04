@@ -1,5 +1,5 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { fetchAttributeValuesForProducts } from '@/services/attributes';
+import type { ProductAttributeValue } from '@/services/attributes/attributeService';
 import { fetchCategories } from '@/services/categories';
 import { fetchProductIdsWithCategoryInfo, fetchRelatedBrandsForCategory } from '@/services/products';
 import { isFailure } from '@/types/api';
@@ -295,7 +295,7 @@ async function extractAttributeCombinations(products: Array<{ id: string }>): Pr
     Array<{ attributeId: string; attributeName: string; value: string; valueLabel: string }>
   >();
 
-  for (const row of data as any[]) {
+  for (const row of data as ProductAttributeValue[]) {
     const attr = row.attributes;
     const value = row.value_text ?? String(row.value_number ?? row.value_boolean ?? '');
     const valueLabel = value;

@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState } from 'react';
 import { Info, AlertCircle } from 'lucide-react';
 import { toast } from 'sonner';
@@ -57,7 +56,7 @@ export const AuctionListingModal = ({
       endTime.setDate(endTime.getDate() + durationDays);
 
       // Update listing to auction type
-      const listingResult = await updateProduct(productId, { auction_type: 'auction' as any });
+      const listingResult = await updateProduct(productId, { auction_type: 'auction' as const });
       if (isFailure(listingResult)) throw listingResult.error;
 
       // Create auction

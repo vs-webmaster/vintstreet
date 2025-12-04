@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 /**
  * Ninja (MoovParcel) API Integration
  * Used for warehouse fulfillment orders
@@ -107,6 +106,20 @@ export interface NinjaOrderData {
   order_access_url?: string;
 }
 
+export interface NinjaImportResponse {
+  success: boolean;
+  order_id?: string;
+  message?: string;
+  [key: string]: unknown;
+}
+
+export interface NinjaOrderResponse {
+  order_id: string;
+  status: string;
+  tracking_number?: string;
+  [key: string]: unknown;
+}
+
 export class NinjaApiClient {
   private baseUrl = 'https://api.moovparcel.net/api';
   private credentials: NinjaCredentials;
@@ -154,7 +167,7 @@ export class NinjaApiClient {
   /**
    * Import order to Ninja
    */
-  async importOrder(orderData: NinjaOrderData[]): Promise<any> {
+  async importOrder(orderData: NinjaOrderData[]): Promise<NinjaImportResponse> {
     if (!this.accessToken) {
       await this.authenticate();
     }
@@ -181,7 +194,7 @@ export class NinjaApiClient {
   /**
    * Get order details
    */
-  async getOrder(orderId: string): Promise<any> {
+  async getOrder(orderId: string): Promise<NinjaOrderResponse> {
     if (!this.accessToken) {
       await this.authenticate();
     }

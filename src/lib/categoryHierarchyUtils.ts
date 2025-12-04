@@ -1,9 +1,9 @@
 /**
  * Utility functions for building category hierarchy structures
  */
-/* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { filterByCategoryId, filterBySubcategoryId, filterBySubSubcategoryId } from './filterUtils';
+import type { Category, Subcategory, SubSubcategory, SubSubSubcategory } from '@/types/category';
 
 // ============================================
 // Type definitions with meaningful names
@@ -94,10 +94,10 @@ export function buildAdminCategoryHierarchy<T extends Level2Category>(
 // ============================================
 
 export interface CategoryLevelMaps {
-  l1Map: Map<string, any>;
-  l2Map: Map<string, any>;
-  l3Map: Map<string, any>;
-  l4Map: Map<string, any>;
+  l1Map: Map<string, Category>;
+  l2Map: Map<string, Subcategory>;
+  l3Map: Map<string, SubSubcategory>;
+  l4Map: Map<string, SubSubSubcategory>;
 }
 
 /**

@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState, useEffect, useRef } from 'react';
 import AgoraRTC, {
   IAgoraRTCClient,
@@ -38,7 +37,11 @@ export const useAgora = ({ channelName, userId, isHost = false }: UseAgoraProps)
     configError: null,
   });
 
-  const [agoraConfig, setAgoraConfig] = useState<any>(null);
+  interface AgoraConfig {
+    appId: string;
+    token: string | null;
+  }
+  const [agoraConfig, setAgoraConfig] = useState<AgoraConfig | null>(null);
   const clientRef = useRef<IAgoraRTCClient | null>(null);
   const remoteVideoTracksRef = useRef<Map<number, IRemoteVideoTrack>>(new Map());
   const remoteAudioTracksRef = useRef<Map<number, IRemoteAudioTrack>>(new Map());

@@ -1,5 +1,5 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useQuery } from '@tanstack/react-query';
+import type { LucideIcon } from 'lucide-react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -38,7 +38,7 @@ const SupportPage = () => {
   });
 
   const getIcon = (iconName: string) => {
-    const icons: Record<string, any> = {
+    const icons: Record<string, LucideIcon> = {
       Mail,
       MessageCircle,
       Book,

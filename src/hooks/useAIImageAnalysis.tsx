@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState } from 'react';
 import { toast } from 'sonner';
 import { fileToBase64 } from '@/lib/imageUtils';
@@ -59,7 +58,19 @@ export const useAIImageAnalysis = ({ formData, updateFormData, onImageRejected }
           }
 
           // Handle identified status
-          const { suggestedName, suggestedDescription, suggestedCategory } = data as any;
+          interface AIImageAnalysisResponse {
+            status: string;
+            suggestedName?: string;
+            suggestedDescription?: string;
+            suggestedCategory?: {
+              categoryId?: string;
+              subcategoryId?: string;
+              subSubcategoryId?: string;
+              subSubSubcategoryId?: string;
+            };
+            reason?: string;
+          }
+          const { suggestedName, suggestedDescription, suggestedCategory } = data as AIImageAnalysisResponse;
 
           // Only populate fields if they're currently empty
           if (suggestedName && !formData.name) {

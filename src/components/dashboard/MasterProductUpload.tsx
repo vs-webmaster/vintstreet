@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState } from 'react';
 import { useQueryClient } from '@tanstack/react-query';
 import { Upload, AlertCircle, Download } from 'lucide-react';
@@ -20,6 +19,8 @@ import { fetchBrands } from '@/services/brands';
 import { fetchSubcategories, fetchAllSubSubcategories, fetchAllSubSubSubcategories } from '@/services/categories';
 import { createProduct } from '@/services/products/productService';
 import { isFailure } from '@/types/api';
+import type { ExcelRowData, FailedRow } from '@/types/common';
+import type { Attribute } from '@/services/attributes/attributeService';
 
 interface MasterProductUploadProps {
   isOpen: boolean;
@@ -32,7 +33,7 @@ export const MasterProductUpload = ({ isOpen, onClose, categoryId, systemSellerI
   const { user } = useAuth();
   const [isUploading, setIsUploading] = useState(false);
   const [uploadResults, setUploadResults] = useState<{ success: number; failed: number } | null>(null);
-  const [failedRows, setFailedRows] = useState<any[]>([]);
+  const [failedRows, setFailedRows] = useState<FailedRow[]>([]);
   const [uploadProgress, setUploadProgress] = useState({ current: 0, total: 0 });
   const queryClient = useQueryClient();
 
@@ -204,7 +205,11 @@ export const MasterProductUpload = ({ isOpen, onClose, categoryId, systemSellerI
         }
 
         // Group attributes by subcategory_id
-        const subAttrMap = new Map<string, any[]>();
+        interface AttributeLink {
+          attributes?: Attribute;
+          subcategory_id?: string;
+        }
+        const subAttrMap = new Map<string, Attribute[]>();
         (subAttrResult.data || []).forEach((link) => {
           if (link.attributes && link.subcategory_id) {
             if (!subAttrMap.has(link.subcategory_id)) {
@@ -238,7 +243,7 @@ export const MasterProductUpload = ({ isOpen, onClose, categoryId, systemSellerI
         }
 
         // Group attributes by sub_subcategory_id
-        const subSubAttrMap = new Map<string, any[]>();
+        const subSubAttrMap = new Map<string, Attribute[]>();
         (subSubAttrResult.data || []).forEach((link) => {
           if (link.attributes && link.sub_subcategory_id) {
             if (!subSubAttrMap.has(link.sub_subcategory_id)) {
@@ -272,7 +277,7 @@ export const MasterProductUpload = ({ isOpen, onClose, categoryId, systemSellerI
       setUploadProgress({ current: 0, total: totalRows });
 
       for (let i = 0; i < jsonData.length; i++) {
-        const row = jsonData[i] as any;
+        const row = jsonData[i] as ExcelRowData;
         try {
           // Skip example rows
           if (row.product_name === 'Example Product') continue;
@@ -418,7 +423,7 @@ export const MasterProductUpload = ({ isOpen, onClose, categoryId, systemSellerI
           const subSubcatAttrs = subSubcategoryId ? attributesBySubSubcategory.get(subSubcategoryId) || [] : [];
 
           // Deduplicate by attribute id, prioritizing deeper levels
-          const uniqueAttrMap = new Map<string, any>();
+          const uniqueAttrMap = new Map<string, Attribute>();
           [...catAttrs, ...subcatAttrs, ...subSubcatAttrs].forEach((a: unknown) => uniqueAttrMap.set(a.id, a));
           const attributes = Array.from(uniqueAttrMap.values());
           const attributeValues: unknown[] = [];

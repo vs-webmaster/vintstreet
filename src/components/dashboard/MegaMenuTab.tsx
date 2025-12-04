@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState } from 'react';
 import { useQuery, useQueryClient, useMutation } from '@tanstack/react-query';
 import { Loader2, Eye, EyeOff, X, TrendingUp, Star, Crown, List, Plus, Edit2, Trash2 } from 'lucide-react';
@@ -124,7 +123,7 @@ export const MegaMenuTab = () => {
       // Build hierarchy
       const categories = (cats.data || []).map((cat) => ({
         ...cat,
-        brands: filterByCategoryId(categoryBrands.data as any, cat.id).map((cb: unknown) => ({
+        brands: filterByCategoryId(categoryBrands.data as Array<{ id: string; category_id: string; brand_id: string; display_order: number; brands: { id: string; name: string } }>, cat.id).map((cb) => ({
           id: cb.id,
           brand_id: cb.brand_id,
           display_order: cb.display_order,

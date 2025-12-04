@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState, useEffect } from 'react';
 import { Save, X, AlertCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -11,6 +10,9 @@ import { useProhibitedWordsValidation } from '@/hooks/useProhibitedWordsValidati
 import { validateProductInput } from '@/lib/prohibitedWordsValidation';
 import { updateProduct, archiveProduct } from '@/services/products';
 import { isFailure } from '@/types/api';
+import type { Database } from '@/integrations/supabase/types';
+
+type ListingUpdate = Database['public']['Tables']['listings']['Update'];
 
 interface ListingProduct {
   id: string;
@@ -85,8 +87,7 @@ export const EditProductModal = ({ isOpen, onClose, product, onProductUpdated }:
         starting_price: parseFloat(formData.starting_price),
         product_description: formData.product_description || null,
         thumbnail: formData.thumbnail || null,
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      } as any);
+      } as ListingUpdate);
 
       if (isFailure(result)) {
         throw result.error;

@@ -1,11 +1,11 @@
 // Listing Service
 // Centralized data access for listing operations
-/* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { supabase } from '@/integrations/supabase/client';
 import type { Result } from '@/types/api';
 import { success, failure } from '@/types/api';
 import { normalizeError, logError } from '@/lib/errors';
+import type { ProductAttributeValue } from '@/services/attributes/attributeService';
 
 export interface Listing {
   id: string;
@@ -160,10 +160,10 @@ export async function fetchAuctionProducts(params: {
 }
 
 // Fetch product attribute values in batches
-export async function fetchProductAttributeValues(productIds: string[]): Promise<Result<any[]>> {
+export async function fetchProductAttributeValues(productIds: string[]): Promise<Result<ProductAttributeValue[]>> {
   try {
     const batchSize = 500;
-    const allAttributeValues: unknown[] = [];
+    const allAttributeValues: ProductAttributeValue[] = [];
 
     for (let i = 0; i < productIds.length; i += batchSize) {
       const batchIds = productIds.slice(i, i + batchSize);
@@ -188,7 +188,7 @@ export async function fetchProductAttributeValues(productIds: string[]): Promise
       }
 
       if (batchValues) {
-        allAttributeValues.push(...batchValues);
+        allAttributeValues.push(...(batchValues as ProductAttributeValue[]));
       }
     }
 

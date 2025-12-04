@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState } from 'react';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
@@ -11,7 +10,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from 
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
-import { fetchGuides, createGuide, updateGuide, deleteGuide, type GuideTableName } from '@/services/guides';
+import { fetchGuides, createGuide, updateGuide, deleteGuide, type GuideTableName, type Guide } from '@/services/guides';
 import { isFailure } from '@/types/api';
 
 interface GuideManagerProps {
@@ -34,7 +33,7 @@ export const GuideManager = ({
   contentPlaceholder,
 }: GuideManagerProps) => {
   const [isAddDialogOpen, setIsAddDialogOpen] = useState(false);
-  const [editingGuide, setEditingGuide] = useState<any>(null);
+  const [editingGuide, setEditingGuide] = useState<Guide | null>(null);
   const [name, setName] = useState('');
   const [content, setContent] = useState('');
   const queryClient = useQueryClient();

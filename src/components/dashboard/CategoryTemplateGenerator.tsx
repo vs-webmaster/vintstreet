@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Download } from 'lucide-react';
 import { toast } from 'sonner';
 import { Button } from '@/components/ui/button';
@@ -74,8 +73,18 @@ export const CategoryTemplateGenerator = ({
         .sort((a: unknown, b: unknown) => (a.display_order || 0) - (b.display_order || 0));
 
       // For each subcategory, fetch its attributes
-      const attributesBySubcategory = new Map<string, any[]>();
-      const allAttributeOptions = new Map<string, any[]>();
+      interface AttributeLink {
+        attributes?: { id: string; name: string; data_type: string };
+        subcategory_id?: string;
+      }
+      interface AttributeOption {
+        id: string;
+        value: string;
+        is_active: boolean | null;
+        display_order: number;
+      }
+      const attributesBySubcategory = new Map<string, AttributeLink[]>();
+      const allAttributeOptions = new Map<string, AttributeOption[]>();
 
       // Fetch attributes for all subcategories at once
       const subcategoryIds = subcategories.map((s) => s.id);
@@ -84,7 +93,7 @@ export const CategoryTemplateGenerator = ({
         if (isFailure(subAttrResult)) throw subAttrResult.error;
 
         // Group attributes by subcategory_id
-        const subAttrMap = new Map<string, any[]>();
+        const subAttrMap = new Map<string, AttributeLink[]>();
         (subAttrResult.data || []).forEach((link) => {
           if (link.attributes && link.subcategory_id) {
             if (!subAttrMap.has(link.subcategory_id)) {
@@ -179,7 +188,13 @@ export const CategoryTemplateGenerator = ({
       };
 
       // Collect attributes based on selection level
-      const uniqueAttributes = new Map<string, any>();
+      interface Attribute {
+        id: string;
+        name: string;
+        data_type: string;
+        display_order?: number | null;
+      }
+      const uniqueAttributes = new Map<string, Attribute>();
 
       // Always include category-level attributes first
       categoryLevelAttrs.forEach((attr: unknown) => {

@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { format } from 'date-fns';
@@ -61,7 +60,7 @@ export default function AdminDataRecoveryPage() {
   // Fetch product history for a specific product
   const { data: productHistory, isLoading: historyLoading } = useQuery({
     queryKey: ['product-audit-history', searchedProductId, selectedAuditType],
-    queryFn: async (): Promise<any[] | null> => {
+    queryFn: async (): Promise<Array<{ id: string; product_id: string; change_type: string; old_value: unknown; new_value: unknown; changed_by: string; created_at: string }> | null> => {
       if (!searchedProductId) return null;
 
       let result;

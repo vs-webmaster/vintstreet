@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import {
   FileText,
   Image,
@@ -26,7 +25,9 @@ interface BlogSidebarProps {
   onNavigateToSection: (index: number) => void;
 }
 
-const SECTION_ICONS: Record<string, any> = {
+import type { LucideIcon } from 'lucide-react';
+
+const SECTION_ICONS: Record<string, LucideIcon> = {
   heading: Heading,
   paragraph: FileText,
   image: Image,

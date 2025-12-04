@@ -1,6 +1,5 @@
 // Bulk Edit Products Hook
 // Manages state and operations for bulk product editing
-/* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { useEffect, useState, useMemo, useCallback } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -22,7 +21,9 @@ import { fetchBrands } from '@/services/brands';
 import { fetchProductsByIdsForBulkEdit, bulkUpdateProducts } from '@/services/products';
 import { fetchTags, fetchTagLinksForProducts, bulkUpdateProductTagsForProduct } from '@/services/tags';
 import { isFailure } from '@/types/api';
-import { Category } from '@/types/category';
+import type { Category, Subcategory, SubSubcategory, SubSubSubcategory } from '@/types/category';
+import type { Attribute } from '@/services/attributes/attributeService';
+import type { ProductAttributeValue } from '@/services/attributes/attributeService';
 
 export interface BulkEditProduct {
   id: string;
@@ -54,17 +55,28 @@ export const useBulkEditProducts = () => {
 
   // Reference data
   const [level1Categories, setLevel1Categories] = useState<Category[]>([]);
-  const [level2Categories, setLevel2Categories] = useState<any[]>([]);
-  const [level3Categories, setLevel3Categories] = useState<any[]>([]);
-  const [level4Categories, setLevel4Categories] = useState<any[]>([]);
-  const [brands, setBrands] = useState<any[]>([]);
-  const [availableTags, setAvailableTags] = useState<any[]>([]);
+  const [level2Categories, setLevel2Categories] = useState<Subcategory[]>([]);
+  const [level3Categories, setLevel3Categories] = useState<SubSubcategory[]>([]);
+  const [level4Categories, setLevel4Categories] = useState<SubSubSubcategory[]>([]);
+  interface Brand {
+    id: string;
+    name: string;
+    logo_url?: string | null;
+    is_active?: boolean | null;
+  }
+  interface Tag {
+    id: string;
+    name: string;
+    color?: string;
+  }
+  const [brands, setBrands] = useState<Brand[]>([]);
+  const [availableTags, setAvailableTags] = useState<Tag[]>([]);
 
   // Attributes
-  const [attributes, setAttributes] = useState<Map<string, any[]>>(new Map());
-  const [productAttributes, setProductAttributes] = useState<Map<string, any[]>>(new Map());
-  const [allUniqueAttributes, setAllUniqueAttributes] = useState<any[]>([]);
-  const [allAvailableAttributes, setAllAvailableAttributes] = useState<any[]>([]);
+  const [attributes, setAttributes] = useState<Map<string, Attribute[]>>(new Map());
+  const [productAttributes, setProductAttributes] = useState<Map<string, ProductAttributeValue[]>>(new Map());
+  const [allUniqueAttributes, setAllUniqueAttributes] = useState<Attribute[]>([]);
+  const [allAvailableAttributes, setAllAvailableAttributes] = useState<Attribute[]>([]);
 
   // Tags
   const [productTags, setProductTags] = useState<Map<string, string[]>>(new Map());
@@ -76,7 +88,7 @@ export const useBulkEditProducts = () => {
   // Unsaved changes tracking
   const [showUnsavedDialog, setShowUnsavedDialog] = useState(false);
   const [initialProducts, setInitialProducts] = useState<BulkEditProduct[]>([]);
-  const [initialProductAttributes, setInitialProductAttributes] = useState<Map<string, any[]>>(new Map());
+  const [initialProductAttributes, setInitialProductAttributes] = useState<Map<string, ProductAttributeValue[]>>(new Map());
 
   const productIds: string[] = location.state?.productIds || [];
 
@@ -165,7 +177,7 @@ export const useBulkEditProducts = () => {
 
   // Merge all available attributes with unique attributes for display
   const displayAttributes = useMemo(() => {
-    const attrMap = new Map<string, any>();
+    const attrMap = new Map<string, Attribute>();
     allUniqueAttributes.forEach((attr) => attrMap.set(attr.id, attr));
     allAvailableAttributes.forEach((attr) => {
       const existing = attrMap.get(attr.id);

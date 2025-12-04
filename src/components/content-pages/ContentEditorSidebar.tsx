@@ -1,5 +1,5 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Image, Type, Layout, MousePointerClick, HelpCircle, LayoutGrid } from 'lucide-react';
+import type { LucideIcon } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
@@ -26,7 +26,7 @@ const SECTION_TEMPLATES = [
   { value: 'cards', label: 'Cards Section', description: 'Row of cards with title and text' },
 ];
 
-const SECTION_ICONS: Record<string, any> = {
+const SECTION_ICONS: Record<string, LucideIcon> = {
   hero: Image,
   text_block: Type,
   image_text: Layout,
