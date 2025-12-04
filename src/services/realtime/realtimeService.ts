@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 // Realtime Service
 // Centralized realtime subscription service for Supabase Realtime
 

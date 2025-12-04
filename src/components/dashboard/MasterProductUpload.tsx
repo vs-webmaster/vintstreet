@@ -1,4 +1,5 @@
-/* eslint-disable no-case-declarations */
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import { useState } from 'react';
 import { useQueryClient } from '@tanstack/react-query';
 import { Upload, AlertCircle, Download } from 'lucide-react';

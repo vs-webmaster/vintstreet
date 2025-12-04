@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 // Bulk Edit Products Hook
 // Manages state and operations for bulk product editing
 

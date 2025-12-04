@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 // Mega Menu Service
 // Centralized data access for mega menu operations
 

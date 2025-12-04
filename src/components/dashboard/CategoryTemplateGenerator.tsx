@@ -96,7 +96,7 @@ export const CategoryTemplateGenerator = ({
 
         // Fetch attributes for all sub-subcategories at once
         const subSubcategoryIds = subSubcategories.map((ss) => ss.id);
-        let subSubAttrMap = new Map<string, any[]>();
+        const subSubAttrMap = new Map<string, unknown[]>();
         if (subSubcategoryIds.length > 0) {
           const subSubAttrResult = await fetchAttributeSubSubcategoriesBySubSubcategoryIds(subSubcategoryIds);
           if (isFailure(subSubAttrResult)) throw subSubAttrResult.error;

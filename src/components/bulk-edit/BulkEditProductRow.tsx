@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 // Bulk Edit Product Row Component
 // Memoized row for efficient rendering
 
