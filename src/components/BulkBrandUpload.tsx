@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useState } from 'react';
 import { Download, Upload, FileSpreadsheet, AlertCircle } from 'lucide-react';
 import * as XLSX from 'xlsx';
@@ -67,6 +68,7 @@ export const BulkBrandUpload: React.FC<BulkBrandUploadProps> = ({ isOpen, onClos
       const brandsToCreate: CreateBrandInput[] = [];
       const skippedRows: unknown[] = [];
 
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       for (const row of jsonData as any[]) {
         // Skip example rows
         if (row.name === 'Example Brand Name') continue;

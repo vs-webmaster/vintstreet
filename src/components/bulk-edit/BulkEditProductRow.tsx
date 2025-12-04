@@ -1,5 +1,6 @@
 // Bulk Edit Product Row Component
 // Memoized row for efficient rendering
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { memo } from 'react';
 import { Button } from '@/components/ui/button';

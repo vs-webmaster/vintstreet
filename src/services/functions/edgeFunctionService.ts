@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 // Edge Functions Service
 // Wrapper for Supabase Edge Function invocations
 

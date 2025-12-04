@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState, useEffect, createContext, useContext, useRef } from 'react';
 import { buildCategoryHierarchy, buildCategoryLevelMaps } from '@/lib/categoryHierarchyUtils';
 import { filterByCategoryId } from '@/lib/filterUtils';

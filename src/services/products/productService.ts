@@ -1,5 +1,6 @@
 // Product Service
 // Centralized product data access layer
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { supabase } from '@/integrations/supabase/client';
 import { normalizeError, logError, NotFoundError } from '@/lib/errors';

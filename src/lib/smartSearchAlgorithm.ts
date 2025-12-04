@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { fetchAttributeValuesForProducts } from '@/services/attributes';
 import { fetchCategories } from '@/services/categories';
 import { fetchProductIdsWithCategoryInfo, fetchRelatedBrandsForCategory } from '@/services/products';

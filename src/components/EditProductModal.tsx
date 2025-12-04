@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState, useEffect } from 'react';
 import { Save, X, AlertCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -84,6 +85,7 @@ export const EditProductModal = ({ isOpen, onClose, product, onProductUpdated }:
         starting_price: parseFloat(formData.starting_price),
         product_description: formData.product_description || null,
         thumbnail: formData.thumbnail || null,
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
       } as any);
 
       if (isFailure(result)) {

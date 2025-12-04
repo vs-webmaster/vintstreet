@@ -1,4 +1,3 @@
-/* eslint-disable no-case-declarations */
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import {

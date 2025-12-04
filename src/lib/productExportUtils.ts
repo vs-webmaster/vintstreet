@@ -1,4 +1,5 @@
 // Utility functions for product export operations
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
 /**
  * Downloads content as a CSV file

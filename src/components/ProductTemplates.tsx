@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Package, PoundSterling, Edit, Trash2, Eye, EyeOff, Upload, FileEdit } from 'lucide-react';

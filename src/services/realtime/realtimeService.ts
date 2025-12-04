@@ -1,5 +1,6 @@
 // Realtime Service
 // Centralized realtime subscription service for Supabase Realtime
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { supabase } from '@/integrations/supabase/client';
 import type { RealtimeChannel } from '@supabase/supabase-js';

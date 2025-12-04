@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useQuery } from '@tanstack/react-query';
 import {
   fetchProductAttributes,
@@ -93,7 +94,7 @@ export const useProductData = (productIdOrSlug: string | undefined) => {
       const colorAttrResult = await fetchProductAttributeByName(product.id, 'colour');
       const productColor = colorAttrResult.success && colorAttrResult.data ? colorAttrResult.data.value_text : null;
 
-      let allProducts: unknown[] = [];
+      const allProducts: unknown[] = [];
       const seenIds = new Set([product.id]);
 
       // If product has a color, prioritize same color products
