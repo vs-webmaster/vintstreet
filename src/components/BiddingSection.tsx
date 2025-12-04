@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { Timer, Gavel, Crown, ArrowUp } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -45,12 +45,8 @@ const BiddingSection = ({ streamId, isStreamer = false }: BiddingSectionProps) =
   const [bidAmounts, setBidAmounts] = useState<Record<string, string>>({});
   const [loading, setLoading] = useState(false);
   const [showCustomBid, setShowCustomBid] = useState<Record<string, boolean>>({});
-  useEffect(() => {
-    fetchListings();
-    const unsubscribe = subscribeToUpdates();
-    return unsubscribe;
-  }, [streamId]);
-  const fetchListings = async () => {
+  
+  const fetchListings = useCallback(async () => {
     const result = await fetchProductsByStream(streamId, { status: 'published' });
 
     if (isSuccess(result) && result.data && result.data.length > 0) {
@@ -109,8 +105,8 @@ const BiddingSection = ({ streamId, isStreamer = false }: BiddingSectionProps) =
         ],
       });
     }
-  };
-  const subscribeToUpdates = () => {
+  }, [streamId]);
+  const subscribeToUpdates = useCallback(() => {
     // Subscribe to listing updates
     const unsubscribeListings = subscribeToPostgresChanges(
       'listings_updates',
@@ -144,7 +140,14 @@ const BiddingSection = ({ streamId, isStreamer = false }: BiddingSectionProps) =
       unsubscribeListings();
       unsubscribeBids();
     };
-  };
+  }, [streamId, fetchListings]);
+
+  useEffect(() => {
+    fetchListings();
+    const unsubscribe = subscribeToUpdates();
+    return unsubscribe;
+  }, [streamId, fetchListings, subscribeToUpdates]);
+
   const placeBid = async (listingId: string) => {
     if (!user) {
       toast({

@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Package, PoundSterling, Edit, Trash2, Eye, EyeOff, Upload, FileEdit } from 'lucide-react';
 import { AddProductModal } from '@/components/AddProductModal';
@@ -39,7 +39,7 @@ export const ProductTemplates = ({ streamId }: ProductTemplatesProps) => {
   const [statusFilter, setStatusFilter] = useState<'live' | 'sold' | 'draft' | 'private'>('live');
   const [isBulkUploadOpen, setIsBulkUploadOpen] = useState(false);
 
-  const fetchShopProducts = async () => {
+  const fetchShopProducts = useCallback(async () => {
     try {
       if (!user) return;
 
@@ -54,17 +54,17 @@ export const ProductTemplates = ({ streamId }: ProductTemplatesProps) => {
     } catch (error) {
       console.error('Error in fetchShopProducts:', error);
     }
-  };
+  }, [user]);
 
-  const fetchProducts = async () => {
+  const fetchProducts = useCallback(async () => {
     setLoading(true);
     await fetchShopProducts();
     setLoading(false);
-  };
+  }, [fetchShopProducts]);
 
   useEffect(() => {
     fetchProducts();
-  }, []);
+  }, [fetchProducts]);
 
   const handleDeleteProduct = async (productId: string) => {
     try {

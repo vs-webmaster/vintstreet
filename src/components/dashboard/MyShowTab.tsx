@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Gift, Box, Users, Plus, Trash2, Edit, Package } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -78,11 +78,7 @@ export const MyShowTab = () => {
   const [editingItem, setEditingItem] = useState<any>(null);
   const { toast } = useToast();
 
-  useEffect(() => {
-    fetchLivestreamProducts();
-  }, [user]);
-
-  const fetchLivestreamProducts = async () => {
+  const fetchLivestreamProducts = useCallback(async () => {
     if (!user?.id) return;
 
     const result = await fetchProductsBySeller(user.id, {
@@ -95,7 +91,11 @@ export const MyShowTab = () => {
     }
 
     setLivestreamProducts(result.data || []);
-  };
+  }, [user]);
+
+  useEffect(() => {
+    fetchLivestreamProducts();
+  }, [user, fetchLivestreamProducts]);
 
   // Form states
   const [mysteryBoxForm, setMysteryBoxForm] = useState({

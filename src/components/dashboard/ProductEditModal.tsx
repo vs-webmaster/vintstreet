@@ -319,7 +319,7 @@ export const ProductEditModal = ({ product, sellerId, isOpen, onClose, onSave }:
         isInitialLoadRef.current = false;
       }, 100);
     }
-  }, [product]);
+  }, [product, setInitialImages]);
 
   const handleSave = async () => {
     if (!formData.product_name) {
