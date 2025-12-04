@@ -194,7 +194,7 @@ export const useBasketShipping = (cartItems: CartItem[]) => {
       const providerBand = getProviderBandForWeight(selectedOption.provider_id, totalWeight);
       return sum + (providerBand ? Number(providerBand.price) : 0);
     }, 0);
-  }, [sellerGroups, shippingOptions, providerPrices, getProviderBandForWeight]);
+  }, [sellerGroups, shippingOptions, getProviderBandForWeight]);
 
   const total = subtotal + totalShipping + totalBuyerProtectionFee;
 

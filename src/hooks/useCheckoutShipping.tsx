@@ -33,7 +33,8 @@ export const useCheckoutShipping = ({
   shippingCountry,
 }: UseCheckoutShippingProps) => {
   const [selectedShippingOptions, setSelectedShippingOptions] = useState<Record<string, string>>({});
-  const uuidRegex = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
+  // Regex is a constant, memoize it to avoid recreating on every render
+  const uuidRegex = useMemo(() => /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i, []);
 
   // Fetch shipping options with provider names for all resolved seller IDs
   const { data: shippingOptionsData } = useQuery({
@@ -69,13 +70,16 @@ export const useCheckoutShipping = ({
   }, [shippingOptionsData]);
 
   // Get items for a specific seller
-  const getSellerItems = (sellerId: string) => {
-    return cartItems.filter((item) => {
-      if (uuidRegex.test(item.listings?.seller_id || '')) return item.listings?.seller_id === sellerId;
-      const mapped = nameMappings?.find((m) => m.shop_name === item.listings?.seller_id)?.user_id;
-      return mapped === sellerId;
-    });
-  };
+  const getSellerItems = useCallback(
+    (sellerId: string) => {
+      return cartItems.filter((item) => {
+        if (uuidRegex.test(item.listings?.seller_id || '')) return item.listings?.seller_id === sellerId;
+        const mapped = nameMappings?.find((m) => m.shop_name === item.listings?.seller_id)?.user_id;
+        return mapped === sellerId;
+      });
+    },
+    [cartItems, nameMappings],
+  );
 
   // Calculate total weight for a seller's items
   const getSellerWeight = useCallback(
@@ -143,7 +147,7 @@ export const useCheckoutShipping = ({
 
       return total + postagePrice;
     }, 0);
-  }, [sellerIds, selectedShippingOptions, shippingOptionsData, cartItems, providerPrices, getProviderBandForWeight, getSellerWeight]);
+  }, [sellerIds, selectedShippingOptions, shippingOptionsData, getProviderBandForWeight, getSellerWeight]);
 
   // Get price for a specific option
   const getOptionPrice = (option: ShippingOptionRow, sellerId: string): number => {

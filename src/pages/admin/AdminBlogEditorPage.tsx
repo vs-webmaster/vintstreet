@@ -228,7 +228,7 @@ export default function AdminBlogEditorPage() {
       JSON.stringify(selectedRelatedPosts.sort()) !== JSON.stringify(initialRelatedPosts.sort());
 
     return formDataChanged || sectionsChanged || tagsChanged || productsChanged || relatedPostsChanged;
-  };
+  }, [formData, initialFormData, sections, initialSections, selectedTags, initialTags, selectedProducts, initialProducts, selectedRelatedPosts, initialRelatedPosts]);
 
   const handleNavigateBack = () => {
     if (hasUnsavedChanges() && !saveMutation.isPending) {
