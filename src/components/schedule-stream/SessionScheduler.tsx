@@ -1,4 +1,4 @@
-import { useState, useEffect, useImperativeHandle, forwardRef } from 'react';
+import { useState, useEffect, useImperativeHandle, forwardRef, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { CalendarIcon, X, ShoppingBag, Package, Edit2 } from 'lucide-react';
@@ -104,7 +104,7 @@ export const SessionScheduler = forwardRef<SessionSchedulerRef, SessionScheduler
     ];
 
     // Generate repeat shows based on selected days and weeks
-    const generateRepeatShows = () => {
+    const generateRepeatShows = useCallback(() => {
       if (!repeatStartDate || selectedDays.length === 0 || scheduledShows.length === 0) {
         setRepeatShows([]);
         return;
@@ -153,11 +153,11 @@ export const SessionScheduler = forwardRef<SessionSchedulerRef, SessionScheduler
       }
 
       setRepeatShows(shows.sort((a, b) => new Date(a.date!).getTime() - new Date(b.date!).getTime()));
-    };
+    }, [repeatStartDate, selectedDays, repeatWeeks, scheduledShows, streamTitle]);
 
     useEffect(() => {
       generateRepeatShows();
-    }, [repeatStartDate, selectedDays, repeatWeeks, scheduledShows]);
+    }, [generateRepeatShows]);
 
     // Set repeat start date to day after show 1 date
     useEffect(() => {

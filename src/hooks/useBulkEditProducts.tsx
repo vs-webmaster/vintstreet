@@ -90,7 +90,8 @@ export const useBulkEditProducts = () => {
   const [initialProducts, setInitialProducts] = useState<BulkEditProduct[]>([]);
   const [initialProductAttributes, setInitialProductAttributes] = useState<Map<string, ProductAttributeValue[]>>(new Map());
 
-  const productIds: string[] = location.state?.productIds || [];
+  // Get productIds from location state - memoized to avoid re-renders
+  const productIds = useMemo(() => location.state?.productIds || [], [location.state?.productIds]);
 
   // Column visibility state
   const [visibleColumns, setVisibleColumns] = useState<Record<string, boolean>>(() => {

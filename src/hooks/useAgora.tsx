@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import AgoraRTC, {
   IAgoraRTCClient,
   IRemoteVideoTrack,
@@ -83,7 +83,7 @@ export const useAgora = ({ channelName, userId, isHost = false }: UseAgoraProps)
     return () => {
       clearAgoraConfigCache();
     };
-  }, []);
+  }, [channelName, userId, isHost]);
 
   useEffect(() => {
     if (!channelName || !agoraConfig || !state.configLoaded) {
@@ -194,7 +194,7 @@ export const useAgora = ({ channelName, userId, isHost = false }: UseAgoraProps)
   }, [channelName, userId, isHost, agoraConfig, state.configLoaded]);
 
   // Cleanup function for tracks
-  const cleanupTracks = () => {
+  const cleanupTracks = useCallback(() => {
     if (state.localVideoTrack) {
       state.localVideoTrack.close();
     }
@@ -203,7 +203,7 @@ export const useAgora = ({ channelName, userId, isHost = false }: UseAgoraProps)
     }
     remoteVideoTracksRef.current.clear();
     remoteAudioTracksRef.current.clear();
-  };
+  }, [state.localVideoTrack, state.localAudioTrack]);
 
   // Separate cleanup effect
   useEffect(() => {
@@ -216,7 +216,7 @@ export const useAgora = ({ channelName, userId, isHost = false }: UseAgoraProps)
       }
       initializingRef.current = false;
     };
-  }, []);
+  }, [cleanupTracks]);
 
   const startVideo = async () => {
     if (!clientRef.current || !isHost) {
