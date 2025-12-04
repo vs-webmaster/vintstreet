@@ -58,6 +58,8 @@ jobs:
           VITE_ALGOLIA_APP_ID: ${{ secrets.VITE_ALGOLIA_APP_ID }}
           VITE_ALGOLIA_SEARCH_API_KEY: ${{ secrets.VITE_ALGOLIA_SEARCH_API_KEY }}
           VITE_GOOGLE_MAPS_API_KEY: ${{ secrets.VITE_GOOGLE_MAPS_API_KEY }}
+          # Sentry error tracking (optional)
+          VITE_SENTRY_DSN: ${{ secrets.VITE_SENTRY_DSN }}
           # Algolia index names (optional - code has defaults if secrets not set)
           VITE_ALGOLIA_PRODUCTS_INDEX_NAME: ${{ secrets.VITE_ALGOLIA_PRODUCTS_INDEX_NAME }}
           VITE_ALGOLIA_CATEGORIES_INDEX_NAME: ${{ secrets.VITE_ALGOLIA_CATEGORIES_INDEX_NAME }}
