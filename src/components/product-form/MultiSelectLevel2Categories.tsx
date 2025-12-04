@@ -162,6 +162,7 @@ export const MultiSelectLevel2Categories = ({
   );
 };
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const getSelectedAdditionalLevel2Categories = (selectedIds: string[]) => {
   return selectedIds;
 };

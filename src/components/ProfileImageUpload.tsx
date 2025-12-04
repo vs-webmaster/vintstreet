@@ -66,7 +66,7 @@ export const ProfileImageUpload = ({
     e.preventDefault();
     const file = e.dataTransfer.files[0];
     if (file) handleFileSelect(file);
-  }, []);
+  }, [handleFileSelect]);
 
   const handleDragOver = useCallback((e: React.DragEvent) => {
     e.preventDefault();

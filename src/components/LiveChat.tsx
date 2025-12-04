@@ -119,7 +119,7 @@ const LiveChat = ({ streamId }: LiveChatProps) => {
     return () => {
       clearAgoraRTMConfigCache();
     };
-  }, []);
+  }, [streamId]);
 
   // Initialize RTM client and join channel
   useEffect(() => {
