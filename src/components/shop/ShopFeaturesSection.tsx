@@ -79,7 +79,7 @@ export const ShopFeaturesSection = () => {
     },
   });
 
-  const features = cardData?.items || [];
+  const features = useMemo(() => cardData?.items || [], [cardData?.items]);
 
   const gifIndices = useMemo(
     () =>
