@@ -53,9 +53,25 @@ jobs:
 
       - name: Run tests
         run: npm run test
+        env:
+          # The Critical Ones (Fixed the crash)
+          VITE_SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
+          VITE_SUPABASE_PUBLISHABLE_KEY: ${{ secrets.VITE_SUPABASE_PUBLISHABLE_KEY }}
+          # The Safety Net (Prevent secondary crashes)
+          VITE_ALGOLIA_APP_ID: ${{ secrets.VITE_ALGOLIA_APP_ID }}
+          VITE_ALGOLIA_SEARCH_API_KEY: ${{ secrets.VITE_ALGOLIA_SEARCH_API_KEY }}
+          VITE_AGORA_APP_ID: ${{ secrets.VITE_AGORA_APP_ID }}
 
       - name: Generate test coverage
         run: npm run test:coverage
+        env:
+          # The Critical Ones (Fixed the crash)
+          VITE_SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
+          VITE_SUPABASE_PUBLISHABLE_KEY: ${{ secrets.VITE_SUPABASE_PUBLISHABLE_KEY }}
+          # The Safety Net (Prevent secondary crashes)
+          VITE_ALGOLIA_APP_ID: ${{ secrets.VITE_ALGOLIA_APP_ID }}
+          VITE_ALGOLIA_SEARCH_API_KEY: ${{ secrets.VITE_ALGOLIA_SEARCH_API_KEY }}
+          VITE_AGORA_APP_ID: ${{ secrets.VITE_AGORA_APP_ID }}
 
       - name: Build application
         run: npm run build
