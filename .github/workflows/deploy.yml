@@ -188,4 +188,4 @@ jobs:
             --region $GAR_LOCATION \
             --platform managed \
             --allow-unauthenticated \
-            --port 8080 \
+            --port 8080
