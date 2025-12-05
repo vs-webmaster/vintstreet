@@ -8,8 +8,9 @@ RUN addgroup -g 1001 -S nodejs && \
 
 WORKDIR /app
 
-# Install serve as non-root user
-RUN npm install -g serve
+# Install curl for health checks and serve as non-root user
+RUN apk add --no-cache curl && \
+    npm install -g serve
 
 # Copy pre-built dist folder (built in CI/CD with environment variables)
 # The dist folder is downloaded from build artifacts in the workflow
@@ -21,8 +22,8 @@ USER nodejs
 # Cloud Run listens on port 8080
 EXPOSE 8080
 
-# Health check
+# Health check using standard HTTP client
 HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
-  CMD node -e "require('http').get('http://localhost:8080', (r) => {process.exit(r.statusCode === 200 ? 0 : 1)})"
+  CMD curl -f http://localhost:8080 || exit 1
 
 CMD ["serve", "-s", "dist", "-l", "8080"]

@@ -1,6 +1,10 @@
 node_modules
 dist-ssr
 .git
+# NOTE: 'dist' is NOT ignored - it must be present before Docker build
+# The dist folder is built in CI/CD and passed as an artifact
+# For local builds: run 'npm run build' before 'docker build'
+# See: .github/workflows/deploy.yml (build-and-test job)
 .gitignore
 .vscode
 .idea

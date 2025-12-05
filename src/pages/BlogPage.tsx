@@ -6,6 +6,8 @@ import Footer from '@/components/Footer';
 import { MegaMenuNav } from '@/components/MegaMenuNav';
 import { Badge } from '@/components/ui/badge';
 import { fetchActiveBlogCategories, fetchPublishedBlogPosts } from '@/services/blog';
+import type { BlogCategory } from '@/services/blog/blogCategoryService';
+import type { BlogPostWithCategory } from '@/services/blog/blogPostService';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { isFailure } from '@/types/api';
 import wordOnStreetTitle from '@/assets/word-on-street-title.webp';
@@ -14,7 +16,7 @@ export default function BlogPage() {
   const [searchParams] = useSearchParams();
   const categorySlug = searchParams.get('category');
 
-  const { data: categories = [] } = useQuery({
+  const { data: categories = [] } = useQuery<BlogCategory[]>({
     queryKey: ['blog-categories'],
     queryFn: async () => {
       const result = await fetchActiveBlogCategories();
@@ -23,7 +25,7 @@ export default function BlogPage() {
     },
   });
 
-  const { data: posts = [], isLoading } = useQuery({
+  const { data: posts = [], isLoading } = useQuery<BlogPostWithCategory[]>({
     queryKey: ['blog-posts', categorySlug],
     queryFn: async () => {
       const result = await fetchPublishedBlogPosts(categorySlug || undefined);
@@ -65,7 +67,7 @@ export default function BlogPage() {
                         All Posts
                       </Badge>
                     </Link>
-                    {categories.map((category: unknown) => (
+                    {categories.map((category) => (
                       <Link key={category.id} to={`/blog?category=${category.slug}`}>
                         <Badge
                           variant={categorySlug === category.slug ? 'default' : 'outline'}
@@ -91,7 +93,7 @@ export default function BlogPage() {
             </Card>
           ) : (
             <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-              {posts.map((post: unknown) => (
+              {posts.map((post) => (
                 <Link key={post.id} to={`/blog/${post.slug}`}>
                   <Card className="flex h-full flex-col transition-shadow hover:shadow-lg">
                     {post.featured_image && (
@@ -104,7 +106,7 @@ export default function BlogPage() {
                     <CardHeader className="flex-1">
                       <div className="mb-2 flex items-center gap-2">
                         {post.blog_categories && <Badge>{post.blog_categories.name}</Badge>}
-                        {post.reading_time > 0 && (
+                        {post.reading_time != null && post.reading_time > 0 && (
                           <span className="text-sm text-muted-foreground">{post.reading_time} min read</span>
                         )}
                       </div>
