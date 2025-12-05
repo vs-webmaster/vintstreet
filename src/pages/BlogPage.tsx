@@ -8,7 +8,7 @@ import { Badge } from '@/components/ui/badge';
 import { fetchActiveBlogCategories, fetchPublishedBlogPosts } from '@/services/blog';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { isFailure } from '@/types/api';
-import wordOnStreetTitle from '@/assets/word-on-street-title.jpeg';
+import wordOnStreetTitle from '@/assets/word-on-street-title.webp';
 
 export default function BlogPage() {
   const [searchParams] = useSearchParams();
