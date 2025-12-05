@@ -17,12 +17,15 @@ A modern vintage fashion marketplace with live streaming, auctions, and curated 
 
 ## Prerequisites
 
-- Node.js 18+ and npm
+- **Node.js 20.19+** (or 22.12+) - Required for Vite 7
+- npm
 - Supabase account and project
 - Algolia account
 - Agora.io account
 - Google Cloud account (for Maps API)
 - Stripe account
+
+> **Note**: Node.js 18 is no longer supported. See [Vite 7 Migration Guide](./docs/VITE7_MIGRATION.md) for details.
 
 ## Getting Started
 
@@ -110,11 +113,17 @@ vintstreet/
 
 Detailed setup guides are available in the `docs/` directory:
 
+### Setup Guides
 - [Agora Setup Guide](./docs/AGORA_SETUP.md) - Configure live streaming
 - [Algolia Setup Guide](./docs/ALGOLIA_SETUP.md) - Set up AI-powered search
 - [Google Maps Setup](./docs/GOOGLE_MAPS_SETUP.md) - Configure location services
 - [Multi-Currency Guide](./docs/MULTI_CURRENCY_GUIDE.md) - Currency handling
 - [Shipping Implementation](./docs/SHIPPING_IMPLEMENTATION.md) - Shipping label generation
+
+### Development & Deployment
+- [Local Docker Build Guide](./docs/LOCAL_DOCKER_BUILD.md) - How to build and run Docker containers locally
+- [Vite 7 Migration Guide](./docs/VITE7_MIGRATION.md) - Information about the Vite 7 upgrade and breaking changes
+- [Deployment Runbook](./docs/DEPLOYMENT_RUNBOOK.md) - Production deployment procedures
 
 ## Deployment
 
@@ -128,31 +137,60 @@ npm run build
 
 The optimized output will be in the `dist/` folder, ready for deployment to any static hosting service (Vercel, Netlify, Cloudflare Pages, etc.).
 
+**Important**: The build process requires all environment variables to be set in your `.env` file. These variables are embedded at build time by Vite.
+
 ### Docker Deployment
 
-The project includes a Dockerfile for containerized deployment:
+The project uses an optimized Docker build process for security and CI/CD integration.
+
+#### Local Docker Build
+
+For local development and testing:
 
 ```sh
-# Build the Docker image
+# 1. Build the application first (required!)
+npm run build
+
+# 2. Build the Docker image
 docker build -t vintstreet .
 
-# Run the container
+# 3. Run the container
 docker run -p 8080:8080 vintstreet
 ```
 
-The Docker image uses a multi-stage build:
-1. Build stage: Compiles the React application
-2. Production stage: Serves the app with a custom Node.js server that includes security headers
+**Important Notes**:
+- You **must** run `npm run build` before `docker build` - the Dockerfile expects a pre-built `dist` folder
+- The `dist` folder is not in `.dockerignore` because it's required for the Docker build
+- See [Local Docker Build Guide](./docs/LOCAL_DOCKER_BUILD.md) for detailed instructions
 
-The server listens on port 8080 by default (configurable via `PORT` environment variable).
+#### Build Architecture
 
-### Cloud Run / Container Platforms
+The Docker build process has been optimized:
+
+1. **Build Stage** (CI/CD or local): Application is built with `npm run build` using environment variables
+2. **Docker Stage**: Only the pre-built `dist` folder is copied into a minimal Node.js Alpine image
+3. **Security**: No secrets are passed as Docker build arguments - they're only used during the build step
+
+This architecture provides:
+- Better security (no secrets in Docker layers)
+- Faster Docker builds (no dependency installation in Docker)
+- Consistent builds between CI/CD and local development
+
+#### Cloud Run / Container Platforms
 
 For platforms like Google Cloud Run:
 
-1. Build and push the image to your container registry
-2. Deploy the container with environment variables configured
-3. Ensure port 8080 is exposed (or update the `PORT` env var)
+1. The CI/CD pipeline (`.github/workflows/deploy.yml`) handles the build and deployment automatically
+2. Build artifacts are passed between jobs securely
+3. Docker image is pushed to Google Artifact Registry
+4. Cloud Run deployment uses the built image
+
+For manual deployment:
+1. Build the application: `npm run build`
+2. Build and push the Docker image to your container registry
+3. Deploy the container with port 8080 exposed
+
+The server listens on port 8080 by default (configurable via `PORT` environment variable).
 
 ## Contributing
 

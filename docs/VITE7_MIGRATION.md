@@ -58,4 +58,9 @@ The legacy Sass API has been removed. Only the modern API is supported.
 
 ## Date
 
-Migration completed: 2025-01-XX
+Migration completed: January 2025
+
+## Related Documentation
+
+- [CHANGELOG.md](../CHANGELOG.md) - Full changelog of all changes
+- [Local Docker Build Guide](./LOCAL_DOCKER_BUILD.md) - Docker build instructions
