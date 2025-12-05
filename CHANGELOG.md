@@ -29,6 +29,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added Vite 7 migration documentation in `docs/VITE7_MIGRATION.md`
 - Added local Docker build documentation in `docs/LOCAL_DOCKER_BUILD.md`
 - Added documentation comments to `.dockerignore` explaining build process
+- Added test execution to CI/CD workflow (tests now fail build if they fail)
+- Added test coverage reporting in CI/CD
+- Created comprehensive testing strategy documents:
+  - `docs/TEST_COVERAGE_IMPROVEMENT_PLAN.md` - Testing improvement plan
+  - `docs/TEST_IMPLEMENTATION_SUMMARY.md` - Summary of implemented tests
+- Added critical path tests:
+  - Payment processing tests (payment splits, refunds, validation)
+  - Authentication tests (signup, login, password reset, session)
+  - Shopping cart tests (add, remove, guest cart, validation)
+  - Order service tests (create, update, status transitions, filters)
+  - Stripe service tests (transactions, payouts, connected accounts)
+- Set initial coverage thresholds (20% lines/functions/statements, 15% branches) for gradual improvement
 
 ### Security
 - Removed secrets from Docker build args (now only used in CI/CD build step)

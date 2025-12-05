@@ -51,6 +51,12 @@ jobs:
       - name: Type check
         run: npm run type-check || echo "Type checking not configured"
 
+      - name: Run tests
+        run: npm run test
+
+      - name: Generate test coverage
+        run: npm run test:coverage
+
       - name: Build application
         run: npm run build
         env:

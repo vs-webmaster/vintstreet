@@ -38,7 +38,7 @@ describe('Error Handlers', () => {
       const normalized = normalizeError({ weird: 'object' });
 
       expect(normalized).toBeInstanceOf(AppError);
-      expect(normalized.message).toBe('An unknown error occurred');
+      expect(normalized.message).toBe('An unexpected error occurred');
     });
   });
 
