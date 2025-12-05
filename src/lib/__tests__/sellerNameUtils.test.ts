@@ -143,8 +143,7 @@ describe('Seller Name Utils', () => {
       vi.mocked(fetchSellerInfoMapService).mockResolvedValue({
         success: true,
         data: mockMap,
-        error: null,
-      } as any);
+      });
 
       const result = await fetchSellerInfoMap(['seller-1']);
 

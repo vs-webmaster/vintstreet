@@ -9,7 +9,7 @@ describe('Listing Filter Utils', () => {
         in: vi.fn().mockReturnThis(),
       };
 
-      applyListingFilters(mockQuery as any, {
+      applyListingFilters(mockQuery as unknown, {
         activeCategory: 'cat-1',
         activeSubcategory: null,
         activeSubSubcategory: null,
@@ -27,7 +27,7 @@ describe('Listing Filter Utils', () => {
         in: vi.fn().mockReturnThis(),
       };
 
-      applyListingFilters(mockQuery as any, {
+      applyListingFilters(mockQuery as unknown, {
         activeCategory: 'cat-1',
         activeSubcategory: 'sub-1',
         activeSubSubcategory: null,
@@ -45,7 +45,7 @@ describe('Listing Filter Utils', () => {
         in: vi.fn().mockReturnThis(),
       };
 
-      applyListingFilters(mockQuery as any, {
+      applyListingFilters(mockQuery as unknown, {
         activeCategory: 'cat-1',
         activeSubcategory: 'sub-1',
         activeSubSubcategory: 'subsub-1',
@@ -63,7 +63,7 @@ describe('Listing Filter Utils', () => {
         in: vi.fn().mockReturnThis(),
       };
 
-      applyListingFilters(mockQuery as any, {
+      applyListingFilters(mockQuery as unknown, {
         activeCategory: 'cat-1',
         activeSubcategory: 'sub-1',
         activeSubSubcategory: 'subsub-1',
@@ -81,7 +81,7 @@ describe('Listing Filter Utils', () => {
         in: vi.fn().mockReturnThis(),
       };
 
-      applyListingFilters(mockQuery as any, {
+      applyListingFilters(mockQuery as unknown, {
         activeCategory: null,
         activeSubcategory: null,
         activeSubSubcategory: null,
@@ -99,7 +99,7 @@ describe('Listing Filter Utils', () => {
         in: vi.fn().mockReturnThis(),
       };
 
-      applyListingFilters(mockQuery as any, {
+      applyListingFilters(mockQuery as unknown, {
         activeCategory: null,
         activeSubcategory: null,
         activeSubSubcategory: null,
@@ -117,7 +117,7 @@ describe('Listing Filter Utils', () => {
         in: vi.fn().mockReturnThis(),
       };
 
-      applyListingFilters(mockQuery as any, {
+      applyListingFilters(mockQuery as unknown, {
         activeCategory: 'cat-1',
         activeSubcategory: 'sub-1',
         activeSubSubcategory: 'subsub-1',
@@ -141,7 +141,7 @@ describe('Listing Filter Utils', () => {
         in: vi.fn().mockReturnThis(),
       };
 
-      applyDirectListingFilters(mockQuery as any, {
+      applyDirectListingFilters(mockQuery as unknown, {
         activeCategory: 'cat-1',
         activeSubcategory: null,
         activeSubSubcategory: null,
@@ -158,7 +158,7 @@ describe('Listing Filter Utils', () => {
         in: vi.fn().mockReturnThis(),
       };
 
-      applyDirectListingFilters(mockQuery as any, {
+      applyDirectListingFilters(mockQuery as unknown, {
         activeCategory: 'cat-1',
         activeSubcategory: 'sub-1',
         activeSubSubcategory: null,
@@ -175,7 +175,7 @@ describe('Listing Filter Utils', () => {
         in: vi.fn().mockReturnThis(),
       };
 
-      applyDirectListingFilters(mockQuery as any, {
+      applyDirectListingFilters(mockQuery as unknown, {
         activeCategory: null,
         activeSubcategory: null,
         activeSubSubcategory: null,

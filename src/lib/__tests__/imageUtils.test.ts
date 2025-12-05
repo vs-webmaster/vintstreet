@@ -61,7 +61,7 @@ describe('Image Utils', () => {
         });
         vi.spyOn(reader, 'readAsDataURL').mockImplementation(mockReadAsDataURL);
         return reader;
-      }) as any;
+      }) as unknown as typeof FileReader;
 
       await expect(fileToBase64(file)).rejects.toThrow('Error reading file');
       
