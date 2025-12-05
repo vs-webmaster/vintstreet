@@ -20,8 +20,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 - Fixed favicon path: moved from `src/assets/favicon.ico` to `public/favicon.ico` for proper production builds
+- Fixed trailing backslash in deploy.yml Cloud Run deployment command
 - Improved Dockerfile health check: replaced `node -e` with `curl` for better security scanning compatibility
 - Fixed TypeScript type safety in BlogPage: replaced `unknown` types with proper `BlogCategory` and `BlogPostWithCategory` types
+- Restored preconnect/dns-prefetch tags for Supabase in index.html for improved performance
 
 ### Added
 - Added Vite 7 migration documentation in `docs/VITE7_MIGRATION.md`
