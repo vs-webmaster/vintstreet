@@ -1,5 +1,4 @@
 node_modules
-# dist - Removed: We now need the pre-built dist folder from CI/CD artifacts
 dist-ssr
 .git
 .gitignore
