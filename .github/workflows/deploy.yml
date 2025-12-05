@@ -94,6 +94,14 @@ jobs:
           name: dist
           path: dist
 
+      - name: Verify dist folder exists
+        run: |
+          if [ ! -d "dist" ] || [ -z "$(ls -A dist)" ]; then
+            echo "ERROR: dist folder is missing or empty!"
+            exit 1
+          fi
+          echo "✓ dist folder verified ($(du -sh dist | cut -f1))"
+
       - name: Authenticate to Google Cloud
         uses: google-github-actions/auth@v2
         with:
